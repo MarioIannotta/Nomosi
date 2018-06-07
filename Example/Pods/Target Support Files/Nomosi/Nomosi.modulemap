@@ -1,0 +1,6 @@
+framework module Nomosi {
+  umbrella header "Nomosi-umbrella.h"
+
+  export *
+  module * { export * }
+}

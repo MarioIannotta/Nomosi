@@ -1,0 +1,719 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4D9A4398E72024AC4C86CE15 /* Pods_Nomosi_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E8319CF1C05F007C895A47 /* Pods_Nomosi_Example.framework */; };
+		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
+		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		AC0D1A5820C976B9002E614B /* HavardArtMuseumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A4D20C976B9002E614B /* HavardArtMuseumService.swift */; };
+		AC0D1A5920C976B9002E614B /* CenturiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A4E20C976B9002E614B /* CenturiesService.swift */; };
+		AC0D1A5A20C976B9002E614B /* CenturiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A5020C976B9002E614B /* CenturiesViewController.swift */; };
+		AC0D1A5B20C976B9002E614B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0D1A5120C976B9002E614B /* Main.storyboard */; };
+		AC0D1A5C20C976B9002E614B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC0D1A5320C976B9002E614B /* LaunchScreen.xib */; };
+		AC0D1A5D20C976B9002E614B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC0D1A5420C976B9002E614B /* Images.xcassets */; };
+		AC0D1A5F20C976B9002E614B /* Century.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A5720C976B9002E614B /* Century.swift */; };
+		AC0D1A6220C97725002E614B /* CenturyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A6120C97725002E614B /* CenturyCell.swift */; };
+		AC0D1A6420C97C58002E614B /* CenturyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A6320C97C58002E614B /* CenturyDetailViewController.swift */; };
+		AC0D1A6720C97CAC002E614B /* CenturyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A6620C97CAC002E614B /* CenturyService.swift */; };
+		AC0D1A6920C97F9C002E614B /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A6820C97F9C002E614B /* GroupCell.swift */; };
+		AC0D1A6B20C98074002E614B /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A6A20C98074002E614B /* Group.swift */; };
+		AC0D1A6D20C98994002E614B /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A6C20C98994002E614B /* Object.swift */; };
+		AC0D1A6F20C98A1F002E614B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A6E20C98A1F002E614B /* Image.swift */; };
+		AC0D1A7120C98A2B002E614B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7020C98A2B002E614B /* Person.swift */; };
+		AC0D1A7520C98A5A002E614B /* ObjectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7420C98A5A002E614B /* ObjectsService.swift */; };
+		AC0D1A7820C98AEB002E614B /* ObjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */; };
+		AC0D1A7B20C98BCF002E614B /* ObjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */; };
+		AC0D1A7F20C99530002E614B /* PaginatedServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */; };
+		ACF96D9D20BDB8C700FA5934 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ACF96D9C20BDB8C700FA5934 /* .swiftlint.yml */; };
+		C29A4FCAA006F77DE56CE09F /* Pods_Nomosi_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F705AB03E6D287B9AAE844E6 /* Pods_Nomosi_Tests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		607FACE61AFB9204008FA782 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
+			remoteInfo = Nomosi;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0B2FA5CB94EFDC0E31C0FD00 /* Pods-Nomosi_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomosi_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nomosi_Example/Pods-Nomosi_Example.release.xcconfig"; sourceTree = "<group>"; };
+		353739E42F1B493C04BC8BFD /* Pods-Nomosi_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomosi_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nomosi_Tests/Pods-Nomosi_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		5A8B945D98C515300836B1B8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		607FACD01AFB9204008FA782 /* Nomosi_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nomosi_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		607FACE51AFB9204008FA782 /* Nomosi_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Nomosi_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		AC0D1A4D20C976B9002E614B /* HavardArtMuseumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HavardArtMuseumService.swift; sourceTree = "<group>"; };
+		AC0D1A4E20C976B9002E614B /* CenturiesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenturiesService.swift; sourceTree = "<group>"; };
+		AC0D1A5020C976B9002E614B /* CenturiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenturiesViewController.swift; sourceTree = "<group>"; };
+		AC0D1A5120C976B9002E614B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		AC0D1A5320C976B9002E614B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		AC0D1A5420C976B9002E614B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AC0D1A5520C976B9002E614B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC0D1A5720C976B9002E614B /* Century.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Century.swift; sourceTree = "<group>"; };
+		AC0D1A6120C97725002E614B /* CenturyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenturyCell.swift; sourceTree = "<group>"; };
+		AC0D1A6320C97C58002E614B /* CenturyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenturyDetailViewController.swift; sourceTree = "<group>"; };
+		AC0D1A6620C97CAC002E614B /* CenturyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenturyService.swift; sourceTree = "<group>"; };
+		AC0D1A6820C97F9C002E614B /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
+		AC0D1A6A20C98074002E614B /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		AC0D1A6C20C98994002E614B /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		AC0D1A6E20C98A1F002E614B /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		AC0D1A7020C98A2B002E614B /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		AC0D1A7420C98A5A002E614B /* ObjectsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsService.swift; sourceTree = "<group>"; };
+		AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsViewController.swift; sourceTree = "<group>"; };
+		AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCell.swift; sourceTree = "<group>"; };
+		AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedServiceInfo.swift; sourceTree = "<group>"; };
+		ACF96D9C20BDB8C700FA5934 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		B6E8319CF1C05F007C895A47 /* Pods_Nomosi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomosi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6DC791124412F311A46AF49 /* Pods-Nomosi_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomosi_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nomosi_Tests/Pods-Nomosi_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		D2354C02DD4F5D5A45E80912 /* Nomosi.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Nomosi.podspec; path = ../Nomosi.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		D8E7093C6B68FCF336114885 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		F705AB03E6D287B9AAE844E6 /* Pods_Nomosi_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomosi_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F812BFD6D41B2209735E4625 /* Pods-Nomosi_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomosi_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nomosi_Example/Pods-Nomosi_Example.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		607FACCD1AFB9204008FA782 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D9A4398E72024AC4C86CE15 /* Pods_Nomosi_Example.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		607FACE21AFB9204008FA782 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C29A4FCAA006F77DE56CE09F /* Pods_Nomosi_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1046E4B8D982129F3EEF1FDC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F812BFD6D41B2209735E4625 /* Pods-Nomosi_Example.debug.xcconfig */,
+				0B2FA5CB94EFDC0E31C0FD00 /* Pods-Nomosi_Example.release.xcconfig */,
+				C6DC791124412F311A46AF49 /* Pods-Nomosi_Tests.debug.xcconfig */,
+				353739E42F1B493C04BC8BFD /* Pods-Nomosi_Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		607FACC71AFB9204008FA782 = {
+			isa = PBXGroup;
+			children = (
+				ACF96D9C20BDB8C700FA5934 /* .swiftlint.yml */,
+				607FACF51AFB993E008FA782 /* Podspec Metadata */,
+				607FACD21AFB9204008FA782 /* Example for Nomosi */,
+				607FACE81AFB9204008FA782 /* Tests */,
+				607FACD11AFB9204008FA782 /* Products */,
+				1046E4B8D982129F3EEF1FDC /* Pods */,
+				83741B4B76223D25533DC016 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		607FACD11AFB9204008FA782 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD01AFB9204008FA782 /* Nomosi_Example.app */,
+				607FACE51AFB9204008FA782 /* Nomosi_Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		607FACD21AFB9204008FA782 /* Example for Nomosi */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				AC0D1A5620C976B9002E614B /* Models */,
+				AC0D1A4C20C976B9002E614B /* Services */,
+				AC0D1A4F20C976B9002E614B /* UI */,
+				AC0D1A5220C976B9002E614B /* Supporting files */,
+			);
+			name = "Example for Nomosi";
+			path = Nomosi;
+			sourceTree = "<group>";
+		};
+		607FACE81AFB9204008FA782 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				607FACE91AFB9204008FA782 /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		607FACE91AFB9204008FA782 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				607FACEA1AFB9204008FA782 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				D2354C02DD4F5D5A45E80912 /* Nomosi.podspec */,
+				5A8B945D98C515300836B1B8 /* README.md */,
+				D8E7093C6B68FCF336114885 /* LICENSE */,
+			);
+			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		83741B4B76223D25533DC016 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6E8319CF1C05F007C895A47 /* Pods_Nomosi_Example.framework */,
+				F705AB03E6D287B9AAE844E6 /* Pods_Nomosi_Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AC0D1A4C20C976B9002E614B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AC0D1A7320C98A51002E614B /* Objects */,
+				AC0D1A7220C98A4B002E614B /* Century */,
+				AC0D1A4D20C976B9002E614B /* HavardArtMuseumService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AC0D1A4F20C976B9002E614B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				AC0D1A5120C976B9002E614B /* Main.storyboard */,
+				AC0D1A6020C97719002E614B /* Centuries */,
+				AC0D1A7620C98ADA002E614B /* Objects */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		AC0D1A5220C976B9002E614B /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				AC0D1A5520C976B9002E614B /* Info.plist */,
+				AC0D1A5420C976B9002E614B /* Images.xcassets */,
+				AC0D1A5320C976B9002E614B /* LaunchScreen.xib */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		AC0D1A5620C976B9002E614B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AC0D1A5720C976B9002E614B /* Century.swift */,
+				AC0D1A6A20C98074002E614B /* Group.swift */,
+				AC0D1A6E20C98A1F002E614B /* Image.swift */,
+				AC0D1A6C20C98994002E614B /* Object.swift */,
+				AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */,
+				AC0D1A7020C98A2B002E614B /* Person.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AC0D1A6020C97719002E614B /* Centuries */ = {
+			isa = PBXGroup;
+			children = (
+				AC0D1A5020C976B9002E614B /* CenturiesViewController.swift */,
+				AC0D1A6120C97725002E614B /* CenturyCell.swift */,
+				AC0D1A6520C97C5D002E614B /* Detail */,
+			);
+			path = Centuries;
+			sourceTree = "<group>";
+		};
+		AC0D1A6520C97C5D002E614B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				AC0D1A6320C97C58002E614B /* CenturyDetailViewController.swift */,
+				AC0D1A6820C97F9C002E614B /* GroupCell.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		AC0D1A7220C98A4B002E614B /* Century */ = {
+			isa = PBXGroup;
+			children = (
+				AC0D1A4E20C976B9002E614B /* CenturiesService.swift */,
+				AC0D1A6620C97CAC002E614B /* CenturyService.swift */,
+			);
+			path = Century;
+			sourceTree = "<group>";
+		};
+		AC0D1A7320C98A51002E614B /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				AC0D1A7420C98A5A002E614B /* ObjectsService.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		AC0D1A7620C98ADA002E614B /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				AC0D1A7920C98BCA002E614B /* Cell */,
+				AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		AC0D1A7920C98BCA002E614B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		607FACCF1AFB9204008FA782 /* Nomosi_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Nomosi_Example" */;
+			buildPhases = (
+				734781F28535DE5B686B4B52 /* [CP] Check Pods Manifest.lock */,
+				607FACCC1AFB9204008FA782 /* Sources */,
+				607FACCD1AFB9204008FA782 /* Frameworks */,
+				607FACCE1AFB9204008FA782 /* Resources */,
+				1B000DE1DE5442AE71BB057E /* [CP] Embed Pods Frameworks */,
+				AC51452720BDB5D20059A3E3 /* SwiftLint */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nomosi_Example;
+			productName = Nomosi;
+			productReference = 607FACD01AFB9204008FA782 /* Nomosi_Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		607FACE41AFB9204008FA782 /* Nomosi_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Nomosi_Tests" */;
+			buildPhases = (
+				BBE406AACF680C5CB7323B2C /* [CP] Check Pods Manifest.lock */,
+				607FACE11AFB9204008FA782 /* Sources */,
+				607FACE21AFB9204008FA782 /* Frameworks */,
+				607FACE31AFB9204008FA782 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
+			);
+			name = Nomosi_Tests;
+			productName = Tests;
+			productReference = 607FACE51AFB9204008FA782 /* Nomosi_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		607FACC81AFB9204008FA782 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Mario Iannotta";
+				TargetAttributes = {
+					607FACCF1AFB9204008FA782 = {
+						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0900;
+					};
+					607FACE41AFB9204008FA782 = {
+						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0900;
+						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
+				};
+			};
+			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Nomosi" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 607FACC71AFB9204008FA782;
+			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				607FACCF1AFB9204008FA782 /* Nomosi_Example */,
+				607FACE41AFB9204008FA782 /* Nomosi_Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		607FACCE1AFB9204008FA782 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACF96D9D20BDB8C700FA5934 /* .swiftlint.yml in Resources */,
+				AC0D1A5D20C976B9002E614B /* Images.xcassets in Resources */,
+				AC0D1A5C20C976B9002E614B /* LaunchScreen.xib in Resources */,
+				AC0D1A5B20C976B9002E614B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		607FACE31AFB9204008FA782 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B000DE1DE5442AE71BB057E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Nomosi_Example/Pods-Nomosi_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nomosi/Nomosi.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nomosi.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nomosi_Example/Pods-Nomosi_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		734781F28535DE5B686B4B52 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nomosi_Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC51452720BDB5D20059A3E3 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+		};
+		BBE406AACF680C5CB7323B2C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nomosi_Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		607FACCC1AFB9204008FA782 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC0D1A7F20C99530002E614B /* PaginatedServiceInfo.swift in Sources */,
+				AC0D1A6920C97F9C002E614B /* GroupCell.swift in Sources */,
+				AC0D1A6F20C98A1F002E614B /* Image.swift in Sources */,
+				AC0D1A7B20C98BCF002E614B /* ObjectCell.swift in Sources */,
+				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				AC0D1A5F20C976B9002E614B /* Century.swift in Sources */,
+				AC0D1A6B20C98074002E614B /* Group.swift in Sources */,
+				AC0D1A6720C97CAC002E614B /* CenturyService.swift in Sources */,
+				AC0D1A6420C97C58002E614B /* CenturyDetailViewController.swift in Sources */,
+				AC0D1A6D20C98994002E614B /* Object.swift in Sources */,
+				AC0D1A5A20C976B9002E614B /* CenturiesViewController.swift in Sources */,
+				AC0D1A5920C976B9002E614B /* CenturiesService.swift in Sources */,
+				AC0D1A7820C98AEB002E614B /* ObjectsViewController.swift in Sources */,
+				AC0D1A7520C98A5A002E614B /* ObjectsService.swift in Sources */,
+				AC0D1A7120C98A2B002E614B /* Person.swift in Sources */,
+				AC0D1A6220C97725002E614B /* CenturyCell.swift in Sources */,
+				AC0D1A5820C976B9002E614B /* HavardArtMuseumService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		607FACE11AFB9204008FA782 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 607FACCF1AFB9204008FA782 /* Nomosi_Example */;
+			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		607FACED1AFB9204008FA782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		607FACEE1AFB9204008FA782 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		607FACF01AFB9204008FA782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F812BFD6D41B2209735E4625 /* Pods-Nomosi_Example.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "$(SRCROOT)/Nomosi/Supporting files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		607FACF11AFB9204008FA782 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B2FA5CB94EFDC0E31C0FD00 /* Pods-Nomosi_Example.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "$(SRCROOT)/Nomosi/Supporting files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		607FACF31AFB9204008FA782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6DC791124412F311A46AF49 /* Pods-Nomosi_Tests.debug.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		607FACF41AFB9204008FA782 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 353739E42F1B493C04BC8BFD /* Pods-Nomosi_Tests.release.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Nomosi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				607FACED1AFB9204008FA782 /* Debug */,
+				607FACEE1AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Nomosi_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				607FACF01AFB9204008FA782 /* Debug */,
+				607FACF11AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Nomosi_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				607FACF31AFB9204008FA782 /* Debug */,
+				607FACF41AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 607FACC81AFB9204008FA782 /* Project object */;
+}
