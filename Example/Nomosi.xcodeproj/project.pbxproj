@@ -29,6 +29,7 @@
 		AC0D1A7820C98AEB002E614B /* ObjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */; };
 		AC0D1A7B20C98BCF002E614B /* ObjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */; };
 		AC0D1A7F20C99530002E614B /* PaginatedServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */; };
+		AC9B7ECA20D1CB7700E160FA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */; };
 		ACF96D9D20BDB8C700FA5934 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ACF96D9C20BDB8C700FA5934 /* .swiftlint.yml */; };
 		C29A4FCAA006F77DE56CE09F /* Pods_Nomosi_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F705AB03E6D287B9AAE844E6 /* Pods_Nomosi_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,7 @@
 		AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsViewController.swift; sourceTree = "<group>"; };
 		AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCell.swift; sourceTree = "<group>"; };
 		AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedServiceInfo.swift; sourceTree = "<group>"; };
+		AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ACF96D9C20BDB8C700FA5934 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B6E8319CF1C05F007C895A47 /* Pods_Nomosi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomosi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6DC791124412F311A46AF49 /* Pods-Nomosi_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomosi_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nomosi_Tests/Pods-Nomosi_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				AC0D1A5120C976B9002E614B /* Main.storyboard */,
 				AC0D1A6020C97719002E614B /* Centuries */,
 				AC0D1A7620C98ADA002E614B /* Objects */,
+				AC9B7EC820D1CB6C00E160FA /* Settings */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -277,6 +280,14 @@
 				AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		AC9B7EC820D1CB6C00E160FA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -475,6 +486,7 @@
 				AC0D1A7120C98A2B002E614B /* Person.swift in Sources */,
 				AC0D1A6220C97725002E614B /* CenturyCell.swift in Sources */,
 				AC0D1A5820C976B9002E614B /* HavardArtMuseumService.swift in Sources */,
+				AC9B7ECA20D1CB7700E160FA /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

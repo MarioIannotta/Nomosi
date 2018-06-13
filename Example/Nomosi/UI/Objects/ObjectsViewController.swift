@@ -16,7 +16,8 @@ class ObjectsViewController: UIViewController {
     struct Config {
         var numberOfItemsForRow: CGFloat = 2
         var horizontalPadding: CGFloat = 10
-        var verticalPadding: CGFloat = 10
+        var topPadding: CGFloat = 10
+        var bottomPadding: CGFloat = 120
         var cellHeight: CGFloat = 280
     }
     
@@ -25,17 +26,28 @@ class ObjectsViewController: UIViewController {
     // MARK: - IBOutlets
     
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var footerView: UIView! {
+        didSet {
+            footerServiceOverlayView = ServiceOverlayView(cover: footerView)
+            footerServiceOverlayView?.backgroundColor = .clear
+        }
+    }
+    
+    private var footerServiceOverlayView: ServiceOverlayView?
     
     // MARK: - Model
     
     private var objects: [Object] = []
-    private var isLoadingInProgress = false
     private var lastLoadedPageLink: String? = nil
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadNextPage()
     }
     
@@ -49,16 +61,11 @@ class ObjectsViewController: UIViewController {
     }
     
     private func loadNextPage() {
-        guard !isLoadingInProgress else { return }
-        let overlay = lastLoadedPageLink == nil ? ServiceOverlayView(cover: view) : nil
-        isLoadingInProgress = true
+        let overlay = lastLoadedPageLink == nil ? ServiceOverlayView(cover: view) : footerServiceOverlayView
         ObjectsService(nextPage: lastLoadedPageLink)?
             .onSuccess { [weak self] response in
                 self?.lastLoadedPageLink = response.paginatedServiceInfo.next
                 self?.insertObjects(response.objects)
-            }
-            .onCompletion { [weak self] _, _ in
-                self?.isLoadingInProgress = false
             }
             .load(usingOverlay: overlay)
     }
@@ -104,9 +111,9 @@ extension ObjectsViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: config.verticalPadding,
+        return UIEdgeInsets(top: config.topPadding,
                             left: config.horizontalPadding,
-                            bottom: config.verticalPadding,
+                            bottom: config.bottomPadding,
                             right: config.horizontalPadding)
     }
     

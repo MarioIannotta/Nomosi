@@ -20,6 +20,10 @@ public struct Cache {
         case onDisk(timeout: TimeInterval)
     }
     
+    public static func removeAllCachedResponses() {
+        URLCache.shared.removeAllCachedResponses()
+    }
+    
     static func loadIfNeeded(request: URLRequest,
                              cachePolicy: Cache.Policy,
                              completion: ((_ data: Data?) -> Void)) {
@@ -29,25 +33,30 @@ public struct Cache {
         }
         guard
             let cachedResponse = URLCache.shared.cachedResponse(for: request),
-            let expiringDate = cachedResponse.userInfo?[Keys.expiringDateKey] as? Date,
-            expiringDate > Date()
+            let expiringDate = cachedResponse.userInfo?[Keys.expiringDateKey] as? Date
             else {
                 completion(nil)
                 return
+            }
+        if expiringDate > Date() {
+            URLCache.shared.removeCachedResponse(for: request)
+            completion(nil)
+        } else {
+            completion(cachedResponse.data)
         }
-        completion(cachedResponse.data)
     }
     
+    @discardableResult
     static func storeIfNeeded(request: URLRequest,
                               response: URLResponse,
                               data: Data,
-                              cachePolicy: Cache.Policy) {
+                              cachePolicy: Cache.Policy) -> Bool {
         
         var storagePolicy: URLCache.StoragePolicy = .notAllowed
         var cacheTimeout: TimeInterval = -1
         switch cachePolicy {
         case .none:
-            return
+            return false
         case let .inRam(ramCacheTimeout):
             cacheTimeout = ramCacheTimeout
             storagePolicy = .allowedInMemoryOnly
@@ -61,6 +70,7 @@ public struct Cache {
                                                userInfo: [Keys.expiringDateKey: expiringDate],
                                                storagePolicy: storagePolicy)
         URLCache.shared.storeCachedResponse(cachedResponse, for: request)
+        return true
     }
     
 }

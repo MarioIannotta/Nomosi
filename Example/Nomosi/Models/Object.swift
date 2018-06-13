@@ -55,7 +55,6 @@ struct Object: Decodable {
     let exhibitioncount, techniqueid, dateend: Int?
     let creditline: String?
     let imagepermissionlevel: Int?
-    let signed, periodid: String?
     let century: String?
     let classificationid: Int?
     let medium: String?

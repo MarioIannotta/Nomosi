@@ -125,7 +125,7 @@
             </objects>
             <point key="canvasLocation" x="3498.4000000000001" y="-751.57421289355329"/>
         </scene>
-        <!--Objects View Controller-->
+        <!--Objects-->
         <scene sceneID="vKh-X9-vav">
             <objects>
                 <viewController id="ueb-sN-ved" customClass="ObjectsViewController" customModule="Nomosi_Example" customModuleProvider="target" sceneMemberID="viewController">
@@ -133,18 +133,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gF-yz-0Nm">
+                                <rect key="frame" x="0.0" y="518" width="375" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="DyS-dc-PcZ"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nhK-2h-WdS">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="607-K7-77i">
                                     <size key="itemSize" width="167" height="276"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ObjectCell" id="YlO-1o-Gg6" customClass="ObjectCell" customModule="Nomosi_Example" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="167" height="276"/>
+                                        <rect key="frame" x="0.0" y="50" width="167" height="276"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="167" height="276"/>
@@ -247,6 +254,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="EcJ-UQ-RPH">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="ueb-sN-ved" id="JW7-wY-rdQ"/>
                                     <outlet property="delegate" destination="ueb-sN-ved" id="Gt2-sO-8tW"/>
@@ -257,14 +268,18 @@
                         <constraints>
                             <constraint firstItem="nhK-2h-WdS" firstAttribute="top" secondItem="tGs-AM-ysP" secondAttribute="top" id="19y-sT-Swa"/>
                             <constraint firstItem="tGs-AM-ysP" firstAttribute="trailing" secondItem="nhK-2h-WdS" secondAttribute="trailing" id="KYs-VY-swd"/>
+                            <constraint firstItem="tGs-AM-ysP" firstAttribute="bottom" secondItem="3gF-yz-0Nm" secondAttribute="bottom" id="btq-zS-HUk"/>
+                            <constraint firstItem="tGs-AM-ysP" firstAttribute="trailing" secondItem="3gF-yz-0Nm" secondAttribute="trailing" id="cDa-rP-ocr"/>
+                            <constraint firstItem="3gF-yz-0Nm" firstAttribute="leading" secondItem="tGs-AM-ysP" secondAttribute="leading" id="eEa-QO-2gN"/>
                             <constraint firstItem="tGs-AM-ysP" firstAttribute="bottom" secondItem="nhK-2h-WdS" secondAttribute="bottom" id="gml-2K-xUz"/>
                             <constraint firstItem="nhK-2h-WdS" firstAttribute="leading" secondItem="tGs-AM-ysP" secondAttribute="leading" id="n9M-ei-n5W"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tGs-AM-ysP"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mhD-HH-ORO"/>
+                    <navigationItem key="navigationItem" title="Objects" id="mhD-HH-ORO"/>
                     <connections>
                         <outlet property="collectionView" destination="nhK-2h-WdS" id="tQT-KJ-Lfx"/>
+                        <outlet property="footerView" destination="3gF-yz-0Nm" id="86s-54-e3X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zfM-ff-EPX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -380,17 +395,19 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Ct5-oS-5sk" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="itJ-FO-WMZ">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="Eck-5y-EwF" kind="relationship" relationship="viewControllers" id="XIk-eH-7KI"/>
                         <segue destination="EJI-S1-ZhI" kind="relationship" relationship="viewControllers" id="fZJ-Z7-Vr1"/>
+                        <segue destination="dd9-c5-jck" kind="relationship" relationship="viewControllers" id="FWz-ha-OMP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbn-FH-lac" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1769" y="-409"/>
+            <point key="canvasLocation" x="1774" y="112"/>
         </scene>
         <!--Objects-->
         <scene sceneID="LYN-Lh-3D5">
@@ -410,6 +427,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFy-a0-hyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2559" y="-76"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="6us-cs-Huc">
+            <objects>
+                <viewController id="f6G-YS-kzd" customClass="SettingsViewController" customModule="Nomosi_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LLj-PB-nzD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwv-Ru-5Vw">
+                                <rect key="frame" x="40" y="94" width="295" height="50"/>
+                                <color key="backgroundColor" white="0.94038058660000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="cUJ-Jv-r2f"/>
+                                </constraints>
+                                <state key="normal" title="Reset cache"/>
+                                <connections>
+                                    <action selector="clearCacheButtonTapped" destination="f6G-YS-kzd" eventType="touchUpInside" id="0Ss-Il-Ao9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Bwv-Ru-5Vw" firstAttribute="top" secondItem="Ze5-kx-tnC" secondAttribute="top" constant="30" id="JHi-Un-JSl"/>
+                            <constraint firstItem="Bwv-Ru-5Vw" firstAttribute="leading" secondItem="Ze5-kx-tnC" secondAttribute="leading" constant="40" id="THt-ji-wM6"/>
+                            <constraint firstItem="Ze5-kx-tnC" firstAttribute="trailing" secondItem="Bwv-Ru-5Vw" secondAttribute="trailing" constant="40" id="nss-1T-NKT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ze5-kx-tnC"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="aa1-rV-QGy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NHo-YS-Tr6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3496.8000000000002" y="616.64167916041981"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="w8c-Rm-VAI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dd9-c5-jck" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" id="CQ2-JY-sp3"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0YB-On-DRj">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="f6G-YS-kzd" kind="relationship" relationship="rootViewController" id="xpU-AP-Vna"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tAC-ed-WAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2557.5999999999999" y="616.64167916041981"/>
         </scene>
     </scenes>
 </document>

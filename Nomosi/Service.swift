@@ -84,6 +84,13 @@ open class Service<Response: ServiceResponse> {
                 return nil
             }
         
+        guard
+            !RequestsQueue.isOnGoing(request: request)
+            else {
+                completeRequest(response: nil, error: .redundantRequest)
+                return nil
+            }
+        
         Cache.loadIfNeeded(request: request, cachePolicy: cachePolicy) { [weak self] data in
             guard let `self` = self else { return }
             if let data = data {
@@ -97,25 +104,32 @@ open class Service<Response: ServiceResponse> {
         return self
     }
     
-    private func loadIfNeeded(request: URLRequest, usingOverlay serviceOverlayView: ServiceOverlayView? = nil) {
+    private func loadIfNeeded(request: URLRequest,
+                              usingOverlay serviceOverlayView: ServiceOverlayView? = nil) {
         guard
             self.canStartDataTask
             else {
                 self.completeRequest(response: nil, error: .requestCancelled)
                 return
             }
+        RequestsQueue.append(request: request)
         serviceOverlayView?.addService()
         let shouldLoadServiceCallback = self.shouldLoadServiceCallback ?? { completion in completion(true) }
         shouldLoadServiceCallback { shouldLoadService in
             if shouldLoadService {
                 self.performDataTask(request: request) {
-                    serviceOverlayView?.removeService()
+                    self.resolve(request, usingOverlay: serviceOverlayView)
                 }
             } else {
-                serviceOverlayView?.removeService()
+                self.resolve(request, usingOverlay: serviceOverlayView)
                 self.completeRequest(response: nil, error: .shouldLoadServiceEvaluatedToFalse)
             }
         }
+    }
+    
+    private func resolve(_ request: URLRequest, usingOverlay serviceOverlayView: ServiceOverlayView?) {
+        serviceOverlayView?.removeService()
+        RequestsQueue.resolve(request: request)
     }
 
     public func cancel() {
@@ -149,11 +163,13 @@ open class Service<Response: ServiceResponse> {
                     self.completeRequest(response: nil, error: .emptyResponse)
                     return
                 }
-            Cache.storeIfNeeded(request: request,
-                                response: response,
-                                data: data,
-                                cachePolicy: self.cachePolicy)
-            self.log.print("📦 \(self): storing response in cache with policy \(self.cachePolicy)")
+            let hasResponseBeenCached = Cache.storeIfNeeded(request: request,
+                                                            response: response,
+                                                            data: data,
+                                                            cachePolicy: self.cachePolicy)
+            if hasResponseBeenCached {
+                self.log.print("📦 \(self): storing response in cache with policy \(self.cachePolicy)")
+            }
             self.parseReceivedDataAndCompleteRequest(data: data)
         }
         sessionDataTask?.resume()

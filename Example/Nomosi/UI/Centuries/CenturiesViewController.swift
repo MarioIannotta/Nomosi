@@ -21,11 +21,10 @@ class CenturiesViewController: UIViewController {
     
     // MARK: - Lifecycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        let service = CenturiesService()
-        service
+        CenturiesService()
             .load(usingOverlay: ServiceOverlayView(cover: view))?
             .onSuccess { [weak self] response in
                 self?.centuries = response

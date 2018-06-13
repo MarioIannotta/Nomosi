@@ -9,6 +9,10 @@
 import Foundation
 
 public struct ServiceError: Error {
+    
+    public static var redundantRequest: ServiceError {
+        return ServiceError(code: 7, reason: "The same request is already running")
+    }
 
     public static var requestCancelled: ServiceError {
         return ServiceError(code: 6, reason: "The request has been cancelled")
