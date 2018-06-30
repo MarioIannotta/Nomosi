@@ -38,7 +38,9 @@ public struct Cache {
                 completion(nil)
                 return
             }
-        if expiringDate > Date() {
+        
+        let date = Date()
+        if expiringDate < date {
             URLCache.shared.removeCachedResponse(for: request)
             completion(nil)
         } else {
