@@ -30,6 +30,7 @@ class HavardArtMuseumService<Response: ServiceResponse>: Service<Response> {
     
     private func commonSetup() {
         cachePolicy = .onDisk(timeout: 60*5) // 5 minutes persistent cache
+        log = .none
     }
     
 }

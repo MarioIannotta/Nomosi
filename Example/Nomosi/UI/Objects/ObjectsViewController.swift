@@ -22,6 +22,9 @@ class ObjectsViewController: UIViewController {
     }
     
     private var config = Config()
+    private var shouldLoadNextPage: Bool {
+        return collectionView.contentSize.height - collectionView.contentOffset.y - collectionView.frame.height < 100 || objects.count == 0
+    }
     
     // MARK: - IBOutlets
     
@@ -48,7 +51,13 @@ class ObjectsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadNextPage()
+        loadNextPageIfNeeded()
+    }
+    
+    func resetDataSource() {
+        lastLoadedPageLink = nil
+        objects = []
+        collectionView.reloadData()
     }
     
     private func insertObjects(_ objects: [Object]) {
@@ -60,9 +69,10 @@ class ObjectsViewController: UIViewController {
         collectionView.insertItems(at: indexPathsToAdd)
     }
     
-    private func loadNextPage() {
+    private func loadNextPageIfNeeded() {
+        guard shouldLoadNextPage else { return }
         let overlay = lastLoadedPageLink == nil ? ServiceOverlayView(cover: view) : footerServiceOverlayView
-        ObjectsService(nextPage: lastLoadedPageLink)?
+        _ = ObjectsService(nextPage: lastLoadedPageLink)?
             .onSuccess { [weak self] response in
                 self?.lastLoadedPageLink = response.paginatedServiceInfo.next
                 self?.insertObjects(response.objects)
@@ -75,10 +85,7 @@ class ObjectsViewController: UIViewController {
 extension ObjectsViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let threshold = scrollView.contentSize.height - scrollView.contentOffset.y - scrollView.frame.height
-        if threshold < 100 {
-            loadNextPage()
-        }
+        loadNextPageIfNeeded()
     }
     
 }

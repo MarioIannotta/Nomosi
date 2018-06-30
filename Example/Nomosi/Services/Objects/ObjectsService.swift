@@ -11,6 +11,7 @@ import Nomosi
 
 class ObjectsService: HavardArtMuseumService<ObjectsServiceResponse> {
 
+    @discardableResult
     init?(nextPage: String?) {
         if let nextPageURL = URL(string: nextPage ?? "") {
             super.init(absoluteURL: nextPageURL)

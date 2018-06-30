@@ -12,6 +12,8 @@ import Nomosi
 class SettingsViewController: UIViewController {
     
     @IBAction private func clearCacheButtonTapped() {
+        let objectsViewController = (tabBarController?.childViewControllers.first as? UINavigationController)?.childViewControllers.first as? ObjectsViewController
+        objectsViewController?.resetDataSource()
         Cache.removeAllCachedResponses() 
     }
     
