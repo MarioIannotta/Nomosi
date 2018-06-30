@@ -36,9 +36,13 @@ class ObjectCell: UICollectionViewCell {
         titleLabel.text = object.title
         centuryLabel.text = object.century
         classificationLabel.text = object.classification
+        centuryContainerView.isHidden = (centuryLabel.text?.count ?? 0) == 0
+        classificationContainerView.isHidden = (classificationLabel.text?.count ?? 0) == 0
         let imageLink = object.images?.first(where: { $0.baseimageurl != nil })?.baseimageurl ?? ""
-        previewImageView.loadImage(link: "\(imageLink)?height=200&width=200",
-                                   cachePolicy: .onDisk(timeout: 60*5)) // disk cache for 5 minutes
+        previewImageView.loadImage(
+            link: "\(imageLink)?height=200&width=200",
+            placeholder: .activityIndicator(tintColor: .black, errorImage: #imageLiteral(resourceName: "image_placeholder")),
+            cachePolicy: .inRam(timeout: 60*5)) // disk cache for 5 minutes
     }
     
     override func prepareForReuse() {
