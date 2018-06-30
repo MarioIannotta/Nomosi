@@ -28,7 +28,7 @@ open class Service<Response: ServiceResponse> {
     private var url: URL? {
         if let absoluteURL = absoluteURL {
             return absoluteURL
-        } else if let basePath = basePath {
+        } else if let basePath = basePath, !basePath.isEmpty {
             if let relativePath = relativePath {
                 return URL(string: basePath+relativePath)
             } else {
@@ -176,7 +176,8 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func parseReceivedDataAndCompleteRequest(data: Data) {
-        self.log.print("Response: \n\(String(data: data, encoding: .utf8) ?? "")", requiredLevel: .verbose)
+        let responsString = String(data: data, encoding: .utf8) ?? "\(data.count) bytes"
+        self.log.print("Response: \n\(responsString)", requiredLevel: .verbose)
         do {
             let response = try Response.parse(data: data)
             self.completeRequest(response: response, error: nil)
@@ -207,7 +208,10 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func makeRequest() -> URLRequest? {
-        guard let url = url else { return nil }
+        guard
+            let url = url,
+            url.host != nil
+            else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         var allHeaders = [String: String]()
