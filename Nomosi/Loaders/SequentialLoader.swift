@@ -10,23 +10,11 @@ import Foundation
 
 class SequentialLoader: Loader {
     
-    var policy: LoaderPolicy
-    var services: [AnyService]
-    
-    init(policy: LoaderPolicy, services: [AnyService]) {
-        self.policy = policy
-        self.services = services
-    }
-    
-    deinit {
-        cancelOnGoigRequests()
-    }
-    
-    func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
-              completion: @escaping (() -> Void)) {
+    override func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
+                       completion: (() -> Void)?) {
         
         loadNextServiceIfNeeded(usingOverlay: serviceOverlayView) { _ in
-            completion()
+            completion?()
         }
     }
     
@@ -59,6 +47,18 @@ class SequentialLoader: Loader {
             }
             completion(self.shouldStopLoader(service: service, error: error), error)
         }
+    }
+    
+}
+
+extension Array where Element == AnyService {
+    
+    public func sequentialLoad(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
+                               errorPolicy: Loader.ErrorPolicy = .ignoreErrors,
+                               completion: (() -> Void)?) {
+        SequentialLoader(services: self, errorPolicy: errorPolicy)
+            .load(usingOverlay: serviceOverlayView,
+                  completion: completion)
     }
     
 }

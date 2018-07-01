@@ -8,28 +8,40 @@
 
 import Foundation
 
-enum LoaderPolicy {
-    
-    typealias ErrorEvaluationClosure = (_ service: AnyService, _ error: Error) -> Bool
-    
-    case ignoreErrors
-    case stopAtFirstError
-    case custom(shouldStopAtError: ErrorEvaluationClosure)
-    
-}
+open class Loader {
 
-protocol Loader {
+    public typealias ErrorEvaluationClosure = (_ service: AnyService, _ error: Error) -> Bool
     
-    var policy: LoaderPolicy { get set }
-    var services: [AnyService] { get set }
+    public enum ErrorPolicy {
+        case ignoreErrors
+        case stopAtFirstError
+        case custom(shouldStopAtError: ErrorEvaluationClosure)
+    }
     
-}
+    private (set) var errorPolicy: ErrorPolicy
+    private (set) var services: [AnyService]
     
-extension Loader {
+    public init(services: [AnyService], errorPolicy: ErrorPolicy) {
+        self.errorPolicy = errorPolicy
+        self.services = services
+    }
     
-    func shouldStopLoader(service: AnyService, error: Error?) -> Bool {
+    deinit {
+        cancelOnGoigRequests()
+    }
+    
+    public func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
+                     completion: (() -> Void)?) {
+        assert(false, "Loader is an abstract class")
+    }
+    
+    public func cancelOnGoigRequests() {
+        services.forEach { $0.cancelRequest() }
+    }
+    
+    internal func shouldStopLoader(service: AnyService, error: Error?) -> Bool {
         guard let error = error else { return false }
-        switch self.policy {
+        switch errorPolicy {
         case .ignoreErrors:
             return false
         case .stopAtFirstError:
@@ -37,10 +49,6 @@ extension Loader {
         case .custom(let shouldStopAtError):
             return shouldStopAtError(service, error)
         }
-    }
-    
-    func cancelOnGoigRequests() {
-        services.forEach { $0.cancelRequest() }
     }
     
 }

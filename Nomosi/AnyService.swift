@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ Type erasure protocol for Service
+ */
 public protocol AnyService: class {
     
     typealias AnyServiceResponseCallback = (_ error: Error?) -> Void
@@ -17,15 +20,9 @@ public protocol AnyService: class {
     
     func cancelRequest()
     
-    var id: String { get }
-    
 }
 
 extension Service: AnyService {
-    
-    public var id: String {
-        return "\(hashValue)"
-    }
     
     public func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
                      completion: @escaping (_ error: Error?) -> Void) {
@@ -37,6 +34,28 @@ extension Service: AnyService {
     
     public func cancelRequest() {
         cancel()
+    }
+    
+}
+
+// MARK: - Syntax sugar dance
+
+extension Array where Element == AnyService {
+    
+    public func and(_ services: AnyService...) -> [AnyService] {
+        var allServices = self
+        allServices.append(contentsOf: services)
+        return allServices
+    }
+    
+}
+
+extension AnyService {
+    
+    public func and(_ services: AnyService...) -> [AnyService] {
+        var allServices = [self as AnyService]
+        allServices.append(contentsOf: services)
+        return allServices
     }
     
 }

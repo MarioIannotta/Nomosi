@@ -255,4 +255,13 @@ extension Service: Hashable {
         return lhs.hashValue == rhs.hashValue
     }
     
+    public static func == (lhs: Service<Response>, rhs: AnyService) -> Bool {
+        let rhsAsService = rhs as? Service<Response>
+        return lhs == rhsAsService
+    }
+    
+    public static func == (lhs: AnyService, rhs: Service<Response>) -> Bool {
+        return rhs == lhs
+    }
+    
 }

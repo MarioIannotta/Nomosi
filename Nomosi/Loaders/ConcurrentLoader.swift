@@ -8,39 +8,35 @@
 
 import Foundation
 
-class ConcurrentLoader: Loader {
+open class ConcurrentLoader: Loader {
     
-    var policy: LoaderPolicy
-    var services: [AnyService]
-    
-    init(policy: LoaderPolicy, services: [AnyService]) {
-        self.policy = policy
-        self.services = services
-    }
-    
-    deinit {
-        cancelOnGoigRequests()
-    }
-    
-    func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
-              completion: @escaping (() -> Void)) {
+    override public func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
+                              completion: (() -> Void)?) {
         let dispatchGroup = DispatchGroup()
         services.forEach { service in
             dispatchGroup.enter()
-            service.load(usingOverlay: serviceOverlayView) { [weak self, weak service] error in
+            service.load(usingOverlay: serviceOverlayView) {  error in
                 dispatchGroup.leave()
-                guard let `self` = self, let service = service else {
-                    completion()
-                    return
-                }
                 if self.shouldStopLoader(service: service, error: error) {
                     self.cancelOnGoigRequests()
                 }
             }
         }
         dispatchGroup.notify(queue: .main) {
-            completion()
+            completion?()
         }
+    }
+    
+}
+
+extension Array where Element == AnyService {
+    
+    public func concurrentLoad(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
+                               errorPolicy: Loader.ErrorPolicy = .ignoreErrors,
+                               completion: (() -> Void)?) {
+        ConcurrentLoader(services: self, errorPolicy: errorPolicy)
+            .load(usingOverlay: serviceOverlayView,
+                  completion: completion)
     }
     
 }
