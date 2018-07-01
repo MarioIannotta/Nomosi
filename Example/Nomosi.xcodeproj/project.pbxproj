@@ -188,9 +188,9 @@
 		AC0D1A4C20C976B9002E614B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				AC0D1A7320C98A51002E614B /* Objects */,
-				AC0D1A7220C98A4B002E614B /* Century */,
 				AC0D1A4D20C976B9002E614B /* HavardArtMuseumService.swift */,
+				AC0D1A7220C98A4B002E614B /* Century */,
+				AC0D1A7320C98A51002E614B /* Objects */,
 			);
 			path = Services;
 			sourceTree = "<group>";
