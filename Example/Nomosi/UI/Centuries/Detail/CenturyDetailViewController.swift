@@ -25,7 +25,8 @@ class CenturyDetailViewController: UIViewController {
         super.viewDidLoad()
         title = century?.name
         CenturyService(id: century?.id ?? -1)
-            .load(usingOverlay: ServiceOverlayView(cover: view))?
+            .addingObserver(ServiceOverlayView(cover: view))
+            .load()?
             .onSuccess { [weak self] century in
                 self?.century = century
                 self?.reloadContent()

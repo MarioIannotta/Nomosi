@@ -10,25 +10,24 @@ import Foundation
 
 class SequentialLoader: Loader {
     
-    override func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
-                       completion: (() -> Void)?) {
+    override func load(completion: (() -> Void)?) {
         
-        loadNextServiceIfNeeded(usingOverlay: serviceOverlayView) { _ in
+        loadNextServiceIfNeeded { _ in
             completion?()
         }
     }
     
     private func loadNextServiceIfNeeded(atIndex serviceIndex: Int = 0,
-                                         usingOverlay serviceOverlayView: ServiceOverlayView?,
                                          completion: @escaping ((_ error: Error?) -> Void)) {
-        guard serviceIndex < services.count else {
-            completion(nil)
-            return
-        }
-        loadService(services[serviceIndex], usingOverlay: serviceOverlayView) { [weak self] shouldStopRequests, error in
+        guard
+            serviceIndex < services.count
+            else {
+                completion(nil)
+                return
+            }
+        loadService(services[serviceIndex]) { [weak self] shouldStopRequests, error in
             guard shouldStopRequests else {
                 self?.loadNextServiceIfNeeded(atIndex: serviceIndex + 1,
-                                             usingOverlay: serviceOverlayView,
                                              completion: completion)
                 return
             }
@@ -38,9 +37,8 @@ class SequentialLoader: Loader {
     }
     
     private func loadService(_ service: AnyService,
-                             usingOverlay: ServiceOverlayView?,
                              completion: @escaping ((_ shouldStopRequests: Bool, _ error: Error?) -> Void)) {
-        service.load(usingOverlay: usingOverlay) { [weak self, weak service] error in
+        service.load() { [weak self, weak service] error in
             guard let `self` = self, let service = service else {
                 completion(true, error)
                 return
@@ -53,12 +51,11 @@ class SequentialLoader: Loader {
 
 extension Array where Element == AnyService {
     
-    public func sequentialLoad(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
+    public func sequentialLoad(usingOverlay serviceOverlayView: ServiceObserver? = nil,
                                errorPolicy: Loader.ErrorPolicy = .ignoreErrors,
                                completion: (() -> Void)?) {
         SequentialLoader(services: self, errorPolicy: errorPolicy)
-            .load(usingOverlay: serviceOverlayView,
-                  completion: completion)
+            .load(completion: completion)
     }
     
 }

@@ -30,8 +30,7 @@ open class Loader {
         cancelOnGoigRequests()
     }
     
-    public func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
-                     completion: (() -> Void)?) {
+    public func load(completion: (() -> Void)?) {
         assert(false, "Loader is an abstract class")
     }
     

@@ -47,6 +47,7 @@ open class Service<Response: ServiceResponse> {
     private var failureCallback: FailureCallback?
     private var shouldLoadServiceCallback: ShouldLoadServiceCallback?
     private var canStartDataTask = true
+    private var serviceObservers = [ServiceObserver]()
     
     public init() { }
     
@@ -75,8 +76,16 @@ open class Service<Response: ServiceResponse> {
     }
     
     @discardableResult
-    public func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil) -> Self? {
+    public func addingObserver(_ serviceObserver: ServiceObserver) -> Self {
+        serviceObservers.append(serviceObserver)
+        return self
+    }
+    
+    @discardableResult
+    public func load() -> Self? {
         log.print("⬆️ \(self)")
+        serviceObservers.forEach { $0.serviceDidStartRequest(self) }
+        
         guard
             let request = makeRequest()
             else {
@@ -90,7 +99,6 @@ open class Service<Response: ServiceResponse> {
                 completeRequest(response: nil, error: .redundantRequest)
                 return nil
             }
-        
         Cache.loadIfNeeded(request: request, cachePolicy: cachePolicy) { [weak self] data in
             guard let `self` = self else { return }
             if let data = data {
@@ -98,14 +106,13 @@ open class Service<Response: ServiceResponse> {
                 self.parseReceivedDataAndCompleteRequest(data: data)
                 return
             } else {
-                self.loadIfNeeded(request: request, usingOverlay: serviceOverlayView)
+                self.loadIfNeeded(request: request)
             }
         }
         return self
     }
     
-    private func loadIfNeeded(request: URLRequest,
-                              usingOverlay serviceOverlayView: ServiceOverlayView? = nil) {
+    private func loadIfNeeded(request: URLRequest) {
         guard
             self.canStartDataTask
             else {
@@ -113,22 +120,20 @@ open class Service<Response: ServiceResponse> {
                 return
             }
         RequestsQueue.append(request: request)
-        serviceOverlayView?.addService()
         let shouldLoadServiceCallback = self.shouldLoadServiceCallback ?? { completion in completion(true) }
         shouldLoadServiceCallback { shouldLoadService in
             if shouldLoadService {
                 self.performDataTask(request: request) {
-                    self.resolve(request, usingOverlay: serviceOverlayView)
+                    self.resolve(request)
                 }
             } else {
-                self.resolve(request, usingOverlay: serviceOverlayView)
+                self.resolve(request)
                 self.completeRequest(response: nil, error: .shouldLoadServiceEvaluatedToFalse)
             }
         }
     }
     
-    private func resolve(_ request: URLRequest, usingOverlay serviceOverlayView: ServiceOverlayView?) {
-        serviceOverlayView?.removeService()
+    private func resolve(_ request: URLRequest) {
         RequestsQueue.resolve(request: request)
     }
 
@@ -187,6 +192,7 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func completeRequest(response: Response?, error: ServiceError?) {
+        serviceObservers.forEach { $0.serviceDidEndRequest(self, response: response, error: error) }
         if let safeResponse = response {
             DispatchQueue.main.async {
                 self.successCallback?(safeResponse)

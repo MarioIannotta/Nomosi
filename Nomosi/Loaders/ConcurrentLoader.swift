@@ -10,12 +10,11 @@ import Foundation
 
 open class ConcurrentLoader: Loader {
     
-    override public func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
-                              completion: (() -> Void)?) {
+    override public func load(completion: (() -> Void)?) {
         let dispatchGroup = DispatchGroup()
         services.forEach { service in
             dispatchGroup.enter()
-            service.load(usingOverlay: serviceOverlayView) {  error in
+            service.load { error in
                 dispatchGroup.leave()
                 if self.shouldStopLoader(service: service, error: error) {
                     self.cancelOnGoigRequests()
@@ -31,12 +30,10 @@ open class ConcurrentLoader: Loader {
 
 extension Array where Element == AnyService {
     
-    public func concurrentLoad(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
-                               errorPolicy: Loader.ErrorPolicy = .ignoreErrors,
+    public func concurrentLoad(errorPolicy: Loader.ErrorPolicy = .ignoreErrors,
                                completion: (() -> Void)?) {
         ConcurrentLoader(services: self, errorPolicy: errorPolicy)
-            .load(usingOverlay: serviceOverlayView,
-                  completion: completion)
+            .load(completion: completion)
     }
     
 }

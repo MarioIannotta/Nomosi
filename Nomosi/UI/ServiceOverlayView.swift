@@ -8,6 +8,18 @@
 
 import UIKit
 
+extension ServiceOverlayView: ServiceObserver {
+    
+    public func serviceDidStartRequest(_ service: AnyService) {
+        addService()
+    }
+    
+    public func serviceDidEndRequest(_ service: AnyService, response: ServiceResponse?, error: Error?) {
+        removeService()
+    }
+    
+}
+
 open class ServiceOverlayView: UIView {
     
     private var loadingServicesCount = 0 

@@ -15,8 +15,9 @@ public protocol AnyService: class {
     
     typealias AnyServiceResponseCallback = (_ error: Error?) -> Void
     
-    func load(usingOverlay serviceOverlayView: ServiceOverlayView?,
-              completion: @escaping AnyServiceResponseCallback)
+    func load(completion: @escaping AnyServiceResponseCallback)
+    
+    func addObserver(_ serviceObserver: ServiceObserver)
     
     func cancelRequest()
     
@@ -24,12 +25,15 @@ public protocol AnyService: class {
 
 extension Service: AnyService {
     
-    public func load(usingOverlay serviceOverlayView: ServiceOverlayView? = nil,
-                     completion: @escaping (_ error: Error?) -> Void) {
+    public func load(completion: @escaping (_ error: Error?) -> Void) {
         onCompletion { _, error in
             completion(error)
         }
-        load(usingOverlay: serviceOverlayView)
+        load()
+    }
+    
+    public func addObserver(_ serviceObserver: ServiceObserver) {
+        addingObserver(serviceObserver)
     }
     
     public func cancelRequest() {
@@ -46,6 +50,11 @@ extension Array where Element == AnyService {
         var allServices = self
         allServices.append(contentsOf: services)
         return allServices
+    }
+    
+    public func addingObserver(_ serviceObserver: ServiceObserver) -> [AnyService] {
+        forEach { $0.addObserver(serviceObserver) }
+        return self
     }
     
 }

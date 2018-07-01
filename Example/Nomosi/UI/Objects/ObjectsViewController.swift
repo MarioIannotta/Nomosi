@@ -47,6 +47,35 @@ class ObjectsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let serviceOne = CenturiesService()
+        let serviceTwo = ObjectsService(nextPage: nil)!
+        
+        let customErrorEvaluation: Loader.ErrorEvaluationClosure = { service, error in
+            let isTheSame = service == serviceTwo
+            print("isThe Same: \(isTheSame)")
+            return isTheSame
+        }
+        
+//        ([serviceOne, serviceTwo] as [AnyService])
+//            .concurrentLoad(errorPolicy: .custom(shouldStopAtError: customErrorEvaluation)) {
+//
+//        }
+        
+//        ConcurrentLoader(services: [serviceOne, serviceTwo],
+//                         errorPolicy: .custom(shouldStopAtError: customErrorEvaluation))
+//            .load { [weak self] in
+//                print("end")
+//        }
+        
+        
+        serviceOne
+            .and(serviceTwo)
+            .and(serviceOne)
+            .concurrentLoad(errorPolicy: .custom(shouldStopAtError: customErrorEvaluation)) {
+            
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,14 +99,21 @@ class ObjectsViewController: UIViewController {
     }
     
     private func loadNextPageIfNeeded() {
-        guard shouldLoadNextPage else { return }
-        let overlay = lastLoadedPageLink == nil ? ServiceOverlayView(cover: view) : footerServiceOverlayView
-        _ = ObjectsService(nextPage: lastLoadedPageLink)?
+        guard
+            shouldLoadNextPage,
+            let service = ObjectsService(nextPage: lastLoadedPageLink)
+            else { return }
+        var serviceOverlayView = ServiceOverlayView(cover: view)
+        if lastLoadedPageLink != nil, let footerServiceOverlayView = footerServiceOverlayView {
+            serviceOverlayView = footerServiceOverlayView
+        }
+        service
+            .addingObserver(serviceOverlayView)
+            .load()?
             .onSuccess { [weak self] response in
                 self?.lastLoadedPageLink = response.paginatedServiceInfo.next
                 self?.insertObjects(response.objects)
             }
-            .load(usingOverlay: overlay)
     }
     
 }
