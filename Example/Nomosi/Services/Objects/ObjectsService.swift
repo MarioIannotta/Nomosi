@@ -9,7 +9,7 @@
 import Foundation
 import Nomosi
 
-class ObjectsService: HavardArtMuseumService<ObjectsServiceResponse> {
+class ObjectsService: HarvardArtMuseumService<ObjectsServiceResponse> {
 
     @discardableResult
     init?(nextPage: String?) {

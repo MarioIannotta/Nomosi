@@ -15,29 +15,40 @@ class CenturyDetailViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
+    private var serviceOverlayView: ServiceOverlayView!
+    
     // MARK: - Model
     
     var century: Century?
+    var centuryID: Int = -1
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = century?.name
-        CenturyService(id: century?.id ?? -1)
-            .addingObserver(ServiceOverlayView(cover: view))
-            .load()?
-            .onSuccess { [weak self] century in
-                self?.century = century
-                self?.reloadContent()
-            }
-            .onFailure { error in
-                // TODO: handle error
-            }
+        centuryID = century?.id ?? -1
+        serviceOverlayView = ServiceOverlayView(cover: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        century = nil
+        let centuryService = CenturyService(id: centuryID)
+        centuryService
+            .load()?
+            .addingObserver(serviceOverlayView)
+            .addingObserver(self)
+            .onSuccess { [weak self] century in
+                self?.century = century
+            }
+            .onFailure { error in
+                // TODO: handle error
+            }
+            .onCompletion { [weak self] _, _ in
+                self?.reloadContent()
+            }
     }
     
     private func reloadContent() {
@@ -67,6 +78,24 @@ extension CenturyDetailViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+}
+
+extension CenturyDetailViewController: ServiceObserver {
+    
+    func serviceWillStartRequest(_ service: AnyService) {
+//        guard
+//            let service = service as? CenturyService
+//            else { return }
+//        print("service \(service) did start request")
+    }
+    
+    func serviceDidEndRequest(_ service: AnyService) {
+//        guard
+//            let service = service as? CenturyService
+//            else { return }
+//        print("service \(service) did end request, latest response is: \(service.latestResponse)")
     }
     
 }

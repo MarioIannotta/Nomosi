@@ -8,30 +8,32 @@
 
 import UIKit
 
-extension ServiceOverlayView: ServiceObserver {
-    
-    public func serviceDidStartRequest(_ service: AnyService) {
-        addService()
-    }
-    
-    public func serviceDidEndRequest(_ service: AnyService, response: ServiceResponse?, error: Error?) {
-        removeService()
-    }
-    
-}
-
 open class ServiceOverlayView: UIView {
     
-    private var loadingServicesCount = 0 
-    
     private weak var viewToCover: UIView?
-    private var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     private var viewToConverObservation: NSKeyValueObservation?
+    private var contentStackView = UIStackView(frame: .zero)
+    private var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    private var errorLabel = UILabel(frame: .zero)
+    private var tryAgainButton = UIButton(type: .system)
+
+    private var keepOnError: Bool = false
+    private var hasError: Bool = false
+    private var loadingServices = [AnyService]()
+    private var servicesWithError = [AnyService]()
     
-    public init(cover viewToCover: UIView) {
+    private var hasLoadingServices: Bool {
+        return loadingServices.count > 0
+    }
+    private var hasServicesWithError: Bool {
+        return servicesWithError.count > 0
+    }
+    
+    public init(cover viewToCover: UIView, keepOnError: Bool = true) {
         super.init(frame: .zero)
+        self.viewToCover = viewToCover
+        self.keepOnError = keepOnError
         setup()
-        cover(view: viewToCover)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -48,48 +50,139 @@ open class ServiceOverlayView: UIView {
         viewToConverObservation = nil
     }
     
-    public func cover(view: UIView) {
-        viewToCover = view
-        viewToConverObservation = view.observe(\.bounds) { [weak self] _, _ in
+    private func setup() {
+        setupView()
+        setupActivityIndicator()
+        setupErrorLabel()
+        setupTryAgainButton()
+        setupContentStackView()
+    }
+    
+    private func setupView() {
+        backgroundColor = UIColor(white: 1, alpha: 1)
+        viewToConverObservation = viewToCover?.observe(\.bounds) { [weak self] _, _ in
             self?.refreshSize()
         }
     }
     
-    private func setup() {
-        backgroundColor = UIColor(white: 1, alpha: 1)
+    private func setupActivityIndicator() {
         activityIndicator.startAnimating()
-        addSubview(activityIndicator)
+        activityIndicator.hidesWhenStopped = false
+    }
+    
+    private func setupErrorLabel() {
+        errorLabel.textAlignment = .center
+        errorLabel.numberOfLines = 0
+        setError(nil)
+    }
+    
+    private func setupTryAgainButton() {
+        tryAgainButton.setTitle("Try again", for: .normal)
+        tryAgainButton.layer.cornerRadius = 5
+        tryAgainButton.layer.borderWidth = 1
+        tryAgainButton.layer.borderColor = tryAgainButton.tintColor.cgColor
+        tryAgainButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        tryAgainButton.sizeToFit()
+        tryAgainButton.isHidden = true
+        tryAgainButton.addTarget(self, action: #selector(tryAgainButtonDidTap), for: .touchUpInside)
+    }
+    
+    private func setupContentStackView() {
+        addSubview(contentStackView)
+        [activityIndicator, errorLabel, tryAgainButton].forEach { contentStackView.addArrangedSubview($0) }
+        contentStackView.backgroundColor = .red
+        contentStackView.alignment = .center
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.axis = .vertical
+        contentStackView.spacing = 20
+        NSLayoutConstraint.activate([
+            leftAnchor.constraint(equalTo: contentStackView.leftAnchor, constant: -20),
+            rightAnchor.constraint(equalTo: contentStackView.rightAnchor, constant: 20),
+            centerYAnchor.constraint(equalTo: contentStackView.centerYAnchor)
+            ])
+    }
+    
+    fileprivate func setError(_ serviceError: ServiceError?) {
+        self.hasError = serviceError != nil
+        DispatchQueue.main.async { [weak self] in
+            self?.errorLabel.text = serviceError?.reason ?? ""
+            self?.tryAgainButton.isHidden = serviceError == nil
+        }
     }
     
     private func refreshSize() {
         frame = viewToCover?.bounds ?? .zero
-        activityIndicator.center = center
+    }
+    
+    @objc private func tryAgainButtonDidTap() {
+        servicesWithError.forEach { $0.load(completion: nil) }
     }
     
     private func addOverlayIfNeeded() {
+        guard
+            self.hasLoadingServices || self.superview != nil
+            else { return }
+        setError(nil)
+        servicesWithError = []
         DispatchQueue.main.async { [weak self] in
             guard let `self` = self else { return }
-            guard self.loadingServicesCount > 0 || self.superview != nil else { return }
             self.viewToCover?.addSubview(self)
             self.refreshSize()
         }
     }
     
     private func removeOverlayViewIfNeeded() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            guard self?.loadingServicesCount == 0 else { return }
-            self?.removeFromSuperview()
+        DispatchQueue.main.async {
+            if !self.hasLoadingServices && (!self.hasServicesWithError || !self.keepOnError) {
+                self.removeFromSuperview()
+            }
         }
     }
     
-    internal func addService() {
-        loadingServicesCount += 1
+    private func setActivityIndicator(hidden isHidden: Bool) {
+        DispatchQueue.main.async {
+            self.activityIndicator.isHidden = isHidden
+        }
+    }
+    
+    private func hideActivityIndicatorIfNeeded() {
+        DispatchQueue.main.async { [weak self] in
+            self?.activityIndicator.isHidden = self?.loadingServices.count == 0
+        }
+    }
+    
+    private func serviceDidStartLoad(_ service: AnyService) {
+        loadingServices.appendIfNotExists(service)
+        hideActivityIndicatorIfNeeded()
         addOverlayIfNeeded()
     }
     
-    internal func removeService() {
-        loadingServicesCount -= 1
+    private func serviceDidEndLoad(_ service: AnyService) {
+        loadingServices.remove(service)
+        /*
+         if there's an error, and that error is not the redundant request
+         error (we want this error to be silent), let's display the error message
+         */
+        if let lastError = service.lastError, lastError != ServiceError.redundantRequest {
+            setError(service.lastError)
+            servicesWithError.appendIfNotExists(service)
+        } else {
+            servicesWithError.remove(service)
+        }
+        hideActivityIndicatorIfNeeded()
         removeOverlayViewIfNeeded()
+    }
+    
+}
+
+extension ServiceOverlayView: ServiceObserver {
+    
+    public func serviceWillStartRequest(_ service: AnyService) {
+        serviceDidStartLoad(service)
+    }
+    
+    public func serviceDidEndRequest(_ service: AnyService) {
+        serviceDidEndLoad(service)
     }
     
 }

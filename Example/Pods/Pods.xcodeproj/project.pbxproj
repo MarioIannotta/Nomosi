@@ -7,29 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01BA24BEB01575BD49DA6864F9D0E19A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		0226519564966DE19FCA1C991702E3D8 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65BF715C9349A0EE92F16ACB79FEB0 /* Method.swift */; };
-		2B8032304E94A547C4BD62C664010105 /* ServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D4CC09B5E2FD0119B0390BFF79BBE7 /* ServiceResponse.swift */; };
+		06517B0A7A6C8D48BEBF3481559C4BCD /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3290155017A2EF2F330D5EA63D409D67 /* Loader.swift */; };
+		248905314FE2AB2F9895021768717B22 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9470F9B3B9C30C26E4046A66AF89E4FA /* ServiceError.swift */; };
+		2BDC861FC94DB31C4C1D0FD85928485B /* ServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF0CCB0FF833ABBEAFAFDCD81EEFD3 /* ServiceObserver.swift */; };
 		38385F6F12D5F5F1138965F5B283D510 /* Pods-Nomosi_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 13C37DF471234BB12FCBEBA141E3F89D /* Pods-Nomosi_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45B7591FEF23212F056BE53A89937402 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09836B248F72523CF5D88E48EE0A1C5 /* UIImageView+.swift */; };
-		603AB843D5F4A5B169EA455F194D2F47 /* AnyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D6B089670C8C2DA1CD399F5513D3C8 /* AnyService.swift */; };
-		6377C96C516CFA05D7F5475A49A4F411 /* ConcurrentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCD687CD53E081FE47ECD01FD6759D8 /* ConcurrentLoader.swift */; };
-		7D0195C5B963FD8E8B1BEA4EC7579257 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2236511C000724FC1621B0583DFDD /* ServiceError.swift */; };
-		7D0724DE906017CA7D4646BD958B2620 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7624FFD88021F521D74BB637227EB047 /* Loader.swift */; };
+		40AA4CD4D612B1E32B1404FCBEA73136 /* ConcurrentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BAF1B7417BEFC491F2AC2284198170 /* ConcurrentLoader.swift */; };
+		4F8C039A2B052E9CFCBC7C6763CD86DA /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A16E875C014102F66AFF938E27BB69 /* Service.swift */; };
+		5438F5B38D20479E7C94D8843E3D1B31 /* ServiceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340383801E1CCE82DBB32272EC3D1B73 /* ServiceOverlayView.swift */; };
+		58A178BB8D375622448886BB25DAE207 /* Nomosi-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EF24E489D2C2452D7B06B0B91DC255 /* Nomosi-dummy.m */; };
+		79CF46AA0FE303641F18FB01A92F81D6 /* AnyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6235638821823E89228ECE6D0AA9EA0 /* AnyService.swift */; };
 		803A5720C4E19C1E09571A8F20993807 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		8155C02CFD88B435902A282413E1D802 /* RequestsQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236221E7605CB4E496F0468F8E98F82 /* RequestsQueue.swift */; };
-		86B75A21543EA7FBB2C23797FD9E0F98 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BF98238F48A3EB67EAA5D9FF208B6A /* Service.swift */; };
-		89A4149B212680DBFBD6C3984DE17EFF /* ServiceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB483949F3BF4EFD50E0022719D479D /* ServiceOverlayView.swift */; };
+		89A3CB8F09C89B383E0347B33C361CBE /* NetworkActivityIndicatorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD690EE0FF934AE42F3A2DA73023B151 /* NetworkActivityIndicatorHandler.swift */; };
+		8F9495B0A81D82A5D165FAD2EDE8B9DA /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940D0FE0EC55E8B19D58737FC25E365 /* Method.swift */; };
+		98F29FB0AC39D17EE237B0A66CCF6B9A /* ServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023E48898589FE21BB0D33E86675FD2E /* ServiceResponse.swift */; };
+		9BDB08E62D76EF9C0D41F44D1E71720E /* RequestQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19330F91AC5DE7D64889F1744CC230D /* RequestQueue.swift */; };
 		A8689710C6289F6953BE7A96F0774E0B /* Pods-Nomosi_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE9FE7065E27A3409655243852E5C7F /* Pods-Nomosi_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9F71A66A76400FB179EEBD473A4A991 /* Pods-Nomosi_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6DE2B128AAC750518F5DD4A7B9DC3 /* Pods-Nomosi_Example-dummy.m */; };
-		AC0C8A7420E9492000767658 /* ServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0C8A7320E9492000767658 /* ServiceObserver.swift */; };
-		B16B4147DC3486D0FC73F0BE468CA9FB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D88E0FFC3CA80FDF3614FFA21935C1 /* Log.swift */; };
-		B658AEF41D6A3E839E38A2B0C60CC34E /* SequentialLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245059EDB8F6C9EF04EE3D3AD28A313B /* SequentialLoader.swift */; };
-		CEF153624663C0605DCF916B360EAF26 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25824BEBEA0258D6AEE000AA9A52548 /* Cache.swift */; };
-		D4BCF30630BCEE55215C047F9255FD89 /* Nomosi-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 884A7219A01D44A036718BFD62D5F756 /* Nomosi-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D9DC496C3BCF990E5D68BE7157DEFD10 /* Nomosi-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A82EDFD2BAE9FD6A33C56EED582B780D /* Nomosi-dummy.m */; };
+		B61423F282039C2E08D37A44A4342C80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		C9391034C441E2E3BB7983AC67A34A37 /* Nomosi-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D6400AC3C60F7EE420FA747C4F72386F /* Nomosi-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D247EB9A65ED0D3208505CB54680A215 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812F2D91BC3DEF64AD73FE2F55686639 /* Cache.swift */; };
+		D80069610CE9C0723C74C93B783B7D02 /* SequentialLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F6E3A741083B6AE6B66930E870EF7 /* SequentialLoader.swift */; };
 		DF4068324C1D6F9CCE2C927FF391D677 /* Pods-Nomosi_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C638CFF7DA1DB368C0A9AB41D904B163 /* Pods-Nomosi_Tests-dummy.m */; };
 		E85ED4B76C18FE8C4CEF011A8DE13517 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		F100B1A2FB1B48F47EF056BC6DB5EE46 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8838C0AE84E37012748A5DB72FD40576 /* UIImageView+.swift */; };
+		FF379A7B095FC5862279222E0864AA8D /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F9AEAB77C5AF75ABDD376EBE8CBDD8 /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DA2A04FBD8E55312B4501CDB92593F96;
+			remoteGlobalIDString = 3160D839192BC5C5F48D400D7E88E78E;
 			remoteInfo = Nomosi;
 		};
 		AFA7A264F69B427508E7C44A9E9751DB /* PBXContainerItemProxy */ = {
@@ -50,54 +51,55 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		023E48898589FE21BB0D33E86675FD2E /* ServiceResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceResponse.swift; path = Nomosi/Core/ServiceResponse.swift; sourceTree = "<group>"; };
 		13C37DF471234BB12FCBEBA141E3F89D /* Pods-Nomosi_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Nomosi_Example-umbrella.h"; sourceTree = "<group>"; };
 		1DF83854E38C89358F73CBD8574F31CF /* Pods-Nomosi_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Nomosi_Example-resources.sh"; sourceTree = "<group>"; };
-		245059EDB8F6C9EF04EE3D3AD28A313B /* SequentialLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SequentialLoader.swift; sourceTree = "<group>"; };
-		2AB483949F3BF4EFD50E0022719D479D /* ServiceOverlayView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServiceOverlayView.swift; sourceTree = "<group>"; };
-		2D2C0F47809C3267379762C6E70629DC /* Nomosi-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nomosi-prefix.pch"; sourceTree = "<group>"; };
-		2E365652F60FBCA8ACC06717957F970B /* Nomosi.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = Nomosi.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		26730E1550E7FB35A89D0A89773A0E16 /* Nomosi.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Nomosi.modulemap; sourceTree = "<group>"; };
+		2F8F6E3A741083B6AE6B66930E870EF7 /* SequentialLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SequentialLoader.swift; sourceTree = "<group>"; };
 		31F586C57AC64BB3DE37E71B05D2D420 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3290155017A2EF2F330D5EA63D409D67 /* Loader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		340383801E1CCE82DBB32272EC3D1B73 /* ServiceOverlayView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceOverlayView.swift; path = Nomosi/UI/ServiceOverlayView.swift; sourceTree = "<group>"; };
 		34725CE3D34DBA1339819805C02C218E /* Pods-Nomosi_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Nomosi_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		36D6B089670C8C2DA1CD399F5513D3C8 /* AnyService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyService.swift; path = Nomosi/AnyService.swift; sourceTree = "<group>"; };
-		3B2B1D11CF64DAC13ACE7E5FA05B512C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3E490E9FC62A7E655DEFB163B80DE65D /* Pods-Nomosi_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Nomosi_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		51D88E0FFC3CA80FDF3614FFA21935C1 /* Log.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Log.swift; path = Nomosi/Log.swift; sourceTree = "<group>"; };
-		54033CEFB31BC9D5F283B9068E908B1F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		49A16E875C014102F66AFF938E27BB69 /* Service.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Service.swift; path = Nomosi/Core/Service.swift; sourceTree = "<group>"; };
 		5ED6DE2B128AAC750518F5DD4A7B9DC3 /* Pods-Nomosi_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Nomosi_Example-dummy.m"; sourceTree = "<group>"; };
+		624CA539C9EA1A723E6B5B0F879AD2E1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7624FFD88021F521D74BB637227EB047 /* Loader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		66BAF1B7417BEFC491F2AC2284198170 /* ConcurrentLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConcurrentLoader.swift; sourceTree = "<group>"; };
+		6DAF1E031DA902D1AC5573CABC8F2B0F /* Nomosi.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Nomosi.xcconfig; sourceTree = "<group>"; };
 		7B296218B20B26EB33961333CA61FD97 /* Pods-Nomosi_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Nomosi_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		7EE9FE7065E27A3409655243852E5C7F /* Pods-Nomosi_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Nomosi_Tests-umbrella.h"; sourceTree = "<group>"; };
-		87BF98238F48A3EB67EAA5D9FF208B6A /* Service.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Service.swift; path = Nomosi/Service.swift; sourceTree = "<group>"; };
-		884A7219A01D44A036718BFD62D5F756 /* Nomosi-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nomosi-umbrella.h"; sourceTree = "<group>"; };
-		8FDA544AF98883309973BE42F0389530 /* Nomosi.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Nomosi.modulemap; sourceTree = "<group>"; };
+		812F2D91BC3DEF64AD73FE2F55686639 /* Cache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Cache.swift; path = Nomosi/Core/Cache.swift; sourceTree = "<group>"; };
+		8838C0AE84E37012748A5DB72FD40576 /* UIImageView+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImageView+.swift"; path = "Nomosi/UI/UIImageView+.swift"; sourceTree = "<group>"; };
+		8940D0FE0EC55E8B19D58737FC25E365 /* Method.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Method.swift; path = Nomosi/Core/Method.swift; sourceTree = "<group>"; };
 		933F15F639DFBB41024F11C120724EF8 /* Pods-Nomosi_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Nomosi_Tests-resources.sh"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9470F9B3B9C30C26E4046A66AF89E4FA /* ServiceError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceError.swift; path = Nomosi/Core/ServiceError.swift; sourceTree = "<group>"; };
 		964C35CEEAED50DC2926B98082778878 /* Nomosi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nomosi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		979B6B892E6525B294F0FC44F3AD0BE4 /* Pods-Nomosi_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Nomosi_Example.modulemap"; sourceTree = "<group>"; };
-		9B65BF715C9349A0EE92F16ACB79FEB0 /* Method.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Method.swift; path = Nomosi/Method.swift; sourceTree = "<group>"; };
-		9CCD687CD53E081FE47ECD01FD6759D8 /* ConcurrentLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConcurrentLoader.swift; sourceTree = "<group>"; };
+		99EF24E489D2C2452D7B06B0B91DC255 /* Nomosi-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Nomosi-dummy.m"; sourceTree = "<group>"; };
+		99F9AEAB77C5AF75ABDD376EBE8CBDD8 /* Log.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Log.swift; path = Nomosi/Core/Log.swift; sourceTree = "<group>"; };
 		9D4E08BE224709F98C79EC79DA85BB7C /* Pods_Nomosi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomosi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A09836B248F72523CF5D88E48EE0A1C5 /* UIImageView+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
-		A236221E7605CB4E496F0468F8E98F82 /* RequestsQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestsQueue.swift; path = Nomosi/RequestsQueue.swift; sourceTree = "<group>"; };
-		A82EDFD2BAE9FD6A33C56EED582B780D /* Nomosi-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Nomosi-dummy.m"; sourceTree = "<group>"; };
-		AC0C8A7320E9492000767658 /* ServiceObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceObserver.swift; sourceTree = "<group>"; };
-		B25824BEBEA0258D6AEE000AA9A52548 /* Cache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Cache.swift; path = Nomosi/Cache.swift; sourceTree = "<group>"; };
+		B10433DD7F66EC33CA34C60D2E8195AA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		B37FE0A3D9472C527475FB641F96B21B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7CBC0D939C5D9070E176BA0A352368C /* Pods-Nomosi_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Nomosi_Example-frameworks.sh"; sourceTree = "<group>"; };
 		BF71EB286678CDA1B04CCA9670D83739 /* Pods-Nomosi_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Nomosi_Tests.modulemap"; sourceTree = "<group>"; };
 		C07301D6920E401F0C6AB38A49F97565 /* Pods-Nomosi_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Nomosi_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		C158E526C0A71C3436B71BF584F18A56 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C19330F91AC5DE7D64889F1744CC230D /* RequestQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestQueue.swift; path = Nomosi/Core/RequestQueue.swift; sourceTree = "<group>"; };
 		C5513672BE07955DA3FB465E67DF670D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5B54B0E6D651995DB162E0ED552EDBC /* Nomosi.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = Nomosi.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C638CFF7DA1DB368C0A9AB41D904B163 /* Pods-Nomosi_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Nomosi_Tests-dummy.m"; sourceTree = "<group>"; };
 		C6B1357DAAB8E65D25E60C36663E1098 /* Pods-Nomosi_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Nomosi_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D2213E46D4123AA5AE95EE11FCCB3E8E /* Pods-Nomosi_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Nomosi_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		D4DB2CD59365C9943DF86C32823DF3E6 /* Pods_Nomosi_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomosi_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6400AC3C60F7EE420FA747C4F72386F /* Nomosi-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nomosi-umbrella.h"; sourceTree = "<group>"; };
+		DD690EE0FF934AE42F3A2DA73023B151 /* NetworkActivityIndicatorHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkActivityIndicatorHandler.swift; path = Nomosi/UI/NetworkActivityIndicatorHandler.swift; sourceTree = "<group>"; };
 		E0AA9804C9850BC5BFB7381F30E53DC3 /* Pods-Nomosi_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Nomosi_Example.release.xcconfig"; sourceTree = "<group>"; };
+		E6235638821823E89228ECE6D0AA9EA0 /* AnyService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyService.swift; path = Nomosi/Core/AnyService.swift; sourceTree = "<group>"; };
 		EB715B85831F3917074A157F06EC5ADE /* Pods-Nomosi_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Nomosi_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		EB9F3DE32DE630067B1B102D95BC305C /* Pods-Nomosi_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Nomosi_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		F1D4CC09B5E2FD0119B0390BFF79BBE7 /* ServiceResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceResponse.swift; path = Nomosi/ServiceResponse.swift; sourceTree = "<group>"; };
-		F9F2236511C000724FC1621B0583DFDD /* ServiceError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceError.swift; path = Nomosi/ServiceError.swift; sourceTree = "<group>"; };
-		FA7B0C4918010E8F7009954F2447867E /* Nomosi.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Nomosi.xcconfig; sourceTree = "<group>"; };
+		EDEF0CCB0FF833ABBEAFAFDCD81EEFD3 /* ServiceObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceObserver.swift; path = Nomosi/Core/ServiceObserver.swift; sourceTree = "<group>"; };
+		F4E63612157D6FE5DA62F829F7FCACAB /* Nomosi-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nomosi-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,11 +111,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9C44A3298C1A006E36874C8CCE06FC2B /* Frameworks */ = {
+		42078D6661713FDC4816F80C30B153AA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01BA24BEB01575BD49DA6864F9D0E19A /* Foundation.framework in Frameworks */,
+				B61423F282039C2E08D37A44A4342C80 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +130,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07A24EE6361694211D0811FA408AF93F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				DD690EE0FF934AE42F3A2DA73023B151 /* NetworkActivityIndicatorHandler.swift */,
+				340383801E1CCE82DBB32272EC3D1B73 /* ServiceOverlayView.swift */,
+				8838C0AE84E37012748A5DB72FD40576 /* UIImageView+.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		32A23E08346748F1793F899C5FF672C1 /* SwiftLint */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,46 +147,25 @@
 			path = SwiftLint;
 			sourceTree = "<group>";
 		};
-		427B85EA51CE6C5A7C898273F35130D5 /* Loaders */ = {
+		42712E83E78908BDABC2E7FF14E10FBC /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				9CCD687CD53E081FE47ECD01FD6759D8 /* ConcurrentLoader.swift */,
-				7624FFD88021F521D74BB637227EB047 /* Loader.swift */,
-				245059EDB8F6C9EF04EE3D3AD28A313B /* SequentialLoader.swift */,
+				B10433DD7F66EC33CA34C60D2E8195AA /* LICENSE */,
+				C5B54B0E6D651995DB162E0ED552EDBC /* Nomosi.podspec */,
+				624CA539C9EA1A723E6B5B0F879AD2E1 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		42A2D52614521B6A374955C1ACA5E6E0 /* Loaders */ = {
+			isa = PBXGroup;
+			children = (
+				66BAF1B7417BEFC491F2AC2284198170 /* ConcurrentLoader.swift */,
+				3290155017A2EF2F330D5EA63D409D67 /* Loader.swift */,
+				2F8F6E3A741083B6AE6B66930E870EF7 /* SequentialLoader.swift */,
 			);
 			name = Loaders;
-			path = Nomosi/Loaders;
-			sourceTree = "<group>";
-		};
-		47EC878FB03BB4933D6ACAF231E3E470 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				2AB483949F3BF4EFD50E0022719D479D /* ServiceOverlayView.swift */,
-				A09836B248F72523CF5D88E48EE0A1C5 /* UIImageView+.swift */,
-			);
-			name = UI;
-			path = Nomosi/UI;
-			sourceTree = "<group>";
-		};
-		4825847DDCEC33FB00F1608372A50BC6 /* Nomosi */ = {
-			isa = PBXGroup;
-			children = (
-				36D6B089670C8C2DA1CD399F5513D3C8 /* AnyService.swift */,
-				B25824BEBEA0258D6AEE000AA9A52548 /* Cache.swift */,
-				51D88E0FFC3CA80FDF3614FFA21935C1 /* Log.swift */,
-				9B65BF715C9349A0EE92F16ACB79FEB0 /* Method.swift */,
-				A236221E7605CB4E496F0468F8E98F82 /* RequestsQueue.swift */,
-				87BF98238F48A3EB67EAA5D9FF208B6A /* Service.swift */,
-				F9F2236511C000724FC1621B0583DFDD /* ServiceError.swift */,
-				AC0C8A7320E9492000767658 /* ServiceObserver.swift */,
-				F1D4CC09B5E2FD0119B0390BFF79BBE7 /* ServiceResponse.swift */,
-				427B85EA51CE6C5A7C898273F35130D5 /* Loaders */,
-				A7DDDCC6C839BCB5F6A02F1AE4BF094D /* Pod */,
-				7D75929C12BCE711AF38F9AA4C75335E /* Support Files */,
-				47EC878FB03BB4933D6ACAF231E3E470 /* UI */,
-			);
-			name = Nomosi;
-			path = ../..;
+			path = Nomosi/Core/Loaders;
 			sourceTree = "<group>";
 		};
 		51E6D2214F7330BE42D37236F3408758 /* Targets Support Files */ = {
@@ -204,25 +195,11 @@
 			path = "Target Support Files/Pods-Nomosi_Example";
 			sourceTree = "<group>";
 		};
-		7D75929C12BCE711AF38F9AA4C75335E /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				C158E526C0A71C3436B71BF584F18A56 /* Info.plist */,
-				8FDA544AF98883309973BE42F0389530 /* Nomosi.modulemap */,
-				FA7B0C4918010E8F7009954F2447867E /* Nomosi.xcconfig */,
-				A82EDFD2BAE9FD6A33C56EED582B780D /* Nomosi-dummy.m */,
-				2D2C0F47809C3267379762C6E70629DC /* Nomosi-prefix.pch */,
-				884A7219A01D44A036718BFD62D5F756 /* Nomosi-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/Nomosi";
-			sourceTree = "<group>";
-		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				DCE6BDC4A3E128456FFA8CFA53632DAD /* Development Pods */,
+				F940418579673AF6B88332F229219026 /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
 				9758CC519AE2C57A9659FFC01AAD26F9 /* Pods */,
 				952F969B03D572FD214B79AEAA7A9E22 /* Products */,
@@ -266,14 +243,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A7DDDCC6C839BCB5F6A02F1AE4BF094D /* Pod */ = {
+		A3E13054A2ACCFD7F584B7889368079D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3B2B1D11CF64DAC13ACE7E5FA05B512C /* LICENSE */,
-				2E365652F60FBCA8ACC06717957F970B /* Nomosi.podspec */,
-				54033CEFB31BC9D5F283B9068E908B1F /* README.md */,
+				B37FE0A3D9472C527475FB641F96B21B /* Info.plist */,
+				26730E1550E7FB35A89D0A89773A0E16 /* Nomosi.modulemap */,
+				6DAF1E031DA902D1AC5573CABC8F2B0F /* Nomosi.xcconfig */,
+				99EF24E489D2C2452D7B06B0B91DC255 /* Nomosi-dummy.m */,
+				F4E63612157D6FE5DA62F829F7FCACAB /* Nomosi-prefix.pch */,
+				D6400AC3C60F7EE420FA747C4F72386F /* Nomosi-umbrella.h */,
 			);
-			name = Pod;
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/Nomosi";
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -284,6 +265,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C055B8D13A654AC06CB0BE44A3753C26 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E6235638821823E89228ECE6D0AA9EA0 /* AnyService.swift */,
+				812F2D91BC3DEF64AD73FE2F55686639 /* Cache.swift */,
+				99F9AEAB77C5AF75ABDD376EBE8CBDD8 /* Log.swift */,
+				8940D0FE0EC55E8B19D58737FC25E365 /* Method.swift */,
+				C19330F91AC5DE7D64889F1744CC230D /* RequestQueue.swift */,
+				49A16E875C014102F66AFF938E27BB69 /* Service.swift */,
+				9470F9B3B9C30C26E4046A66AF89E4FA /* ServiceError.swift */,
+				EDEF0CCB0FF833ABBEAFAFDCD81EEFD3 /* ServiceObserver.swift */,
+				023E48898589FE21BB0D33E86675FD2E /* ServiceResponse.swift */,
+				42A2D52614521B6A374955C1ACA5E6E0 /* Loaders */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
 		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,10 +290,22 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		DCE6BDC4A3E128456FFA8CFA53632DAD /* Development Pods */ = {
+		F14A30D1C038BD1C55E7CDF00E7B0FB9 /* Nomosi */ = {
 			isa = PBXGroup;
 			children = (
-				4825847DDCEC33FB00F1608372A50BC6 /* Nomosi */,
+				C055B8D13A654AC06CB0BE44A3753C26 /* Core */,
+				42712E83E78908BDABC2E7FF14E10FBC /* Pod */,
+				A3E13054A2ACCFD7F584B7889368079D /* Support Files */,
+				07A24EE6361694211D0811FA408AF93F /* UI */,
+			);
+			name = Nomosi;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		F940418579673AF6B88332F229219026 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F14A30D1C038BD1C55E7CDF00E7B0FB9 /* Nomosi */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -303,11 +313,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		47EA004E73673A507F0E3CDF13F3AA31 /* Headers */ = {
+		1B981E4F3AADAA4B41C05F2A2441B9CC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4BCF30630BCEE55215C047F9255FD89 /* Nomosi-umbrella.h in Headers */,
+				C9391034C441E2E3BB7983AC67A34A37 /* Nomosi-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +358,23 @@
 			productReference = 9D4E08BE224709F98C79EC79DA85BB7C /* Pods_Nomosi_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		3160D839192BC5C5F48D400D7E88E78E /* Nomosi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C284FFD4E13594D6E3E5995213C5C31 /* Build configuration list for PBXNativeTarget "Nomosi" */;
+			buildPhases = (
+				93FC20D7CF6A72C59F957D09B31CFB14 /* Sources */,
+				42078D6661713FDC4816F80C30B153AA /* Frameworks */,
+				1B981E4F3AADAA4B41C05F2A2441B9CC /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nomosi;
+			productName = Nomosi;
+			productReference = 964C35CEEAED50DC2926B98082778878 /* Nomosi.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		CAE8FD4087A21247FF3F27E81BABC5EC /* Pods-Nomosi_Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B0BB2B5CAC575E4585B859C27E454AD0 /* Build configuration list for PBXNativeTarget "Pods-Nomosi_Tests" */;
@@ -364,23 +391,6 @@
 			name = "Pods-Nomosi_Tests";
 			productName = "Pods-Nomosi_Tests";
 			productReference = D4DB2CD59365C9943DF86C32823DF3E6 /* Pods_Nomosi_Tests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		DA2A04FBD8E55312B4501CDB92593F96 /* Nomosi */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C25A70CAB546541F404DC019C091EAC9 /* Build configuration list for PBXNativeTarget "Nomosi" */;
-			buildPhases = (
-				31702176ABFFE3EFA7869FFB63F9CA7B /* Sources */,
-				9C44A3298C1A006E36874C8CCE06FC2B /* Frameworks */,
-				47EA004E73673A507F0E3CDF13F3AA31 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Nomosi;
-			productName = Nomosi;
-			productReference = 964C35CEEAED50DC2926B98082778878 /* Nomosi.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -404,7 +414,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DA2A04FBD8E55312B4501CDB92593F96 /* Nomosi */,
+				3160D839192BC5C5F48D400D7E88E78E /* Nomosi */,
 				15034EAE7F6B8F795D790E2540303642 /* Pods-Nomosi_Example */,
 				CAE8FD4087A21247FF3F27E81BABC5EC /* Pods-Nomosi_Tests */,
 			);
@@ -412,28 +422,6 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		31702176ABFFE3EFA7869FFB63F9CA7B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				603AB843D5F4A5B169EA455F194D2F47 /* AnyService.swift in Sources */,
-				CEF153624663C0605DCF916B360EAF26 /* Cache.swift in Sources */,
-				6377C96C516CFA05D7F5475A49A4F411 /* ConcurrentLoader.swift in Sources */,
-				7D0724DE906017CA7D4646BD958B2620 /* Loader.swift in Sources */,
-				B16B4147DC3486D0FC73F0BE468CA9FB /* Log.swift in Sources */,
-				0226519564966DE19FCA1C991702E3D8 /* Method.swift in Sources */,
-				D9DC496C3BCF990E5D68BE7157DEFD10 /* Nomosi-dummy.m in Sources */,
-				8155C02CFD88B435902A282413E1D802 /* RequestsQueue.swift in Sources */,
-				B658AEF41D6A3E839E38A2B0C60CC34E /* SequentialLoader.swift in Sources */,
-				86B75A21543EA7FBB2C23797FD9E0F98 /* Service.swift in Sources */,
-				7D0195C5B963FD8E8B1BEA4EC7579257 /* ServiceError.swift in Sources */,
-				89A4149B212680DBFBD6C3984DE17EFF /* ServiceOverlayView.swift in Sources */,
-				2B8032304E94A547C4BD62C664010105 /* ServiceResponse.swift in Sources */,
-				45B7591FEF23212F056BE53A89937402 /* UIImageView+.swift in Sources */,
-				AC0C8A7420E9492000767658 /* ServiceObserver.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3CFCDB8042B62C9239770152393CE05D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -450,13 +438,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		93FC20D7CF6A72C59F957D09B31CFB14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79CF46AA0FE303641F18FB01A92F81D6 /* AnyService.swift in Sources */,
+				D247EB9A65ED0D3208505CB54680A215 /* Cache.swift in Sources */,
+				40AA4CD4D612B1E32B1404FCBEA73136 /* ConcurrentLoader.swift in Sources */,
+				06517B0A7A6C8D48BEBF3481559C4BCD /* Loader.swift in Sources */,
+				FF379A7B095FC5862279222E0864AA8D /* Log.swift in Sources */,
+				8F9495B0A81D82A5D165FAD2EDE8B9DA /* Method.swift in Sources */,
+				89A3CB8F09C89B383E0347B33C361CBE /* NetworkActivityIndicatorHandler.swift in Sources */,
+				58A178BB8D375622448886BB25DAE207 /* Nomosi-dummy.m in Sources */,
+				9BDB08E62D76EF9C0D41F44D1E71720E /* RequestQueue.swift in Sources */,
+				D80069610CE9C0723C74C93B783B7D02 /* SequentialLoader.swift in Sources */,
+				4F8C039A2B052E9CFCBC7C6763CD86DA /* Service.swift in Sources */,
+				248905314FE2AB2F9895021768717B22 /* ServiceError.swift in Sources */,
+				2BDC861FC94DB31C4C1D0FD85928485B /* ServiceObserver.swift in Sources */,
+				5438F5B38D20479E7C94D8843E3D1B31 /* ServiceOverlayView.swift in Sources */,
+				98F29FB0AC39D17EE237B0A66CCF6B9A /* ServiceResponse.swift in Sources */,
+				F100B1A2FB1B48F47EF056BC6DB5EE46 /* UIImageView+.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		06B1D72C1B393093771BF6DC00018040 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Nomosi;
-			target = DA2A04FBD8E55312B4501CDB92593F96 /* Nomosi */;
+			target = 3160D839192BC5C5F48D400D7E88E78E /* Nomosi */;
 			targetProxy = 73D1D0AA90E8F79658A8496F5394A06C /* PBXContainerItemProxy */;
 		};
 		F02C0BDF018325ED15054B67A6633AE3 /* PBXTargetDependency */ = {
@@ -566,39 +577,6 @@
 			};
 			name = Debug;
 		};
-		3BEFC521F05BCEA9954A86978F67625F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA7B0C4918010E8F7009954F2447867E /* Nomosi.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Nomosi/Nomosi-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Nomosi/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Nomosi/Nomosi.modulemap";
-				PRODUCT_MODULE_NAME = Nomosi;
-				PRODUCT_NAME = Nomosi;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.1;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		541E7B824B80F841D2AE3834F0FB7D0A /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E0AA9804C9850BC5BFB7381F30E53DC3 /* Pods-Nomosi_Example.release.xcconfig */;
@@ -634,9 +612,43 @@
 			};
 			name = Release;
 		};
-		66C53150BC422796A5E8F8502EB918C5 /* Debug */ = {
+		AF79CFD2407A5F8CA1C1F25239375954 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA7B0C4918010E8F7009954F2447867E /* Nomosi.xcconfig */;
+			baseConfigurationReference = EB9F3DE32DE630067B1B102D95BC305C /* Pods-Nomosi_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Nomosi_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Nomosi_Tests/Pods-Nomosi_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BDF4DABFA67725BC26BF0D9B768DAB64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DAF1E031DA902D1AC5573CABC8F2B0F /* Nomosi.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -666,11 +678,10 @@
 			};
 			name = Debug;
 		};
-		AF79CFD2407A5F8CA1C1F25239375954 /* Release */ = {
+		DF505D5F4E1FEEC0523D3D863DB7B197 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB9F3DE32DE630067B1B102D95BC305C /* Pods-Nomosi_Tests.release.xcconfig */;
+			baseConfigurationReference = 6DAF1E031DA902D1AC5573CABC8F2B0F /* Nomosi.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -680,19 +691,19 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Nomosi_Tests/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Nomosi/Nomosi-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Nomosi/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Nomosi_Tests/Pods-Nomosi_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/Nomosi/Nomosi.modulemap";
+				PRODUCT_MODULE_NAME = Nomosi;
+				PRODUCT_NAME = Nomosi;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -795,6 +806,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2C284FFD4E13594D6E3E5995213C5C31 /* Build configuration list for PBXNativeTarget "Nomosi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDF4DABFA67725BC26BF0D9B768DAB64 /* Debug */,
+				DF505D5F4E1FEEC0523D3D863DB7B197 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -809,15 +829,6 @@
 			buildConfigurations = (
 				F05B48CB6314F3D1514A0318E8BE2183 /* Debug */,
 				AF79CFD2407A5F8CA1C1F25239375954 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C25A70CAB546541F404DC019C091EAC9 /* Build configuration list for PBXNativeTarget "Nomosi" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				66C53150BC422796A5E8F8502EB918C5 /* Debug */,
-				3BEFC521F05BCEA9954A86978F67625F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

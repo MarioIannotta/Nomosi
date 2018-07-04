@@ -17,4 +17,12 @@ class SettingsViewController: UIViewController {
         Cache.removeAllCachedResponses() 
     }
     
+    @IBAction private func networkErrorSwitchValueChanged(_ sender: UISwitch) {
+        AppConfig.isNetworkErrorActive = sender.isOn
+    }
+    
+    @IBAction private func slowDownNetworkSwitchValueChanged(_ sender: UISwitch) {
+        AppConfig.slowDownNetworkRequest = sender.isOn
+    }
+    
 }

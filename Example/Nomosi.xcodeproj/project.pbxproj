@@ -10,7 +10,7 @@
 		4D9A4398E72024AC4C86CE15 /* Pods_Nomosi_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E8319CF1C05F007C895A47 /* Pods_Nomosi_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		AC0D1A5820C976B9002E614B /* HavardArtMuseumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A4D20C976B9002E614B /* HavardArtMuseumService.swift */; };
+		AC0D1A5820C976B9002E614B /* HarvardArtMuseumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A4D20C976B9002E614B /* HarvardArtMuseumService.swift */; };
 		AC0D1A5920C976B9002E614B /* CenturiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A4E20C976B9002E614B /* CenturiesService.swift */; };
 		AC0D1A5A20C976B9002E614B /* CenturiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A5020C976B9002E614B /* CenturiesViewController.swift */; };
 		AC0D1A5B20C976B9002E614B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0D1A5120C976B9002E614B /* Main.storyboard */; };
@@ -29,6 +29,7 @@
 		AC0D1A7820C98AEB002E614B /* ObjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */; };
 		AC0D1A7B20C98BCF002E614B /* ObjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */; };
 		AC0D1A7F20C99530002E614B /* PaginatedServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */; };
+		AC8A340B20ECBA93002E42D9 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A340A20ECBA93002E42D9 /* AppConfig.swift */; };
 		AC9B7ECA20D1CB7700E160FA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */; };
 		ACF96D9D20BDB8C700FA5934 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ACF96D9C20BDB8C700FA5934 /* .swiftlint.yml */; };
 		C29A4FCAA006F77DE56CE09F /* Pods_Nomosi_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F705AB03E6D287B9AAE844E6 /* Pods_Nomosi_Tests.framework */; };
@@ -53,7 +54,7 @@
 		607FACE51AFB9204008FA782 /* Nomosi_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Nomosi_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		AC0D1A4D20C976B9002E614B /* HavardArtMuseumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HavardArtMuseumService.swift; sourceTree = "<group>"; };
+		AC0D1A4D20C976B9002E614B /* HarvardArtMuseumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarvardArtMuseumService.swift; sourceTree = "<group>"; };
 		AC0D1A4E20C976B9002E614B /* CenturiesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenturiesService.swift; sourceTree = "<group>"; };
 		AC0D1A5020C976B9002E614B /* CenturiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenturiesViewController.swift; sourceTree = "<group>"; };
 		AC0D1A5120C976B9002E614B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsViewController.swift; sourceTree = "<group>"; };
 		AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCell.swift; sourceTree = "<group>"; };
 		AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedServiceInfo.swift; sourceTree = "<group>"; };
+		AC8A340A20ECBA93002E42D9 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ACF96D9C20BDB8C700FA5934 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B6E8319CF1C05F007C895A47 /* Pods_Nomosi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomosi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,11 +141,12 @@
 		607FACD21AFB9204008FA782 /* Example for Nomosi */ = {
 			isa = PBXGroup;
 			children = (
+				AC8A340A20ECBA93002E42D9 /* AppConfig.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				AC0D1A5620C976B9002E614B /* Models */,
 				AC0D1A4C20C976B9002E614B /* Services */,
-				AC0D1A4F20C976B9002E614B /* UI */,
 				AC0D1A5220C976B9002E614B /* Supporting files */,
+				AC0D1A4F20C976B9002E614B /* UI */,
 			);
 			name = "Example for Nomosi";
 			path = Nomosi;
@@ -188,7 +191,7 @@
 		AC0D1A4C20C976B9002E614B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				AC0D1A4D20C976B9002E614B /* HavardArtMuseumService.swift */,
+				AC0D1A4D20C976B9002E614B /* HarvardArtMuseumService.swift */,
 				AC0D1A7220C98A4B002E614B /* Century */,
 				AC0D1A7320C98A51002E614B /* Objects */,
 			);
@@ -268,8 +271,8 @@
 		AC0D1A7620C98ADA002E614B /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				AC0D1A7920C98BCA002E614B /* Cell */,
 				AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */,
+				AC0D1A7920C98BCA002E614B /* Cell */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				AC0D1A5F20C976B9002E614B /* Century.swift in Sources */,
 				AC0D1A6B20C98074002E614B /* Group.swift in Sources */,
+				AC8A340B20ECBA93002E42D9 /* AppConfig.swift in Sources */,
 				AC0D1A6720C97CAC002E614B /* CenturyService.swift in Sources */,
 				AC0D1A6420C97C58002E614B /* CenturyDetailViewController.swift in Sources */,
 				AC0D1A6D20C98994002E614B /* Object.swift in Sources */,
@@ -485,7 +489,7 @@
 				AC0D1A7520C98A5A002E614B /* ObjectsService.swift in Sources */,
 				AC0D1A7120C98A2B002E614B /* Person.swift in Sources */,
 				AC0D1A6220C97725002E614B /* CenturyCell.swift in Sources */,
-				AC0D1A5820C976B9002E614B /* HavardArtMuseumService.swift in Sources */,
+				AC0D1A5820C976B9002E614B /* HarvardArtMuseumService.swift in Sources */,
 				AC9B7ECA20D1CB7700E160FA /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,6 +622,7 @@
 			baseConfigurationReference = F812BFD6D41B2209735E4625 /* Pods-Nomosi_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = X9253HG4XT;
 				INFOPLIST_FILE = "$(SRCROOT)/Nomosi/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -636,6 +641,7 @@
 			baseConfigurationReference = 0B2FA5CB94EFDC0E31C0FD00 /* Pods-Nomosi_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = X9253HG4XT;
 				INFOPLIST_FILE = "$(SRCROOT)/Nomosi/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -653,6 +659,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C6DC791124412F311A46AF49 /* Pods-Nomosi_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = X9253HG4XT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -678,6 +685,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 353739E42F1B493C04BC8BFD /* Pods-Nomosi_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = X9253HG4XT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

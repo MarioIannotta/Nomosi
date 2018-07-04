@@ -24,6 +24,10 @@ open class Service<Response: ServiceResponse> {
     public var log: Log = .minimal
     public var timeoutInterval: TimeInterval = 60
     public var cachePolicy: Cache.Policy = .none
+    public var queue: DispatchQueue = .main
+    
+    public private (set) var latestResponse: Response?
+    public private (set) var latestError: ServiceError?
     
     private var url: URL? {
         if let absoluteURL = absoluteURL {
@@ -39,14 +43,12 @@ open class Service<Response: ServiceResponse> {
     }
     
     private var sessionDataTask: URLSessionDataTask?
-    private (set)var latestResponse: Response?
-    private (set)var latestError: ServiceError?
     
     private var completionCallback: CompletionCallback?
     private var successCallback: SuccessCallback?
     private var failureCallback: FailureCallback?
     private var shouldLoadServiceCallback: ShouldLoadServiceCallback?
-    private var canStartDataTask = true
+    private var hasBeenCancelled = false
     private var serviceObservers = [ServiceObserver]()
     
     public init() { }
@@ -83,8 +85,39 @@ open class Service<Response: ServiceResponse> {
     
     @discardableResult
     public func load() -> Self? {
+        /*
+         The "real" load must be performed with some little delay because it's possible
+         to schedule a load before setting all the required callbacks.
+         eg:
+         ```
+         AService()
+            .load()
+            .addingObserver(anObserve)
+            .addingObserver(anotherObserver)
+            .shouldLoadService { completion in
+                completion(something)
+            }
+            .onSuccess {
+                // Do stuff on success
+            }
+            .onFailure { error in
+                // Do stuff on failure
+            }
+         ```
+         In the example above without the delay if the service request is not valid an error
+         would be raised before setting the closure to handle the error itself `onFailure {...}`.
+         */
+        queue.asyncAfter(deadline: .now() + 0.01) {
+            self._load()
+        }
+        return self
+    }
+
+    @discardableResult
+    private func _load() -> Self? {
+        hasBeenCancelled = false
         log.print("⬆️ \(self)")
-        serviceObservers.forEach { $0.serviceDidStartRequest(self) }
+        serviceObservers.forEach { $0.serviceWillStartRequest(self) }
         
         guard
             let request = makeRequest()
@@ -106,55 +139,85 @@ open class Service<Response: ServiceResponse> {
                 self.parseReceivedDataAndCompleteRequest(data: data)
                 return
             } else {
-                self.loadIfNeeded(request: request)
+                self.loadIfNeeded()
             }
         }
         return self
     }
     
-    private func loadIfNeeded(request: URLRequest) {
-        guard
-            self.canStartDataTask
-            else {
-                self.completeRequest(response: nil, error: .requestCancelled)
-                return
-            }
-        RequestsQueue.append(request: request)
+    private func loadIfNeeded() {
         let shouldLoadServiceCallback = self.shouldLoadServiceCallback ?? { completion in completion(true) }
         shouldLoadServiceCallback { shouldLoadService in
+            /*
+             If the request has been cancelled while evaluating the closure `shouldLoadServiceCallback`,
+             `hasBeenCancelled` would be true, in that case we should not even start the network request
+             */
+            guard
+                !self.hasBeenCancelled
+                else {
+                    self.completeRequest(response: nil, error: .requestCancelled)
+                    return
+                }
+            
+            /*
+             the URLRequest needs to be refreshed since it's possible to change
+             url, headers etc in shouldLoadServiceCallback
+             */
+            guard
+                let request = self.makeRequest()
+                else {
+                    self.completeRequest(response: nil, error: .invalidRequest)
+                    return
+                }
+            
+            RequestsQueue.append(request: request)
             if shouldLoadService {
                 self.performDataTask(request: request) {
-                    self.resolve(request)
+                    RequestsQueue.resolve(request: request)
                 }
             } else {
-                self.resolve(request)
+                RequestsQueue.resolve(request: request)
                 self.completeRequest(response: nil, error: .shouldLoadServiceEvaluatedToFalse)
             }
         }
     }
-    
-    private func resolve(_ request: URLRequest) {
-        RequestsQueue.resolve(request: request)
-    }
 
     public func cancel() {
-        canStartDataTask = false
+        hasBeenCancelled = true
         sessionDataTask?.cancel()
+    }
+    
+    private func makeRequest() -> URLRequest? {
+        guard
+            let url = url,
+            url.host != nil
+            else { return nil }
+        var request = URLRequest(url: url)
+        request.httpMethod = method.rawValue
+        var allHeaders = [String: String]()
+        headers.forEach { allHeaders[$0.key] = $0.value }
+        request.allHTTPHeaderFields = allHeaders
+        request.httpBody = body
+        request.timeoutInterval = timeoutInterval
+        return request
+    }
+    
+    private func statusCode(for response: URLResponse?) -> String {
+        guard
+            let statusCode = (response as? HTTPURLResponse)?.statusCode
+            else {
+                return "Invalid status code"
+            }
+        return String(statusCode)
     }
     
     private func performDataTask(request: URLRequest, completion: @escaping (() -> Void)) {
         sessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             completion()
-            let statusCodeString: String = {
-                guard
-                    let statusCode = (response as? HTTPURLResponse)?.statusCode
-                    else { return "Invalid stauts code" }
-                return String(statusCode)
-            }()
+            let statusCodeString = self.statusCode(for: response)
             self.log.print("⬇️ [\(statusCodeString)] \(self) - \(data?.count ?? 0) bytes")
             if let error = error {
-                // is there a better way to do that?
-                if error.localizedDescription == "cancelled" {
+                if (error as NSError).code == NSURLErrorCancelled {
                     self.completeRequest(response: nil, error: .requestCancelled)
                 } else {
                     self.completeRequest(response: nil, error: ServiceError(networkError: error))
@@ -192,7 +255,9 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func completeRequest(response: Response?, error: ServiceError?) {
-        serviceObservers.forEach { $0.serviceDidEndRequest(self, response: response, error: error) }
+        latestResponse = response
+        latestError = error
+        serviceObservers.forEach { $0.serviceDidEndRequest(self) }
         if let safeResponse = response {
             DispatchQueue.main.async {
                 self.successCallback?(safeResponse)
@@ -203,29 +268,12 @@ open class Service<Response: ServiceResponse> {
                 self.failureCallback?(error)
             }
         }
-        latestResponse = response
-        latestError = error
-         // completionCallback?(response, error) causes a segmentation fault ¯\_(ツ)_/¯
+        // completionCallback?(response, error) causes a segmentation fault ¯\_(ツ)_/¯
         if let completionCallback = completionCallback {
             DispatchQueue.main.async {
                 completionCallback(response, error)
             }
         }
-    }
-    
-    private func makeRequest() -> URLRequest? {
-        guard
-            let url = url,
-            url.host != nil
-            else { return nil }
-        var request = URLRequest(url: url)
-        request.httpMethod = method.rawValue
-        var allHeaders = [String: String]()
-        headers.forEach { allHeaders[$0.key] = $0.value }
-        request.allHTTPHeaderFields = allHeaders
-        request.httpBody = body
-        request.timeoutInterval = timeoutInterval
-        return request
     }
     
 }

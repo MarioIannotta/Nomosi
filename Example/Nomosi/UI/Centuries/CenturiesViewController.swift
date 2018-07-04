@@ -18,15 +18,21 @@ class CenturiesViewController: UIViewController {
     // MARK: - Model
     
     private var centuries: [Century] = []
+    private var serviceOverlayView: ServiceOverlayView!
     
     // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        serviceOverlayView = ServiceOverlayView(cover: view)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         CenturiesService()
-            .addingObserver(ServiceOverlayView(cover: view))
             .load()?
+            .addingObserver(serviceOverlayView)
             .onSuccess { [weak self] response in
                 self?.centuries = response
                                     .centuries

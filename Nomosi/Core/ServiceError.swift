@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ServiceError: Error {
+public struct ServiceError: Error, Equatable {
     
     public static var redundantRequest: ServiceError {
         return ServiceError(code: 7, reason: "The same request is already running")
@@ -34,8 +34,8 @@ public struct ServiceError: Error {
         return ServiceError(code: 2, reason: "Can't parse the response; Error: \(error)")
     }
     
-    private var code: Int
-    private var reason: String
+    public var code: Int
+    public var reason: String
     
     public init(code: Int, reason: String) {
         self.code = code

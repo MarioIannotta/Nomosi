@@ -272,7 +272,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tGs-AM-ysP"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Objects" id="mhD-HH-ORO"/>
+                    <navigationItem key="navigationItem" title="Objects" id="mhD-HH-ORO">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="9Jk-tW-WF3">
+                            <connections>
+                                <action selector="refreshButtonTapped" destination="ueb-sN-ved" id="ElH-kU-f1i"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="JYI-1m-mos">
+                            <connections>
+                                <action selector="cancelRequest" destination="ueb-sN-ved" id="4cB-Ca-qwj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="nhK-2h-WdS" id="tQT-KJ-Lfx"/>
                         <outlet property="footerView" destination="3gF-yz-0Nm" id="86s-54-e3X"/>
@@ -443,12 +454,54 @@
                                     <action selector="clearCacheButtonTapped" destination="f6G-YS-kzd" eventType="touchUpInside" id="0Ss-Il-Ao9"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gpz-Yk-kbM">
+                                <rect key="frame" x="40" y="171" width="295" height="72"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vp0-C5-8s9">
+                                        <rect key="frame" x="0.0" y="0.0" width="295" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaA-eb-jW7">
+                                                <rect key="frame" x="0.0" y="0.0" width="246" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XP1-AX-tWi">
+                                                <rect key="frame" x="246" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="networkErrorSwitchValueChanged:" destination="f6G-YS-kzd" eventType="valueChanged" id="zEo-Sa-6HB"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTh-nM-CxT">
+                                        <rect key="frame" x="0.0" y="41" width="295" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slow down network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-an-Nme">
+                                                <rect key="frame" x="0.0" y="0.0" width="246" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="N3b-6x-afo">
+                                                <rect key="frame" x="246" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="slowDownNetworkSwitchValueChanged:" destination="f6G-YS-kzd" eventType="valueChanged" id="FJW-jg-x1t"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="gpz-Yk-kbM" firstAttribute="leading" secondItem="Bwv-Ru-5Vw" secondAttribute="leading" id="A8n-dK-sOC"/>
                             <constraint firstItem="Bwv-Ru-5Vw" firstAttribute="top" secondItem="Ze5-kx-tnC" secondAttribute="top" constant="30" id="JHi-Un-JSl"/>
+                            <constraint firstItem="gpz-Yk-kbM" firstAttribute="top" secondItem="Bwv-Ru-5Vw" secondAttribute="bottom" constant="27" id="OWb-7Y-ma6"/>
                             <constraint firstItem="Bwv-Ru-5Vw" firstAttribute="leading" secondItem="Ze5-kx-tnC" secondAttribute="leading" constant="40" id="THt-ji-wM6"/>
                             <constraint firstItem="Ze5-kx-tnC" firstAttribute="trailing" secondItem="Bwv-Ru-5Vw" secondAttribute="trailing" constant="40" id="nss-1T-NKT"/>
+                            <constraint firstItem="gpz-Yk-kbM" firstAttribute="trailing" secondItem="Bwv-Ru-5Vw" secondAttribute="trailing" id="qrB-ru-qfQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ze5-kx-tnC"/>
                     </view>

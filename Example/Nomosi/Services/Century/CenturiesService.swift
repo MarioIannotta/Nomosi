@@ -9,7 +9,7 @@
 import Foundation
 import Nomosi
 
-class CenturiesService: HavardArtMuseumService<CenturiesServiceResponse> {
+class CenturiesService: HarvardArtMuseumService<CenturiesServiceResponse> {
     
     init() {
         super.init(resource: "century")

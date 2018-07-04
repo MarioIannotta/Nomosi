@@ -14,6 +14,7 @@ class RemoteImageService: Service<UIImage> {
         super.init()
         self.absoluteURL = URL(string: link)
         self.cachePolicy = cachePolicy
+        self.log = .none
     }
     
 }
@@ -90,11 +91,11 @@ extension UIImageView {
         service?.cancel()
         addPlaceholderLoadingViewIfNeeded(placeholder: placeholder)
         service = RemoteImageService(link: link, cachePolicy: cachePolicy)
+            .load()?
             .onCompletion { [weak self] image, _ in
                 self?.removeLoadingPlaceholderView()
                 self?.setImageAsyncOnMainThread(image, placeholder: placeholder)
             }
-            .load()
     }
     
     private func addPlaceholderLoadingViewIfNeeded(placeholder: Placeholder?) {

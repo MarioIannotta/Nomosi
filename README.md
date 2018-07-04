@@ -27,3 +27,9 @@ MarioIannotta, info@marioiannotta.com
 ## License
 
 Nomosi is available under the MIT license. See the LICENSE file for more info.
+
+## TODOs:
+
+* [x] Add status bar activity indicator
+* [x] Split pod in podspec (Core + UI)
+* [ ] Upload requests

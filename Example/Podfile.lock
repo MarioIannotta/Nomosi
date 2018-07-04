@@ -1,5 +1,12 @@
 PODS:
-  - Nomosi (0.0.1)
+  - Nomosi (0.0.1):
+    - Nomosi/All (= 0.0.1)
+  - Nomosi/All (0.0.1):
+    - Nomosi/Core
+    - Nomosi/UI
+  - Nomosi/Core (0.0.1)
+  - Nomosi/UI (0.0.1):
+    - Nomosi/Core
   - SwiftLint (0.25.1)
 
 DEPENDENCIES:
@@ -15,7 +22,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Nomosi: a791949fb2663effd83aa160fdff4d56b8ea6b27
+  Nomosi: 051518a50dcd0d576f129ad559ec50601b2cb3fb
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
 
 PODFILE CHECKSUM: ccc0ce697d95d3b5144a61441b59e9452056dfb1
