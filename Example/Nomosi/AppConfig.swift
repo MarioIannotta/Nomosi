@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import Nomosi
 
 struct AppConfig {
     
     static var isNetworkErrorActive: Bool = false
     static var slowDownNetworkRequest: Bool = false
+    static var cachePolicy: Cache.Policy = .none
+    static var logLevel: Log = .minimal
     
 }

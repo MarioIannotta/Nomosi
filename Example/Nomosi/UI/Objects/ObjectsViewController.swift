@@ -111,6 +111,8 @@ class ObjectsViewController: UIViewController {
     
     @IBAction private func refreshButtonTapped() {
         lastLoadedPageLink = nil
+        objects = []
+        collectionView.reloadData()
         loadNextPage()
     }
     

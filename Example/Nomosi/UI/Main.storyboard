@@ -443,31 +443,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwv-Ru-5Vw">
-                                <rect key="frame" x="40" y="94" width="295" height="50"/>
-                                <color key="backgroundColor" white="0.94038058660000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="cUJ-Jv-r2f"/>
-                                </constraints>
-                                <state key="normal" title="Reset cache"/>
-                                <connections>
-                                    <action selector="clearCacheButtonTapped" destination="f6G-YS-kzd" eventType="touchUpInside" id="0Ss-Il-Ao9"/>
-                                </connections>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gpz-Yk-kbM">
-                                <rect key="frame" x="40" y="171" width="295" height="72"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="gpz-Yk-kbM">
+                                <rect key="frame" x="20" y="84" width="335" height="346"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vp0-C5-8s9">
-                                        <rect key="frame" x="0.0" y="0.0" width="295" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaA-eb-jW7">
-                                                <rect key="frame" x="0.0" y="0.0" width="246" height="31"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="31"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XP1-AX-tWi">
-                                                <rect key="frame" x="246" y="0.0" width="51" height="31"/>
+                                                <rect key="frame" x="286" y="0.0" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="networkErrorSwitchValueChanged:" destination="f6G-YS-kzd" eventType="valueChanged" id="zEo-Sa-6HB"/>
                                                 </connections>
@@ -475,37 +464,127 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTh-nM-CxT">
-                                        <rect key="frame" x="0.0" y="41" width="295" height="31"/>
+                                        <rect key="frame" x="0.0" y="61" width="335" height="31"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slow down network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-an-Nme">
-                                                <rect key="frame" x="0.0" y="0.0" width="246" height="31"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delay network requests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-an-Nme">
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="31"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="N3b-6x-afo">
-                                                <rect key="frame" x="246" y="0.0" width="51" height="31"/>
+                                                <rect key="frame" x="286" y="0.0" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="slowDownNetworkSwitchValueChanged:" destination="f6G-YS-kzd" eventType="valueChanged" id="FJW-jg-x1t"/>
                                                 </connections>
                                             </switch>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5aN-Dr-zSr">
+                                        <rect key="frame" x="0.0" y="122" width="335" height="28"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7w-0V-JAe">
+                                                <rect key="frame" x="0.0" y="0.0" width="135" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="gm2-xb-FdI">
+                                                <rect key="frame" x="135" y="0.0" width="200" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="T2k-ZO-J1Q"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="None"/>
+                                                    <segment title="Minimal"/>
+                                                    <segment title="Verbose"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="logValueChanged:" destination="f6G-YS-kzd" eventType="valueChanged" id="Kzr-dB-5yJ"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7UH-71-c1d">
+                                        <rect key="frame" x="0.0" y="180" width="335" height="28"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cache policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVh-Pi-iND">
+                                                <rect key="frame" x="0.0" y="0.0" width="155" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wPe-sF-euO">
+                                                <rect key="frame" x="155" y="0.0" width="180" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="180" id="8dx-ED-FRc"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="None"/>
+                                                    <segment title="Ram"/>
+                                                    <segment title="Disk"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="cacheSegmentControlValueChanged:" destination="f6G-YS-kzd" eventType="valueChanged" id="30B-UF-3yH"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xjz-Fm-1hN">
+                                        <rect key="frame" x="0.0" y="238" width="335" height="28"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cache timeout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tW2-6n-2ez">
+                                                <rect key="frame" x="0.0" y="0.0" width="135" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bOI-Ae-oew">
+                                                <rect key="frame" x="135" y="0.0" width="200" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="OdO-pS-Hjd"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="30s"/>
+                                                    <segment title="1m"/>
+                                                    <segment title="5m"/>
+                                                    <segment title="1h"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="cacheSegmentControlTimeoutValueChanged:" destination="f6G-YS-kzd" eventType="valueChanged" id="2e6-AY-Cj5"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwv-Ru-5Vw">
+                                        <rect key="frame" x="0.0" y="296" width="335" height="50"/>
+                                        <color key="backgroundColor" white="0.94038058660000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="cUJ-Jv-r2f"/>
+                                        </constraints>
+                                        <state key="normal" title="Reset cache"/>
+                                        <connections>
+                                            <action selector="clearCacheButtonTapped" destination="f6G-YS-kzd" eventType="touchUpInside" id="0Ss-Il-Ao9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="gpz-Yk-kbM" firstAttribute="leading" secondItem="Bwv-Ru-5Vw" secondAttribute="leading" id="A8n-dK-sOC"/>
-                            <constraint firstItem="Bwv-Ru-5Vw" firstAttribute="top" secondItem="Ze5-kx-tnC" secondAttribute="top" constant="30" id="JHi-Un-JSl"/>
-                            <constraint firstItem="gpz-Yk-kbM" firstAttribute="top" secondItem="Bwv-Ru-5Vw" secondAttribute="bottom" constant="27" id="OWb-7Y-ma6"/>
-                            <constraint firstItem="Bwv-Ru-5Vw" firstAttribute="leading" secondItem="Ze5-kx-tnC" secondAttribute="leading" constant="40" id="THt-ji-wM6"/>
-                            <constraint firstItem="Ze5-kx-tnC" firstAttribute="trailing" secondItem="Bwv-Ru-5Vw" secondAttribute="trailing" constant="40" id="nss-1T-NKT"/>
-                            <constraint firstItem="gpz-Yk-kbM" firstAttribute="trailing" secondItem="Bwv-Ru-5Vw" secondAttribute="trailing" id="qrB-ru-qfQ"/>
+                            <constraint firstItem="gpz-Yk-kbM" firstAttribute="leading" secondItem="Ze5-kx-tnC" secondAttribute="leading" constant="20" id="8gE-SE-I4h"/>
+                            <constraint firstItem="Ze5-kx-tnC" firstAttribute="trailing" secondItem="gpz-Yk-kbM" secondAttribute="trailing" constant="20" id="pa6-jm-ZYy"/>
+                            <constraint firstItem="gpz-Yk-kbM" firstAttribute="top" secondItem="Ze5-kx-tnC" secondAttribute="top" constant="20" id="zlk-cA-a3Y"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ze5-kx-tnC"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="aa1-rV-QGy"/>
+                    <connections>
+                        <outlet property="cachePolicySegmentControl" destination="wPe-sF-euO" id="QDi-QJ-tl4"/>
+                        <outlet property="cacheTimeoutSegmentControl" destination="bOI-Ae-oew" id="mMg-Xw-unK"/>
+                        <outlet property="cacheTimeoutStackView" destination="xjz-Fm-1hN" id="Gea-Zn-gGr"/>
+                        <outlet property="resetCacheButton" destination="Bwv-Ru-5Vw" id="dOs-R0-bB2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHo-YS-Tr6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

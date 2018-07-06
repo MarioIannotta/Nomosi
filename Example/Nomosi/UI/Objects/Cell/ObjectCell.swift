@@ -42,7 +42,7 @@ class ObjectCell: UICollectionViewCell {
         previewImageView.loadImage(
             link: "\(imageLink)?height=200&width=200",
             placeholder: .activityIndicator(tintColor: .black, errorImage: #imageLiteral(resourceName: "image_placeholder")),
-            cachePolicy: .inRam(timeout: 60*5)) // disk cache for 5 minutes
+            cachePolicy: AppConfig.cachePolicy)
     }
     
     override func prepareForReuse() {

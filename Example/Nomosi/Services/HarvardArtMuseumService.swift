@@ -29,8 +29,8 @@ class HarvardArtMuseumService<Response: ServiceResponse>: Service<Response> {
     }
     
     private func commonSetup() {
-        cachePolicy = .none// .inRam(timeout: 60*5) // 5 minutes persistent cache
-        log = .minimal
+        cachePolicy = AppConfig.cachePolicy
+        log = AppConfig.logLevel
         addingObserver(NetworkActivityIndicatorHandler())
         let oldAbsoluteURL = absoluteURL
         shouldLoadService { [weak self] completion in
