@@ -33,3 +33,4 @@ Nomosi is available under the MIT license. See the LICENSE file for more info.
 * [x] Add status bar activity indicator
 * [x] Split pod in podspec (Core + UI)
 * [ ] Upload requests
+* [ ] Providing a generic interface for the cache so it's possible to use any storage layer by implementing just the methods loadIfNeeded and storeIfNeeded 
