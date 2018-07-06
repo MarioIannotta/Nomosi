@@ -112,6 +112,11 @@ open class Service<Response: ServiceResponse> {
         }
         return self
     }
+    
+    public func cancel() {
+        hasBeenCancelled = true
+        sessionDataTask?.cancel()
+    }
 
     @discardableResult
     private func _load() -> Self? {
@@ -132,22 +137,16 @@ open class Service<Response: ServiceResponse> {
                 completeRequest(response: nil, error: .redundantRequest)
                 return nil
             }
-        Cache.loadIfNeeded(request: request, cachePolicy: cachePolicy) { [weak self] data in
-            guard let `self` = self else { return }
-            if let data = data {
-                log.print("📦 \(self): getting date from cache")
-                self.parseReceivedDataAndCompleteRequest(data: data)
-                return
-            } else {
-                self.loadIfNeeded()
-            }
-        }
-        return self
-    }
-    
-    private func loadIfNeeded() {
+        
         let shouldLoadServiceCallback = self.shouldLoadServiceCallback ?? { completion in completion(true) }
         shouldLoadServiceCallback { shouldLoadService in
+            guard
+                shouldLoadService
+                else {
+                    self.completeRequest(response: nil, error: .shouldLoadServiceEvaluatedToFalse)
+                    return
+                }
+            
             /*
              If the request has been cancelled while evaluating the closure `shouldLoadServiceCallback`,
              `hasBeenCancelled` would be true, in that case we should not even start the network request
@@ -170,21 +169,24 @@ open class Service<Response: ServiceResponse> {
                     return
                 }
             
-            RequestsQueue.append(request: request)
-            if shouldLoadService {
-                self.performDataTask(request: request) {
-                    RequestsQueue.resolve(request: request)
-                }
+            self.loadFromCacheIfNeeded(request: request)
+        }
+        
+        return self
+    }
+    
+    private func loadFromCacheIfNeeded(request: URLRequest) {
+        Cache.loadIfNeeded(request: request, cachePolicy: self.cachePolicy) { [weak self] data in
+            guard
+                let `self` = self
+                else { return }
+            if let data = data {
+                self.log.print("📦 \(self): getting date from cache")
+                self.parseDataAndCompleteRequest(data: data)
             } else {
-                RequestsQueue.resolve(request: request)
-                self.completeRequest(response: nil, error: .shouldLoadServiceEvaluatedToFalse)
+                self.performDataTask(request: request)
             }
         }
-    }
-
-    public func cancel() {
-        hasBeenCancelled = true
-        sessionDataTask?.cancel()
     }
     
     private func makeRequest() -> URLRequest? {
@@ -202,18 +204,10 @@ open class Service<Response: ServiceResponse> {
         return request
     }
     
-    private func statusCode(for response: URLResponse?) -> String {
-        guard
-            let statusCode = (response as? HTTPURLResponse)?.statusCode
-            else {
-                return "Invalid status code"
-            }
-        return String(statusCode)
-    }
-    
-    private func performDataTask(request: URLRequest, completion: @escaping (() -> Void)) {
+    private func performDataTask(request: URLRequest) {
+        RequestsQueue.append(request: request)
         sessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
-            completion()
+            RequestsQueue.resolve(request: request)
             let statusCodeString = self.statusCode(for: response)
             self.log.print("⬇️ [\(statusCodeString)] \(self) - \(data?.count ?? 0) bytes")
             if let error = error {
@@ -238,12 +232,21 @@ open class Service<Response: ServiceResponse> {
             if hasResponseBeenCached {
                 self.log.print("📦 \(self): storing response in cache with policy \(self.cachePolicy)")
             }
-            self.parseReceivedDataAndCompleteRequest(data: data)
+            self.parseDataAndCompleteRequest(data: data)
         }
         sessionDataTask?.resume()
     }
     
-    private func parseReceivedDataAndCompleteRequest(data: Data) {
+    private func statusCode(for response: URLResponse?) -> String {
+        guard
+            let statusCode = (response as? HTTPURLResponse)?.statusCode
+            else {
+                return "Invalid status code"
+        }
+        return String(statusCode)
+    }
+    
+    private func parseDataAndCompleteRequest(data: Data) {
         let responsString = String(data: data, encoding: .utf8) ?? "\(data.count) bytes"
         self.log.print("Response: \n\(responsString)", requiredLevel: .verbose)
         do {
