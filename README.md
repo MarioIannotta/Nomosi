@@ -16,6 +16,18 @@ The idea behind Nomosi is to breakdown the network layer into different *service
 
 Each service is indipendent and atomic making things like module-based app development, client api versioning, working in large teams, testing and maintain the codebase a lot easier.
 
+### Features
+- Declarative functional syntax
+- Type-safe by design
+- Easy way to decorate (eg: token refresh) and/or invalidate request with the closure `shouldLoadService`
+- Simple cache configuration with custom timeout
+- Discard invalid requests without performing them
+- Avoid redundant requests
+- Makes simple to attach thirdy part components with `ServiceObserver`
+- Prebaked UI Components (by adding `Nomosi/UI`)
+
+For an extensive overview about how all of that works, you can take a look at the [service flow chart](https://github.com/MarioIannotta/Nomosi/wiki/Service-flow-chart).
+
 ## What
 
 The core object of Nomosi is declared as  `Service<Response: ServiceResponse>`: a generic class where the placeholder `Response` conforms the protocol  `ServiceResponse`. 
@@ -27,7 +39,7 @@ After setting the required properties (url, method, etc..), by calling the `load
 Example:
 ```swift
 /**
-    The service class: a resource "blueprint", here it is possible to set endpoint, cache policy, log level etc...
+  The service class: a resource "blueprint", here it is possible to set endpoint, cache policy, log level etc...
 */
 class AService<AServiceResponse>: Service<Response> {
 
@@ -46,7 +58,7 @@ class AService<AServiceResponse>: Service<Response> {
 }
 
 /** 
-    The service response, since it conforms `Decodable`, there's no need to implement the parse function.
+  The service response, since it conforms `Decodable`, there's no need to implement the parse function.
 */
 struct AServiceResponse: Decodable {
     var aPropertyOne: String?
@@ -63,18 +75,6 @@ AService()
     }
 }
 ```
-
-## Features
-- Declarative functional syntax
-- Type-safe by design
-- Easy way to decorate (eg: token refresh) and/or invalidate request with the closure `shouldLoadService`
-- Simple cache configuration with custom timeout
-- Discard invalid requests without performing them
-- Avoid redundant requests
-- Makes simple to attach thirdy part components with `ServiceObserver`
-- Prebaked UI Components (by adding `Nomosi/UI`)
-
-For an extensive overview about how all of that works, you can take a look at the [service flow chart](https://github.com/MarioIannotta/Nomosi/wiki/Service-flow-chart).
 
 ## Installation
 
