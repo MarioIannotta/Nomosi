@@ -25,7 +25,7 @@ This protocol requires just one function `static func parse(data: Data) throws -
 After setting the required properties (url, method, etc..), by calling the `load()` function a new request will be performed. It is also possible to chain multiple actions like `onSuccess`, `onFailure`, `addingObserver` in a fancy functional way.
 
 Example:
-```
+```swift
 /**
     The service class: a resource "blueprint", here it is possible to set endpoint, cache policy, log level etc...
 */
