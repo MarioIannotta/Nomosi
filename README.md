@@ -1,15 +1,80 @@
 # Nomosi
 
-[![CI Status](https://img.shields.io/travis/MarioIannotta/Nomosi.svg?style=flat)](https://travis-ci.org/MarioIannotta/Nomosi)
 [![Version](https://img.shields.io/cocoapods/v/Nomosi.svg?style=flat)](https://cocoapods.org/pods/Nomosi)
 [![License](https://img.shields.io/cocoapods/l/Nomosi.svg?style=flat)](https://cocoapods.org/pods/Nomosi)
 [![Platform](https://img.shields.io/cocoapods/p/Nomosi.svg?style=flat)](https://cocoapods.org/pods/Nomosi)
 
-## Example
+## Why
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+Today every app is connected to some backend(s), usually that's achieved through a network layer, generally a singleton, that has the resposability to take an input, perform a network request, parse the response and return a result.
 
-## Requirements
+In complex projects this approach could cause the network layer to be a massive and unmaintainable file with more than 20.000 LOC. Yes, that's a true story.
+
+## How
+
+The idea behind Nomosi is to breakdown the network layer into different *services* where every service represents a remote resource. 
+
+Each service is indipendent and atomic making things like module-based app development, client api versioning, working in large teams, testing and maintain the codebase a lot easier.
+
+## What
+
+The core object of Nomosi is declared as  `Service<Response: ServiceResponse>`: a generic class where the placeholder `Response` conforms the protocol  `ServiceResponse`. 
+
+This protocol requires just one function `static func parse(data: Data) throws -> Self?` and it's already implemented for `Decodable` objects.
+
+After setting the required properties (url, method, etc..), by calling the `load()` function a new request will be performed. It is also possible to chain multiple actions like `onSuccess`, `onFailure`, `addingObserver` in a fancy functional way.
+
+Example:
+```
+/**
+    The service class: a resource "blueprint", here it is possible to set endpoint, cache policy, log level etc...
+*/
+class AService<AServiceResponse>: Service<Response> {
+
+    init() {
+        super.init()
+        basePath = "https://api.aBackend.com/v1/resources/1234"
+        cachePolicy = .inRam(timeout: 60*5)
+        log = .minimal
+        shouldLoadService { [weak self] completion in
+            // here you can decorate the request as you wish,
+            // for example you can place here the token refresh logic
+            completion(true)
+        }
+    }
+
+}
+
+/** 
+    The service response, since it conforms `Decodable`, there's no need to implement the parse function.
+*/
+struct AServiceResponse: Decodable {
+    var aPropertyOne: String?
+    var aPropertyTwo: String?
+}
+
+AService()
+    .load()?
+    .onSuccess { aResponse in
+        // aResponse is an instance of `AServiceResponse`: Type-safe swift superpower!
+    }
+    .onFailure { error in
+        // handle error
+    }
+}
+```
+
+## Features
+- Declarative functional syntax
+- Type-safe by design
+- Easy way to decorate (eg: token refresh) and/or invalidate request with the closure `shouldLoadService`
+- Simple cache configuration with custom timeout
+- Discard invalid requests without performing them
+- Avoid redundant requests
+- Makes simple to attach thirdy part components with `ServiceObserver`
+- Prebaked UI Components (by adding `Nomosi/UI`)
+
+For an extensive overview about how all of that works, you can take a look at the [service flow chart](https://github.com/MarioIannotta/Nomosi/wiki/Service-flow-chart).
 
 ## Installation
 
@@ -19,10 +84,6 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'Nomosi'
 ```
-
-## Author
-
-MarioIannotta, info@marioiannotta.com
 
 ## License
 
