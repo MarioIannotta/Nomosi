@@ -9,7 +9,7 @@
 import UIKit
 import Nomosi
 
-class ObjectsViewController: UIViewController {
+class ObjectsViewController: PaginatedViewController {
     
     // MARK: - Config
     
@@ -22,71 +22,54 @@ class ObjectsViewController: UIViewController {
     }
     
     private var config = Config()
-    private var shouldLoadNextPage: Bool {
-        return collectionView.contentSize.height - collectionView.contentOffset.y - collectionView.frame.height < 100 || objects.count == 0
-    }
     
     // MARK: - IBOutlets
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var footerView: UIView!
     
-    private var footerServiceOverlayView: ServiceOverlayView!
-    private var pageServiceOverlayView: ServiceOverlayView!
-    
     // MARK: - Model
     
-    private var objects: [Object] = []
-    private var lastLoadedPageLink: String? = nil
+    private var objects: Set<Object> = []
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        pageServiceOverlayView = ServiceOverlayView(cover: view)
-        footerServiceOverlayView = ServiceOverlayView(cover: footerView)
-        footerServiceOverlayView?.backgroundColor = .clear
+        setupPaginatedController(scrollView: collectionView, footerView: footerView)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadNextPageIfNeeded()
-    }
-    
-    func resetDataSource() {
-        lastLoadedPageLink = nil
+
+    override func resetDataSource() {
+        super.resetDataSource()
         objects = []
         collectionView.reloadData()
     }
     
     private func insertObjects(_ objects: [Object]) {
         var indexPathsToAdd = [IndexPath]()
-        for index in self.objects.count..<self.objects.count+objects.count {
-            indexPathsToAdd.append(IndexPath(row: index, section: 0))
+        objects.enumerated().forEach { index, object in
+            if !self.objects.contains(object) {
+                indexPathsToAdd.append(IndexPath(row: index, section: 0))
+                self.objects.insert(object)
+            }
         }
-        self.objects += objects
-        collectionView.insertItems(at: indexPathsToAdd)
+        collectionView.reloadData()
     }
     
-    private var currentService: AnyService?
-    
-    private func loadNextPageIfNeeded() {
-        guard
-            shouldLoadNextPage
-            else { return }
-        loadNextPage()
-    }
-    
-    private func loadNextPage() {
-        guard
-            let service = ObjectsService(nextPage: lastLoadedPageLink)
-            else { return }
-        service
+    override func loadNextPage() {
+        var service: ObjectsService?
+        if objects.count == 0 {
+            service = ObjectsService()
+        } else if nextPageLink != nil {
+            service = ObjectsService(nextPageLink: nextPageLink)
+        } else {
+            // if objects.count > 0 and nextPageLink == nil it's the end of the list
+        }
+        service?
             .load()?
             .addingObserver(activeServiceOverlay)
             .onSuccess { [weak self] response in
-                self?.lastLoadedPageLink = response.paginatedServiceInfo.next
+                self?.nextPageLink = response.paginatedServiceInfo.next
                 self?.insertObjects(response.objects)
             }
             .onCompletion { [weak self] _, _ in
@@ -95,33 +78,15 @@ class ObjectsViewController: UIViewController {
         currentService = service
     }
     
-    private var activeServiceOverlay: ServiceOverlayView! {
-        var serviceOverlayView = self.pageServiceOverlayView
-        if lastLoadedPageLink != nil, let footerServiceOverlayView = footerServiceOverlayView {
-            serviceOverlayView = footerServiceOverlayView
-        }
-        return serviceOverlayView
-    }
-    
     // MARK: - IBActions
     
     @IBAction private func cancelRequest() {
-        currentService?.cancelRequest()
+        super.cancelOnGoingRequest()
     }
     
     @IBAction private func refreshButtonTapped() {
-        lastLoadedPageLink = nil
-        objects = []
-        collectionView.reloadData()
+        resetDataSource()
         loadNextPage()
-    }
-    
-}
-
-extension ObjectsViewController: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        loadNextPageIfNeeded()
     }
     
 }
@@ -138,7 +103,7 @@ extension ObjectsViewController: UICollectionViewDataSource, UICollectionViewDel
         guard
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCell", for: indexPath) as? ObjectCell
             else { return UICollectionViewCell() }
-        cell.configure(object: objects[indexPath.item])
+        cell.configure(object: Array(objects)[indexPath.item])
         return cell
     }
     

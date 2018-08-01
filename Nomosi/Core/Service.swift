@@ -242,7 +242,7 @@ open class Service<Response: ServiceResponse> {
             let statusCode = (response as? HTTPURLResponse)?.statusCode
             else {
                 return "Invalid status code"
-        }
+            }
         return String(statusCode)
     }
     

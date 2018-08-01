@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Object: Decodable {
+struct Object: Decodable, Hashable {
     
     struct SeeAlso: Decodable {
         let id, type, format, profile: String?
@@ -61,5 +61,15 @@ struct Object: Decodable {
     let peoplecount, accesslevel: Int?
     let classification: String?
     let seeAlso: [SeeAlso]?
+    
+    // MARK: - Hashable
+    
+    var hashValue: Int {
+        return id ?? -1
+    }
+
+    static func == (lhs: Object, rhs: Object) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
     
 }

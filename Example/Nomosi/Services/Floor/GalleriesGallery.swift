@@ -1,38 +1,36 @@
 //
-//  ObjectsService.swift
+//  GalleriesGallery.swift
 //  Nomosi_Example
 //
-//  Created by Mario on 07/06/2018.
+//  Created by Mario on 01/08/2018.
 //  Copyright © 2018 Mario Iannotta. All rights reserved.
 //
 
 import Foundation
 import Nomosi
 
-class ObjectsService: HarvardArtMuseumService<ObjectsServiceResponse> {
-
-    init?(nextPageLink: String?) {
+class GalleriesGallery: HarvardArtMuseumService<GalleriesServiceResponse> {
+    
+    @discardableResult
+    init(nextPageLink: String?, id: Int) {
         if let nextPageURL = URL(string: nextPageLink ?? "") {
             super.init(absoluteURL: nextPageURL)
         } else {
-            return nil
+            super.init(resource: "gallery")
+            relativePath! += "&floor=\(id)"
         }
-    }
-    
-    init() {
-        super.init(resource: "object")
     }
     
 }
 
-struct ObjectsServiceResponse: ServiceResponse, Decodable {
+struct GalleriesServiceResponse: ServiceResponse, Decodable {
     
     enum CodingKeys: String, CodingKey {
-        case objects = "records"
+        case galleries = "records"
         case paginatedServiceInfo = "info"
     }
     
-    let objects: [Object]
+    let galleries: [Gallery]
     let paginatedServiceInfo: PaginatedServiceInfo
     
 }

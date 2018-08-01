@@ -29,8 +29,17 @@
 		AC0D1A7820C98AEB002E614B /* ObjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */; };
 		AC0D1A7B20C98BCF002E614B /* ObjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */; };
 		AC0D1A7F20C99530002E614B /* PaginatedServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */; };
+		AC29159021123850002B757C /* PaginatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29158F21123850002B757C /* PaginatedViewController.swift */; };
 		AC8A340B20ECBA93002E42D9 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A340A20ECBA93002E42D9 /* AppConfig.swift */; };
 		AC9B7ECA20D1CB7700E160FA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */; };
+		ACB30A3E2111BD1E00524F9D /* MuseumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A3D2111BD1E00524F9D /* MuseumViewController.swift */; };
+		ACB30A402111BDAE00524F9D /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A3F2111BDAE00524F9D /* Floor.swift */; };
+		ACB30A432111BECB00524F9D /* FloorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A422111BECB00524F9D /* FloorCell.swift */; };
+		ACB30A462111BFF700524F9D /* FloorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A452111BFF700524F9D /* FloorDetailViewController.swift */; };
+		ACB30A482111C30700524F9D /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A472111C30700524F9D /* Gallery.swift */; };
+		ACB30A4A2111C62B00524F9D /* GalleriesGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A492111C62B00524F9D /* GalleriesGallery.swift */; };
+		ACB30A4D2111C87000524F9D /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A4C2111C87000524F9D /* GalleryCell.swift */; };
+		ACB30A502111DCD600524F9D /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A4F2111DCD600524F9D /* UILabel+.swift */; };
 		ACF96D9D20BDB8C700FA5934 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ACF96D9C20BDB8C700FA5934 /* .swiftlint.yml */; };
 		C29A4FCAA006F77DE56CE09F /* Pods_Nomosi_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F705AB03E6D287B9AAE844E6 /* Pods_Nomosi_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -74,8 +83,17 @@
 		AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsViewController.swift; sourceTree = "<group>"; };
 		AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCell.swift; sourceTree = "<group>"; };
 		AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedServiceInfo.swift; sourceTree = "<group>"; };
+		AC29158F21123850002B757C /* PaginatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedViewController.swift; sourceTree = "<group>"; };
 		AC8A340A20ECBA93002E42D9 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		ACB30A3D2111BD1E00524F9D /* MuseumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumViewController.swift; sourceTree = "<group>"; };
+		ACB30A3F2111BDAE00524F9D /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
+		ACB30A422111BECB00524F9D /* FloorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorCell.swift; sourceTree = "<group>"; };
+		ACB30A452111BFF700524F9D /* FloorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorDetailViewController.swift; sourceTree = "<group>"; };
+		ACB30A472111C30700524F9D /* Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
+		ACB30A492111C62B00524F9D /* GalleriesGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleriesGallery.swift; sourceTree = "<group>"; };
+		ACB30A4C2111C87000524F9D /* GalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
+		ACB30A4F2111DCD600524F9D /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		ACF96D9C20BDB8C700FA5934 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B6E8319CF1C05F007C895A47 /* Pods_Nomosi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomosi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6DC791124412F311A46AF49 /* Pods-Nomosi_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nomosi_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nomosi_Tests/Pods-Nomosi_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +161,7 @@
 			children = (
 				AC8A340A20ECBA93002E42D9 /* AppConfig.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				ACB30A4E2111DCCB00524F9D /* Extensions */,
 				AC0D1A5620C976B9002E614B /* Models */,
 				AC0D1A4C20C976B9002E614B /* Services */,
 				AC0D1A5220C976B9002E614B /* Supporting files */,
@@ -193,6 +212,7 @@
 			children = (
 				AC0D1A4D20C976B9002E614B /* HarvardArtMuseumService.swift */,
 				AC0D1A7220C98A4B002E614B /* Century */,
+				ACB30A4B2111C7A100524F9D /* Floor */,
 				AC0D1A7320C98A51002E614B /* Objects */,
 			);
 			path = Services;
@@ -203,7 +223,10 @@
 			children = (
 				AC0D1A5120C976B9002E614B /* Main.storyboard */,
 				AC0D1A6020C97719002E614B /* Centuries */,
+				AC29158E21123843002B757C /* Common */,
+				ACB30A3C2111BD0E00524F9D /* Museum */,
 				AC0D1A7620C98ADA002E614B /* Objects */,
+				AC29158921122D24002B757C /* Protocols */,
 				AC9B7EC820D1CB6C00E160FA /* Settings */,
 			);
 			path = UI;
@@ -223,6 +246,8 @@
 			isa = PBXGroup;
 			children = (
 				AC0D1A5720C976B9002E614B /* Century.swift */,
+				ACB30A3F2111BDAE00524F9D /* Floor.swift */,
+				ACB30A472111C30700524F9D /* Gallery.swift */,
 				AC0D1A6A20C98074002E614B /* Group.swift */,
 				AC0D1A6E20C98A1F002E614B /* Image.swift */,
 				AC0D1A6C20C98994002E614B /* Object.swift */,
@@ -285,12 +310,62 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		AC29158921122D24002B757C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		AC29158E21123843002B757C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AC29158F21123850002B757C /* PaginatedViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		AC9B7EC820D1CB6C00E160FA /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		ACB30A3C2111BD0E00524F9D /* Museum */ = {
+			isa = PBXGroup;
+			children = (
+				ACB30A422111BECB00524F9D /* FloorCell.swift */,
+				ACB30A3D2111BD1E00524F9D /* MuseumViewController.swift */,
+				ACB30A442111BFBE00524F9D /* FloorDetail */,
+			);
+			path = Museum;
+			sourceTree = "<group>";
+		};
+		ACB30A442111BFBE00524F9D /* FloorDetail */ = {
+			isa = PBXGroup;
+			children = (
+				ACB30A452111BFF700524F9D /* FloorDetailViewController.swift */,
+				ACB30A4C2111C87000524F9D /* GalleryCell.swift */,
+			);
+			path = FloorDetail;
+			sourceTree = "<group>";
+		};
+		ACB30A4B2111C7A100524F9D /* Floor */ = {
+			isa = PBXGroup;
+			children = (
+				ACB30A492111C62B00524F9D /* GalleriesGallery.swift */,
+			);
+			path = Floor;
+			sourceTree = "<group>";
+		};
+		ACB30A4E2111DCCB00524F9D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ACB30A4F2111DCD600524F9D /* UILabel+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -472,18 +547,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACB30A502111DCD600524F9D /* UILabel+.swift in Sources */,
 				AC0D1A7F20C99530002E614B /* PaginatedServiceInfo.swift in Sources */,
 				AC0D1A6920C97F9C002E614B /* GroupCell.swift in Sources */,
 				AC0D1A6F20C98A1F002E614B /* Image.swift in Sources */,
+				ACB30A4A2111C62B00524F9D /* GalleriesGallery.swift in Sources */,
+				ACB30A402111BDAE00524F9D /* Floor.swift in Sources */,
 				AC0D1A7B20C98BCF002E614B /* ObjectCell.swift in Sources */,
+				ACB30A3E2111BD1E00524F9D /* MuseumViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				AC0D1A5F20C976B9002E614B /* Century.swift in Sources */,
+				ACB30A432111BECB00524F9D /* FloorCell.swift in Sources */,
 				AC0D1A6B20C98074002E614B /* Group.swift in Sources */,
 				AC8A340B20ECBA93002E42D9 /* AppConfig.swift in Sources */,
 				AC0D1A6720C97CAC002E614B /* CenturyService.swift in Sources */,
 				AC0D1A6420C97C58002E614B /* CenturyDetailViewController.swift in Sources */,
 				AC0D1A6D20C98994002E614B /* Object.swift in Sources */,
+				AC29159021123850002B757C /* PaginatedViewController.swift in Sources */,
+				ACB30A462111BFF700524F9D /* FloorDetailViewController.swift in Sources */,
+				ACB30A4D2111C87000524F9D /* GalleryCell.swift in Sources */,
 				AC0D1A5A20C976B9002E614B /* CenturiesViewController.swift in Sources */,
+				ACB30A482111C30700524F9D /* Gallery.swift in Sources */,
 				AC0D1A5920C976B9002E614B /* CenturiesService.swift in Sources */,
 				AC0D1A7820C98AEB002E614B /* ObjectsViewController.swift in Sources */,
 				AC0D1A7520C98A5A002E614B /* ObjectsService.swift in Sources */,
