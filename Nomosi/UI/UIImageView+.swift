@@ -42,7 +42,7 @@ extension UIImageView {
         }
         
         public static func activityIndicator(tintColor: UIColor, errorImage: UIImage) -> Placeholder {
-            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            let activityIndicator = UIActivityIndicatorView(style: .gray)
             activityIndicator.startAnimating()
             activityIndicator.color = tintColor
             let errorView = UIImageView(image: errorImage)

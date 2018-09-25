@@ -13,7 +13,7 @@ open class ServiceOverlayView: UIView {
     private weak var viewToCover: UIView?
     private var viewToConverObservation: NSKeyValueObservation?
     private var contentStackView = UIStackView(frame: .zero)
-    private var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    private var activityIndicator = UIActivityIndicatorView(style: .gray)
     private var errorLabel = UILabel(frame: .zero)
     private var tryAgainButton = UIButton(type: .system)
 
