@@ -35,17 +35,6 @@ class FloorDetailViewController: PaginatedViewController {
         setupPaginatedController(scrollView: tableView, footerView: footerView)
     }
     
-    private func insertObjects(_ galleries: [Gallery]) {
-        var indexPathsToAdd = [IndexPath]()
-        galleries.enumerated().forEach { index, gallery in
-            if !self.galleries.contains(gallery) {
-                indexPathsToAdd.append(IndexPath(row: index, section: 0))
-                self.galleries.insert(gallery)
-            }
-        }
-        tableView.reloadData()
-    }
-    
     override func loadNextPage() {
         var service: GalleriesGallery?
         if galleries.count == 0 || nextPageLink != nil {
@@ -62,6 +51,29 @@ class FloorDetailViewController: PaginatedViewController {
                 self?.currentService = nil
             }
         currentService = service
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard
+            let galleryViewController = segue.destination as? GalleryViewController,
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell)
+            else { return }
+        let selectedGallery = Array(galleries)[indexPath.row]
+        galleryViewController.galleryName = selectedGallery.name
+        galleryViewController.galleryID = selectedGallery.id
+    }
+    
+    private func insertObjects(_ galleries: [Gallery]) {
+        var indexPathsToAdd = [IndexPath]()
+        galleries.enumerated().forEach { index, gallery in
+            if !self.galleries.contains(gallery) {
+                indexPathsToAdd.append(IndexPath(row: index, section: 0))
+                self.galleries.insert(gallery)
+            }
+        }
+        tableView.reloadData()
     }
     
     private func select(rowAtIndexPath: IndexPath) {

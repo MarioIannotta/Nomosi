@@ -31,6 +31,7 @@
 		AC0D1A7F20C99530002E614B /* PaginatedServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */; };
 		AC29159021123850002B757C /* PaginatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29158F21123850002B757C /* PaginatedViewController.swift */; };
 		AC8A340B20ECBA93002E42D9 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A340A20ECBA93002E42D9 /* AppConfig.swift */; };
+		AC949283215A83D400455407 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC949282215A83D400455407 /* GalleryViewController.swift */; };
 		AC9B7ECA20D1CB7700E160FA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */; };
 		ACB30A3E2111BD1E00524F9D /* MuseumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A3D2111BD1E00524F9D /* MuseumViewController.swift */; };
 		ACB30A402111BDAE00524F9D /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A3F2111BDAE00524F9D /* Floor.swift */; };
@@ -85,6 +86,7 @@
 		AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedServiceInfo.swift; sourceTree = "<group>"; };
 		AC29158F21123850002B757C /* PaginatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedViewController.swift; sourceTree = "<group>"; };
 		AC8A340A20ECBA93002E42D9 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		AC949282215A83D400455407 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ACB30A3D2111BD1E00524F9D /* MuseumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumViewController.swift; sourceTree = "<group>"; };
 		ACB30A3F2111BDAE00524F9D /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
@@ -224,9 +226,9 @@
 				AC0D1A5120C976B9002E614B /* Main.storyboard */,
 				AC0D1A6020C97719002E614B /* Centuries */,
 				AC29158E21123843002B757C /* Common */,
+				AC949281215A83BA00455407 /* Gallery */,
 				ACB30A3C2111BD0E00524F9D /* Museum */,
 				AC0D1A7620C98ADA002E614B /* Objects */,
-				AC29158921122D24002B757C /* Protocols */,
 				AC9B7EC820D1CB6C00E160FA /* Settings */,
 			);
 			path = UI;
@@ -310,19 +312,20 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		AC29158921122D24002B757C /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		AC29158E21123843002B757C /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				AC29158F21123850002B757C /* PaginatedViewController.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		AC949281215A83BA00455407 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				AC949282215A83D400455407 /* GalleryViewController.swift */,
+			);
+			path = Gallery;
 			sourceTree = "<group>";
 		};
 		AC9B7EC820D1CB6C00E160FA /* Settings */ = {
@@ -422,11 +425,11 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -549,6 +552,7 @@
 			files = (
 				ACB30A502111DCD600524F9D /* UILabel+.swift in Sources */,
 				AC0D1A7F20C99530002E614B /* PaginatedServiceInfo.swift in Sources */,
+				AC949283215A83D400455407 /* GalleryViewController.swift in Sources */,
 				AC0D1A6920C97F9C002E614B /* GroupCell.swift in Sources */,
 				AC0D1A6F20C98A1F002E614B /* Image.swift in Sources */,
 				ACB30A4A2111C62B00524F9D /* GalleriesGallery.swift in Sources */,
@@ -715,8 +719,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marioiannotta.nomosi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -734,8 +737,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marioiannotta.nomosi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -760,8 +762,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -782,8 +783,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
