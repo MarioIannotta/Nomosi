@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = 'Nomosi'
   s.version          = '0.0.2'
-  s.summary          = 'A protocol oriented way to handle network requests.'
+  s.summary          = 'Plug and play network services for your iOS app.'
   s.description      = <<-DESC
-A protocol oriented way to handle network requests.
+Plug and play network services for your iOS app.
                        DESC
   s.swift_version = '4.2'
   s.homepage         = 'https://github.com/MarioIannotta/Nomosi'
