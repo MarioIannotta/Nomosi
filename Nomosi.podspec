@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 A protocol oriented way to handle network requests.
                        DESC
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
   s.homepage         = 'https://github.com/MarioIannotta/Nomosi'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'MarioIannotta' => 'info@marioiannotta.com' }
