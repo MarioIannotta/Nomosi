@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Nomosi'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = 'A protocol oriented way to handle network requests.'
   s.description      = <<-DESC
 A protocol oriented way to handle network requests.
