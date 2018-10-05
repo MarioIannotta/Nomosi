@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Nomosi'
-  s.version          = '0.0.2'
+  s.version          = '0.0.3'
   s.summary          = 'Plug and play network services for your iOS app.'
   s.description      = <<-DESC
 Plug and play network services for your iOS app.
