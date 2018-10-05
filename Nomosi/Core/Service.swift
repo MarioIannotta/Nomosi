@@ -183,7 +183,7 @@ open class Service<Response: ServiceResponse> {
                 let `self` = self
                 else { return }
             if let data = data {
-                self.log.print("📦 \(self): getting date from cache")
+                self.log.print("📦 \(self): getting data from cache")
                 self.parseDataAndCompleteRequest(data: data)
             } else {
                 self.performDataTask(request: request)
