@@ -123,7 +123,8 @@ open class Service<Response: ServiceResponse> {
     private func _load() -> Self? {
         hasBeenCancelled = false
         log.print("⬆️ \(self)")
-        log.print(requestDescription, requiredLevel: .verbose)
+        log.print(headersDescription, requiredLevel: .verbose)
+        log.print(bodyDescription, requiredLevel: .verbose)
         serviceObservers.forEach { $0.serviceWillStartRequest(self) }
         
         guard
@@ -295,9 +296,19 @@ extension Service: CustomDebugStringConvertible {
         return "\(methodDescription): \(urlDescription)"
     }
     
-    public var requestDescription: String {
-        let bodyDescription = String(data: body?.asData ?? Data(), encoding: .utf8) ?? ""
-        return "Headers:\n\(headers)\nBody:\n\(bodyDescription)"
+    public var headersDescription: String {
+        let headersDescription = headers.count > 0 ? headers.description : "Empty headers"
+        return "Headers: \(headersDescription)"
+    }
+    
+    public var bodyDescription: String {
+        var bodyDescription = "Empty body"
+        if let bodyData = body?.asData,
+            let bodyAsString = String(data: bodyData, encoding: .utf8),
+            bodyAsString.count > 0 {
+            bodyDescription = bodyAsString
+        }
+        return "Body: \(bodyDescription)"
     }
     
 }
