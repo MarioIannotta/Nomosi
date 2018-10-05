@@ -19,12 +19,13 @@ open class Service<Response: ServiceResponse> {
     public var absoluteURL: URL?
     public var basePath: String?
     public var relativePath: String?
-    public var body: Data?
+    public var body: DataConvertible?
     public var headers: [String: String] = [:]
     public var log: Log = .minimal
     public var timeoutInterval: TimeInterval = 60
     public var cachePolicy: Cache.Policy = .none
     public var queue: DispatchQueue = .main
+    public var validStatusCodes: Range<Int> = 200..<300
     
     public private (set) var latestResponse: Response?
     public private (set) var latestError: ServiceError?
@@ -122,6 +123,7 @@ open class Service<Response: ServiceResponse> {
     private func _load() -> Self? {
         hasBeenCancelled = false
         log.print("⬆️ \(self)")
+        log.print(requestDescription, requiredLevel: .verbose)
         serviceObservers.forEach { $0.serviceWillStartRequest(self) }
         
         guard
@@ -199,7 +201,7 @@ open class Service<Response: ServiceResponse> {
         var allHeaders = [String: String]()
         headers.forEach { allHeaders[$0.key] = $0.value }
         request.allHTTPHeaderFields = allHeaders
-        request.httpBody = body
+        request.httpBody = body?.asData
         request.timeoutInterval = timeoutInterval
         return request
     }
@@ -208,8 +210,15 @@ open class Service<Response: ServiceResponse> {
         RequestsQueue.append(request: request)
         sessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             RequestsQueue.resolve(request: request)
-            let statusCodeString = self.statusCode(for: response)
-            self.log.print("⬇️ [\(statusCodeString)] \(self) - \(data?.count ?? 0) bytes")
+            let _statusCode = (response as? HTTPURLResponse)?.statusCode
+            guard
+                let statusCode = _statusCode,
+                self.validStatusCodes.contains(statusCode)
+                else {
+                    self.completeRequest(response: nil, error: .invalidStatusCode(_statusCode))
+                    return
+                }
+            self.log.print("⬇️ [\(String(statusCode))] \(self) - \(data?.count ?? 0) bytes")
             if let error = error {
                 if (error as NSError).code == NSURLErrorCancelled {
                     self.completeRequest(response: nil, error: .requestCancelled)
@@ -235,15 +244,6 @@ open class Service<Response: ServiceResponse> {
             self.parseDataAndCompleteRequest(data: data)
         }
         sessionDataTask?.resume()
-    }
-    
-    private func statusCode(for response: URLResponse?) -> String {
-        guard
-            let statusCode = (response as? HTTPURLResponse)?.statusCode
-            else {
-                return "Invalid status code"
-            }
-        return String(statusCode)
     }
     
     private func parseDataAndCompleteRequest(data: Data) {
@@ -272,10 +272,8 @@ open class Service<Response: ServiceResponse> {
             }
         }
         // completionCallback?(response, error) causes a segmentation fault ¯\_(ツ)_/¯
-        if let completionCallback = completionCallback {
-            DispatchQueue.main.async {
-                completionCallback(response, error)
-            }
+        DispatchQueue.main.async {
+            self.completionCallback?(response, error)
         }
     }
     
@@ -292,7 +290,14 @@ extension Service: CustomDebugStringConvertible {
     }
     
     public var debugDescription: String {
-        return "\(method.rawValue): \(url?.absoluteString ?? "[INVALID URL: \(urlDebugDescription)]")"
+        let methodDescription = method.rawValue
+        let urlDescription = url?.absoluteString ?? "[INVALID URL: \(urlDebugDescription)]"
+        return "\(methodDescription): \(urlDescription)"
+    }
+    
+    public var requestDescription: String {
+        let bodyDescription = String(data: body?.asData ?? Data(), encoding: .utf8) ?? ""
+        return "Headers:\n\(headers)\nBody:\n\(bodyDescription)"
     }
     
 }
@@ -304,7 +309,7 @@ extension Service: Hashable {
             \(method.rawValue):
             \(url?.absoluteString ?? "")
             \(headers)
-            \(String(data: body ?? Data(), encoding: .utf8) ?? "")
+            \(String(data: body?.asData ?? Data(), encoding: .utf8) ?? "")
             """.hashValue
     }
     
