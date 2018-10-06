@@ -27,7 +27,7 @@
 		AC0D1A7120C98A2B002E614B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7020C98A2B002E614B /* Person.swift */; };
 		AC0D1A7520C98A5A002E614B /* ObjectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7420C98A5A002E614B /* ObjectsService.swift */; };
 		AC0D1A7820C98AEB002E614B /* ObjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */; };
-		AC0D1A7B20C98BCF002E614B /* ObjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */; };
+		AC0D1A7B20C98BCF002E614B /* ObjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7A20C98BCF002E614B /* ObjectCollectionViewCell.swift */; };
 		AC0D1A7F20C99530002E614B /* PaginatedServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */; };
 		AC29159021123850002B757C /* PaginatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29158F21123850002B757C /* PaginatedViewController.swift */; };
 		AC8A340B20ECBA93002E42D9 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A340A20ECBA93002E42D9 /* AppConfig.swift */; };
@@ -82,7 +82,7 @@
 		AC0D1A7020C98A2B002E614B /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		AC0D1A7420C98A5A002E614B /* ObjectsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsService.swift; sourceTree = "<group>"; };
 		AC0D1A7720C98AEB002E614B /* ObjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsViewController.swift; sourceTree = "<group>"; };
-		AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCell.swift; sourceTree = "<group>"; };
+		AC0D1A7A20C98BCF002E614B /* ObjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		AC0D1A7E20C99530002E614B /* PaginatedServiceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedServiceInfo.swift; sourceTree = "<group>"; };
 		AC29158F21123850002B757C /* PaginatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedViewController.swift; sourceTree = "<group>"; };
 		AC8A340A20ECBA93002E42D9 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -306,7 +306,7 @@
 		AC0D1A7920C98BCA002E614B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				AC0D1A7A20C98BCF002E614B /* ObjectCell.swift */,
+				AC0D1A7A20C98BCF002E614B /* ObjectCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -540,7 +540,7 @@
 				AC0D1A6F20C98A1F002E614B /* Image.swift in Sources */,
 				ACB30A4A2111C62B00524F9D /* GalleriesService.swift in Sources */,
 				ACB30A402111BDAE00524F9D /* Floor.swift in Sources */,
-				AC0D1A7B20C98BCF002E614B /* ObjectCell.swift in Sources */,
+				AC0D1A7B20C98BCF002E614B /* ObjectCollectionViewCell.swift in Sources */,
 				ACB30A3E2111BD1E00524F9D /* FloorsViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				AC0D1A5F20C976B9002E614B /* Century.swift in Sources */,

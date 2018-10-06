@@ -32,6 +32,9 @@ class ObjectCollectionViewCell: UICollectionViewCell {
         classificationContainerView.layer.cornerRadius = 8
     }
     
+    private let placeholder: UIImageView.Placeholder = .activityIndicator(tintColor: .black,
+                                                                          errorImage: #imageLiteral(resourceName: "image_placeholder"))
+    
     func configure(object: Object) {
         titleLabel.text = object.title
         centuryLabel.text = object.century
@@ -41,7 +44,7 @@ class ObjectCollectionViewCell: UICollectionViewCell {
         let imageLink = object.primaryimageurl ?? ""
         previewImageView.loadImage(
             link: "\(imageLink)?height=200&width=200",
-            placeholder: .activityIndicator(tintColor: .black, errorImage: #imageLiteral(resourceName: "image_placeholder")),
+            placeholder: placeholder,
             cachePolicy: AppConfig.cachePolicy)
     }
     

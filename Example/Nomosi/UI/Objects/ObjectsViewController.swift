@@ -107,8 +107,8 @@ extension ObjectsViewController: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ObjectCell.identifier,
-                                                          for: indexPath) as? ObjectCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ObjectCollectionViewCell.identifier,
+                                                          for: indexPath) as? ObjectCollectionViewCell
             else {
                 return UICollectionViewCell()
             }
