@@ -1,5 +1,5 @@
 //
-//  GalleryCell.swift
+//  GalleryTableViewCell.swift
 //  Nomosi_Example
 //
 //  Created by Mario on 01/08/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GalleryCell: UITableViewCell {
+class GalleryTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var themeLabel: UILabel!

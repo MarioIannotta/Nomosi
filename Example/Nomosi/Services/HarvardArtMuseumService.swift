@@ -20,11 +20,15 @@ class HarvardArtMuseumService<Response: ServiceResponse>: Service<Response> {
         commonSetup()
     }
     
-    init(resource: String) {
+    init(resource: String, queryItems: [String: String] = [:]) {
         self.resource = resource
         super.init()
         basePath = "https://api.harvardartmuseums.org/"
-        relativePath = resource + "?apikey=19222fd0-6a57-11e8-a0b5-c949d872863d"
+        var resourceAndQuery = resource + "?apikey=19222fd0-6a57-11e8-a0b5-c949d872863d"
+        for queryItem in queryItems {
+            resourceAndQuery += "&\(queryItem.key)=\(queryItem.value)"
+        }
+        relativePath = resourceAndQuery
         commonSetup()
     }
     

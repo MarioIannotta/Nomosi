@@ -38,7 +38,7 @@ class PaginatedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadNextPage()
+        loadNextPageIfNeeded(contentOffset: paginatedScrollView?.contentOffset ?? .zero)
     }
     
     public func setupPaginatedController(scrollView: UIScrollView, footerView: UIView) {

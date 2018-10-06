@@ -11,16 +11,20 @@ import Nomosi
 
 class ObjectsService: HarvardArtMuseumService<ObjectsServiceResponse> {
 
-    init?(nextPageLink: String?) {
+    init?(galleryID: Int?, nextPageLink: String? = nil) {
         if let nextPageURL = URL(string: nextPageLink ?? "") {
             super.init(absoluteURL: nextPageURL)
         } else {
-            return nil
+            var queryItems = [String: String]()
+            let fields = "objectid,title,primaryimageurl,century,classification,dateoffirstpageview"
+            queryItems["fields"] = fields.replacingOccurrences(of: ",", with: "%2C")
+            if let galleryID = galleryID {
+                queryItems["gallery"] = String(galleryID)
+            }
+            queryItems["sort"] = "dateoffirstpageview"
+            queryItems["sortorder"] = "desc"
+            super.init(resource: "object", queryItems: queryItems)
         }
-    }
-    
-    init() {
-        super.init(resource: "object")
     }
     
 }

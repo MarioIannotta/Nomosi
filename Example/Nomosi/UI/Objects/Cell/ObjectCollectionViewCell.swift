@@ -1,5 +1,5 @@
 //
-//  ObjectCell.swift
+//  ObjectCollectionViewCell.swift
 //  Nomosi_Example
 //
 //  Created by Mario on 07/06/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ObjectCell: UICollectionViewCell {
+class ObjectCollectionViewCell: UICollectionViewCell {
     
     // MARK: - IBOutlets
     
@@ -38,7 +38,7 @@ class ObjectCell: UICollectionViewCell {
         classificationLabel.text = object.classification
         centuryContainerView.isHidden = (centuryLabel.text?.count ?? 0) == 0
         classificationContainerView.isHidden = (classificationLabel.text?.count ?? 0) == 0
-        let imageLink = object.images?.first(where: { $0.baseimageurl != nil })?.baseimageurl ?? ""
+        let imageLink = object.primaryimageurl ?? ""
         previewImageView.loadImage(
             link: "\(imageLink)?height=200&width=200",
             placeholder: .activityIndicator(tintColor: .black, errorImage: #imageLiteral(resourceName: "image_placeholder")),

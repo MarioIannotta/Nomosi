@@ -66,8 +66,11 @@ extension CenturiesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CenturyCell", for: indexPath) as? CenturyCell
-            else { return UITableViewCell() }
+            let cell = tableView.dequeueReusableCell(withIdentifier: CenturyCell.identifier,
+                                                     for: indexPath) as? CenturyCell
+            else {
+                return UITableViewCell()
+            }
         cell.configure(century: centuries[indexPath.row])
         return cell
     }

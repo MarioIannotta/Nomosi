@@ -19,7 +19,9 @@ public struct ServiceError: Error, Equatable {
     }
     public static var redundantRequest = ServiceError(code: 7, reason: "The same request is already running")
     public static var requestCancelled = ServiceError(code: 6, reason: "The request has been cancelled")
-    public static var shouldLoadServiceEvaluatedToFalse = ServiceError(code: 5, reason: "should load service callback evaluated to false")
+    public static var shouldLoadServiceEvaluatedToFalse = ServiceError(
+        code: 5,
+        reason: "Should load service callback evaluated to false")
     public static var invalidRequest = ServiceError(code: 4, reason: "The request is not valid")
     public static var emptyResponse = ServiceError(code: 3, reason: "Empty response")
     public static func cannotParseResponse(error: Error) -> ServiceError {

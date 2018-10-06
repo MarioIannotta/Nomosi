@@ -23,6 +23,11 @@ class ObjectsViewController: PaginatedViewController {
     
     private var config = Config()
     
+    // MARK: - Injectable properties
+    
+    var galleryName: String?
+    var galleryID: Int?
+    
     // MARK: - IBOutlets
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -30,12 +35,13 @@ class ObjectsViewController: PaginatedViewController {
     
     // MARK: - Model
     
-    private var objects: Set<Object> = []
+    private var objects = [Object]()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = galleryName ?? "Recent Objects"
         setupPaginatedController(scrollView: collectionView, footerView: footerView)
     }
 
@@ -50,7 +56,7 @@ class ObjectsViewController: PaginatedViewController {
         objects.enumerated().forEach { index, object in
             if !self.objects.contains(object) {
                 indexPathsToAdd.append(IndexPath(row: index, section: 0))
-                self.objects.insert(object)
+                self.objects.append(object)
             }
         }
         collectionView.reloadData()
@@ -59,9 +65,9 @@ class ObjectsViewController: PaginatedViewController {
     override func loadNextPage() {
         var service: ObjectsService?
         if objects.count == 0 {
-            service = ObjectsService()
+            service = ObjectsService(galleryID: galleryID)
         } else if nextPageLink != nil {
-            service = ObjectsService(nextPageLink: nextPageLink)
+            service = ObjectsService(galleryID: galleryID, nextPageLink: nextPageLink)
         } else {
             // if objects.count > 0 and nextPageLink == nil it's the end of the list
         }
@@ -101,9 +107,12 @@ extension ObjectsViewController: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ObjectCell", for: indexPath) as? ObjectCell
-            else { return UICollectionViewCell() }
-        cell.configure(object: Array(objects)[indexPath.item])
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ObjectCell.identifier,
+                                                          for: indexPath) as? ObjectCell
+            else {
+                return UICollectionViewCell()
+            }
+        cell.configure(object: objects[indexPath.item])
         return cell
     }
     

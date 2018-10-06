@@ -67,9 +67,12 @@ extension CenturyDetailViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath) as? GroupCell,
+            let cell = tableView.dequeueReusableCell(withIdentifier: GroupCell.identifier,
+                                                     for: indexPath) as? GroupCell,
             let group = century?.detail?.groups?[indexPath.row]
-            else { return UITableViewCell() }
+            else {
+                return UITableViewCell()
+            }
         cell.configure(group: group)
         return cell
     }

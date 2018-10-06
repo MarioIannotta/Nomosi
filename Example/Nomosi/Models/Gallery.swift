@@ -12,11 +12,8 @@ struct Gallery: Decodable, Hashable {
     
     private let summaryLenght = 60
     
-    var galleryNumber: String
     var name: String
     var id: Int
-    var lastUpdate: String
-    var floor: Int
     var theme: String?
     var labelText: String?
     var summaryLabelText: String? {
@@ -35,11 +32,8 @@ struct Gallery: Decodable, Hashable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case galleryNumber = "gallerynumber"
         case name = "name"
         case id = "id"
-        case lastUpdate = "lastupdate"
-        case floor = "floor"
         case theme = "theme"
         case labelText = "labeltext"
     }

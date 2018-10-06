@@ -1,5 +1,5 @@
 //
-//  MuseumViewController.swift
+//  FloorsViewController.swift
 //  Nomosi_Example
 //
 //  Created by Mario on 01/08/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MuseumViewController: UIViewController {
+class FloorsViewController: UIViewController {
     
     // MARK: - IBOutlets
     
@@ -34,7 +34,7 @@ class MuseumViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard
-            let floorDetailViewController = segue.destination as? FloorDetailViewController,
+            let floorDetailViewController = segue.destination as? GalleriesViewController,
             let cell = sender as? UITableViewCell,
             let indexPath = tableView.indexPath(for: cell)
             else { return }
@@ -44,7 +44,7 @@ class MuseumViewController: UIViewController {
     
 }
 
-extension MuseumViewController: UITableViewDataSource, UITableViewDelegate {
+extension FloorsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return floors.count
@@ -52,7 +52,8 @@ extension MuseumViewController: UITableViewDataSource, UITableViewDelegate {
  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FloorCell", for: indexPath) as? FloorCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: FloorTableViewCell.identifier,
+                                                     for: indexPath) as? FloorTableViewCell
             else {
                 return UITableViewCell()
             }

@@ -1,5 +1,5 @@
 //
-//  FloorDetailViewController.swift
+//  GalleriesViewController.swift
 //  Nomosi_Example
 //
 //  Created by Mario on 01/08/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import Nomosi
 
-class FloorDetailViewController: PaginatedViewController {
+class GalleriesViewController: PaginatedViewController {
     
     // MARK: - IBOutlets
     
@@ -36,9 +36,9 @@ class FloorDetailViewController: PaginatedViewController {
     }
     
     override func loadNextPage() {
-        var service: GalleriesGallery?
+        var service: GalleriesService?
         if galleries.count == 0 || nextPageLink != nil {
-            service = GalleriesGallery(nextPageLink: nextPageLink, id: floorID)
+            service = GalleriesService(nextPageLink: nextPageLink, id: floorID)
         } 
         service?
             .load()?
@@ -56,13 +56,13 @@ class FloorDetailViewController: PaginatedViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard
-            let galleryViewController = segue.destination as? GalleryViewController,
+            let objectsViewController = segue.destination as? ObjectsViewController,
             let cell = sender as? UITableViewCell,
             let indexPath = tableView.indexPath(for: cell)
             else { return }
         let selectedGallery = Array(galleries)[indexPath.row]
-        galleryViewController.galleryName = selectedGallery.name
-        galleryViewController.galleryID = selectedGallery.id
+        objectsViewController.galleryName = selectedGallery.name
+        objectsViewController.galleryID = selectedGallery.id
     }
     
     private func insertObjects(_ galleries: [Gallery]) {
@@ -93,7 +93,7 @@ class FloorDetailViewController: PaginatedViewController {
     
 }
 
-extension FloorDetailViewController: UITableViewDataSource, UITableViewDelegate {
+extension GalleriesViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return galleries.count
@@ -101,7 +101,8 @@ extension FloorDetailViewController: UITableViewDataSource, UITableViewDelegate 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell", for: indexPath) as? GalleryCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: GalleryTableViewCell.identifier,
+                                                     for: indexPath) as? GalleryTableViewCell
             else {
                 return UITableViewCell()
             }

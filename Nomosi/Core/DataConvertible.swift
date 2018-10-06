@@ -19,7 +19,6 @@ extension Dictionary: DataConvertible {
         return try? JSONSerialization.data(withJSONObject: self, options: [])
     }
     
-    
 }
 
 extension Array: DataConvertible {
@@ -27,6 +26,5 @@ extension Array: DataConvertible {
     public var asData: Data? {
         return try? JSONSerialization.data(withJSONObject: self, options: [])
     }
-    
     
 }
