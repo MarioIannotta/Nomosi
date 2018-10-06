@@ -91,9 +91,10 @@ Nomosi is available under the MIT license. See the LICENSE file for more info.
 
 ## TODOs:
 
+* [ ] UIImageView.Placeholder doesn't seems to work fine with cell reuse
+* [ ] Upload requests
+* [ ] Providing a generic interface for the cache so it's possible to use any storage layer by implementing just the methods loadIfNeeded and storeIfNeeded 
 * [x] Add status bar activity indicator
 * [x] Split pod in podspec (Core + UI)
 * [x] Provide a dictionary as body
 * [x] Http status code range validation
-* [ ] Upload requests
-* [ ] Providing a generic interface for the cache so it's possible to use any storage layer by implementing just the methods loadIfNeeded and storeIfNeeded 
