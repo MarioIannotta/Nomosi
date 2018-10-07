@@ -421,11 +421,11 @@
             </objects>
             <point key="canvasLocation" x="1449" y="-1183"/>
         </scene>
-        <!--Objects-->
+        <!--Recent objects-->
         <scene sceneID="LYN-Lh-3D5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Eck-5y-EwF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Objects" id="RZL-F0-nyO"/>
+                    <tabBarItem key="tabBarItem" title="Recent objects" id="RZL-F0-nyO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yby-Kb-5zK">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
