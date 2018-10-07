@@ -51,7 +51,6 @@ class ObjectCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         loadImageService?.cancelRequest()
-        previewImageView.image = nil
     }
     
 }
