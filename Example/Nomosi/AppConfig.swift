@@ -57,8 +57,7 @@ struct AppConfig {
         get {
             guard
                 let state = UserDefaults.standard.value(forKey: Keys.cachePolicyState) as? Int,
-                let timeout = UserDefaults.standard.value(forKey: Keys.cachePolicyTimeout) as? TimeInterval,
-                state != 0
+                let timeout = UserDefaults.standard.value(forKey: Keys.cachePolicyTimeout) as? TimeInterval
                 else {
                     return .inRam(timeout: 30)
                 }
