@@ -23,7 +23,8 @@ open class Service<Response: ServiceResponse> {
     public var headers: [String: String] = [:]
     public var log: Log = .minimal
     public var timeoutInterval: TimeInterval = 60
-    public var cachePolicy: Cache.Policy = .none
+    public var cache: Cache = URLCache.shared
+    public var cachePolicy: CachePolicy = .none
     public var queue: DispatchQueue = .main
     public var validStatusCodes: Range<Int>? = 200..<300
     
@@ -179,7 +180,7 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func loadFromCacheIfNeeded(request: URLRequest) {
-        Cache.loadIfNeeded(request: request, cachePolicy: self.cachePolicy) { [weak self] data in
+        cache.loadIfNeeded(request: request, cachePolicy: self.cachePolicy) { [weak self] data in
             guard
                 let `self` = self
                 else { return }
@@ -240,10 +241,10 @@ open class Service<Response: ServiceResponse> {
                     self.completeRequest(response: nil, error: .emptyResponse)
                     return
                 }
-            let hasResponseBeenCached = Cache.storeIfNeeded(request: request,
-                                                            response: response,
-                                                            data: data,
-                                                            cachePolicy: self.cachePolicy)
+            let hasResponseBeenCached = self.cache.storeIfNeeded(request: request,
+                                                                 response: response,
+                                                                 data: data,
+                                                                 cachePolicy: self.cachePolicy)
             if hasResponseBeenCached {
                 self.log.print("📦 \(self): storing response in cache with policy \(self.cachePolicy)")
             }

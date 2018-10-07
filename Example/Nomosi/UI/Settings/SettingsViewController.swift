@@ -65,7 +65,7 @@ class SettingsViewController: UIViewController {
     @IBAction private func clearCacheButtonTapped() {
         let objectsViewController = (tabBarController?.children.first as? UINavigationController)?.children.first as? ObjectsViewController
         objectsViewController?.resetDataSource()
-        Cache.removeAllCachedResponses() 
+        URLCache.shared.removeAllCachedResponses() 
     }
     
     @IBAction private func networkErrorSwitchValueChanged(_ sender: UISwitch) {

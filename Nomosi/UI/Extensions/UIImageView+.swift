@@ -28,7 +28,7 @@ extension UIImageView {
     
     @discardableResult
     public func loadImage(link: String,
-                          cachePolicy: Cache.Policy = .none,
+                          cachePolicy: CachePolicy = .none,
                           overlayView: RemoteImageServiceOverlayView? = nil) -> RemoteImageService {
         let defaultRemoteImageService = DefaultRemoteImageService(link: link)
         return self.loadImage(service: defaultRemoteImageService,

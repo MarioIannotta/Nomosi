@@ -37,7 +37,7 @@ struct AppConfig {
         }
     }
     
-    static var cachePolicy: Cache.Policy {
+    static var cachePolicy: CachePolicy {
         set {
             var state: Int = 0
             var timeout: TimeInterval = 0
