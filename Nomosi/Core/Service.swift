@@ -25,7 +25,7 @@ open class Service<Response: ServiceResponse> {
     public var timeoutInterval: TimeInterval = 60
     public var cachePolicy: Cache.Policy = .none
     public var queue: DispatchQueue = .main
-    public var validStatusCodes: Range<Int> = 200..<300
+    public var validStatusCodes: Range<Int>? = 200..<300
     
     public private (set) var latestResponse: Response?
     public private (set) var latestError: ServiceError?
@@ -212,14 +212,19 @@ open class Service<Response: ServiceResponse> {
         sessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             RequestsQueue.resolve(request: request)
             let _statusCode = (response as? HTTPURLResponse)?.statusCode
-            guard
+            if
+                let validStatusCodes = self.validStatusCodes,
                 let statusCode = _statusCode,
-                self.validStatusCodes.contains(statusCode)
-                else {
-                    self.completeRequest(response: nil, error: .invalidStatusCode(_statusCode))
-                    return
-                }
-            self.log.print("⬇️ [\(String(statusCode))] \(self) - \(data?.count ?? 0) bytes")
+                !validStatusCodes.contains(statusCode)
+            {
+                self.completeRequest(response: nil, error: .invalidStatusCode(statusCode))
+                return
+            }
+            var statusCodeDescription = ""
+            if let _statusCode = _statusCode {
+                statusCodeDescription = String(_statusCode)
+            }
+            self.log.print("⬇️ [\(statusCodeDescription)] \(self) - \(data?.count ?? 0) bytes")
             if let error = error {
                 if (error as NSError).code == NSURLErrorCancelled {
                     self.completeRequest(response: nil, error: .requestCancelled)
