@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nomosi
 
 class ObjectCollectionViewCell: UICollectionViewCell {
     
@@ -32,8 +33,9 @@ class ObjectCollectionViewCell: UICollectionViewCell {
         classificationContainerView.layer.cornerRadius = 8
     }
     
-    private let placeholder: UIImageView.Placeholder = .activityIndicator(tintColor: .black,
-                                                                          errorImage: #imageLiteral(resourceName: "image_placeholder"))
+    private let placeholder: RemoteImageServiceOverlayView = .activityIndicator(tintColor: .black,
+                                                                                errorImage: #imageLiteral(resourceName: "image_placeholder"))
+    private var loadImageService: HarvardRemoteImageService?
     
     func configure(object: Object) {
         titleLabel.text = object.title
@@ -42,13 +44,13 @@ class ObjectCollectionViewCell: UICollectionViewCell {
         centuryContainerView.isHidden = (centuryLabel.text?.count ?? 0) == 0
         classificationContainerView.isHidden = (classificationLabel.text?.count ?? 0) == 0
         let imageLink = object.primaryimageurl ?? ""
-        previewImageView.loadImage(
-            link: "\(imageLink)?height=200&width=200",
-            placeholder: placeholder,
-            cachePolicy: AppConfig.cachePolicy)
+        let loadImageService = HarvardRemoteImageService(link: "\(imageLink)?height=200&width=200")
+        self.loadImageService = previewImageView.loadImage(service: loadImageService,
+                                                           overlayView: placeholder)
     }
     
     override func prepareForReuse() {
+        loadImageService?.cancelRequest()
         previewImageView.image = nil
     }
     

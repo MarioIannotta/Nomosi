@@ -32,6 +32,7 @@
 		AC29159021123850002B757C /* PaginatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29158F21123850002B757C /* PaginatedViewController.swift */; };
 		AC8A340B20ECBA93002E42D9 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A340A20ECBA93002E42D9 /* AppConfig.swift */; };
 		AC9B7ECA20D1CB7700E160FA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */; };
+		ACB096F5216A246A0087297B /* HarvardRemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB096F4216A246A0087297B /* HarvardRemoteImageService.swift */; };
 		ACB30A3E2111BD1E00524F9D /* FloorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A3D2111BD1E00524F9D /* FloorsViewController.swift */; };
 		ACB30A402111BDAE00524F9D /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A3F2111BDAE00524F9D /* Floor.swift */; };
 		ACB30A432111BECB00524F9D /* FloorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A422111BECB00524F9D /* FloorTableViewCell.swift */; };
@@ -87,6 +88,7 @@
 		AC29158F21123850002B757C /* PaginatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedViewController.swift; sourceTree = "<group>"; };
 		AC8A340A20ECBA93002E42D9 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		ACB096F4216A246A0087297B /* HarvardRemoteImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarvardRemoteImageService.swift; sourceTree = "<group>"; };
 		ACB30A3D2111BD1E00524F9D /* FloorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorsViewController.swift; sourceTree = "<group>"; };
 		ACB30A3F2111BDAE00524F9D /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
 		ACB30A422111BECB00524F9D /* FloorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorTableViewCell.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				AC0D1A4D20C976B9002E614B /* HarvardArtMuseumService.swift */,
+				ACB096F4216A246A0087297B /* HarvardRemoteImageService.swift */,
 				AC0D1A7220C98A4B002E614B /* Century */,
 				ACB30A4B2111C7A100524F9D /* Gallery */,
 				AC0D1A7320C98A51002E614B /* Objects */,
@@ -548,6 +551,7 @@
 				AC0D1A6B20C98074002E614B /* Group.swift in Sources */,
 				AC8A340B20ECBA93002E42D9 /* AppConfig.swift in Sources */,
 				AC0D1A6720C97CAC002E614B /* CenturyService.swift in Sources */,
+				ACB096F5216A246A0087297B /* HarvardRemoteImageService.swift in Sources */,
 				AC0D1A6420C97C58002E614B /* CenturyDetailViewController.swift in Sources */,
 				AC0D1A6D20C98994002E614B /* Object.swift in Sources */,
 				AC29159021123850002B757C /* PaginatedViewController.swift in Sources */,

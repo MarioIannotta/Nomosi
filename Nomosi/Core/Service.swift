@@ -277,7 +277,6 @@ open class Service<Response: ServiceResponse> {
                 self.failureCallback?(error)
             }
         }
-        // completionCallback?(response, error) causes a segmentation fault ¯\_(ツ)_/¯
         DispatchQueue.main.async {
             self.completionCallback?(response, error)
         }
