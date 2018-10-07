@@ -194,6 +194,7 @@
                                                                         <constraint firstAttribute="bottom" secondItem="Krf-uF-Z3d" secondAttribute="bottom" constant="2" id="0kF-Om-DxU"/>
                                                                         <constraint firstAttribute="trailing" secondItem="Krf-uF-Z3d" secondAttribute="trailing" constant="8" id="1db-ql-q2o"/>
                                                                         <constraint firstItem="Krf-uF-Z3d" firstAttribute="leading" secondItem="FH1-4T-yO1" secondAttribute="leading" constant="8" id="RIf-jB-ux7"/>
+                                                                        <constraint firstAttribute="height" constant="22" id="TeJ-gi-scZ"/>
                                                                         <constraint firstItem="Krf-uF-Z3d" firstAttribute="top" secondItem="FH1-4T-yO1" secondAttribute="top" constant="2" id="ofC-fS-teT"/>
                                                                     </constraints>
                                                                 </view>
@@ -213,13 +214,11 @@
                                                                         <constraint firstItem="bFt-3P-vwd" firstAttribute="top" secondItem="E57-F5-iZ4" secondAttribute="top" constant="2" id="EoB-my-gA1"/>
                                                                         <constraint firstAttribute="trailing" secondItem="bFt-3P-vwd" secondAttribute="trailing" constant="8" id="gN6-IF-9do"/>
                                                                         <constraint firstAttribute="bottom" secondItem="bFt-3P-vwd" secondAttribute="bottom" constant="2" id="o9T-DR-UaN"/>
+                                                                        <constraint firstAttribute="height" constant="22" id="okj-cX-7sJ"/>
                                                                         <constraint firstItem="bFt-3P-vwd" firstAttribute="leading" secondItem="E57-F5-iZ4" secondAttribute="leading" constant="8" id="uv5-mZ-YUW"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="48" id="J1V-8W-Ana"/>
-                                                            </constraints>
                                                         </stackView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
