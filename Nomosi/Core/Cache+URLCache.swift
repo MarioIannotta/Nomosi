@@ -30,7 +30,7 @@ extension URLCache: Cache {
             else {
                 completion(nil)
                 return
-        }
+            }
         
         let date = Date()
         if expiringDate < date {

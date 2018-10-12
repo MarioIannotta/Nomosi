@@ -94,6 +94,7 @@ Nomosi is available under the MIT license. See the LICENSE file for more info.
 
 * [ ] Upload requests
 * [ ] Add a way to mock services
+* [ ] Document all the public stuff
 * [x] Providing a generic interface for the cache so it's possible to use any storage layer by implementing just the methods loadIfNeeded and storeIfNeeded
 * [x] UIImageView.Placeholder doesn't seems to work fine with cell reuse 
 * [x] Add status bar activity indicator
