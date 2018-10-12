@@ -142,12 +142,12 @@
 			isa = PBXGroup;
 			children = (
 				ACF96D9C20BDB8C700FA5934 /* .swiftlint.yml */,
-				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for Nomosi */,
-				607FACE81AFB9204008FA782 /* Tests */,
-				607FACD11AFB9204008FA782 /* Products */,
-				1046E4B8D982129F3EEF1FDC /* Pods */,
 				83741B4B76223D25533DC016 /* Frameworks */,
+				1046E4B8D982129F3EEF1FDC /* Pods */,
+				607FACF51AFB993E008FA782 /* Podspec Metadata */,
+				607FACD11AFB9204008FA782 /* Products */,
+				607FACE81AFB9204008FA782 /* Tests */,
 			);
 			sourceTree = "<group>";
 		};

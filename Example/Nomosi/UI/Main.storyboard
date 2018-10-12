@@ -220,14 +220,27 @@
                                                                 </view>
                                                             </subviews>
                                                         </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNf-4w-vMQ" customClass="ServiceObserverButton" customModule="Nomosi">
+                                                            <rect key="frame" x="73" y="169" width="76" height="31"/>
+                                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <inset key="contentEdgeInsets" minX="10" minY="8" maxX="10" maxY="8"/>
+                                                            <state key="normal" title="Download"/>
+                                                            <connections>
+                                                                <action selector="downloadButtonTapped" destination="YlO-1o-Gg6" eventType="touchUpInside" id="cDS-5j-bcq"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailingMargin" secondItem="j3H-x9-f2w" secondAttribute="trailing" constant="5" id="6Ei-wn-Tv9"/>
                                                         <constraint firstItem="zrq-wz-Sgc" firstAttribute="top" secondItem="j3H-x9-f2w" secondAttribute="bottom" constant="10" id="FSD-jX-ab1"/>
+                                                        <constraint firstItem="j3H-x9-f2w" firstAttribute="bottom" secondItem="uNf-4w-vMQ" secondAttribute="bottom" constant="5" id="HQF-J4-Xpf"/>
                                                         <constraint firstItem="zrq-wz-Sgc" firstAttribute="leading" secondItem="iGv-Bq-9Ev" secondAttribute="leadingMargin" constant="5" id="HbT-qL-P4d"/>
                                                         <constraint firstItem="j3H-x9-f2w" firstAttribute="leading" secondItem="iGv-Bq-9Ev" secondAttribute="leadingMargin" constant="5" id="J75-5d-1sx"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="DJV-ZA-nuv" secondAttribute="trailing" constant="5" id="Jta-0q-BAK"/>
+                                                        <constraint firstItem="j3H-x9-f2w" firstAttribute="trailing" secondItem="uNf-4w-vMQ" secondAttribute="trailing" constant="5" id="VCH-2R-PE9"/>
                                                         <constraint firstItem="DJV-ZA-nuv" firstAttribute="top" secondItem="iGv-Bq-9Ev" secondAttribute="topMargin" constant="5" id="Zcp-wc-k8S"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="zrq-wz-Sgc" secondAttribute="bottom" constant="5" id="a7t-JL-hpv"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="zrq-wz-Sgc" secondAttribute="trailing" constant="5" id="dZa-8E-tac"/>
@@ -250,6 +263,7 @@
                                             <outlet property="classificationContainerView" destination="E57-F5-iZ4" id="vch-qe-zZs"/>
                                             <outlet property="classificationLabel" destination="bFt-3P-vwd" id="8Ay-8T-UBo"/>
                                             <outlet property="containerView" destination="iGv-Bq-9Ev" id="NTh-tr-mkx"/>
+                                            <outlet property="downloadButton" destination="uNf-4w-vMQ" id="olb-Q3-vTG"/>
                                             <outlet property="previewImageView" destination="j3H-x9-f2w" id="8Gk-xc-zC8"/>
                                             <outlet property="titleLabel" destination="DJV-ZA-nuv" id="zaU-b0-Yxk"/>
                                         </connections>

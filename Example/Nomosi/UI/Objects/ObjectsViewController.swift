@@ -22,6 +22,7 @@ class ObjectsViewController: PaginatedViewController {
     }
     
     private var config = Config()
+    private var downloadedImagesObjectID: [Int?] = []
     
     // MARK: - Injectable properties
     
@@ -84,6 +85,24 @@ class ObjectsViewController: PaginatedViewController {
         currentService = service
     }
     
+    private func downloadObjectPrimaryPhoto(object: Object, serviceObserver: ServiceObserver) {
+        guard
+            let imageLink = object.primaryimageurl
+            else { return }
+        HarvardRemoteImageService(link: imageLink)
+            .addingObserver(serviceObserver)
+            .load()?
+            .onSuccess { [weak self] image in
+                self?.downloadedImagesObjectID.append(object.objectid)
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }
+            .onFailure { [weak self] error in
+                let alertController = UIAlertController(title: "Error", message: error.description, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self?.present(alertController, animated: true, completion: nil)
+            }
+    }
+    
     // MARK: - IBActions
     
     @IBAction private func cancelRequest() {
@@ -112,7 +131,13 @@ extension ObjectsViewController: UICollectionViewDataSource, UICollectionViewDel
             else {
                 return UICollectionViewCell()
             }
-        cell.configure(object: objects[indexPath.item])
+        let viewModel = ObjectCollectionViewCellViewModel(
+            object: objects[indexPath.item],
+            onDownloadButtonTapped: { [weak self] object, serviceObserver in
+                self?.downloadObjectPrimaryPhoto(object: object, serviceObserver: serviceObserver)
+            },
+            isImageDownloaded: downloadedImagesObjectID.contains(objects[indexPath.item].objectid))
+        cell.configure(viewModel: viewModel)
         return cell
     }
     

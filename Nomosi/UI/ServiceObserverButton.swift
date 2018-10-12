@@ -10,14 +10,15 @@ import UIKit
 
 open class ServiceObserverButton: UIButton {
     
-    typealias LoadingActionClosure = (_ button: UIButton) -> Void
+    public typealias LoadingActionClosure = (_ button: UIButton) -> Void
     
-    enum LoadingAction: Equatable {
+    public enum LoadingAction: Equatable {
         
         case showLoader(animated: Bool)
         case disableUserInteraction
         case hideContent(animated: Bool)
         case resize(newSize: CGSize, animated: Bool)
+        case onCompletion(onSuccess: LoadingActionClosure?, onFailure: LoadingActionClosure?)
         case custom(id: Int, perform: LoadingActionClosure, unwind: LoadingActionClosure)
         
         private var id: Int {
@@ -30,6 +31,8 @@ open class ServiceObserverButton: UIButton {
                 return 3
             case .resize:
                 return 4
+            case .onCompletion:
+                return 5
             case .custom(let id, _, _):
                 return id
             }
@@ -37,8 +40,8 @@ open class ServiceObserverButton: UIButton {
         
         // MARK: - Equatable
         
-        static func == (lhs: ServiceObserverButton.LoadingAction,
-                        rhs: ServiceObserverButton.LoadingAction) -> Bool {
+        public static func == (lhs: ServiceObserverButton.LoadingAction,
+                               rhs: ServiceObserverButton.LoadingAction) -> Bool {
             return lhs.id == rhs.id
         }
         
@@ -57,7 +60,7 @@ open class ServiceObserverButton: UIButton {
     private var loadingActions: [LoadingAction] = [.showLoader(animated: true),
                                                    .disableUserInteraction]
     
-    func setLoadingActions(_ loadingActions: LoadingAction...) {
+    public func setLoadingActions(_ loadingActions: LoadingAction...) {
         self.loadingActions = loadingActions
     }
     
@@ -73,6 +76,8 @@ open class ServiceObserverButton: UIButton {
             setNewSize(newSize, animated: animated)
         case .custom(_, let performClosure, _):
             performClosure(self)
+        default:
+            break
         }
     }
     
@@ -88,6 +93,8 @@ open class ServiceObserverButton: UIButton {
             setNewSize(nil, animated: animated)
         case .custom(_, _, let unwindClosure):
             unwindClosure(self)
+        default:
+            break
         }
     }
     
@@ -171,8 +178,18 @@ extension ServiceObserverButton: ServiceObserver {
     
     public func serviceDidEndRequest(_ service: AnyService) {
         DispatchQueue.main.async { [weak self] in
-            self?.loadingActions.forEach {
-                self?.unwindLoadingAction($0)
+            guard
+                let `self` = self
+                else { return }
+            self.loadingActions.forEach {
+                self.unwindLoadingAction($0)
+                if case .onCompletion(let onSuccess, let onFailure) = $0 {
+                    if service.lastError == nil {
+                        onSuccess?(self)
+                    } else {
+                        onFailure?(self)
+                    }
+                }
             }
         }
     }
