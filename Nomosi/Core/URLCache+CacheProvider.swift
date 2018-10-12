@@ -1,5 +1,5 @@
 //
-//  Cache+URLCache.swift
+//  URLCache+CacheProvider.swift
 //  Nomosi
 //
 //  Created by Mario on 07/10/2018.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-extension URLCache: Cache {
+extension URLCache: CacheProvider {
     
     private struct Keys {
-        fileprivate static let expiringDateKey = "Nomosi.Service.Cache.expiringDate"
+        fileprivate static let expiringDateKey = "Nomosi.Service.CacheProvider.expiringDate"
     }
     
     public func removeAllCachedResponses(before date: Date) {

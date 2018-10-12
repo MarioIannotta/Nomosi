@@ -22,3 +22,5 @@ public extension ServiceResponse where Self: Decodable {
     }
     
 }
+
+extension Array: ServiceResponse where Element: Decodable { }

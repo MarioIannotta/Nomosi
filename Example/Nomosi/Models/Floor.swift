@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Floor {
+struct Floor: Decodable {
     
     let name: String
     let id: Int

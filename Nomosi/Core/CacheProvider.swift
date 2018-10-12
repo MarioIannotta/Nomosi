@@ -1,5 +1,5 @@
 //
-//  Cache.swift
+//  CacheProvider.swift
 //  Nomosi
 //
 //  Created by Mario on 13/05/2018.
@@ -14,7 +14,7 @@ public enum CachePolicy {
     case onDisk(timeout: TimeInterval)
 }
 
-public protocol Cache {
+public protocol CacheProvider {
     
     func removeAllCachedResponses(before date: Date)
     

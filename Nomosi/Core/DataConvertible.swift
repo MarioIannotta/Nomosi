@@ -28,3 +28,10 @@ extension Array: DataConvertible {
     }
     
 }
+
+extension String: DataConvertible {
+    
+    public var asData: Data? {
+        return data(using: .utf8)
+    }
+}

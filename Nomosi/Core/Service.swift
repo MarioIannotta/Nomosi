@@ -23,10 +23,11 @@ open class Service<Response: ServiceResponse> {
     public var headers: [String: String] = [:]
     public var log: Log = .minimal
     public var timeoutInterval: TimeInterval = 60
-    public var cache: Cache = URLCache.shared
+    public var cacheProvider: CacheProvider = URLCache.shared
     public var cachePolicy: CachePolicy = .none
     public var queue: DispatchQueue = .main
     public var validStatusCodes: Range<Int>? = 200..<300
+    public var mockProvider: MockProvider?
     
     public private (set) var latestResponse: Response?
     public private (set) var latestError: ServiceError?
@@ -128,6 +129,12 @@ open class Service<Response: ServiceResponse> {
         log.print(bodyDescription, requiredLevel: .verbose)
         serviceObservers.forEach { $0.serviceWillStartRequest(self) }
         
+        if let mockedData = getMockedDataIfNeeded() {
+            log.print("🎭 \(self): getting mocked data")
+            parseDataAndCompleteRequest(data: mockedData)
+            return self
+        }
+        
         guard
             let request = makeRequest()
             else {
@@ -177,8 +184,16 @@ open class Service<Response: ServiceResponse> {
         return self
     }
     
+    private func getMockedDataIfNeeded() -> Data? {
+        guard
+            let mockProvider = mockProvider,
+            mockProvider.isMockEnabled
+            else { return nil }
+        return mockProvider.mockedData.asData
+    }
+    
     private func loadFromCacheIfNeeded(request: URLRequest) {
-        cache.loadIfNeeded(request: request, cachePolicy: self.cachePolicy) { [weak self] data in
+        cacheProvider.loadIfNeeded(request: request, cachePolicy: self.cachePolicy) { [weak self] data in
             guard
                 let `self` = self
                 else { return }
@@ -238,11 +253,11 @@ open class Service<Response: ServiceResponse> {
                 else {
                     self.completeRequest(response: nil, error: .emptyResponse)
                     return
-                }
-            let hasResponseBeenCached = self.cache.storeIfNeeded(request: request,
-                                                                 response: response,
-                                                                 data: data,
-                                                                 cachePolicy: self.cachePolicy)
+            }
+            let hasResponseBeenCached = self.cacheProvider.storeIfNeeded(request: request,
+                                                                         response: response,
+                                                                         data: data,
+                                                                         cachePolicy: self.cachePolicy)
             if hasResponseBeenCached {
                 self.log.print("📦 \(self): storing response in cache with policy \(self.cachePolicy)")
             }

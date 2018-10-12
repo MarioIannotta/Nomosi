@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Nomosi
 
 class FloorsViewController: UIViewController {
     
     // MARK: - IBOutlets
     
     @IBOutlet private weak var tableView: UITableView!
+    
+    private var serviceOverlayView: ServiceOverlayView!
     
     // MARK: - Model
     
@@ -22,13 +25,19 @@ class FloorsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupModel()
+        serviceOverlayView = ServiceOverlayView(cover: view, keepOnError: true)
+        loadData()
     }
     
-    private func setupModel() {
-        for i in 0..<6 {
-            floors.append(Floor(name: "Floor \(i)", id: i))
-        }
+    private func loadData() {
+        let service = FloorsService()
+        service
+            .addingObserver(serviceOverlayView)
+            .load()?
+            .onSuccess { [weak self] floors in
+                self?.floors = floors
+                self?.tableView.reloadData()
+            }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
