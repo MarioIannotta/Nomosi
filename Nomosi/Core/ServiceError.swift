@@ -15,13 +15,10 @@ public struct ServiceError: Error, Equatable {
         if let statusCode = statusCode {
             statusCodeDescription = String(statusCode)
         }
-        return ServiceError(code: 8, reason: "The status code \(statusCodeDescription) is invalid")
+        return ServiceError(code: 7, reason: "The status code \(statusCodeDescription) is invalid")
     }
-    public static var redundantRequest = ServiceError(code: 7, reason: "The same request is already running")
-    public static var requestCancelled = ServiceError(code: 6, reason: "The request has been cancelled")
-    public static var shouldLoadServiceEvaluatedToFalse = ServiceError(
-        code: 5,
-        reason: "Should load service callback evaluated to false")
+    public static var redundantRequest = ServiceError(code: 6, reason: "The same request is already running")
+    public static var requestCancelled = ServiceError(code: 5, reason: "The request has been cancelled")
     public static var invalidRequest = ServiceError(code: 4, reason: "The request is not valid")
     public static var emptyResponse = ServiceError(code: 3, reason: "Empty response")
     public static func cannotParseResponse(error: Error) -> ServiceError {

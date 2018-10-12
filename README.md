@@ -48,10 +48,11 @@ class AService<AServiceResponse>: Service<Response> {
         basePath = "https://api.aBackend.com/v1/resources/1234"
         cachePolicy = .inRam(timeout: 60*5)
         log = .minimal
-        shouldLoadService { [weak self] completion in
+        decotateRequest { [weak self] completion in
             // here you can decorate the request as you wish,
             // for example you can place here the token refresh logic
-            completion(true)
+            // it is possible to pass a ServiceError to the completion block or nil
+            completion(nil)
         }
     }
 

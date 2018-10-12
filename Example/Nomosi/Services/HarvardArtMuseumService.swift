@@ -37,11 +37,11 @@ class HarvardArtMuseumService<Response: ServiceResponse>: Service<Response> {
         log = AppConfig.logLevel
         addingObserver(NetworkActivityIndicatorHandler())
         let oldAbsoluteURL = absoluteURL
-        shouldLoadService { [weak self] completion in
+        decotateRequest { [weak self] completion in
             self?.absoluteURL = AppConfig.isNetworkErrorActive ? URL(string: "http://www.marioiannotta.com") : oldAbsoluteURL
             let idleTimeInterval: TimeInterval = AppConfig.isNetworkRequestDelayEnabled ? 3 : 0
             DispatchQueue.main.asyncAfter(deadline: .now() + idleTimeInterval) {
-                completion(true)
+                completion(nil)
             }
         }
     }

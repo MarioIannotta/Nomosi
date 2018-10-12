@@ -13,7 +13,7 @@ open class Service<Response: ServiceResponse> {
     public typealias CompletionCallback = (_ response: Response?, _ error: ServiceError?) -> Void
     public typealias SuccessCallback = (_ response: Response) -> Void
     public typealias FailureCallback = (_ error: ServiceError) -> Void
-    public typealias ShouldLoadServiceCallback = (@escaping (_ shouldLoadService: Bool) -> Void) -> Void
+    public typealias DecorateRequestCallback = (@escaping (_ error: ServiceError?) -> Void) -> Void
     
     public var method: Method = .get
     public var absoluteURL: URL?
@@ -49,7 +49,7 @@ open class Service<Response: ServiceResponse> {
     private var completionCallback: CompletionCallback?
     private var successCallback: SuccessCallback?
     private var failureCallback: FailureCallback?
-    private var shouldLoadServiceCallback: ShouldLoadServiceCallback?
+    private var decorateRequestCallback: DecorateRequestCallback?
     private var hasBeenCancelled = false
     private var serviceObservers = [ServiceObserver]()
     
@@ -74,8 +74,8 @@ open class Service<Response: ServiceResponse> {
     }
     
     @discardableResult
-    public func shouldLoadService(_ callback: @escaping ShouldLoadServiceCallback) -> Self {
-        shouldLoadServiceCallback = callback
+    public func decotateRequest(_ callback: @escaping DecorateRequestCallback) -> Self {
+        decorateRequestCallback = callback
         return self
     }
     
@@ -96,7 +96,7 @@ open class Service<Response: ServiceResponse> {
             .load()
             .addingObserver(anObserve)
             .addingObserver(anotherObserver)
-            .shouldLoadService { completion in
+            .decotateRequest { completion in
                 completion(something)
             }
             .onSuccess {
@@ -142,17 +142,15 @@ open class Service<Response: ServiceResponse> {
                 return nil
             }
         
-        let shouldLoadServiceCallback = self.shouldLoadServiceCallback ?? { completion in completion(true) }
-        shouldLoadServiceCallback { shouldLoadService in
-            guard
-                shouldLoadService
-                else {
-                    self.completeRequest(response: nil, error: .shouldLoadServiceEvaluatedToFalse)
-                    return
-                }
+        let decorateRequestCallback = self.decorateRequestCallback ?? { completion in completion(nil) }
+        decorateRequestCallback { error in
+            if let error = error {
+                self.completeRequest(response: nil, error: error)
+                return
+            }
             
             /*
-             If the request has been cancelled while evaluating the closure `shouldLoadServiceCallback`,
+             If the request has been cancelled while evaluating the closure `decorateRequestCallback`,
              `hasBeenCancelled` would be true, in that case we should not even start the network request
              */
             guard
@@ -164,7 +162,7 @@ open class Service<Response: ServiceResponse> {
             
             /*
              the URLRequest needs to be refreshed since it's possible to change
-             url, headers etc in shouldLoadServiceCallback
+             url, headers etc in decorateRequestCallback
              */
             guard
                 let request = self.makeRequest()
