@@ -7,11 +7,42 @@
 //
 
 import UIKit
-import Nomosi
 
-class ServiceObserverButton: UIButton {
+open class ServiceObserverButton: UIButton {
     
     typealias LoadingActionClosure = (_ button: UIButton) -> Void
+    
+    enum LoadingAction: Equatable {
+        
+        case showLoader(animated: Bool)
+        case disableUserInteraction
+        case hideContent(animated: Bool)
+        case resize(newSize: CGSize, animated: Bool)
+        case custom(id: Int, perform: LoadingActionClosure, unwind: LoadingActionClosure)
+        
+        private var id: Int {
+            switch self {
+            case .showLoader:
+                return 1
+            case .disableUserInteraction:
+                return 2
+            case .hideContent:
+                return 3
+            case .resize:
+                return 4
+            case .custom(let id, _, _):
+                return id
+            }
+        }
+        
+        // MARK: - Equatable
+        
+        static func == (lhs: ServiceObserverButton.LoadingAction,
+                        rhs: ServiceObserverButton.LoadingAction) -> Bool {
+            return lhs.id == rhs.id
+        }
+        
+    }
     
     private lazy var activityIndicatorView: UIActivityIndicatorView = {
         let activityIndicatorView = UIActivityIndicatorView(style: .white)
@@ -20,38 +51,11 @@ class ServiceObserverButton: UIButton {
         return activityIndicatorView
     }()
     
-    enum LoadingAction: Hashable {
-        
-        case showLoader(animated: Bool)
-        case disableUserInteraction
-        case hideContent(animated: Bool)
-        case resize(newSize: CGSize, animated: Bool)
-        case custom(perform: LoadingActionClosure, unwind: LoadingActionClosure)
-        
-        func hash(into hasher: inout Hasher) {
-            switch self {
-            case .showLoader:
-                hasher.combine(1)
-            case .disableUserInteraction:
-                hasher.combine(2)
-            case .hideContent:
-                hasher.combine(3)
-            case .resize:
-                hasher.combine(4)
-            case .custom:
-                hasher.combine(5)
-            }
-        }
-        
-        static func == (lhs: ServiceObserverButton.LoadingAction,
-                        rhs: ServiceObserverButton.LoadingAction) -> Bool {
-            return lhs.hashValue == rhs.hashValue
-        }
-    }
+    private var oldConstraints = [NSLayoutConstraint: CGFloat]()
+    private var newSizeConstraints = [NSLayoutConstraint]()
     
     private var loadingActions: [LoadingAction] = [.showLoader(animated: true),
-                                                   .disableUserInteraction,
-                                                   .hideContent(animated: false)]
+                                                   .disableUserInteraction]
     
     func setLoadingActions(_ loadingActions: LoadingAction...) {
         self.loadingActions = loadingActions
@@ -67,7 +71,7 @@ class ServiceObserverButton: UIButton {
             setContent(alpha: 0, animated: animated)
         case .resize(let newSize, let animated):
             setNewSize(newSize, animated: animated)
-        case .custom(let performClosure, _):
+        case .custom(_, let performClosure, _):
             performClosure(self)
         }
     }
@@ -82,7 +86,7 @@ class ServiceObserverButton: UIButton {
             setContent(alpha: 1, animated: animated)
         case .resize(_, let animated):
             setNewSize(nil, animated: animated)
-        case .custom(_, let unwindClosure):
+        case .custom(_, _, let unwindClosure):
             unwindClosure(self)
         }
     }
@@ -111,13 +115,12 @@ class ServiceObserverButton: UIButton {
         if loadingActions.contains(.hideContent(animated: true)) {
             constraints += [activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor)]
         } else if let contentView = titleLabel ?? imageView {
-            constraints += [contentView.leadingAnchor.constraint(equalTo: activityIndicatorView.trailingAnchor, constant: 10)]
+            constraints += [contentView.leadingAnchor.constraint(equalTo: activityIndicatorView.trailingAnchor,
+                                                                 constant: 10)]
         }
         NSLayoutConstraint.activate(constraints)
         layoutIfNeeded()
     }
-    
-    private var newSizeConstraints = [NSLayoutConstraint]()
     
     private func setNewSize(_ newSize: CGSize?, animated: Bool) {
         defer {
@@ -127,6 +130,13 @@ class ServiceObserverButton: UIButton {
         }
         if newSize == nil {
             NSLayoutConstraint.deactivate(newSizeConstraints)
+            oldConstraints.forEach {
+                $0.key.constant = $0.value
+            }
+        } else {
+            constraints.forEach {
+                oldConstraints[$0] = $0.constant
+            }
         }
         guard
             let newSize = newSize
@@ -151,7 +161,7 @@ class ServiceObserverButton: UIButton {
 
 extension ServiceObserverButton: ServiceObserver {
     
-    func serviceWillStartRequest(_ service: AnyService) {
+    public func serviceWillStartRequest(_ service: AnyService) {
         DispatchQueue.main.async { [weak self] in
             self?.loadingActions.forEach {
                 self?.performLoadingAction($0)
@@ -159,7 +169,7 @@ extension ServiceObserverButton: ServiceObserver {
         }
     }
     
-    func serviceDidEndRequest(_ service: AnyService) {
+    public func serviceDidEndRequest(_ service: AnyService) {
         DispatchQueue.main.async { [weak self] in
             self?.loadingActions.forEach {
                 self?.unwindLoadingAction($0)

@@ -41,6 +41,7 @@
 		981D26B93B9745E10DE8DD8740E09B1C /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF855337A4358E9904967BB3D10E7FE /* ServiceError.swift */; };
 		9B010674E45D1AD5E326EC7810D93578 /* RequestQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D620E5342AD3F76E0ED439AE15C7C /* RequestQueue.swift */; };
 		A61F9991CB7DD1EF83B27B363C2E7945 /* Pods-Nomosi_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A387FA419B824C627FBBBB83A3F6795 /* Pods-Nomosi_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACE1D791216CBDBE00DF822E /* ServiceObserverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE1D790216CBDBE00DF822E /* ServiceObserverButton.swift */; };
 		ACEE7C50216A607C0027F54B /* Cache+URLCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7C4F216A607C0027F54B /* Cache+URLCache.swift */; };
 		B782E9D39C9EF14AE910202C180A20B4 /* Pods-Nomosi_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A01156CD7777798129E94EBF9B4AD5C8 /* Pods-Nomosi_Tests-dummy.m */; };
 		BA0C485D19A2F12A3167C17C3339405C /* SequentialLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E903F43CE8C4F1E33AB0362BF19676 /* SequentialLoader.swift */; };
@@ -106,6 +107,7 @@
 		9D4E08BE224709F98C79EC79DA85BB7C /* Pods_Nomosi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomosi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FB379544F6CB4E20849111A38BF1551 /* UIView+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		A01156CD7777798129E94EBF9B4AD5C8 /* Pods-Nomosi_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Nomosi_Tests-dummy.m"; sourceTree = "<group>"; };
+		ACE1D790216CBDBE00DF822E /* ServiceObserverButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceObserverButton.swift; path = Nomosi/UI/ServiceObserverButton.swift; sourceTree = "<group>"; };
 		ACEE7C4F216A607C0027F54B /* Cache+URLCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Cache+URLCache.swift"; path = "Nomosi/Core/Cache+URLCache.swift"; sourceTree = "<group>"; };
 		B26A9C7BCC0721DFC8BB504F9F1A21F8 /* Pods-Nomosi_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Nomosi_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		B3E903F43CE8C4F1E33AB0362BF19676 /* SequentialLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SequentialLoader.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				496328C7D1CDE33C41284E67C110AB6B /* NetworkActivityIndicatorHandler.swift */,
 				6C48EB9D9E756121C4654B3ED572AFE9 /* RemoteImageService.swift */,
 				5E176DA5C95770E35A7C8C490B8F8F86 /* RemoteImageServiceOverlayView.swift */,
+				ACE1D790216CBDBE00DF822E /* ServiceObserverButton.swift */,
 				B5200D85A8CC79D1021CD4CAFD3F35C4 /* ServiceOverlayView.swift */,
 				5E4F7396375D95735B8B4515CC19E76A /* Extensions */,
 			);
@@ -513,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA1976FB468CBD324C94C0A7444F6EE9 /* AnyService.swift in Sources */,
+				ACE1D791216CBDBE00DF822E /* ServiceObserverButton.swift in Sources */,
 				5386A6469BE73429E9BFF69C89D642B2 /* Cache.swift in Sources */,
 				86E812170A8FBA5CD9C9F8F3014501D3 /* ConcurrentLoader.swift in Sources */,
 				46ED9D28F5E6EFAD7DEDC51AC5AAB0DE /* DataConvertible.swift in Sources */,

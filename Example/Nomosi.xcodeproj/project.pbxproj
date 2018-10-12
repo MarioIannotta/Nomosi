@@ -10,7 +10,6 @@
 		4D9A4398E72024AC4C86CE15 /* Pods_Nomosi_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E8319CF1C05F007C895A47 /* Pods_Nomosi_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		AC0687D3216A6ACB00248809 /* ServiceObserverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0687D2216A6ACB00248809 /* ServiceObserverButton.swift */; };
 		AC0D1A5820C976B9002E614B /* HarvardArtMuseumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A4D20C976B9002E614B /* HarvardArtMuseumService.swift */; };
 		AC0D1A5920C976B9002E614B /* CenturiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A4E20C976B9002E614B /* CenturiesService.swift */; };
 		AC0D1A5A20C976B9002E614B /* CenturiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D1A5020C976B9002E614B /* CenturiesViewController.swift */; };
@@ -66,7 +65,6 @@
 		607FACE51AFB9204008FA782 /* Nomosi_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Nomosi_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		AC0687D2216A6ACB00248809 /* ServiceObserverButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceObserverButton.swift; sourceTree = "<group>"; };
 		AC0D1A4D20C976B9002E614B /* HarvardArtMuseumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarvardArtMuseumService.swift; sourceTree = "<group>"; };
 		AC0D1A4E20C976B9002E614B /* CenturiesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenturiesService.swift; sourceTree = "<group>"; };
 		AC0D1A5020C976B9002E614B /* CenturiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenturiesViewController.swift; sourceTree = "<group>"; };
@@ -336,7 +334,6 @@
 			isa = PBXGroup;
 			children = (
 				ACB30A3D2111BD1E00524F9D /* FloorsViewController.swift */,
-				AC0687D2216A6ACB00248809 /* ServiceObserverButton.swift */,
 				ACB30A422111BECB00524F9D /* FloorTableViewCell.swift */,
 				ACB30A452111BFF700524F9D /* GalleriesViewController.swift */,
 				ACC2DB9E2168C5ED00489B81 /* GalleryTableViewCell.swift */,
@@ -548,7 +545,6 @@
 				ACB30A402111BDAE00524F9D /* Floor.swift in Sources */,
 				AC0D1A7B20C98BCF002E614B /* ObjectCollectionViewCell.swift in Sources */,
 				ACB30A3E2111BD1E00524F9D /* FloorsViewController.swift in Sources */,
-				AC0687D3216A6ACB00248809 /* ServiceObserverButton.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				AC0D1A5F20C976B9002E614B /* Century.swift in Sources */,
 				ACB30A432111BECB00524F9D /* FloorTableViewCell.swift in Sources */,
