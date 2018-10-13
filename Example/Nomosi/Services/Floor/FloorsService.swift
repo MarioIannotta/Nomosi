@@ -14,20 +14,10 @@ class FloorsService: HarvardArtMuseumService<[Floor]> {
     
     init() {
         super.init(resource: "floors")
-        mockProvider = self
+        self.mockProvider = self
     }
     
 }
 
-extension FloorsService: MockProvider {
-    
-    var mockedData: DataConvertible {
-        var floors = [[String: AnyHashable]]()
-        Array(0..<6).forEach { (floorIndex: Int) in
-            floors.append(["name": "Floor \(floorIndex)", "id": floorIndex])
-        }
-        return floors
-    }
-    
-}
+extension FloorsService: MockProvider { }
 

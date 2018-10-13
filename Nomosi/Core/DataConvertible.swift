@@ -34,4 +34,13 @@ extension String: DataConvertible {
     public var asData: Data? {
         return data(using: .utf8)
     }
+    
+}
+
+extension URL: DataConvertible {
+    
+    public var asData: Data? {
+        return try? Data(contentsOf: self)
+    }
+    
 }

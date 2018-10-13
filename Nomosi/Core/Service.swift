@@ -189,7 +189,7 @@ open class Service<Response: ServiceResponse> {
             let mockProvider = mockProvider,
             mockProvider.isMockEnabled
             else { return nil }
-        return mockProvider.mockedData.asData
+        return mockProvider.mockedData?.asData
     }
     
     private func loadFromCacheIfNeeded(request: URLRequest) {

@@ -33,6 +33,7 @@
 		AC686C992170F0B900843368 /* FloorsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC686C982170F0B900843368 /* FloorsService.swift */; };
 		AC8A340B20ECBA93002E42D9 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A340A20ECBA93002E42D9 /* AppConfig.swift */; };
 		AC9B7ECA20D1CB7700E160FA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */; };
+		AC9CDBC52171DE640078A37F /* FloorsService.mock in Resources */ = {isa = PBXBuildFile; fileRef = AC9CDBC42171DE640078A37F /* FloorsService.mock */; };
 		ACB096F5216A246A0087297B /* HarvardRemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB096F4216A246A0087297B /* HarvardRemoteImageService.swift */; };
 		ACB30A3E2111BD1E00524F9D /* FloorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A3D2111BD1E00524F9D /* FloorsViewController.swift */; };
 		ACB30A402111BDAE00524F9D /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB30A3F2111BDAE00524F9D /* Floor.swift */; };
@@ -90,6 +91,7 @@
 		AC686C982170F0B900843368 /* FloorsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorsService.swift; sourceTree = "<group>"; };
 		AC8A340A20ECBA93002E42D9 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		AC9B7EC920D1CB7700E160FA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		AC9CDBC42171DE640078A37F /* FloorsService.mock */ = {isa = PBXFileReference; lastKnownFileType = text; path = FloorsService.mock; sourceTree = "<group>"; };
 		ACB096F4216A246A0087297B /* HarvardRemoteImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarvardRemoteImageService.swift; sourceTree = "<group>"; };
 		ACB30A3D2111BD1E00524F9D /* FloorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorsViewController.swift; sourceTree = "<group>"; };
 		ACB30A3F2111BDAE00524F9D /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				AC686C982170F0B900843368 /* FloorsService.swift */,
+				AC9CDBC42171DE640078A37F /* FloorsService.mock */,
 			);
 			path = Floor;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				AC0D1A5D20C976B9002E614B /* Images.xcassets in Resources */,
 				AC0D1A5C20C976B9002E614B /* LaunchScreen.xib in Resources */,
 				AC0D1A5B20C976B9002E614B /* Main.storyboard in Resources */,
+				AC9CDBC52171DE640078A37F /* FloorsService.mock in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
