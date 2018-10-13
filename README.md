@@ -20,9 +20,10 @@ Each service is indipendent and atomic making things like module-based app devel
 - Declarative functional syntax
 - Type-safe by design
 - Easy to decorate (eg: token refresh) and/or invalidate requests
-- Simple cache configuration with custom timeout
+- Straightforward cache configuration with the layer of your choice (URLCache by default) 
 - Discard invalid requests before performing them
 - Avoid redundant requests
+- Mock support
 - Makes simple to attach thirdy part components with `ServiceObserver`
 - Prebaked UI Components (by adding `Nomosi/UI`)
 
