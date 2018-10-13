@@ -1,9 +1,19 @@
 Pod::Spec.new do |s|
   s.name             = 'Nomosi'
   s.version          = '0.0.4'
-  s.summary          = 'Plug and play network services for your iOS app.'
+  s.summary          = 'Declarative plug and play network services for your iOS app.'
   s.description      = <<-DESC
-Plug and play network services for your iOS app.
+## Features
+
+* Declarative functional syntax
+* Type-safe by design
+* Easy to decorate (eg: token refresh) and/or invalidate requests
+* Straightforward cache configuration with the layer of your choice (URLCache by default)
+* Discard invalid requests before performing them
+* Avoid redundant requests
+* Mock support
+* Makes simple to attach thirdy part components with ServiceObserver
+* Prebaked UI Components (by adding Nomosi/UI)
                        DESC
   s.swift_version = '4.2'
   s.homepage         = 'https://github.com/MarioIannotta/Nomosi'
