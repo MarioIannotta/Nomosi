@@ -75,7 +75,7 @@ open class Service<Response: ServiceResponse> {
     }
     
     @discardableResult
-    public func decotateRequest(_ callback: @escaping DecorateRequestCallback) -> Self {
+    public func decorateRequest(_ callback: @escaping DecorateRequestCallback) -> Self {
         decorateRequestCallback = callback
         return self
     }
@@ -97,7 +97,7 @@ open class Service<Response: ServiceResponse> {
             .load()
             .addingObserver(anObserve)
             .addingObserver(anotherObserver)
-            .decotateRequest { completion in
+            .decorateRequest { completion in
                 completion(something)
             }
             .onSuccess {
