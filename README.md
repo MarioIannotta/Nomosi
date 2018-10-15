@@ -1,4 +1,4 @@
-![Nomosi](https://raw.githubusercontent.com/MarioIannotta/Nomosi/master/Resources/Nomosi.jpg)
+![Nomosi: Declarative plug and play network services for your iOS apps](https://raw.githubusercontent.com/MarioIannotta/Nomosi/develop/Resources/Nomosi.jpg)
 
 [![Version](https://img.shields.io/cocoapods/v/Nomosi.svg?style=flat)](https://cocoapods.org/pods/Nomosi)
 [![License](https://img.shields.io/cocoapods/l/Nomosi.svg?style=flat)](https://cocoapods.org/pods/Nomosi)
