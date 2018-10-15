@@ -124,9 +124,12 @@ open class Service<Response: ServiceResponse> {
     @discardableResult
     private func _load() -> Self? {
         hasBeenCancelled = false
-        log.print("⬆️ \(self)")
-        log.print(headersDescription, requiredLevel: .verbose)
-        log.print(bodyDescription, requiredLevel: .verbose)
+        // if the user has defined a decorateRequestCallback, let's log the request after the decorating
+        if self.decorateRequestCallback == nil {
+            printFullRequest()
+        } else {
+            log.print("⏱ \(self): decorating request...", requiredLevel: .verbose)
+        }
         serviceObservers.forEach { $0.serviceWillStartRequest(self) }
         
         if let mockedData = getMockedDataIfNeeded() {
@@ -151,6 +154,9 @@ open class Service<Response: ServiceResponse> {
         
         let decorateRequestCallback = self.decorateRequestCallback ?? { completion in completion(nil) }
         decorateRequestCallback { error in
+            if self.decorateRequestCallback != nil {
+                self.printFullRequest()
+            }
             if let error = error {
                 self.completeRequest(response: nil, error: error)
                 return
@@ -182,6 +188,12 @@ open class Service<Response: ServiceResponse> {
         }
         
         return self
+    }
+    
+    private func printFullRequest() {
+        log.print("⬆️ \(self)")
+        log.print(headersDescription, requiredLevel: .verbose)
+        log.print(bodyDescription, requiredLevel: .verbose)
     }
     
     private func getMockedDataIfNeeded() -> Data? {
