@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RequestsQueue {
+private class RequestsQueue {
     
     static private var onGoinRequests = [URLRequest]()
     
@@ -22,6 +22,22 @@ class RequestsQueue {
     
     static func isOnGoing(request: URLRequest) -> Bool {
         return onGoinRequests.index(of: request) != nil
+    }
+    
+}
+
+extension URLRequest {
+    
+    func begin() {
+        RequestsQueue.append(request: self)
+    }
+    
+    func resolve() {
+        RequestsQueue.resolve(request: self)
+    }
+    
+    var isOnGoing: Bool {
+        return RequestsQueue.isOnGoing(request: self)
     }
     
 }

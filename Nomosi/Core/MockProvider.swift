@@ -31,3 +31,15 @@ public extension MockProvider {
     }
     
 }
+
+extension Service {
+    
+    func getMockedDataIfNeeded() -> Data? {
+        guard
+            let mockProvider = mockProvider,
+            mockProvider.isMockEnabled
+            else { return nil }
+        return mockProvider.mockedData?.asData
+    }
+    
+}

@@ -19,6 +19,7 @@ open class Service<Response: ServiceResponse> {
     public var absoluteURL: URL?
     public var basePath: String?
     public var relativePath: String?
+    public var serviceType: ServiceType = .data
     public var body: DataConvertible?
     public var headers: [String: String] = [:]
     public var log: Log = .minimal
@@ -32,25 +33,12 @@ open class Service<Response: ServiceResponse> {
     public private (set) var latestResponse: Response?
     public private (set) var latestError: ServiceError?
     
-    private var url: URL? {
-        if let absoluteURL = absoluteURL {
-            return absoluteURL
-        } else if let basePath = basePath, !basePath.isEmpty {
-            if let relativePath = relativePath {
-                return URL(string: basePath+relativePath)
-            } else {
-                return URL(string: basePath)
-            }
-        }
-        return nil
-    }
-    
-    private var sessionDataTask: URLSessionDataTask?
-    
+    private var sessionTask: URLSessionTask?
     private var completionCallback: CompletionCallback?
     private var successCallback: SuccessCallback?
     private var failureCallback: FailureCallback?
     private var decorateRequestCallback: DecorateRequestCallback?
+    private var progressCallback: ProgressCallback?
     private var hasBeenCancelled = false
     private var serviceObservers = [ServiceObserver]()
     
@@ -77,6 +65,12 @@ open class Service<Response: ServiceResponse> {
     @discardableResult
     public func decorateRequest(_ callback: @escaping DecorateRequestCallback) -> Self {
         decorateRequestCallback = callback
+        return self
+    }
+    
+    @discardableResult
+    public func onProgress(_ callback: @escaping ProgressCallback) -> Self {
+        progressCallback = callback
         return self
     }
     
@@ -118,7 +112,7 @@ open class Service<Response: ServiceResponse> {
     
     public func cancel() {
         hasBeenCancelled = true
-        sessionDataTask?.cancel()
+        sessionTask?.cancel()
     }
 
     @discardableResult
@@ -146,7 +140,7 @@ open class Service<Response: ServiceResponse> {
             }
         
         guard
-            !RequestsQueue.isOnGoing(request: request)
+            !request.isOnGoing
             else {
                 completeRequest(response: nil, error: .redundantRequest)
                 return nil
@@ -196,14 +190,6 @@ open class Service<Response: ServiceResponse> {
         log.print(bodyDescription, requiredLevel: .verbose)
     }
     
-    private func getMockedDataIfNeeded() -> Data? {
-        guard
-            let mockProvider = mockProvider,
-            mockProvider.isMockEnabled
-            else { return nil }
-        return mockProvider.mockedData?.asData
-    }
-    
     private func loadFromCacheIfNeeded(request: URLRequest) {
         cacheProvider.loadIfNeeded(request: request, cachePolicy: self.cachePolicy) { [weak self] data in
             guard
@@ -213,69 +199,85 @@ open class Service<Response: ServiceResponse> {
                 self.log.print("📦 \(self): getting data from cache")
                 self.parseDataAndCompleteRequest(data: data)
             } else {
-                self.performDataTask(request: request)
+                self.performTask(request: request)
             }
         }
     }
     
-    private func makeRequest() -> URLRequest? {
-        guard
-            let url = url,
-            url.host != nil
-            else { return nil }
-        var request = URLRequest(url: url)
-        request.httpMethod = method.rawValue
-        var allHeaders = [String: String]()
-        headers.forEach { allHeaders[$0.key] = $0.value }
-        request.allHTTPHeaderFields = allHeaders
-        request.httpBody = body?.asData
-        request.timeoutInterval = timeoutInterval
-        return request
+    private func performTask(request: URLRequest) {
+        switch serviceType {
+        case .data:
+            performDataTask(request: request)
+        case .upload,
+             .uploadFile:
+            performUploadTask(request: request)
+        }
     }
     
     private func performDataTask(request: URLRequest) {
-        RequestsQueue.append(request: request)
-        sessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
-            RequestsQueue.resolve(request: request)
-            let _statusCode = (response as? HTTPURLResponse)?.statusCode
-            if
-                let validStatusCodes = self.validStatusCodes,
-                let statusCode = _statusCode,
-                !validStatusCodes.contains(statusCode)
-            {
-                self.completeRequest(response: nil, error: .invalidStatusCode(statusCode))
-                return
-            }
-            var statusCodeDescription = ""
-            if let _statusCode = _statusCode {
-                statusCodeDescription = String(_statusCode)
-            }
-            self.log.print("⬇️ [\(statusCodeDescription)] \(self) - \(data?.count ?? 0) bytes")
-            if let error = error {
-                if (error as NSError).code == NSURLErrorCancelled {
-                    self.completeRequest(response: nil, error: .requestCancelled)
-                } else {
-                    self.completeRequest(response: nil, error: ServiceError(networkError: error))
-                }
-                return
-            }
-            guard
-                let data = data,
-                let response = response
-                else {
-                    self.completeRequest(response: nil, error: .emptyResponse)
-                    return
-            }
-            let hasResponseBeenCached = self.cacheProvider.storeIfNeeded(request: request,
-                                                                         response: response,
-                                                                         data: data,
-                                                                         cachePolicy: self.cachePolicy)
-            if hasResponseBeenCached {
-                self.log.print("📦 \(self): storing response in cache with policy \(self.cachePolicy)")
-            }
-            self.parseDataAndCompleteRequest(data: data)
+        request.begin()
+        sessionTask = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            request.resolve()
+            self?.handleCompletedTask(data: data, response: response, error: error)
+            self?.cacheResponseIfNeeded(request: request, response: response, data: data)
         }
-        sessionDataTask?.resume()
+        sessionTask?.resume()
+    }
+    
+    private func performUploadTask(request: URLRequest) {
+        request.begin()
+        let uploadDelegate = UploadDelegate(
+            onProgress: progressCallback,
+            onCompletion: { data, response, error in
+                request.resolve()
+                self.handleCompletedTask(data: data, response: response, error: error)
+                self.cacheResponseIfNeeded(request: request, response: response, data: data)
+            })
+        let session = URLSession(configuration: URLSessionConfiguration.default,
+                                 delegate: uploadDelegate,
+                                 delegateQueue: OperationQueue())
+        switch serviceType {
+        case .upload(let content):
+            sessionTask = session.uploadTask(with: request, from: content.asData ?? Data())
+        case .uploadFile(let url):
+            sessionTask = session.uploadTask(with: request, fromFile: url)
+        default:
+            break
+        }
+        sessionTask?.resume()
+        session.finishTasksAndInvalidate()
+    }
+    
+    private func handleCompletedTask(data: Data?, response: URLResponse?, error: Error?) {
+        let _statusCode = (response as? HTTPURLResponse)?.statusCode
+        if
+            let validStatusCodes = self.validStatusCodes,
+            let statusCode = _statusCode,
+            !validStatusCodes.contains(statusCode)
+        {
+            self.completeRequest(response: nil, error: .invalidStatusCode(statusCode))
+            return
+        }
+        var statusCodeDescription = ""
+        if let _statusCode = _statusCode {
+            statusCodeDescription = String(_statusCode)
+        }
+        self.log.print("⬇️ [\(statusCodeDescription)] \(self) - \(data?.count ?? 0) bytes")
+        if let error = error {
+            if (error as NSError).code == NSURLErrorCancelled {
+                self.completeRequest(response: nil, error: .requestCancelled)
+            } else {
+                self.completeRequest(response: nil, error: ServiceError(networkError: error))
+            }
+            return
+        }
+        guard
+            let data = data
+            else {
+                self.completeRequest(response: nil, error: .emptyResponse)
+                return
+            }
+        self.parseDataAndCompleteRequest(data: data)
     }
     
     private func parseDataAndCompleteRequest(data: Data) {
@@ -306,65 +308,6 @@ open class Service<Response: ServiceResponse> {
         DispatchQueue.main.async {
             self.completionCallback?(response, error)
         }
-    }
-    
-}
-
-extension Service: CustomDebugStringConvertible {
-    
-    private var urlDebugDescription: String {
-        return """
-        (absoluteURL: \"\(absoluteURL?.absoluteString ?? "")\",
-        basePath: \"\(basePath ?? "")\",
-        reltivePath: \"\(relativePath ?? "")\")
-        """
-    }
-    
-    public var debugDescription: String {
-        let methodDescription = method.rawValue
-        let urlDescription = url?.absoluteString ?? "[INVALID URL: \(urlDebugDescription)]"
-        return "\(methodDescription): \(urlDescription)"
-    }
-    
-    public var headersDescription: String {
-        let headersDescription = headers.count > 0 ? headers.description : "Empty headers"
-        return "Headers: \(headersDescription)"
-    }
-    
-    public var bodyDescription: String {
-        var bodyDescription = "Empty body"
-        if let bodyData = body?.asData,
-            let bodyAsString = String(data: bodyData, encoding: .utf8),
-            bodyAsString.count > 0 {
-            bodyDescription = bodyAsString
-        }
-        return "Body: \(bodyDescription)"
-    }
-    
-}
-
-extension Service: Hashable {
-    
-    public var hashValue: Int {
-        return """
-            \(method.rawValue):
-            \(url?.absoluteString ?? "")
-            \(headers)
-            \(String(data: body?.asData ?? Data(), encoding: .utf8) ?? "")
-            """.hashValue
-    }
-    
-    public static func == (lhs: Service<Response>, rhs: Service<Response>) -> Bool {
-        return lhs.hashValue == rhs.hashValue
-    }
-    
-    public static func == (lhs: Service<Response>, rhs: AnyService) -> Bool {
-        let rhsAsService = rhs as? Service<Response>
-        return lhs == rhsAsService
-    }
-    
-    public static func == (lhs: AnyService, rhs: Service<Response>) -> Bool {
-        return rhs == lhs
     }
     
 }
