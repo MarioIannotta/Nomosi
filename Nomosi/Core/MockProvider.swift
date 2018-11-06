@@ -21,25 +21,18 @@ public extension MockProvider {
     }
     
     var mockedData: DataConvertible? {
-        let serviceName = String(describing: type(of: self))
         guard
-            let path = Bundle.main.path(forResource: serviceName, ofType: "mock")
+            isMockEnabled
             else {
                 return nil
-        }
-        return URL(fileURLWithPath: path)
-    }
-    
-}
-
-extension Service {
-    
-    func getMockedDataIfNeeded() -> Data? {
+            }
+        let mockProviderName = String(describing: type(of: self))
         guard
-            let mockProvider = mockProvider,
-            mockProvider.isMockEnabled
-            else { return nil }
-        return mockProvider.mockedData?.asData
+            let path = Bundle.main.path(forResource: mockProviderName, ofType: "mock")
+            else {
+                return nil
+            }
+        return URL(fileURLWithPath: path)
     }
     
 }
