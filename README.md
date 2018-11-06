@@ -10,30 +10,18 @@ Today every app is connected to some backend(s), usually that's achieved through
 
 In complex projects this approach could cause the network layer to be a massive and unmaintainable file with more than 20.000 LOC. Yes, that's a true story.
 
-## How
-
 The idea behind Nomosi is to breakdown the network layer into different *services* where every service represents a remote resource. 
 
 Each service is indipendent and atomic making things like module-based app development, client api versioning, working in large teams, testing and maintain the codebase a lot easier.
 
 ### Features
-- Declarative functional syntax
-- Type-safe by design
-- Easy to decorate (eg: token refresh) and/or invalidate requests
-- Straightforward cache configuration with the layer of your choice (URLCache by default) 
-- Discard invalid requests before performing them
-- Avoid redundant requests
-- Mock support
-- Makes simple to attach thirdy part components with `ServiceObserver`
-- Prebaked UI Components (by adding `Nomosi/UI`)
+<details>
+<summary>Declarative functional syntax</summary>
+<p>
 
-For an extensive overview about how all of that works, you can take a look at the [service flow chart](https://github.com/MarioIannotta/Nomosi/wiki/Service-flow-chart).
+The core object of Nomosi is a *Service*, declared as  `Service<Response: ServiceResponse>` aka a generic class where the placeholder `Response` conforms the protocol  `ServiceResponse`. 
 
-## What
-
-The core object of Nomosi is declared as  `Service<Response: ServiceResponse>`: a generic class where the placeholder `Response` conforms the protocol  `ServiceResponse`. 
-
-This protocol requires just one function `static func parse(data: Data) throws -> Self?` and it's already implemented for `Decodable` objects.
+In this way instead of having a singleton that handle tons of requests, you'll have different *services* and it's immediatly clear what you should expect from each service. 
 
 After setting the required properties (url, method, etc..), by calling the `load()` function a new request will be performed. It is also possible to chain multiple actions like `onSuccess`, `onFailure`, `addingObserver` in a fancy functional way.
 
@@ -77,6 +65,164 @@ AService()
     }
 }
 ```
+
+</p>
+</details>
+
+<details>
+<summary>Type-safe by design</summary>
+<p>
+
+Leveraging Swift's type system and latest features, with Nomosi you won't ever need to handle JSON and mixed data content directly. You can forget about third party libraries such as Marshal and SwiftyJSON.
+
+</p>
+</details>
+
+<details>
+<summary>Easy to decorate (eg: token refresh) and/or invalidate requests</summary>
+<p>
+
+Handling tokens and requests validation could be tricky. That's why the closure `decorateRequest` has been introduced.
+
+The closure is called just before the network task is started and, using the completion block, it's possible to invalidate or decorate the request that is about to be performed.
+
+Example:
+
+```swift
+class TokenProtectedService<ServiceResponse>: Service<Response> {
+
+    init() {
+        super.init()
+        basePath = "https://api.aBackend.com/v1/resources/1234"
+        decorateRequest { [weak self] completion in
+            AuthManager.shared.retrieveToken { token in
+                if let token = token {
+                    self?.headers["Authorization"] = token
+                    completion(nil)
+                } else {
+                    completion(ServiceError(code: 100, reason: "Unable to retrieve the token"))
+                }
+            }
+        }
+    }
+    
+}
+```
+
+</p>
+</details>
+
+<details>
+<summary>Straightforward cache configuration with the layer of your choice (URLCache by default) </summary>
+<p>
+
+Cache is handled with the protocol `CacheProvider`, that makes easy to use the persistent layer of you choice such as Realm or CoreData by implementing just three methods:
+```swift
+func removeAllCachedResponses(before date: Date)
+
+func loadIfNeeded(request: URLRequest, 
+                  cachePolicy: CachePolicy, 
+                  completion: ((_ data: Data?) -> Void))
+
+func storeIfNeeded(request: URLRequest, 
+                   response: URLResponse,
+                   data: Data, 
+                   cachePolicy: CachePolicy) -> Bool
+```
+
+`URLCache` already conforms `CacheProvider` so you can use cache without doing anything. 
+
+</p>
+</details>
+
+<details>
+<summary>Discard invalid or redundant requests </summary>
+<p>
+
+Nomosi ensure that every performed request is valid and unique.
+
+For exampe, if you call two time the `load()` method on the same service, only one request will be performed, you'll receive a *reduntant request* error for the second one. 
+
+</p>
+</details>
+
+<details>
+<summary>Mock support</summary>
+<p>
+
+Mock are handled with the protocol `MockProvider` defined as it follows:
+```swift
+protocol MockProvider {
+
+    var isMockEnabled: Bool { get }
+    var mockedData: DataConvertible? { get }
+
+}
+```
+
+By default mock are retieved by searching for files in the bundle named `ServiceName.mock`.
+
+Example
+
+```swift
+// UserService.swift
+class UserService<User>: Service<Response> {
+
+    init(userID: Int) {
+        super.init()
+        basePath = "https://api.aBackend.com/v1/users/\(userID)"
+    }
+
+}
+```
+
+```swift
+// User.swift
+struct User {
+    let name: String
+    let surname: String
+    let website: String
+}
+```
+
+```swift
+// UserService.mock
+{
+    "name": "Mario",
+    "surname": "Iannotta",
+    "website": "http://www.marioiannotta.com"
+}
+```
+
+</p>
+</details>
+
+<details>
+<summary>Develop and attach thirdy part components </summary>
+<p>
+
+Any class that conforms the protocol `ServiceObserver` can be notified when a request starts and ends; all ui components such as loader and fancy buttons are built using this protocol. 
+
+</p>
+</details>
+
+<details>
+<summary>Prebaked UI Components</summary>
+<p>
+
+Installing `Nomosi/UI` you can use different prebaked components, such as:
+- `NetworkActivityIndicatorHandler` to handle the network activity indicator in the status bar.
+- `RemoteImageService` to load, efficiently cache and display remote images in imageviews using custom loaders and placeholders.
+- `ServiceOverlayView` to handle loaders while performing requests and display any occurred errors alongside the retry button.
+- `ServiceObserverButton` to perform custom animations (resize, show loader, hide content etc...) on buttons while performing requests.
+
+</p>
+</details>
+
+<br/>
+
+For an extensive overview about how all of that works, you can take a look at the [service flow chart](https://github.com/MarioIannotta/Nomosi/wiki/Service-flow-chart).
+
 
 ## Installation
 
