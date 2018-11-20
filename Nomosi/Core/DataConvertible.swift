@@ -1,8 +1,9 @@
 //
 //  DataConvertible.swift
-//  KeychainSwift
+//  Nomosi
 //
 //  Created by Mario on 04/10/2018.
+//  Copyright © 2018 Mario. All rights reserved.
 //
 
 import Foundation
@@ -41,6 +42,15 @@ extension URL: DataConvertible {
     
     public var asData: Data? {
         return try? Data(contentsOf: self)
+    }
+    
+}
+
+extension DataConvertible where Self: Encodable {
+    
+    public var asData: Data? {
+        let jsonEncoder = JSONEncoder()
+        return try? jsonEncoder.encode(self)
     }
     
 }
