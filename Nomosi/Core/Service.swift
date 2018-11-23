@@ -218,8 +218,7 @@ open class Service<Response: ServiceResponse> {
         request.begin()
         sessionTask = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             request.resolve()
-            self?.handleCompletedTask(data: data, response: response, error: error)
-            self?.cacheResponseIfNeeded(request: request, response: response, data: data)
+            self?.handleCompletedTask(request: request, data: data, response: response, error: error)
         }
         sessionTask?.resume()
     }
@@ -230,8 +229,7 @@ open class Service<Response: ServiceResponse> {
             onProgress: progressCallback,
             onCompletion: { data, response, error in
                 request.resolve()
-                self.handleCompletedTask(data: data, response: response, error: error)
-                self.cacheResponseIfNeeded(request: request, response: response, data: data)
+                self.handleCompletedTask(request: request, data: data, response: response, error: error)
             })
         let session = URLSession(configuration: URLSessionConfiguration.default,
                                  delegate: uploadDelegate,
@@ -248,36 +246,37 @@ open class Service<Response: ServiceResponse> {
         session.finishTasksAndInvalidate()
     }
     
-    private func handleCompletedTask(data: Data?, response: URLResponse?, error: Error?) {
+    private func handleCompletedTask(request: URLRequest, data: Data?, response: URLResponse?, error: Error?) {
         let _statusCode = (response as? HTTPURLResponse)?.statusCode
         if
-            let validStatusCodes = self.validStatusCodes,
+            let validStatusCodes = validStatusCodes,
             let statusCode = _statusCode,
             !validStatusCodes.contains(statusCode)
         {
-            self.completeRequest(response: nil, error: .invalidStatusCode(statusCode))
+            completeRequest(response: nil, error: .invalidStatusCode(statusCode))
             return
         }
         var statusCodeDescription = ""
         if let _statusCode = _statusCode {
             statusCodeDescription = String(_statusCode)
         }
-        self.log.print("⬇️ [\(statusCodeDescription)] \(self) - \(data?.count ?? 0) bytes")
+        log.print("⬇️ [\(statusCodeDescription)] \(self) - \(data?.count ?? 0) bytes")
         if let error = error {
             if (error as NSError).code == NSURLErrorCancelled {
-                self.completeRequest(response: nil, error: .requestCancelled)
+                completeRequest(response: nil, error: .requestCancelled)
             } else {
-                self.completeRequest(response: nil, error: ServiceError(networkError: error))
+                completeRequest(response: nil, error: ServiceError(networkError: error))
             }
             return
         }
         guard
             let data = data
             else {
-                self.completeRequest(response: nil, error: .emptyResponse)
+                completeRequest(response: nil, error: .emptyResponse)
                 return
             }
-        self.parseDataAndCompleteRequest(data: data)
+        cacheResponseIfNeeded(request: request, response: response, data: data)
+        parseDataAndCompleteRequest(data: data)
     }
     
     private func parseDataAndCompleteRequest(data: Data) {
