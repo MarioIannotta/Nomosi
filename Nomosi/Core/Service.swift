@@ -126,7 +126,7 @@ open class Service<Response: ServiceResponse> {
         }
         serviceObservers.forEach { $0.serviceWillStartRequest(self) }
         
-        if let mockedData = mockProvider?.mockedData {
+        if let mockedData = mockProvider?.mockedData?.asData {
             log.print("🎭 \(self): getting mocked data")
             parseDataAndCompleteRequest(data: mockedData)
             return self
