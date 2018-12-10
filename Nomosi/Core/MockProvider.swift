@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol MockProvider {
+public protocol MockProvider: class {
     
     var isMockEnabled: Bool { get }
     var mockedData: DataConvertible? { get }

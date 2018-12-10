@@ -14,7 +14,7 @@ public enum CachePolicy {
     case onDisk(timeout: TimeInterval)
 }
 
-public protocol CacheProvider {
+public protocol CacheProvider: class {
     
     func removeAllCachedResponses(before date: Date)
     
@@ -37,10 +37,10 @@ extension Service {
         guard
             let response = response,
             let data = data,
-            cacheProvider.storeIfNeeded(request: request,
-                                        response: response,
-                                        data: data,
-                                        cachePolicy: self.cachePolicy)
+            cacheProvider?.storeIfNeeded(request: request,
+                                         response: response,
+                                         data: data,
+                                         cachePolicy: self.cachePolicy) == true
             else { return }
         log.print("📦 \(self): storing response in cache with policy \(self.cachePolicy)")
     }

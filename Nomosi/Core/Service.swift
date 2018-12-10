@@ -24,11 +24,11 @@ open class Service<Response: ServiceResponse> {
     public var headers: [String: String] = [:]
     public var log: Log = .minimal
     public var timeoutInterval: TimeInterval = 60
-    public var cacheProvider: CacheProvider = URLCache.shared
+    public weak var cacheProvider: CacheProvider? = URLCache.shared
     public var cachePolicy: CachePolicy = .none
     public var queue: DispatchQueue = .main
     public var validStatusCodes: Range<Int>? = 200..<300
-    public var mockProvider: MockProvider?
+    public weak var mockProvider: MockProvider?
     
     public private (set) var latestResponse: Response?
     public private (set) var latestError: ServiceError?
@@ -191,9 +191,15 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func loadFromCacheIfNeeded(request: URLRequest) {
+        guard
+            let cacheProvider = cacheProvider
+            else {
+                self.performTask(request: request)
+                return
+            }
         cacheProvider.loadIfNeeded(request: request, cachePolicy: self.cachePolicy) { [weak self] data in
             guard
-                let `self` = self
+                let self = self
                 else { return }
             if let data = data {
                 self.log.print("📦 \(self): getting data from cache")
@@ -216,9 +222,9 @@ open class Service<Response: ServiceResponse> {
     
     private func performDataTask(request: URLRequest) {
         request.begin()
-        sessionTask = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+        sessionTask = URLSession.shared.dataTask(with: request) { data, response, error in
             request.resolve()
-            self?.handleCompletedTask(request: request, data: data, response: response, error: error)
+            self.handleCompletedTask(request: request, data: data, response: response, error: error)
         }
         sessionTask?.resume()
     }

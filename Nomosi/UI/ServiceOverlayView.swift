@@ -10,7 +10,7 @@ import UIKit
 
 open class ServiceOverlayView: UIView {
     
-    private weak var viewToCover: UIView?
+    private var viewToCover: UIView?
     private var viewToConverObservation: NSKeyValueObservation?
     private var contentStackView = UIStackView(frame: .zero)
     private var activityIndicator = UIActivityIndicatorView(style: .gray)
@@ -47,7 +47,9 @@ open class ServiceOverlayView: UIView {
     }
     
     deinit {
+        viewToConverObservation?.invalidate()
         viewToConverObservation = nil
+        viewToCover = nil
     }
     
     private func setup() {
@@ -60,7 +62,7 @@ open class ServiceOverlayView: UIView {
     
     private func setupView() {
         backgroundColor = UIColor(white: 1, alpha: 1)
-        viewToConverObservation = viewToCover?.observe(\.bounds) { [weak self] _, _ in
+        viewToConverObservation = viewToCover?.observe(\.frame) { [weak self] _, _ in
             self?.refreshSize()
         }
     }
