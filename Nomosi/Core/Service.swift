@@ -217,6 +217,8 @@ open class Service<Response: ServiceResponse> {
         case .upload,
              .uploadFile:
             performUploadTask(request: request)
+        case .downloadFile:
+            performDownloadTask(request: request)
         }
     }
     
@@ -237,7 +239,7 @@ open class Service<Response: ServiceResponse> {
                 request.resolve()
                 self.handleCompletedTask(request: request, data: data, response: response, error: error)
             })
-        let session = URLSession(configuration: URLSessionConfiguration.default,
+        let session = URLSession(configuration: .default,
                                  delegate: uploadDelegate,
                                  delegateQueue: OperationQueue())
         switch serviceType {
@@ -248,6 +250,20 @@ open class Service<Response: ServiceResponse> {
         default:
             break
         }
+        sessionTask?.resume()
+        session.finishTasksAndInvalidate()
+    }
+    
+    private func performDownloadTask(request: URLRequest) {
+        request.begin()
+        let downloadDelegate = DownloadDelegate(onProgress: nil,
+                                                onCompletion: {url, response, error in
+                                                    request.resolve()
+                                                })
+        let session = URLSession(configuration: .default,
+                                 delegate: downloadDelegate,
+                                 delegateQueue: OperationQueue())
+        sessionTask = session.downloadTask(with: request)
         sessionTask?.resume()
         session.finishTasksAndInvalidate()
     }

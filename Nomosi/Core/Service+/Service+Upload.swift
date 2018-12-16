@@ -7,25 +7,11 @@
 
 import Foundation
 
-public typealias ProgressCallback = (_ progress: Progress) -> Void
-
-class UploadDelegate: NSObject {
+class UploadDelegate: AsycTask<Data?>, URLSessionTaskDelegate, URLSessionDataDelegate {
     
-    typealias CompletionClosure = ((_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)
-    
-    private var onProgress: ProgressCallback?
-    private var onCompletion: CompletionClosure?
     private var data: Data?
     
-    init(onProgress: ProgressCallback?,
-         onCompletion: CompletionClosure?) {
-        self.onProgress = onProgress
-        self.onCompletion = onCompletion
-    }
-    
-}
-
-extension UploadDelegate: URLSessionTaskDelegate {
+    // MARK: - URLSessionTaskDelegate
     
     func urlSession(_ session: URLSession,
                     task: URLSessionTask,
@@ -43,9 +29,7 @@ extension UploadDelegate: URLSessionTaskDelegate {
         onCompletion?(data, task.response, error)
     }
     
-}
-
-extension UploadDelegate: URLSessionDataDelegate {
+    // MARK: - URLSessionDataDelegate
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         self.data = data

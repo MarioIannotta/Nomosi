@@ -28,7 +28,7 @@ public enum ServiceType {
     case data
     case upload(content: DataConvertible)
     case uploadFile(url: URL)
-    // download?
+    case downloadFile
 }
 
 extension Service {
