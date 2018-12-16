@@ -253,26 +253,21 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func handleCompletedTask(request: URLRequest, data: Data?, response: URLResponse?, error: Error?) {
-        let _statusCode = (response as? HTTPURLResponse)?.statusCode
+        let statusCode = (response as? HTTPURLResponse)?.statusCode
         if
             let validStatusCodes = validStatusCodes,
-            let statusCode = _statusCode,
+            let statusCode = statusCode,
             !validStatusCodes.contains(statusCode)
         {
             completeRequest(response: nil, error: .invalidStatusCode(statusCode))
             return
         }
-        var statusCodeDescription = ""
-        if let _statusCode = _statusCode {
-            statusCodeDescription = String(_statusCode)
-        }
+        let statusCodeDescription = statusCode.flatMap { String($0) } ?? ""
         log.print("⬇️ [\(statusCodeDescription)] \(self) - \(data?.count ?? 0) bytes")
         if let error = error {
-            if (error as NSError).code == NSURLErrorCancelled {
-                completeRequest(response: nil, error: .requestCancelled)
-            } else {
-                completeRequest(response: nil, error: ServiceError(networkError: error))
-            }
+            let isCancelled = (error as NSError).code == NSURLErrorCancelled
+            let serviceError: ServiceError = isCancelled ? .requestCancelled : ServiceError(networkError: error)
+            completeRequest(response: nil, error: serviceError)
             return
         }
         guard
