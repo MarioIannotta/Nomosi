@@ -37,7 +37,7 @@
 		86E812170A8FBA5CD9C9F8F3014501D3 /* ConcurrentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA5DC425B89D714393664AD40A33F88 /* ConcurrentLoader.swift */; };
 		94229BAE2B02C41491C9231F95B1D635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
 		981D26B93B9745E10DE8DD8740E09B1C /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF855337A4358E9904967BB3D10E7FE /* ServiceError.swift */; };
-		9B010674E45D1AD5E326EC7810D93578 /* RequestQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D620E5342AD3F76E0ED439AE15C7C /* RequestQueue.swift */; };
+		9B010674E45D1AD5E326EC7810D93578 /* URLRequest+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D620E5342AD3F76E0ED439AE15C7C /* URLRequest+Queue.swift */; };
 		A61F9991CB7DD1EF83B27B363C2E7945 /* Pods-Nomosi_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A387FA419B824C627FBBBB83A3F6795 /* Pods-Nomosi_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC686C972170EBA300843368 /* MockProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC686C962170EBA300843368 /* MockProvider.swift */; };
 		AC71EC742175396F00BA966A /* Service+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC71EC732175396F00BA966A /* Service+Log.swift */; };
@@ -106,7 +106,7 @@
 		7D7E3D83D29B35E41A5E86201D167061 /* Loader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		9127C1BDA9726910E010EA7C2A5EC506 /* Nomosi-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nomosi-umbrella.h"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		956D620E5342AD3F76E0ED439AE15C7C /* RequestQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestQueue.swift; path = Nomosi/Core/RequestQueue.swift; sourceTree = "<group>"; };
+		956D620E5342AD3F76E0ED439AE15C7C /* URLRequest+Queue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "URLRequest+Queue.swift"; sourceTree = "<group>"; };
 		964C35CEEAED50DC2926B98082778878 /* Nomosi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nomosi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A7C68C19176943911B3F46457218748 /* ServiceResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceResponse.swift; path = Nomosi/Core/ServiceResponse.swift; sourceTree = "<group>"; };
 		9D4E08BE224709F98C79EC79DA85BB7C /* Pods_Nomosi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomosi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,7 +243,6 @@
 				ACAC32D32176306100BF0E09 /* Extensions */,
 				88E2869E88429C00CAFB24E83A012EEE /* Loaders */,
 				AC686C962170EBA300843368 /* MockProvider.swift */,
-				956D620E5342AD3F76E0ED439AE15C7C /* RequestQueue.swift */,
 				BB8C61D18688C564452A34CDDFF0CE91 /* Service.swift */,
 				ACAC32D52176306100BF0E09 /* Service+ */,
 				5DF855337A4358E9904967BB3D10E7FE /* ServiceError.swift */,
@@ -331,6 +330,7 @@
 		ACAC32D32176306100BF0E09 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				956D620E5342AD3F76E0ED439AE15C7C /* URLRequest+Queue.swift */,
 				ACAC32D42176306100BF0E09 /* URLCache+CacheProvider.swift */,
 			);
 			name = Extensions;
@@ -563,7 +563,7 @@
 				70DACB0C29B169FAB27F0D2FB5074244 /* RemoteImageService.swift in Sources */,
 				3A95A219A8C8BEC01DD619A1518A4D33 /* RemoteImageServiceOverlayView.swift in Sources */,
 				ACD6E7FC21C6C1CC0005B93C /* AsyncTask.swift in Sources */,
-				9B010674E45D1AD5E326EC7810D93578 /* RequestQueue.swift in Sources */,
+				9B010674E45D1AD5E326EC7810D93578 /* URLRequest+Queue.swift in Sources */,
 				BA0C485D19A2F12A3167C17C3339405C /* SequentialLoader.swift in Sources */,
 				AC686C972170EBA300843368 /* MockProvider.swift in Sources */,
 				478BA63DFAF5333E1E8496FCE00E99C1 /* Service.swift in Sources */,
