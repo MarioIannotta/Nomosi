@@ -40,8 +40,8 @@ struct Gallery: Decodable, Hashable {
     
     // MARK: - Hashable
     
-    var hashValue: Int {
-        return id
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
 }

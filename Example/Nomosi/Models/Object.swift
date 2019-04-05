@@ -64,8 +64,8 @@ struct Object: Decodable, Hashable {
     
     // MARK: - Hashable
     
-    var hashValue: Int {
-        return id ?? -1
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 
     static func == (lhs: Object, rhs: Object) -> Bool {

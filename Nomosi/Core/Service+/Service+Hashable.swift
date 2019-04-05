@@ -9,13 +9,11 @@ import Foundation
 
 extension Service: Hashable {
     
-    public var hashValue: Int {
-        return """
-            \(method.rawValue):
-            \(url?.absoluteString ?? "")
-            \(headers)
-            \(String(data: body?.asData ?? Data(), encoding: .utf8) ?? "")
-            """.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(method.rawValue)
+        hasher.combine(url)
+        hasher.combine(headers)
+        hasher.combine(body?.asData)
     }
     
     public static func == (lhs: Service<Response>, rhs: Service<Response>) -> Bool {

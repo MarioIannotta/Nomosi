@@ -25,10 +25,11 @@ extension URLRequest {
     }
     
     /**
-     We can't use the default implementation defined here https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/URLRequest.swift as
+     We can't use the default implementation defined here
+     https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/URLRequest.swift as
      ```
      public static func ==(lhs: URLRequest, rhs: URLRequest) -> Bool {
-     return lhs._handle._uncopiedReference().isEqual(rhs._handle._uncopiedReference())
+        return lhs._handle._uncopiedReference().isEqual(rhs._handle._uncopiedReference())
      }
      ```
      */
