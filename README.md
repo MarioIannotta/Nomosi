@@ -116,21 +116,24 @@ class TokenProtectedService<ServiceResponse>: Service<Response> {
 <summary>Straightforward cache configuration with the layer of your choice (URLCache by default) </summary>
 <p>
 
-Cache is handled with the protocol `CacheProvider`, that makes easy to use the persistent layer of you choice such as Realm or CoreData by implementing just three methods:
-```swift
-func removeAllCachedResponses(before date: Date)
+Cache is handled with the protocol `CacheProvider`.
 
-func loadIfNeeded(request: URLRequest, 
-                  cachePolicy: CachePolicy, 
+`URLCache` already conforms this protocol and  with the podspec  `Nomosi/CoreDataCache` you can use CoreData as persistent storage. 
+
+If you want to use another persistent layer library (Realm, CouchBase, etc...) you have to implement just three methods:
+```swift
+func removeExpiredCachedResponses()
+
+func loadIfNeeded(request: URLRequest,
+                  cachePolicy: CachePolicy,
                   completion: ((_ data: Data?) -> Void))
 
-func storeIfNeeded(request: URLRequest, 
-                   response: URLResponse,
-                   data: Data, 
-                   cachePolicy: CachePolicy) -> Bool
+func storeIfNeeded(request: URLRequest,
+                  response: URLResponse,
+                  data: Data,
+                  cachePolicy: CachePolicy,
+                  completion: ((_ success: Bool) -> Void))
 ```
-
-`URLCache` already conforms `CacheProvider` so you can use cache without doing anything. 
 
 </p>
 </details>
@@ -241,6 +244,7 @@ Nomosi is available under the MIT license. See the LICENSE file for more info.
 
 * [ ] Document all the public stuff
 * [ ] Add unit tests
+* [x] CoreData CacheProvider
 * [x] Download requests
 * [x] Upload requests
 * [x] Add a way to mock services
