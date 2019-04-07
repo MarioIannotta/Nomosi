@@ -10,10 +10,11 @@ import Foundation
 extension URLCache: CacheProvider {
     
     private struct Keys {
-        fileprivate static let expiringDateKey = "Nomosi.Service.CacheProvider.expiringDate"
+        fileprivate static let expirationDateKey = "Nomosi.Service.CacheProvider.expirationDateKey"
     }
     
-    public func removeAllCachedResponses(before date: Date) {
+    public func removeExpiredCachedResponses() {
+        // I can't find a way to remove just the expired cached responses
         removeAllCachedResponses()
     }
     
@@ -26,14 +27,14 @@ extension URLCache: CacheProvider {
         }
         guard
             let cachedResponse = cachedResponse(for: request),
-            let expiringDate = cachedResponse.userInfo?[Keys.expiringDateKey] as? Date
+            let expirationDate = cachedResponse.userInfo?[Keys.expirationDateKey] as? Date
             else {
                 completion(nil)
                 return
             }
         
         let date = Date()
-        if expiringDate < date {
+        if expirationDate < date {
             removeCachedResponse(for: request)
             completion(nil)
         } else {
@@ -41,17 +42,17 @@ extension URLCache: CacheProvider {
         }
     }
     
-    @discardableResult
     public func storeIfNeeded(request: URLRequest,
                               response: URLResponse,
                               data: Data,
-                              cachePolicy: CachePolicy) -> Bool {
+                              cachePolicy: CachePolicy,
+                              completion: ((_ success: Bool) -> Void)) {
         
         var storagePolicy: URLCache.StoragePolicy = .notAllowed
         var cacheTimeout: TimeInterval = -1
         switch cachePolicy {
         case .none:
-            return false
+            return completion(false)
         case let .inRam(ramCacheTimeout):
             cacheTimeout = ramCacheTimeout
             storagePolicy = .allowedInMemoryOnly
@@ -59,13 +60,13 @@ extension URLCache: CacheProvider {
             cacheTimeout = diskCacheTimeout
             storagePolicy = .allowed
         }
-        let expiringDate = Date().addingTimeInterval(cacheTimeout)
+        let expirationDate = Date().addingTimeInterval(cacheTimeout)
         let cachedResponse = CachedURLResponse(response: response,
                                                data: data,
-                                               userInfo: [Keys.expiringDateKey: expiringDate],
+                                               userInfo: [Keys.expirationDateKey: expirationDate],
                                                storagePolicy: storagePolicy)
         storeCachedResponse(cachedResponse, for: request)
-        return true
+        completion(true)
     }
     
 }

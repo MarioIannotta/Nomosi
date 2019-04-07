@@ -2,13 +2,12 @@
 //  CachedResponse+CoreDataProperties.swift
 //  Nomosi
 //
-//  Created by Mario on 05/04/2019.
+//  Created by Mario on 07/04/2019.
 //
 //
 
 import Foundation
 import CoreData
-
 
 extension CachedResponse {
 
@@ -16,7 +15,7 @@ extension CachedResponse {
         return NSFetchRequest<CachedResponse>(entityName: "CachedResponse")
     }
 
-    @NSManaged public var date: NSDate?
+    @NSManaged public var data: NSData?
     @NSManaged public var expirationDate: NSDate?
     @NSManaged public var id: String?
 

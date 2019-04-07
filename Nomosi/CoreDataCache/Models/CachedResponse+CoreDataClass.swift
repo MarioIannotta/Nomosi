@@ -2,7 +2,7 @@
 //  CachedResponse+CoreDataClass.swift
 //  Nomosi
 //
-//  Created by Mario on 05/04/2019.
+//  Created by Mario on 07/04/2019.
 //
 //
 
