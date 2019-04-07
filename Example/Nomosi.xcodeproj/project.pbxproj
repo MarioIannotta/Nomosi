@@ -383,8 +383,8 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				1B000DE1DE5442AE71BB057E /* [CP] Embed Pods Frameworks */,
 				AC51452720BDB5D20059A3E3 /* SwiftLint */,
+				28B5F80F7E8D36F6CDA4AC69 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -477,18 +477,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1B000DE1DE5442AE71BB057E /* [CP] Embed Pods Frameworks */ = {
+		28B5F80F7E8D36F6CDA4AC69 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Nomosi_Example/Pods-Nomosi_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Nomosi/Nomosi.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nomosi_Example/Pods-Nomosi_Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nomosi.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nomosi_Example/Pods-Nomosi_Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -653,7 +652,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -702,7 +701,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

@@ -1,9 +1,9 @@
 {
   "name": "Nomosi",
-  "version": "0.0.3",
-  "summary": "Plug and play network services for your iOS app.",
-  "description": "Plug and play network services for your iOS app.",
-  "swift_version": "4.2",
+  "version": "0.0.7",
+  "summary": "Declarative plug and play network services for your iOS apps.",
+  "description": "## Features\n\n* Declarative functional syntax\n* Type-safe by design\n* Easy to decorate (eg: token refresh) and/or invalidate requests\n* Straightforward cache configuration with the layer of your choice (URLCache by default) \n* Discard invalid or redundant requests\n* Mock support\n* Develop and attach thirdy part components\n* Prebaked UI Components (by adding Nomosi/UI)",
+  "swift_versions": "5",
   "homepage": "https://github.com/MarioIannotta/Nomosi",
   "license": {
     "type": "MIT",
@@ -14,11 +14,11 @@
   },
   "source": {
     "git": "https://github.com/MarioIannotta/Nomosi.git",
-    "tag": "0.0.3"
+    "tag": "0.0.7"
   },
   "social_media_url": "https://twitter.com/MarioIannotta",
   "platforms": {
-    "ios": "9.0"
+    "ios": "10.0"
   },
   "default_subspecs": "All",
   "subspecs": [
@@ -29,6 +29,9 @@
 
         ],
         "Nomosi/UI": [
+
+        ],
+        "Nomosi/CoreDataCache": [
 
         ]
       }
@@ -46,6 +49,22 @@
       "dependencies": {
         "Nomosi/Core": [
 
+        ]
+      }
+    },
+    {
+      "name": "CoreDataCache",
+      "ios": {
+        "source_files": "Nomosi/CoreDataCache/**/*.swift"
+      },
+      "dependencies": {
+        "Nomosi/Core": [
+
+        ]
+      },
+      "resource_bundles": {
+        "CoreDataCache": [
+          "Nomosi/CoreDataCache/Resources/*.xcdatamodeld"
         ]
       }
     }

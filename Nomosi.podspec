@@ -14,17 +14,18 @@ Pod::Spec.new do |s|
 * Develop and attach thirdy part components
 * Prebaked UI Components (by adding Nomosi/UI)
                        DESC
-  s.swift_version = '4.2'
+  s.swift_version = '5'
   s.homepage         = 'https://github.com/MarioIannotta/Nomosi'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'MarioIannotta' => 'info@marioiannotta.com' }
   s.source           = { :git => 'https://github.com/MarioIannotta/Nomosi.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/MarioIannotta'
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
   
   s.subspec 'All' do |s|
       s.dependency 'Nomosi/Core'
       s.dependency 'Nomosi/UI'
+      s.dependency 'Nomosi/CoreDataCache'
   end
   
   s.subspec 'Core' do |s|
@@ -35,6 +36,12 @@ Pod::Spec.new do |s|
   s.subspec 'UI' do |s|
       s.ios.source_files = 'Nomosi/UI/**/*'
       s.dependency 'Nomosi/Core'
+  end
+  
+  s.subspec 'CoreDataCache' do |s|
+      s.ios.source_files = 'Nomosi/CoreDataCache/**/*.swift'
+      s.dependency 'Nomosi/Core'
+      s.resource_bundles = { 'CoreDataCache' => ['Nomosi/CoreDataCache/Resources/*.xcdatamodeld'] }
   end
   
   s.default_subspecs = 'All'

@@ -1,11 +1,14 @@
 PODS:
-  - Nomosi (0.0.3):
-    - Nomosi/All (= 0.0.3)
-  - Nomosi/All (0.0.3):
+  - Nomosi (0.0.7):
+    - Nomosi/All (= 0.0.7)
+  - Nomosi/All (0.0.7):
     - Nomosi/Core
+    - Nomosi/CoreDataCache
     - Nomosi/UI
-  - Nomosi/Core (0.0.3)
-  - Nomosi/UI (0.0.3):
+  - Nomosi/Core (0.0.7)
+  - Nomosi/CoreDataCache (0.0.7):
+    - Nomosi/Core
+  - Nomosi/UI (0.0.7):
     - Nomosi/Core
   - SwiftLint (0.25.1)
 
@@ -22,9 +25,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Nomosi: 3c771b0bafc1ad043ca5b5caed9e460206cf2cf1
+  Nomosi: 81fc989eec9dcbb977b7675ece6160861570c4e1
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
 
 PODFILE CHECKSUM: ccc0ce697d95d3b5144a61441b59e9452056dfb1
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.7.0.beta.3
