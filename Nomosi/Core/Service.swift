@@ -34,11 +34,11 @@ open class Service<Response: ServiceResponse> {
     public private (set) var latestError: ServiceError?
     
     private var sessionTask: URLSessionTask?
-    private var completionCallback: CompletionCallback?
-    private var successCallback: SuccessCallback?
-    private var failureCallback: FailureCallback?
+    private var completionCallbacks = ThreadSafeArray<CompletionCallback>()
+    private var successCallbacks = ThreadSafeArray<SuccessCallback>()
+    private var failureCallbacks = ThreadSafeArray<FailureCallback>()
+    private var progressCallbacks = ThreadSafeArray<ProgressCallback>()
     private var decorateRequestCallback: DecorateRequestCallback?
-    private var progressCallback: ProgressCallback?
     private var hasBeenCancelled = false
     private var serviceObservers = [ServiceObserver]()
     
@@ -46,19 +46,19 @@ open class Service<Response: ServiceResponse> {
     
     @discardableResult
     public func onCompletion(_ callback: @escaping CompletionCallback) -> Self {
-        completionCallback = callback
+        completionCallbacks.append(callback)
         return self
     }
     
     @discardableResult
     public func onSuccess(_ callback: @escaping SuccessCallback) -> Self {
-        successCallback = callback
+        successCallbacks.append(callback)
         return self
     }
     
     @discardableResult
     public func onFailure(_ callback: @escaping FailureCallback) -> Self {
-        failureCallback = callback
+        failureCallbacks.append(callback)
         return self
     }
     
@@ -70,7 +70,7 @@ open class Service<Response: ServiceResponse> {
     
     @discardableResult
     public func onProgress(_ callback: @escaping ProgressCallback) -> Self {
-        progressCallback = callback
+        progressCallbacks.append(callback)
         return self
     }
     
@@ -234,7 +234,11 @@ open class Service<Response: ServiceResponse> {
     private func performUploadTask(request: URLRequest) {
         request.begin()
         let uploadDelegate = UploadDelegate(
-            onProgress: progressCallback,
+            onProgress: { [weak self] progress in
+                self?.progressCallbacks.forEach { progressCallback in
+                    progressCallback(progress)
+                }
+            },
             onCompletion: { data, response, error in
                 request.resolve()
                 self.handleCompletedTask(request: request, data: data, response: response, error: error)
@@ -313,16 +317,16 @@ open class Service<Response: ServiceResponse> {
         serviceObservers.forEach { $0.serviceDidEndRequest(self) }
         if let safeResponse = response {
             DispatchQueue.main.async {
-                self.successCallback?(safeResponse)
+                self.successCallbacks.forEach { $0(safeResponse) }
             }
         } else if let error = error {
             self.log.print("⚠️ \(self): Error \(error)")
             DispatchQueue.main.async {
-                self.failureCallback?(error)
+                self.failureCallbacks.forEach { $0(error) }
             }
         }
         DispatchQueue.main.async {
-            self.completionCallback?(response, error)
+            self.completionCallbacks.forEach { $0(response, error) }
         }
     }
     
