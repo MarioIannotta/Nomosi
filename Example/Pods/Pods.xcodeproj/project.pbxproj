@@ -30,7 +30,6 @@
 		24F305F41338C504E707DAE0E7E76397 /* AsyncTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850B22DD5DF020A41E37622FB81C487 /* AsyncTask.swift */; };
 		2592214D8BA062F41C6A7190BD2627BD /* Service+Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA4887E794ED830F6B3974F58D6331C /* Service+Upload.swift */; };
 		2A8FF1F1DF73AA4A0AADD6E3A9FF7001 /* RemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E17529A9760CE1121C22E1DB4F152E /* RemoteImageService.swift */; };
-		2C5CE593514B83E242FA36F6EB6199A8 /* SequentialLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01D26E333555177E6E5B33FDF209DA2 /* SequentialLoader.swift */; };
 		2C90635BA91B9B2E3E31CFC7D3D77D73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		37488A82577268D141EEF015650085D2 /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CD733D93C6989A5DC1B260DA726FCE /* DataConvertible.swift */; };
 		3895B9AEF4B2500E3E33C8A56A7D973F /* NSPersistentContainer+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC47D26513FE2E227DF14C8280B862FD /* NSPersistentContainer+Bundle.swift */; };
@@ -53,7 +52,6 @@
 		AFF76CC3ACCAAD2CE8713F83B419AD35 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A71D9CA94673C4D4FC7AF4DD5A7E4A9 /* UIView+.swift */; };
 		B2C503D3F19B5DE94723E0D38E524D67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		BBF1A5F4E42CAAA443FDC839651EF98E /* NomosiCoreDataCache.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = A7578311DE35BDF6D1713E404B2135FA /* NomosiCoreDataCache.xcdatamodeld */; };
-		C0FF4D573E7374C1C5D839B8D2E51D35 /* ConcurrentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D48EA38D14B3751A803FFF2A8D7FD /* ConcurrentLoader.swift */; };
 		C72BC5DD16EE2C4AF456DE12B8CE9AE4 /* MockProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D65960D4BDDAA89778CC28B1FEEAB78 /* MockProvider.swift */; };
 		D07CA36F57CCC0DA175043DC2FDCB34F /* Pods-Nomosi_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DEDB8A991A90B0119E4E6F699465984C /* Pods-Nomosi_Example-dummy.m */; };
 		D8A8FB3C7E2951FA3F7FC9B00518EBCF /* RemoteImageServiceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8910958C6B3450FC16D123BD133D7BF7 /* RemoteImageServiceOverlayView.swift */; };
@@ -63,7 +61,6 @@
 		EDFD1CE7B235FB9F383E7BB0374BA75C /* AnyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2B598042864264A1F1AFDC664BF5B /* AnyService.swift */; };
 		F143A7BB8FC243B03CCDB67A50209D8B /* ServiceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6034EC92A4B81782BA11CA68EBADAD /* ServiceOverlayView.swift */; };
 		F3A5731D5578377DEEC278BD07C0EB52 /* CoreDataCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D386F7F02D389101B76B3B95D4227731 /* CoreDataCacheProvider.swift */; };
-		FDC6B49592CC20DCAC5798283BE46FB1 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE7EBB26F071F98785ACCD7884B9587 /* Loader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,7 +106,6 @@
 		1DAF720C086E9A5BC1DA2689EABC5B5D /* Pods-Nomosi_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Nomosi_Tests.modulemap"; sourceTree = "<group>"; };
 		1DBF720C6B003C1A84B281A05025D8DA /* Service+Hashable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Service+Hashable.swift"; sourceTree = "<group>"; };
 		1EA4887E794ED830F6B3974F58D6331C /* Service+Upload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Service+Upload.swift"; sourceTree = "<group>"; };
-		1FE7EBB26F071F98785ACCD7884B9587 /* Loader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		203446147DE185E94E6A4707EA5D6FB1 /* URLCache+CacheProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "URLCache+CacheProvider.swift"; sourceTree = "<group>"; };
 		27D84D3ED981BFA090BEEA26F63CB71D /* Nomosi-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Nomosi-dummy.m"; sourceTree = "<group>"; };
 		2850B22DD5DF020A41E37622FB81C487 /* AsyncTask.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncTask.swift; path = Nomosi/Core/AsyncTask.swift; sourceTree = "<group>"; };
@@ -124,7 +120,6 @@
 		4198C36CA768A0A726A49E6BB0853C94 /* Nomosi-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Nomosi-Info.plist"; sourceTree = "<group>"; };
 		4943532818A7D2F4A5C93E28C425B0FB /* Pods_Nomosi_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nomosi_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FBC08BF6310A7120750CF24D97D0B8B /* ServiceRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceRequest.swift; path = Nomosi/Core/ServiceRequest.swift; sourceTree = "<group>"; };
-		5A4D48EA38D14B3751A803FFF2A8D7FD /* ConcurrentLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConcurrentLoader.swift; sourceTree = "<group>"; };
 		79722E55B71FF7DDB27DE8B43BAC1C21 /* Pods-Nomosi_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Nomosi_Example-frameworks.sh"; sourceTree = "<group>"; };
 		7D65960D4BDDAA89778CC28B1FEEAB78 /* MockProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MockProvider.swift; path = Nomosi/Core/MockProvider.swift; sourceTree = "<group>"; };
 		7EB72F15C2931FC54B36CFF258DF91AB /* Pods-Nomosi_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Nomosi_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,7 +138,6 @@
 		AAAAD5A7027C839D5A5A6095B2E2B30B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		AC531BC022736EE30008297E /* ThreadSafeArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadSafeArray.swift; path = Nomosi/Core/ThreadSafeArray.swift; sourceTree = "<group>"; };
 		AE6034EC92A4B81782BA11CA68EBADAD /* ServiceOverlayView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceOverlayView.swift; path = Nomosi/UI/ServiceOverlayView.swift; sourceTree = "<group>"; };
-		B01D26E333555177E6E5B33FDF209DA2 /* SequentialLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SequentialLoader.swift; sourceTree = "<group>"; };
 		B12AC66085AC6EEEAD12D6D4B4E6E0D6 /* ResourceBundle-CoreDataCache-Nomosi-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-CoreDataCache-Nomosi-Info.plist"; sourceTree = "<group>"; };
 		B6E47AFAF18AF4AEFADA400B10130A5F /* Nomosi-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nomosi-prefix.pch"; sourceTree = "<group>"; };
 		B734F8710C727E9D99FA1A7F3BDC1682 /* CachedResponse+CoreDataClass.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CachedResponse+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -255,7 +249,6 @@
 				8B7FB062AF74B26CC99622355BB13C09 /* ServiceResponse.swift */,
 				AC531BC022736EE30008297E /* ThreadSafeArray.swift */,
 				C80FC9CA58E2C8A9636F2FF9267D268B /* Extensions */,
-				FFCE0D6B6236EA3C1518BE627C92A45A /* Loaders */,
 				A682576CD871061C8E544E741A9CB686 /* Service+ */,
 			);
 			name = Core;
@@ -461,17 +454,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		FFCE0D6B6236EA3C1518BE627C92A45A /* Loaders */ = {
-			isa = PBXGroup;
-			children = (
-				5A4D48EA38D14B3751A803FFF2A8D7FD /* ConcurrentLoader.swift */,
-				1FE7EBB26F071F98785ACCD7884B9587 /* Loader.swift */,
-				B01D26E333555177E6E5B33FDF209DA2 /* SequentialLoader.swift */,
-			);
-			name = Loaders;
-			path = Nomosi/Core/Loaders;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -667,18 +649,15 @@
 				ACC7A789A6A10746102ECD8ECA079966 /* CachedResponse+CoreDataClass.swift in Sources */,
 				0F453CF35D7EA762404F33CED83C1200 /* CachedResponse+CoreDataProperties.swift in Sources */,
 				24B1B6EF9F2F046A5EAA55F1EB8B6283 /* CacheProvider.swift in Sources */,
-				C0FF4D573E7374C1C5D839B8D2E51D35 /* ConcurrentLoader.swift in Sources */,
 				F3A5731D5578377DEEC278BD07C0EB52 /* CoreDataCacheProvider.swift in Sources */,
 				224EECE3799392B11186DAD89BADD820 /* CoreDataManager.swift in Sources */,
 				37488A82577268D141EEF015650085D2 /* DataConvertible.swift in Sources */,
-				FDC6B49592CC20DCAC5798283BE46FB1 /* Loader.swift in Sources */,
 				C72BC5DD16EE2C4AF456DE12B8CE9AE4 /* MockProvider.swift in Sources */,
 				3F68179FADB8566A0C4FF0D113ADC4A5 /* NetworkActivityIndicatorHandler.swift in Sources */,
 				0E205B1333DEE0D26888722FD72CD4F3 /* Nomosi-dummy.m in Sources */,
 				3895B9AEF4B2500E3E33C8A56A7D973F /* NSPersistentContainer+Bundle.swift in Sources */,
 				2A8FF1F1DF73AA4A0AADD6E3A9FF7001 /* RemoteImageService.swift in Sources */,
 				D8A8FB3C7E2951FA3F7FC9B00518EBCF /* RemoteImageServiceOverlayView.swift in Sources */,
-				2C5CE593514B83E242FA36F6EB6199A8 /* SequentialLoader.swift in Sources */,
 				654E25B8107D0FE883D129DAA3AF7FD9 /* Service+Download.swift in Sources */,
 				403EE9D0340AA2CC5E1CE382609E458F /* Service+Hashable.swift in Sources */,
 				5694C7C4410D34DE3B25D7DDA199FDEE /* Service+Log.swift in Sources */,
