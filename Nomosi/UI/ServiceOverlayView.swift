@@ -13,11 +13,14 @@ open class ServiceOverlayView: UIView {
     private var viewToCover: UIView?
     private var viewToConverObservation: NSKeyValueObservation?
     private var contentStackView = UIStackView(frame: .zero)
+    private var buttonsStackView = UIStackView(frame: .zero)
     private var activityIndicator = UIActivityIndicatorView(style: .gray)
     private var errorLabel = UILabel(frame: .zero)
     private var tryAgainButton = UIButton(type: .system)
-
+    private var cancelButton = UIButton(type: .system)
+    
     private var keepOnError: Bool = false
+    private var onCancel: (() -> Void)?
     private var hasError: Bool = false
     private var loadingServices = [AnyService]()
     private var servicesWithError = [AnyService]()
@@ -29,10 +32,13 @@ open class ServiceOverlayView: UIView {
         return servicesWithError.count > 0
     }
     
-    public init(cover viewToCover: UIView, keepOnError: Bool = true) {
+    public init(cover viewToCover: UIView,
+                keepOnError: Bool = true,
+                onCancel: (() -> Void)? = nil) {
         super.init(frame: .zero)
         self.viewToCover = viewToCover
         self.keepOnError = keepOnError
+        self.onCancel = onCancel
         setup()
     }
     
@@ -57,7 +63,9 @@ open class ServiceOverlayView: UIView {
         setupActivityIndicator()
         setupErrorLabel()
         setupTryAgainButton()
+        setupCancelButton()
         setupContentStackView()
+        setupButtonsStackView()
     }
     
     private func setupView() {
@@ -80,19 +88,31 @@ open class ServiceOverlayView: UIView {
     
     private func setupTryAgainButton() {
         tryAgainButton.setTitle("Try again", for: .normal)
-        tryAgainButton.layer.cornerRadius = 5
-        tryAgainButton.layer.borderWidth = 1
-        tryAgainButton.layer.borderColor = tryAgainButton.tintColor.cgColor
-        tryAgainButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        tryAgainButton.sizeToFit()
-        tryAgainButton.isHidden = true
         tryAgainButton.addTarget(self, action: #selector(tryAgainButtonDidTap), for: .touchUpInside)
+        styleButton(tryAgainButton, color: tryAgainButton.tintColor)
+    }
+    
+    private func setupCancelButton() {
+        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.addTarget(self, action: #selector(cancelButtonDidTap), for: .touchUpInside)
+        styleButton(cancelButton, color: .red)
+    }
+    
+    private func styleButton(_ button: UIButton, color: UIColor) {
+        button.tintColor = color
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = button.tintColor.cgColor
+        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        button.sizeToFit()
+        button.isHidden = true
     }
     
     private func setupContentStackView() {
         addSubview(contentStackView)
-        [activityIndicator, errorLabel, tryAgainButton].forEach { contentStackView.addArrangedSubview($0) }
-        contentStackView.backgroundColor = .red
+        [activityIndicator, errorLabel, buttonsStackView].forEach {
+            contentStackView.addArrangedSubview($0)
+        }
         contentStackView.alignment = .center
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.axis = .vertical
@@ -104,11 +124,19 @@ open class ServiceOverlayView: UIView {
             ])
     }
     
+    private func setupButtonsStackView() {
+        [tryAgainButton, cancelButton].forEach {
+            buttonsStackView.addArrangedSubview($0)
+        }
+        buttonsStackView.spacing = 10
+    }
+    
     fileprivate func setError(_ serviceError: ServiceError?) {
         self.hasError = serviceError != nil
         DispatchQueue.main.async { [weak self] in
             self?.errorLabel.text = serviceError?.reason ?? ""
             self?.tryAgainButton.isHidden = serviceError == nil
+            self?.cancelButton.isHidden = serviceError == nil
         }
     }
     
@@ -118,6 +146,11 @@ open class ServiceOverlayView: UIView {
     
     @objc private func tryAgainButtonDidTap() {
         servicesWithError.forEach { $0.load(completion: nil) }
+    }
+    
+    @objc private func cancelButtonDidTap() {
+        removeFromSuperview()
+        onCancel?()
     }
     
     private func addOverlayIfNeeded() {
