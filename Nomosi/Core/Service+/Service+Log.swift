@@ -26,12 +26,8 @@ public enum Log: Int {
 
 extension Service: CustomDebugStringConvertible {
     
-    var urlDebugDescription: String {
-        return """
-        (absoluteURL: \"\(absoluteURL?.absoluteString ?? "")\",
-        basePath: \"\(basePath ?? "")\",
-        reltivePath: \"\(relativePath ?? "")\")
-        """
+    private var urlDebugDescription: String {
+        return url?.description ?? "Nil url"
     }
     
     var headersDescription: String {
@@ -50,9 +46,7 @@ extension Service: CustomDebugStringConvertible {
     }
     
     public var debugDescription: String {
-        let methodDescription = method.rawValue
-        let urlDescription = url?.absoluteString ?? "[INVALID URL: \(urlDebugDescription)]"
-        return "\(methodDescription): \(urlDescription)"
+        return "\(method.rawValue): \(urlDebugDescription)"
     }
     
 }

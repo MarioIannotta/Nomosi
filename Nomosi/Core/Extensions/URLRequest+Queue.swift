@@ -16,7 +16,7 @@ extension URLRequest {
         URLRequest.nomosiOnGoingRequests.append(self)
     }
     
-    func resolve() {
+    func end() {
         URLRequest.nomosiOnGoingRequests.removeAll(where: { $0._isEqual(to: self) })
     }
     

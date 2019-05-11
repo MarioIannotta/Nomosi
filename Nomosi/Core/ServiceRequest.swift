@@ -33,19 +33,6 @@ public enum ServiceType {
 
 extension Service {
     
-    var url: URL? {
-        if let absoluteURL = absoluteURL {
-            return absoluteURL
-        } else if let basePath = basePath, !basePath.isEmpty {
-            if let relativePath = relativePath {
-                return URL(string: basePath+relativePath)
-            } else {
-                return URL(string: basePath)
-            }
-        }
-        return nil
-    }
-    
     func makeRequest() -> URLRequest? {
         guard
             let url = url,

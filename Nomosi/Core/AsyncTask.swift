@@ -7,7 +7,7 @@
 
 import Foundation
 
-public typealias ProgressCallback = (_ progress: Progress) -> Void
+public typealias ProgressClosure = (_ progress: Progress) -> Void
 
 class AsycTask<ExpectedResult>: NSObject {
     
@@ -15,10 +15,10 @@ class AsycTask<ExpectedResult>: NSObject {
                                     _ response: URLResponse?,
                                     _ error: Error?) -> Void)
     
-    var onProgress: ProgressCallback?
+    var onProgress: ProgressClosure?
     var onCompletion: CompletionClosure?
     
-    public init(onProgress: ProgressCallback?,
+    public init(onProgress: ProgressClosure?,
                 onCompletion: CompletionClosure?) {
         self.onProgress = onProgress
         self.onCompletion = onCompletion

@@ -14,7 +14,7 @@ class GalleriesService: HarvardArtMuseumService<GalleriesServiceResponse> {
     @discardableResult
     init(nextPageLink: String?, id: Int) {
         if let nextPageURL = URL(string: nextPageLink ?? "") {
-            super.init(absoluteURL: nextPageURL)
+            super.init(url: nextPageURL)
         } else {
             var queryItems = [String: String]()
             queryItems["floor"] = String(id)

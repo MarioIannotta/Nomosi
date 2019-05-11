@@ -9,6 +9,16 @@
 import UIKit
 import Nomosi
 
+class DownloadService: Nomosi.DownloadService {
+    
+    override init() {
+        super.init()
+        url = URL(string: "https://cbcdn2.gp-static.com/uploads/product_manual/file/202/HERO3_Plus_Black_UM_ENG_REVD.pdf")
+    }
+    
+}
+
+
 class FloorsViewController: UIViewController {
     
     // MARK: - IBOutlets
@@ -27,6 +37,7 @@ class FloorsViewController: UIViewController {
         super.viewDidLoad()
         serviceOverlayView = ServiceOverlayView(cover: view, keepOnError: true)
         loadData()
+        download()
     }
     
     private func loadData() {
@@ -37,6 +48,19 @@ class FloorsViewController: UIViewController {
             .onSuccess { [weak self] floors in
                 self?.floors = floors
                 self?.tableView.reloadData()
+            }
+    }
+    
+    private func download() {
+        let service = DownloadService()
+        service
+            .load()?
+            .onProgress { progress in
+                print(progress.fractionCompleted)
+            }
+            .onSuccess { url in
+                print(url)
+                
             }
     }
     

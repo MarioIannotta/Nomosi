@@ -24,3 +24,18 @@ public extension ServiceResponse where Self: Decodable {
 }
 
 extension Array: ServiceResponse where Element: Decodable { }
+
+// Usefull for a download service like DownloadService: Service<URL>
+
+extension URL: ServiceResponse {
+    
+    public static func parse(data: Data) throws -> URL? {
+        guard
+            let string = String(data: data, encoding: .utf8)
+            else {
+                return nil
+            }
+        return URL(string: string)
+    }
+    
+}

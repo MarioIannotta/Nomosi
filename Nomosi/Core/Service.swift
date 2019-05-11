@@ -10,15 +10,14 @@ import Foundation
 
 open class Service<Response: ServiceResponse> {
     
-    public typealias CompletionCallback = (_ response: Response?, _ error: ServiceError?) -> Void
-    public typealias SuccessCallback = (_ response: Response) -> Void
-    public typealias FailureCallback = (_ error: ServiceError) -> Void
-    public typealias DecorateRequestCallback = (@escaping (_ error: ServiceError?) -> Void) -> Void
+    public typealias CompletionClosure = (_ response: Response?, _ error: ServiceError?) -> Void
+    public typealias SuccessClosure = (_ response: Response) -> Void
+    public typealias FailureClosure = (_ error: ServiceError) -> Void
+    public typealias DecorateRequestClosure = (@escaping (_ error: ServiceError?) -> Void) -> Void
+    public typealias ShouldRetryClosure = (_ response: Response?, _ error: ServiceError?, _ retryCount: Int) -> Bool
     
     public var method: Method = .get
-    public var absoluteURL: URL?
-    public var basePath: String?
-    public var relativePath: String?
+    public var url: URL?
     public var serviceType: ServiceType = .data
     public var body: DataConvertible?
     public var headers: [String: String] = [:]
@@ -34,43 +33,51 @@ open class Service<Response: ServiceResponse> {
     public private (set) var latestError: ServiceError?
     
     private var sessionTask: URLSessionTask?
-    private var completionCallbacks = ThreadSafeArray<CompletionCallback>()
-    private var successCallbacks = ThreadSafeArray<SuccessCallback>()
-    private var failureCallbacks = ThreadSafeArray<FailureCallback>()
-    private var progressCallbacks = ThreadSafeArray<ProgressCallback>()
-    private var decorateRequestCallback: DecorateRequestCallback?
+    private var completionClosures = ThreadSafeArray<CompletionClosure>()
+    private var successClosures = ThreadSafeArray<SuccessClosure>()
+    private var failureClosures = ThreadSafeArray<FailureClosure>()
+    private var progressClosures = ThreadSafeArray<ProgressClosure>()
+    private var decorateRequestClosure: DecorateRequestClosure?
+    private var shouldRetryClosure: ShouldRetryClosure?
     private var hasBeenCancelled = false
     private var serviceObservers = [ServiceObserver]()
+    private var retryCount = 0
     
     public init() { }
     
     @discardableResult
-    public func onCompletion(_ callback: @escaping CompletionCallback) -> Self {
-        completionCallbacks.append(callback)
+    public func onCompletion(_ closure: @escaping CompletionClosure) -> Self {
+        completionClosures.append(closure)
         return self
     }
     
     @discardableResult
-    public func onSuccess(_ callback: @escaping SuccessCallback) -> Self {
-        successCallbacks.append(callback)
+    public func onSuccess(_ closure: @escaping SuccessClosure) -> Self {
+        successClosures.append(closure)
         return self
     }
     
     @discardableResult
-    public func onFailure(_ callback: @escaping FailureCallback) -> Self {
-        failureCallbacks.append(callback)
+    public func onFailure(_ closure: @escaping FailureClosure) -> Self {
+        failureClosures.append(closure)
         return self
     }
     
     @discardableResult
-    public func decorateRequest(_ callback: @escaping DecorateRequestCallback) -> Self {
-        decorateRequestCallback = callback
+    public func decorateRequest(_ closure: @escaping DecorateRequestClosure) -> Self {
+        decorateRequestClosure = closure
         return self
     }
     
     @discardableResult
-    public func onProgress(_ callback: @escaping ProgressCallback) -> Self {
-        progressCallbacks.append(callback)
+    public func shouldRetryOnError(_ closure: @escaping ShouldRetryClosure) -> Self {
+        shouldRetryClosure = closure
+        return self
+    }
+    
+    @discardableResult
+    public func onProgress(_ closure: @escaping ProgressClosure) -> Self {
+        progressClosures.append(closure)
         return self
     }
     
@@ -84,7 +91,7 @@ open class Service<Response: ServiceResponse> {
     public func load() -> Self? {
         /*
          The "real" load must be performed with some little delay because it's possible
-         to schedule a load before setting all the required callbacks.
+         to schedule a load before setting all the required closures.
          eg:
          ```
          AService()
@@ -104,6 +111,7 @@ open class Service<Response: ServiceResponse> {
          In the example above without the delay if the service request is not valid an error
          would be raised before setting the closure to handle the error itself `onFailure {...}`.
          */
+        retryCount = 0
         queue.asyncAfter(deadline: .now() + 0.01) {
             self._load()
         }
@@ -117,9 +125,10 @@ open class Service<Response: ServiceResponse> {
 
     @discardableResult
     private func _load() -> Self? {
+        retryCount += 1
         hasBeenCancelled = false
-        // if the user has defined a decorateRequestCallback, let's log the request after the decorating
-        if self.decorateRequestCallback == nil {
+        // if the user has defined a decorateRequestClosure, let's log the request after the decorating
+        if self.decorateRequestClosure == nil {
             printFullRequest()
         } else {
             log.print("⏱ \(self): decorating request...", requiredLevel: .verbose)
@@ -146,9 +155,9 @@ open class Service<Response: ServiceResponse> {
                 return nil
             }
         
-        let decorateRequestCallback = self.decorateRequestCallback ?? { completion in completion(nil) }
+        let decorateRequestCallback = self.decorateRequestClosure ?? { completion in completion(nil) }
         decorateRequestCallback { error in
-            if self.decorateRequestCallback != nil {
+            if self.decorateRequestClosure != nil {
                 self.printFullRequest()
             }
             if let error = error {
@@ -197,7 +206,7 @@ open class Service<Response: ServiceResponse> {
                 self.performTask(request: request)
                 return
             }
-        cacheProvider.loadIfNeeded(request: request, cachePolicy: self.cachePolicy) { [weak self] data in
+        cacheProvider.loadIfNeeded(request: request, cachePolicy: cachePolicy) { [weak self] data in
             guard
                 let self = self
                 else { return }
@@ -225,27 +234,27 @@ open class Service<Response: ServiceResponse> {
     private func performDataTask(request: URLRequest) {
         request.begin()
         sessionTask = URLSession.shared.dataTask(with: request) { data, response, error in
-            request.resolve()
+            request.end()
             self.handleCompletedTask(request: request, data: data, response: response, error: error)
         }
         sessionTask?.resume()
     }
     
+    private func makeURLSession(delegate: URLSessionDelegate) -> URLSession {
+        return URLSession(configuration: .default,
+                          delegate: delegate,
+                          delegateQueue: OperationQueue())
+    }
+    
     private func performUploadTask(request: URLRequest) {
         request.begin()
         let uploadDelegate = UploadDelegate(
-            onProgress: { [weak self] progress in
-                self?.progressCallbacks.forEach { progressCallback in
-                    progressCallback(progress)
-                }
-            },
+            onProgress: forwardProgress,
             onCompletion: { data, response, error in
-                request.resolve()
+                request.end()
                 self.handleCompletedTask(request: request, data: data, response: response, error: error)
             })
-        let session = URLSession(configuration: .default,
-                                 delegate: uploadDelegate,
-                                 delegateQueue: OperationQueue())
+        let session = makeURLSession(delegate: uploadDelegate)
         switch serviceType {
         case .upload(let content):
             sessionTask = session.uploadTask(with: request, from: content.asData ?? Data())
@@ -260,16 +269,23 @@ open class Service<Response: ServiceResponse> {
     
     private func performDownloadTask(request: URLRequest) {
         request.begin()
-        let downloadDelegate = DownloadDelegate(onProgress: nil,
-                                                onCompletion: {url, response, error in
-                                                    request.resolve()
-                                                })
-        let session = URLSession(configuration: .default,
-                                 delegate: downloadDelegate,
-                                 delegateQueue: OperationQueue())
+        let downloadDelegate = DownloadDelegate(
+            onProgress: forwardProgress,
+            onCompletion: { url, response, error in
+                request.end()
+                self.handleCompletedTask(request: request,
+                                         data: url.absoluteString.asData,
+                                         response: response,
+                                         error: error)
+            })
+        let session = makeURLSession(delegate: downloadDelegate)
         sessionTask = session.downloadTask(with: request)
         sessionTask?.resume()
         session.finishTasksAndInvalidate()
+    }
+    
+    private func forwardProgress(_ progress: Progress) {
+        progressClosures.forEach { $0(progress) }
     }
     
     private func handleCompletedTask(request: URLRequest, data: Data?, response: URLResponse?, error: Error?) {
@@ -301,8 +317,8 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func parseDataAndCompleteRequest(data: Data) {
-        let responsString = String(data: data, encoding: .utf8) ?? "\(data.count) bytes"
-        self.log.print("Response: \n\(responsString)", requiredLevel: .verbose)
+        let responseString = String(data: data, encoding: .utf8) ?? "\(data.count) bytes"
+        self.log.print("Response: \n\(responseString)", requiredLevel: .verbose)
         do {
             let response = try Response.parse(data: data)
             self.completeRequest(response: response, error: nil)
@@ -312,21 +328,29 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func completeRequest(response: Response?, error: ServiceError?) {
+        let shouldRetry = shouldRetryClosure?(response, error, retryCount) ?? false
+        guard
+            !shouldRetry
+            else {
+                log.print("🔄 \(self): Retrying request")
+                self._load()
+                return
+            }
         latestResponse = response
         latestError = error
         serviceObservers.forEach { $0.serviceDidEndRequest(self) }
         if let safeResponse = response {
             DispatchQueue.main.async {
-                self.successCallbacks.forEach { $0(safeResponse) }
+                self.successClosures.forEach { $0(safeResponse) }
             }
         } else if let error = error {
             self.log.print("⚠️ \(self): Error \(error)")
             DispatchQueue.main.async {
-                self.failureCallbacks.forEach { $0(error) }
+                self.failureClosures.forEach { $0(error) }
             }
         }
         DispatchQueue.main.async {
-            self.completionCallbacks.forEach { $0(response, error) }
+            self.completionClosures.forEach { $0(response, error) }
         }
     }
     

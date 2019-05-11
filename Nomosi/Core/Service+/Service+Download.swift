@@ -7,6 +7,15 @@
 
 import Foundation
 
+open class DownloadService: Service<URL> {
+    
+    public override init() {
+        super.init()
+        serviceType = .downloadFile
+    }
+    
+}
+
 class DownloadDelegate: AsycTask<URL>, URLSessionDownloadDelegate {
     
     // MARK: - URLSessionDownloadDelegate

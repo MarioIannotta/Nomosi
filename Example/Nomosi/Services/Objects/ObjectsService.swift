@@ -13,7 +13,7 @@ class ObjectsService: HarvardArtMuseumService<ObjectsServiceResponse> {
 
     init?(galleryID: Int?, nextPageLink: String? = nil) {
         if let nextPageURL = URL(string: nextPageLink ?? "") {
-            super.init(absoluteURL: nextPageURL)
+            super.init(url: nextPageURL)
         } else {
             var queryItems = [String: String]()
             let fields = "objectid,title,primaryimageurl,century,classification,dateoffirstpageview"

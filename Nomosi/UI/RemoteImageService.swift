@@ -14,7 +14,7 @@ open class DefaultRemoteImageService: Service<UIImage> {
     
     public init(link: String) {
         super.init()
-        self.absoluteURL = URL(string: link)
+        self.url = URL(string: link)
     }
     
 }
