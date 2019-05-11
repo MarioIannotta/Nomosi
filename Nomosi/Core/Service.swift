@@ -70,7 +70,7 @@ open class Service<Response: ServiceResponse> {
     }
     
     @discardableResult
-    public func shouldRetryOnError(_ closure: @escaping ShouldRetryClosure) -> Self {
+    public func shouldRetry(_ closure: @escaping ShouldRetryClosure) -> Self {
         shouldRetryClosure = closure
         return self
     }
