@@ -50,9 +50,13 @@ class ObjectCollectionViewCell: UICollectionViewCell {
             .showLoader(animated: true),
             .hideContent(animated: false),
             .resize(newSize: downloadButtonCompactiSize, animated: true),
-            .onCompletion(onSuccess: { [weak self] _ in
+            .onCompletion({ [weak self] _, hasError in
+                guard
+                    !hasError
+                    else { return }
                 self?.setupDownloadButton(isImageDownloaded: true)
-            }, onFailure: nil))
+            })
+        )
     }
     
     func configure(viewModel: ObjectCollectionViewCellViewModel) {
