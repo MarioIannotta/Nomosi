@@ -10,6 +10,7 @@ import UIKit
 
 open class ServiceObserverButton: UIButton {
     
+    public typealias CompletionClosure = (_ button: UIButton, _ hasError: Bool) -> Void
     public typealias LoadingActionClosure = (_ button: UIButton) -> Void
     
     public enum LoadingAction: Equatable {
@@ -18,7 +19,7 @@ open class ServiceObserverButton: UIButton {
         case disableUserInteraction
         case hideContent(animated: Bool)
         case resize(newSize: CGSize, animated: Bool)
-        case onCompletion(onSuccess: LoadingActionClosure?, onFailure: LoadingActionClosure?)
+        case onCompletion(CompletionClosure)
         case custom(id: Int, perform: LoadingActionClosure, unwind: LoadingActionClosure)
         
         private var id: Int {
@@ -59,6 +60,9 @@ open class ServiceObserverButton: UIButton {
     
     private var loadingActions: [LoadingAction] = [.showLoader(animated: true),
                                                    .disableUserInteraction]
+    
+    private var loadingServices = [AnyService]()
+    private var failedServices = [AnyService]()
     
     public func setLoadingActions(_ loadingActions: LoadingAction...) {
         self.loadingActions = loadingActions
@@ -164,34 +168,49 @@ open class ServiceObserverButton: UIButton {
         }
     }
     
+    private func performLoadingActionsIfNeeded() {
+        guard
+            loadingServices.count == 1
+            else { return }
+        DispatchQueue.main.async { [weak self] in
+            self?.loadingActions.forEach { self?.performLoadingAction($0) }
+        }
+    }
+    
+    private func performUnwindActionsIfNeeded() {
+        guard
+            loadingServices.count == 0
+            else { return }
+        DispatchQueue.main.async { [weak self] in
+            guard
+                let self = self
+                else { return }
+            self.loadingActions.forEach {
+                self.unwindLoadingAction($0)
+                if case .onCompletion(let closure) = $0 {
+                    closure(self, self.failedServices.count > 0 ? true : false)
+                }
+            }
+        }
+    }
+    
 }
 
 extension ServiceObserverButton: ServiceObserver {
     
     public func serviceWillStartRequest(_ service: AnyService) {
-        DispatchQueue.main.async { [weak self] in
-            self?.loadingActions.forEach {
-                self?.performLoadingAction($0)
-            }
-        }
+        loadingServices.appendIfNotExists(service)
+        performLoadingActionsIfNeeded()
     }
     
     public func serviceDidEndRequest(_ service: AnyService) {
-        DispatchQueue.main.async { [weak self] in
-            guard
-                let `self` = self
-                else { return }
-            self.loadingActions.forEach {
-                self.unwindLoadingAction($0)
-                if case .onCompletion(let onSuccess, let onFailure) = $0 {
-                    if service.lastError == nil {
-                        onSuccess?(self)
-                    } else {
-                        onFailure?(self)
-                    }
-                }
-            }
+        if service.lastError != nil {
+            failedServices.appendIfNotExists(service)
+        } else {
+            failedServices.remove(service)
         }
+        loadingServices.remove(service)
+        performUnwindActionsIfNeeded()
     }
     
 }
