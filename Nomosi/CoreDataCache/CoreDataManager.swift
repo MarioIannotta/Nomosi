@@ -10,9 +10,9 @@ import CoreData
 
 class CoreDataManager {
     
-    fileprivate var container: NSPersistentContainer!
-    fileprivate var storeURL: URL?
-    fileprivate var name = ""
+    private let name: String
+    private var storeURL: URL?
+    private var container: NSPersistentContainer!
     
     init(name: String) {
         self.name = name
@@ -20,22 +20,16 @@ class CoreDataManager {
     }
     
     func initDatabase() {
-        let subspecBundleURL = Bundle(for: CoreDataManager.self)
-            .bundleURL
-            .appendingPathComponent("CoreDataCache.bundle")
         guard
-            let bundle = Bundle(url: subspecBundleURL),
-            let storeURL = FileManager
-                .default
-                .urls(for: .documentDirectory, in: .userDomainMask)
-                .last?
-                .appendingPathComponent("\(name).sqlite")
+            let baseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+            let modelURL = Bundle.nomosi.url(forResource: name, withExtension: "momd"),
+            let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
             else {
-                print("Can't find a valid store named \(name)")
+                #warning("Handle error")
                 return
             }
-        self.storeURL = storeURL
-        self.container = NSPersistentContainer(name: name, bundle: bundle)
+        let storeURL = baseURL.appendingPathComponent("Database/\(name).sqlite")
+        let container = NSPersistentContainer(name: name, managedObjectModel: managedObjectModel)
         
         let description = NSPersistentStoreDescription()
         description.shouldInferMappingModelAutomatically = true
@@ -43,11 +37,16 @@ class CoreDataManager {
         description.url = storeURL
         
         container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
-        container.loadPersistentStores { storesDescription, error in
+        container.loadPersistentStores { _, error in
             if let error = error {
                 print("Fail to load persistent store - Error: \(error)")
             }
         }
+        let viewContext = container.viewContext
+        viewContext.mergePolicy = NSMergePolicy(merge: .overwriteMergePolicyType)
+        
+        self.storeURL = storeURL
+        self.container = container
     }
     
     func newCachedResponse(configurationClosure: ((_ cachedResponse: CachedResponse) -> Void)) {

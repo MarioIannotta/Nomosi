@@ -1,6 +1,0 @@
-framework module Pods_Nomosi_Example {
-  umbrella header "Pods-Nomosi_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

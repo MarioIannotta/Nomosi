@@ -1,6 +1,0 @@
-included: # paths to include during linting. `--path` is ignored if present.
-- ../Nomosi
-
-disabled_rules:
-- trailing_whitespace
-- variable_name

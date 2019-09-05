@@ -5,7 +5,7 @@
 //  Created by Mario on 04/07/2018.
 //
 
-import Foundation
+import UIKit
 
 public struct NetworkActivityIndicatorHandler: ServiceObserver {
     

@@ -5,7 +5,7 @@
 //  Created by Mario on 07/10/2018.
 //
 
-import Foundation
+import UIKit
 
 public class CoreDataCacheProvider: CacheProvider {
     
