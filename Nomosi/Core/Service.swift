@@ -31,14 +31,14 @@ open class Service<Response: ServiceResponse> {
     
     public private (set) var latestResponse: Response?
     public private (set) var latestError: ServiceError?
+    public var decorateRequestClosure: DecorateRequestClosure?
+    public var shouldRetryClosure: ShouldRetryClosure?
     
     private var sessionTask: URLSessionTask?
     private var completionClosures = ThreadSafeArray<CompletionClosure>()
     private var successClosures = ThreadSafeArray<SuccessClosure>()
     private var failureClosures = ThreadSafeArray<FailureClosure>()
     private var progressClosures = ThreadSafeArray<ProgressClosure>()
-    private var decorateRequestClosure: DecorateRequestClosure?
-    private var shouldRetryClosure: ShouldRetryClosure?
     private var hasBeenCancelled = false
     private var serviceObservers = [ServiceObserver]()
     private var retryCount = 0
