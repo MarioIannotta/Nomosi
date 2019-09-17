@@ -27,7 +27,7 @@
 		AC52883323216AA300C9462C /* CachedResponse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52880D23216AA200C9462C /* CachedResponse+CoreDataClass.swift */; };
 		AC52883423216AA300C9462C /* CachedResponse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52880E23216AA200C9462C /* CachedResponse+CoreDataProperties.swift */; };
 		AC52883523216AA300C9462C /* CoreDataCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52880F23216AA200C9462C /* CoreDataCacheProvider.swift */; };
-		AC52883623216AA300C9462C /* URLRequest+CacheID.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881123216AA200C9462C /* URLRequest+CacheID.swift */; };
+		AC52883623216AA300C9462C /* URLRequest+RequestID.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881123216AA200C9462C /* URLRequest+RequestID.swift */; };
 		AC52883723216AA300C9462C /* NSPersistentContainer+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881223216AA200C9462C /* NSPersistentContainer+Bundle.swift */; };
 		AC52883823216AA300C9462C /* RemoteImageServiceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881423216AA200C9462C /* RemoteImageServiceOverlayView.swift */; };
 		AC52883923216AA300C9462C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881623216AA200C9462C /* UIView+.swift */; };
@@ -126,7 +126,7 @@
 		AC52880D23216AA200C9462C /* CachedResponse+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CachedResponse+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC52880E23216AA200C9462C /* CachedResponse+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CachedResponse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC52880F23216AA200C9462C /* CoreDataCacheProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataCacheProvider.swift; sourceTree = "<group>"; };
-		AC52881123216AA200C9462C /* URLRequest+CacheID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+CacheID.swift"; sourceTree = "<group>"; };
+		AC52881123216AA200C9462C /* URLRequest+RequestID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+RequestID.swift"; sourceTree = "<group>"; };
 		AC52881223216AA200C9462C /* NSPersistentContainer+Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+Bundle.swift"; sourceTree = "<group>"; };
 		AC52881423216AA200C9462C /* RemoteImageServiceOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImageServiceOverlayView.swift; sourceTree = "<group>"; };
 		AC52881623216AA200C9462C /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -275,7 +275,6 @@
 		AC52881023216AA200C9462C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				AC52881123216AA200C9462C /* URLRequest+CacheID.swift */,
 				AC52881223216AA200C9462C /* NSPersistentContainer+Bundle.swift */,
 			);
 			path = Extensions;
@@ -326,9 +325,10 @@
 		AC52882423216AA300C9462C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AC52882723216AA300C9462C /* Bundle+.swift */,
 				AC52882523216AA300C9462C /* URLCache+CacheProvider.swift */,
 				AC52882623216AA300C9462C /* URLRequest+Queue.swift */,
-				AC52882723216AA300C9462C /* Bundle+.swift */,
+				AC52881123216AA200C9462C /* URLRequest+RequestID.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -663,7 +663,7 @@
 			files = (
 				AC52883423216AA300C9462C /* CachedResponse+CoreDataProperties.swift in Sources */,
 				AC52883B23216AA300C9462C /* ServiceObserverButton.swift in Sources */,
-				AC52883623216AA300C9462C /* URLRequest+CacheID.swift in Sources */,
+				AC52883623216AA300C9462C /* URLRequest+RequestID.swift in Sources */,
 				AC52883E23216AA300C9462C /* RemoteImageService.swift in Sources */,
 				AC52883523216AA300C9462C /* CoreDataCacheProvider.swift in Sources */,
 				AC52884F23216AA300C9462C /* Service+Log.swift in Sources */,
