@@ -41,7 +41,7 @@ public class CoreDataCacheProvider: CacheProvider {
             URLCache.shared.loadIfNeeded(request: request, cachePolicy: cachePolicy, completion: completion)
         case .onDisk:
             guard
-                let cachedResponse = coreDataManager?.fetchCachedResponse(withIdentifier: request.cacheID)
+                let cachedResponse = coreDataManager?.fetchCachedResponse(withIdentifier: request.requestID)
                 else {
                     completion(nil)
                     return
@@ -79,7 +79,7 @@ public class CoreDataCacheProvider: CacheProvider {
                     return
                 }
             coreDataManager.newCachedResponse { cachedResponse in
-                cachedResponse.id = request.cacheID
+                cachedResponse.id = request.requestID
                 cachedResponse.expirationDate = Date().addingTimeInterval(timeout) as NSDate
                 cachedResponse.data = data as NSData
                 completion(true)
@@ -88,7 +88,7 @@ public class CoreDataCacheProvider: CacheProvider {
     }
     
     private func removeCachedResponse(for request: URLRequest) {
-        coreDataManager?.removeCacheResponse(withIdentifier: request.cacheID)
+        coreDataManager?.removeCacheResponse(withIdentifier: request.requestID)
     }
     
 }

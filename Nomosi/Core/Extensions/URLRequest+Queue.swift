@@ -34,10 +34,7 @@ extension URLRequest {
      ```
      */
     private func _isEqual(to request: URLRequest) -> Bool {
-        return request.url == url &&
-            request.httpMethod == httpMethod &&
-            request.allHTTPHeaderFields == allHTTPHeaderFields &&
-            request.httpBody == httpBody
+        return requestID == request.requestID
     }
     
 }
