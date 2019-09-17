@@ -73,7 +73,7 @@ class ObjectsViewController: PaginatedViewController {
             // if objects.count > 0 and nextPageLink == nil it's the end of the list
         }
         service?
-            .load()?
+            .load()
             .addingObserver(activeServiceOverlay)
             .onSuccess { [weak self] response in
                 self?.nextPageLink = response.paginatedServiceInfo.next
@@ -91,7 +91,7 @@ class ObjectsViewController: PaginatedViewController {
             else { return }
         HarvardRemoteImageService(link: imageLink)
             .addingObserver(serviceObserver)
-            .load()?
+            .load()
             .onSuccess { [weak self] image in
                 self?.downloadedImagesObjectID.append(object.objectid)
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)

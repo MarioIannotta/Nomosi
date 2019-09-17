@@ -41,7 +41,7 @@ class GalleriesViewController: PaginatedViewController {
             service = GalleriesService(nextPageLink: nextPageLink, id: floorID)
         } 
         service?
-            .load()?
+            .load()
             .addingObserver(activeServiceOverlay)
             .onSuccess { [weak self] response in
                 self?.nextPageLink = response.paginatedServiceInfo.next

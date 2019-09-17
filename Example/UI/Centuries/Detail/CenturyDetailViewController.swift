@@ -37,7 +37,7 @@ class CenturyDetailViewController: UIViewController {
         century = nil
         let centuryService = CenturyService(id: centuryID)
         centuryService
-            .load()?
+            .load()
             .addingObserver(serviceOverlayView)
             .addingObserver(self)
             .onSuccess { [weak self] century in

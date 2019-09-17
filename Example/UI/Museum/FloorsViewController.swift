@@ -33,7 +33,7 @@ class FloorsViewController: UIViewController {
         let service = FloorsService()
         service
             .addingObserver(serviceOverlayView)
-            .load()?
+            .load()
             .onSuccess { [weak self] floors in
                 self?.floors = floors
                 self?.tableView.reloadData()

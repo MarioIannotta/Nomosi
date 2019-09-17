@@ -31,7 +31,7 @@ class CenturiesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         CenturiesService()
-            .load()?
+            .load()
             .addingObserver(serviceOverlayView)
             .onSuccess { [weak self] response in
                 self?.centuries = response
