@@ -14,7 +14,7 @@ public protocol DataConvertible {
     
 }
 
-extension Dictionary: DataConvertible {
+extension Dictionary: DataConvertible, BodyConvertible {
     
     public var asData: Data? {
         return try? JSONSerialization.data(withJSONObject: self, options: [])
@@ -22,7 +22,7 @@ extension Dictionary: DataConvertible {
     
 }
 
-extension Array: DataConvertible {
+extension Array: DataConvertible, BodyConvertible {
     
     public var asData: Data? {
         return try? JSONSerialization.data(withJSONObject: self, options: [])
@@ -30,7 +30,7 @@ extension Array: DataConvertible {
     
 }
 
-extension String: DataConvertible {
+extension String: DataConvertible, BodyConvertible {
     
     public var asData: Data? {
         return data(using: .utf8)
@@ -38,7 +38,7 @@ extension String: DataConvertible {
     
 }
 
-extension URL: DataConvertible {
+extension URL: DataConvertible, BodyConvertible {
     
     public var asData: Data? {
         return try? Data(contentsOf: self)
@@ -47,6 +47,15 @@ extension URL: DataConvertible {
 }
 
 extension DataConvertible where Self: Encodable {
+    
+    public var asData: Data? {
+        let jsonEncoder = JSONEncoder()
+        return try? jsonEncoder.encode(self)
+    }
+    
+}
+
+extension BodyConvertible where Self: Encodable {
     
     public var asData: Data? {
         let jsonEncoder = JSONEncoder()

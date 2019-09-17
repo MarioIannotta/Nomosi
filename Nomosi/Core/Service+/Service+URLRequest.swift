@@ -43,7 +43,11 @@ extension Service {
         var allHeaders = [String: String]()
         headers.forEach { allHeaders[$0.key] = $0.value }
         request.allHTTPHeaderFields = allHeaders
-        request.httpBody = body?.asData
+        if let bodyData = body?.asData {
+            request.httpBody = bodyData
+        } else if let bodyStream = body?.asBodyStream {
+            request.httpBodyStream = bodyStream
+        }
         request.timeoutInterval = timeoutInterval
         return request
     }

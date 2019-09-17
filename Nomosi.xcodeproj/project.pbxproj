@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		AC21F0D023317A4A007E55CE /* BodyConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC21F0CF23317A4A007E55CE /* BodyConvertible.swift */; };
 		AC52880123216A9800C9462C /* Nomosi.h in Headers */ = {isa = PBXBuildFile; fileRef = AC5287FF23216A9800C9462C /* Nomosi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC52883123216AA300C9462C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52880823216AA200C9462C /* CoreDataManager.swift */; };
 		AC52883223216AA300C9462C /* NomosiCoreDataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC52880A23216AA200C9462C /* NomosiCoreDataCache.xcdatamodeld */; };
@@ -39,7 +40,7 @@
 		AC52883F23216AA300C9462C /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881D23216AA300C9462C /* DataConvertible.swift */; };
 		AC52884023216AA300C9462C /* ServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881E23216AA300C9462C /* ServiceObserver.swift */; };
 		AC52884123216AA300C9462C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881F23216AA300C9462C /* Service.swift */; };
-		AC52884223216AA300C9462C /* ServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882023216AA300C9462C /* ServiceRequest.swift */; };
+		AC52884223216AA300C9462C /* Service+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882023216AA300C9462C /* Service+URLRequest.swift */; };
 		AC52884323216AA300C9462C /* AnyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882123216AA300C9462C /* AnyService.swift */; };
 		AC52884423216AA300C9462C /* ThreadSafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882223216AA300C9462C /* ThreadSafeArray.swift */; };
 		AC52884523216AA300C9462C /* MockProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882323216AA300C9462C /* MockProvider.swift */; };
@@ -118,6 +119,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AC21F0CF23317A4A007E55CE /* BodyConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyConvertible.swift; sourceTree = "<group>"; };
 		AC5287FC23216A9800C9462C /* Nomosi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nomosi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5287FF23216A9800C9462C /* Nomosi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nomosi.h; sourceTree = "<group>"; };
 		AC52880023216A9800C9462C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,7 +140,7 @@
 		AC52881D23216AA300C9462C /* DataConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		AC52881E23216AA300C9462C /* ServiceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceObserver.swift; sourceTree = "<group>"; };
 		AC52881F23216AA300C9462C /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		AC52882023216AA300C9462C /* ServiceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRequest.swift; sourceTree = "<group>"; };
+		AC52882023216AA300C9462C /* Service+URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Service+URLRequest.swift"; sourceTree = "<group>"; };
 		AC52882123216AA300C9462C /* AnyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyService.swift; sourceTree = "<group>"; };
 		AC52882223216AA300C9462C /* ThreadSafeArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadSafeArray.swift; sourceTree = "<group>"; };
 		AC52882323216AA300C9462C /* MockProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockProvider.swift; sourceTree = "<group>"; };
@@ -212,6 +214,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC21F0CE233179F8007E55CE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				AC21F0CF23317A4A007E55CE /* BodyConvertible.swift */,
+				AC52882923216AA300C9462C /* CacheProvider.swift */,
+				AC52881D23216AA300C9462C /* DataConvertible.swift */,
+				AC52881E23216AA300C9462C /* ServiceObserver.swift */,
+				AC52882A23216AA300C9462C /* ServiceResponse.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		AC5287F223216A9800C9462C = {
 			isa = PBXGroup;
 			children = (
@@ -307,16 +321,12 @@
 			children = (
 				AC52882123216AA300C9462C /* AnyService.swift */,
 				AC52882B23216AA300C9462C /* AsyncTask.swift */,
-				AC52882923216AA300C9462C /* CacheProvider.swift */,
-				AC52881D23216AA300C9462C /* DataConvertible.swift */,
 				AC52882423216AA300C9462C /* Extensions */,
 				AC52882323216AA300C9462C /* MockProvider.swift */,
+				AC21F0CE233179F8007E55CE /* Protocols */,
 				AC52881F23216AA300C9462C /* Service.swift */,
 				AC52882C23216AA300C9462C /* Service+ */,
 				AC52882823216AA300C9462C /* ServiceError.swift */,
-				AC52881E23216AA300C9462C /* ServiceObserver.swift */,
-				AC52882023216AA300C9462C /* ServiceRequest.swift */,
-				AC52882A23216AA300C9462C /* ServiceResponse.swift */,
 				AC52882223216AA300C9462C /* ThreadSafeArray.swift */,
 			);
 			path = Core;
@@ -336,10 +346,11 @@
 		AC52882C23216AA300C9462C /* Service+ */ = {
 			isa = PBXGroup;
 			children = (
-				AC52882D23216AA300C9462C /* Service+Hashable.swift */,
 				AC52882E23216AA300C9462C /* Service+Download.swift */,
+				AC52882D23216AA300C9462C /* Service+Hashable.swift */,
 				AC52882F23216AA300C9462C /* Service+Log.swift */,
 				AC52883023216AA300C9462C /* Service+Upload.swift */,
+				AC52882023216AA300C9462C /* Service+URLRequest.swift */,
 			);
 			path = "Service+";
 			sourceTree = "<group>";
@@ -668,13 +679,14 @@
 				AC52883523216AA300C9462C /* CoreDataCacheProvider.swift in Sources */,
 				AC52884F23216AA300C9462C /* Service+Log.swift in Sources */,
 				AC52884523216AA300C9462C /* MockProvider.swift in Sources */,
-				AC52884223216AA300C9462C /* ServiceRequest.swift in Sources */,
+				AC52884223216AA300C9462C /* Service+URLRequest.swift in Sources */,
 				AC52883F23216AA300C9462C /* DataConvertible.swift in Sources */,
 				AC52883823216AA300C9462C /* RemoteImageServiceOverlayView.swift in Sources */,
 				AC52884323216AA300C9462C /* AnyService.swift in Sources */,
 				AC52884623216AA300C9462C /* URLCache+CacheProvider.swift in Sources */,
 				AC52884A23216AA300C9462C /* CacheProvider.swift in Sources */,
 				AC52883A23216AA300C9462C /* UIImageView+.swift in Sources */,
+				AC21F0D023317A4A007E55CE /* BodyConvertible.swift in Sources */,
 				AC52883223216AA300C9462C /* NomosiCoreDataCache.xcdatamodeld in Sources */,
 				AC52884023216AA300C9462C /* ServiceObserver.swift in Sources */,
 				AC52885023216AA300C9462C /* Service+Upload.swift in Sources */,

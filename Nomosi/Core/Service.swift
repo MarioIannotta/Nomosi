@@ -19,7 +19,7 @@ open class Service<Response: ServiceResponse> {
     public var method: Method = .get
     public var url: URL?
     public var serviceType: ServiceType = .data
-    public var body: DataConvertible?
+    public var body: BodyConvertible?
     public var headers: [String: String] = [:]
     public var log: Log = .minimal
     public var timeoutInterval: TimeInterval = 60

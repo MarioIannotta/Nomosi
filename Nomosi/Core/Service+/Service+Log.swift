@@ -41,6 +41,8 @@ extension Service: CustomDebugStringConvertible {
             let bodyAsString = String(data: bodyData, encoding: .utf8),
             bodyAsString.count > 0 {
             bodyDescription = bodyAsString
+        } else if let bodyStream = body?.asBodyStream {
+            bodyDescription = "Body stream \(bodyStream.description)"
         }
         return "Body: \(bodyDescription)"
     }
