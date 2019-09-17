@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum CachePolicy {
+public enum CachePolicy: Equatable {
     case none
     case inRam(timeout: TimeInterval)
     case onDisk(timeout: TimeInterval)
@@ -37,7 +37,8 @@ extension Service {
                                data: Data?) {
         guard
             let response = response,
-            let data = data
+            let data = data,
+            cachePolicy != CachePolicy.none
             else { return }
         cacheProvider?.storeIfNeeded(
             request: request,
