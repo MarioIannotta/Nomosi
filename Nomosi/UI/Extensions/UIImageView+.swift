@@ -19,7 +19,7 @@ extension UIImageView {
             service.addObserver(overlayView)
         }
         service
-            .load()?
+            .load()
             .onCompletion { [weak self] image, _ in
                 self?.image = image
             }

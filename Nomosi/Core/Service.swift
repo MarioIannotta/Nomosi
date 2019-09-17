@@ -88,7 +88,7 @@ open class Service<Response: ServiceResponse> {
     }
     
     @discardableResult
-    public func load() -> Self? {
+    public func load() -> Self {
         /*
          The "real" load must be performed with some little delay because it's possible
          to schedule a load before setting all the required closures.
