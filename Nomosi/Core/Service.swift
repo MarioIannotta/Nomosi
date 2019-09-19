@@ -350,7 +350,9 @@ open class Service<Response: ServiceResponse> {
         if let response = response {
             if let error = validateResponseClosure?(response) {
                 self.log.print("⚠️ \(self): Error validating request. Error: \(error)")
-                self.failureClosures.forEach { $0(.responseValidationFailed(error)) }
+                DispatchQueue.main.async {
+                    self.failureClosures.forEach { $0(.responseValidationFailed(error)) }
+                }
             } else {
                 DispatchQueue.main.async {
                     self.successClosures.forEach { $0(response) }
