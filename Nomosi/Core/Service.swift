@@ -15,6 +15,7 @@ open class Service<Response: ServiceResponse> {
     public typealias FailureClosure = (_ error: ServiceError) -> Void
     public typealias DecorateRequestClosure = (@escaping (_ error: ServiceError?) -> Void) -> Void
     public typealias ShouldRetryClosure = (_ response: Response?, _ error: ServiceError?, _ retryCount: Int) -> Bool
+    public typealias ValidateResponseClosure = (_ response: Response) -> Error?
     
     public var method: Method = .get
     public var url: URL?
@@ -33,6 +34,7 @@ open class Service<Response: ServiceResponse> {
     public private (set) var latestError: ServiceError?
     public var decorateRequestClosure: DecorateRequestClosure?
     public var shouldRetryClosure: ShouldRetryClosure?
+    public var validateResponseClosure: ValidateResponseClosure?
     
     private var sessionTask: URLSessionTask?
     private var completionClosures = ThreadSafeArray<CompletionClosure>()
@@ -72,6 +74,12 @@ open class Service<Response: ServiceResponse> {
     @discardableResult
     public func shouldRetry(_ closure: @escaping ShouldRetryClosure) -> Self {
         shouldRetryClosure = closure
+        return self
+    }
+    
+    @discardableResult
+    public func validateResponse(_ closure: @escaping ValidateResponseClosure) -> Self {
+        validateResponseClosure = closure
         return self
     }
     
@@ -137,7 +145,7 @@ open class Service<Response: ServiceResponse> {
         
         if let mockedData = mockProvider?.mockedData?.asData {
             log.print("🎭 \(self): getting mocked data")
-            parseDataAndCompleteRequest(data: mockedData)
+            parseDataAndValidateRequest(data: mockedData)
             return self
         }
         
@@ -212,7 +220,7 @@ open class Service<Response: ServiceResponse> {
                 else { return }
             if let data = data {
                 self.log.print("📦 \(self): getting data from cache")
-                self.parseDataAndCompleteRequest(data: data)
+                self.parseDataAndValidateRequest(data: data)
             } else {
                 self.performTask(request: request)
             }
@@ -313,10 +321,10 @@ open class Service<Response: ServiceResponse> {
                 return
             }
         cacheResponseIfNeeded(request: request, response: response, data: data)
-        parseDataAndCompleteRequest(data: data)
+        parseDataAndValidateRequest(data: data)
     }
     
-    private func parseDataAndCompleteRequest(data: Data) {
+    private func parseDataAndValidateRequest(data: Data) {
         let responseString = String(data: data, encoding: .utf8) ?? "\(data.count) bytes"
         self.log.print("Response: \n\(responseString)", requiredLevel: .verbose)
         do {
@@ -339,9 +347,14 @@ open class Service<Response: ServiceResponse> {
         latestResponse = response
         latestError = error
         serviceObservers.forEach { $0.serviceDidEndRequest(self) }
-        if let safeResponse = response {
-            DispatchQueue.main.async {
-                self.successClosures.forEach { $0(safeResponse) }
+        if let response = response {
+            if let error = validateResponseClosure?(response) {
+                self.log.print("⚠️ \(self): Error validating request. Error: \(error)")
+                self.failureClosures.forEach { $0(.responseValidationFailed(error)) }
+            } else {
+                DispatchQueue.main.async {
+                    self.successClosures.forEach { $0(response) }
+                }
             }
         } else if let error = error {
             self.log.print("⚠️ \(self): Error \(error)")

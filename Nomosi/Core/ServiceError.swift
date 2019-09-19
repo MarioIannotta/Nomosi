@@ -21,6 +21,11 @@ public struct ServiceError: Error {
         }
     }
     
+    public static func responseValidationFailed(_ error: Error) -> ServiceError {
+        return ServiceError(code: 8,
+                            reason: "Error validating service response",
+                            userInfo: UserInfo(underlyingError: error))
+    }
     public static func invalidStatusCode(_ statusCode: Int?) -> ServiceError {
         return ServiceError(code: 7,
                             reason: "Invalid status code \(String(describing: statusCode))",
