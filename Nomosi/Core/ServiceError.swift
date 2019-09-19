@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ServiceError: Error {
+public struct ServiceError: LocalizedError {
     
     public struct UserInfo {
         
@@ -55,6 +55,10 @@ public struct ServiceError: Error {
         self.code = 1
         self.reason = networkError.localizedDescription
         self.userInfo = UserInfo(underlyingError: networkError)
+    }
+    
+    public var errorDescription: String? {
+        return "Error \(code) - \(reason)"
     }
     
 }
