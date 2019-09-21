@@ -336,6 +336,7 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func completeRequest(response: Response?, error: ServiceError?) {
+        var finalError = error
         let shouldRetry = shouldRetryClosure?(response, error, retryCount) ?? false
         guard
             !shouldRetry
@@ -344,28 +345,28 @@ open class Service<Response: ServiceResponse> {
                 self._load()
                 return
             }
-        latestResponse = response
-        latestError = error
-        serviceObservers.forEach { $0.serviceDidEndRequest(self) }
+        defer {
+            latestResponse = response
+            latestError = finalError
+            serviceObservers.forEach { $0.serviceDidEndRequest(self) }
+        }
         if let response = response {
             if let error = validateResponseClosure?(response) {
+                finalError = ServiceError.responseValidationFailed(error)
                 self.log.print("⚠️ \(self): Error validating request. Error: \(error)")
-                DispatchQueue.main.async {
-                    self.failureClosures.forEach { $0(.responseValidationFailed(error)) }
-                }
             } else {
                 DispatchQueue.main.async {
                     self.successClosures.forEach { $0(response) }
                 }
             }
-        } else if let error = error {
+        } else if let error = finalError {
             self.log.print("⚠️ \(self): Error \(error)")
             DispatchQueue.main.async {
                 self.failureClosures.forEach { $0(error) }
             }
         }
         DispatchQueue.main.async {
-            self.completionClosures.forEach { $0(response, error) }
+            self.completionClosures.forEach { $0(response, finalError) }
         }
     }
     
