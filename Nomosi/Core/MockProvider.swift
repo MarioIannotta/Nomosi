@@ -11,6 +11,7 @@ public protocol MockProvider: class {
     
     var isMockEnabled: Bool { get }
     var mockedData: DataConvertible? { get }
+    var mockBundle: Bundle? { get }
     
 }
 
@@ -28,11 +29,15 @@ public extension MockProvider {
             }
         let mockProviderName = String(describing: type(of: self))
         guard
-            let path = Bundle.main.path(forResource: mockProviderName, ofType: "mock")
+            let path = mockBundle?.path(forResource: mockProviderName, ofType: "mock")
             else {
                 return nil
             }
         return URL(fileURLWithPath: path)
+    }
+    
+    var mockBundle: Bundle? {
+        return .main
     }
     
 }
