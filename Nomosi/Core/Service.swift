@@ -336,7 +336,6 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func completeRequest(response: Response?, error: ServiceError?) {
-        var finalError = error
         let shouldRetry = shouldRetryClosure?(response, error, retryCount) ?? false
         guard
             !shouldRetry
@@ -345,28 +344,43 @@ open class Service<Response: ServiceResponse> {
                 self._load()
                 return
             }
-        defer {
-            latestResponse = response
-            latestError = finalError
-            serviceObservers.forEach { $0.serviceDidEndRequest(self) }
-        }
+        
+        var finalError = error
         if let response = response {
             if let error = validateResponseClosure?(response) {
-                finalError = ServiceError.responseValidationFailed(error)
                 self.log.print("⚠️ \(self): Error validating request. Error: \(error)")
+                let validationError = ServiceError.responseValidationFailed(error)
+                finalError = validationError
+                notifyError(validationError)
             } else {
-                DispatchQueue.main.async {
-                    self.successClosures.forEach { $0(response) }
-                }
+                notifySuccess(response)
             }
         } else if let error = finalError {
-            self.log.print("⚠️ \(self): Error \(error)")
-            DispatchQueue.main.async {
-                self.failureClosures.forEach { $0(error) }
-            }
+            notifyError(error)
         }
+        
+        latestResponse = response
+        latestError = finalError
+        notifyCompletion(response: latestResponse, error: latestError)
+    }
+    
+    private func notifyError(_ error: ServiceError) {
+        self.log.print("⚠️ \(self): Error \(error)")
         DispatchQueue.main.async {
-            self.completionClosures.forEach { $0(response, finalError) }
+            self.failureClosures.forEach { $0(error) }
+        }
+    }
+    
+    private func notifySuccess(_ response: Response) {
+        DispatchQueue.main.async {
+            self.successClosures.forEach { $0(response) }
+        }
+    }
+    
+    private func notifyCompletion(response: Response?, error: ServiceError?) {
+        DispatchQueue.main.async {
+            self.completionClosures.forEach { $0(response, error) }
+            self.serviceObservers.forEach { $0.serviceDidEndRequest(self) }
         }
     }
     
