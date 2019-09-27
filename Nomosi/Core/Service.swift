@@ -348,7 +348,6 @@ open class Service<Response: ServiceResponse> {
         var finalError = error
         if let response = response {
             if let error = validateResponseClosure?(response) {
-                self.log.print("⚠️ \(self): Error validating request. Error: \(error)")
                 let validationError = ServiceError.responseValidationFailed(error)
                 finalError = validationError
                 notifyError(validationError)
