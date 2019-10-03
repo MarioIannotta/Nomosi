@@ -29,6 +29,7 @@ open class Service<Response: ServiceResponse> {
     public var queue: DispatchQueue = .main
     public var validStatusCodes: Range<Int>? = 200..<300
     public weak var mockProvider: MockProvider?
+    public var sslPinningHandler: SSLPinningHandler?
     
     public private (set) var latestResponse: Response?
     public private (set) var latestError: ServiceError?
@@ -131,8 +132,7 @@ open class Service<Response: ServiceResponse> {
         sessionTask?.cancel()
     }
 
-    @discardableResult
-    private func _load() -> Self? {
+    private func _load() {
         retryCount += 1
         hasBeenCancelled = false
         // if the user has defined a decorateRequestClosure, let's log the request after the decorating
@@ -146,21 +146,21 @@ open class Service<Response: ServiceResponse> {
         if let mockedData = mockProvider?.mockedData?.asData {
             log.print("🎭 \(self): getting mocked data")
             parseDataAndValidateRequest(data: mockedData)
-            return self
+            return
         }
         
         guard
             let request = makeRequest()
             else {
                 completeRequest(response: nil, error: .invalidRequest)
-                return nil
+                return
             }
         
         guard
             !request.isOnGoing
             else {
                 completeRequest(response: nil, error: .redundantRequest)
-                return nil
+                return
             }
         
         let decorateRequestCallback = self.decorateRequestClosure ?? { completion in completion(nil) }
@@ -197,8 +197,6 @@ open class Service<Response: ServiceResponse> {
             
             self.loadFromCacheIfNeeded(request: request)
         }
-        
-        return self
     }
     
     private func printFullRequest() {
@@ -241,7 +239,10 @@ open class Service<Response: ServiceResponse> {
     
     private func performDataTask(request: URLRequest) {
         request.begin()
-        sessionTask = URLSession.shared.dataTask(with: request) { data, response, error in
+        let session = URLSession(configuration: .default,
+                                 delegate: TaskDelegate(sslPinningHandler: sslPinningHandler),
+                                 delegateQueue: nil)
+        sessionTask = session.dataTask(with: request) { data, response, error in
             request.end()
             self.handleCompletedTask(request: request, data: data, response: response, error: error)
         }
@@ -261,7 +262,8 @@ open class Service<Response: ServiceResponse> {
             onCompletion: { data, response, error in
                 request.end()
                 self.handleCompletedTask(request: request, data: data, response: response, error: error)
-            })
+            },
+            sslPinningHandler: sslPinningHandler)
         let session = makeURLSession(delegate: uploadDelegate)
         switch serviceType {
         case .upload(let content):
@@ -285,7 +287,8 @@ open class Service<Response: ServiceResponse> {
                                          data: url.absoluteString.asData,
                                          response: response,
                                          error: error)
-            })
+            },
+            sslPinningHandler: sslPinningHandler)
         let session = makeURLSession(delegate: downloadDelegate)
         sessionTask = session.downloadTask(with: request)
         sessionTask?.resume()

@@ -244,6 +244,7 @@ Nomosi is available under the MIT license. See the LICENSE file for more info.
 
 * [ ] Document all the public stuff
 * [ ] Add unit tests
+* [x] Add ssl pinning support
 * [x] CoreData CacheProvider
 * [x] Download requests
 * [x] Upload requests

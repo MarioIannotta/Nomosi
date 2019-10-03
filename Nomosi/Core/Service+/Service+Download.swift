@@ -36,4 +36,17 @@ class DownloadDelegate: AsycTask<URL>, URLSessionDownloadDelegate {
         onCompletion?(location, downloadTask.response, downloadTask.error)
     }
     
+    func urlSession(_ session: URLSession,
+                    didReceive challenge: URLAuthenticationChallenge,
+                    completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        guard
+            let sslPinningHandler = sslPinningHandler
+            else {
+                completionHandler(.performDefaultHandling, nil)
+                return
+            }
+        let configuration = sslPinningHandler.configuration(for: challenge)
+        completionHandler(configuration.disposition, configuration.credentials)
+    }
+    
 }

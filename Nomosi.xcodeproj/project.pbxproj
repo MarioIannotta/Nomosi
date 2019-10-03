@@ -92,6 +92,8 @@
 		AC5288BE23216AD700C9462C /* FloorsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52889A23216AD700C9462C /* FloorsService.swift */; };
 		AC5288C323216B3400C9462C /* Nomosi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC5287FC23216A9800C9462C /* Nomosi.framework */; };
 		AC5288C423216B3400C9462C /* Nomosi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC5287FC23216A9800C9462C /* Nomosi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AC959BAE23462DAE00AFE6D5 /* SSLPinningHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC959BAD23462DAE00AFE6D5 /* SSLPinningHandler.swift */; };
+		AC959BB0234638C500AFE6D5 /* Service+TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC959BAF234638C500AFE6D5 /* Service+TaskDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +195,8 @@
 		AC52889923216AD700C9462C /* FloorsService.mock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FloorsService.mock; sourceTree = "<group>"; };
 		AC52889A23216AD700C9462C /* FloorsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloorsService.swift; sourceTree = "<group>"; };
 		AC5288CA23216B6400C9462C /* ExportFramework.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ExportFramework.sh; sourceTree = "<group>"; };
+		AC959BAD23462DAE00AFE6D5 /* SSLPinningHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLPinningHandler.swift; sourceTree = "<group>"; };
+		AC959BAF234638C500AFE6D5 /* Service+TaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+TaskDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +226,7 @@
 				AC52881D23216AA300C9462C /* DataConvertible.swift */,
 				AC52881E23216AA300C9462C /* ServiceObserver.swift */,
 				AC52882A23216AA300C9462C /* ServiceResponse.swift */,
+				AC959BAD23462DAE00AFE6D5 /* SSLPinningHandler.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 		AC52882C23216AA300C9462C /* Service+ */ = {
 			isa = PBXGroup;
 			children = (
+				AC959BAF234638C500AFE6D5 /* Service+TaskDelegate.swift */,
 				AC52882E23216AA300C9462C /* Service+Download.swift */,
 				AC52882D23216AA300C9462C /* Service+Hashable.swift */,
 				AC52882F23216AA300C9462C /* Service+Log.swift */,
@@ -687,11 +693,13 @@
 				AC52884A23216AA300C9462C /* CacheProvider.swift in Sources */,
 				AC52883A23216AA300C9462C /* UIImageView+.swift in Sources */,
 				AC21F0D023317A4A007E55CE /* BodyConvertible.swift in Sources */,
+				AC959BAE23462DAE00AFE6D5 /* SSLPinningHandler.swift in Sources */,
 				AC52883223216AA300C9462C /* NomosiCoreDataCache.xcdatamodeld in Sources */,
 				AC52884023216AA300C9462C /* ServiceObserver.swift in Sources */,
 				AC52885023216AA300C9462C /* Service+Upload.swift in Sources */,
 				AC52884B23216AA300C9462C /* ServiceResponse.swift in Sources */,
 				AC52883123216AA300C9462C /* CoreDataManager.swift in Sources */,
+				AC959BB0234638C500AFE6D5 /* Service+TaskDelegate.swift in Sources */,
 				AC52884123216AA300C9462C /* Service.swift in Sources */,
 				AC52884723216AA300C9462C /* URLRequest+Queue.swift in Sources */,
 				AC52884C23216AA300C9462C /* AsyncTask.swift in Sources */,
