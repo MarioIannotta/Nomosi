@@ -20,10 +20,10 @@ mkdir -p "${universal_framework_path}"
 #exit 0
 
 echo "1/5 Building the target \"${target}\" with the configuration \"${configuration}\" for the simulator"
-xcodebuild ENABLE_BITCODE=YES BITCODE_GENERATION_MODE=bitcode BUILD_DIR=${build_path} SWIFT_ENABLE_BATCH_MODE=NO > /dev/null -target ${target} -configuration ${configuration} -sdk iphonesimulator clean build
+xcodebuild ENABLE_BITCODE=YES BITCODE_GENERATION_MODE=bitcode BUILD_DIR=${build_path} BUILD_LIBRARY_FOR_DISTRIBUTION=YES SWIFT_ENABLE_BATCH_MODE=NO > /dev/null -target ${target} -configuration ${configuration} -sdk iphonesimulator clean build
 
 echo "2/5 Building the target \"${target}\" with the configuration \"${configuration}\" for the devices"
-xcodebuild ENABLE_BITCODE=YES BITCODE_GENERATION_MODE=bitcode BUILD_DIR=${build_path} SWIFT_ENABLE_BATCH_MODE=NO > /dev/null -target ${target} -configuration ${configuration} -sdk iphoneos clean build ONLY_ACTIVE_ARCH=NO
+xcodebuild ENABLE_BITCODE=YES BITCODE_GENERATION_MODE=bitcode BUILD_DIR=${build_path} BUILD_LIBRARY_FOR_DISTRIBUTION=YES SWIFT_ENABLE_BATCH_MODE=NO > /dev/null -target ${target} -configuration ${configuration} -sdk iphoneos clean build ONLY_ACTIVE_ARCH=NO
 
 cp -R "${build_path}/${configuration}-iphoneos/" "${universal_base_path}/"
 
