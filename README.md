@@ -3,6 +3,7 @@
 [![Version](https://img.shields.io/cocoapods/v/Nomosi.svg?style=flat)](https://cocoapods.org/pods/Nomosi)
 [![License](https://img.shields.io/cocoapods/l/Nomosi.svg?style=flat)](https://cocoapods.org/pods/Nomosi)
 [![Platform](https://img.shields.io/cocoapods/p/Nomosi.svg?style=flat)](https://cocoapods.org/pods/Nomosi)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ## Why
 
@@ -229,12 +230,11 @@ For an extensive overview about how all of that works, you can take a look at th
 
 ## Installation
 
-Nomosi is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+#### Cocoapods
+`pod 'Nomosi'`
 
-```ruby
-pod 'Nomosi'
-```
+#### Carthage
+`github "MarioIannotta/Nomosi" ~> 0.1.2`
 
 ## License
 
