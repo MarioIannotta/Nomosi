@@ -113,6 +113,8 @@ class SettingsViewController: UIViewController {
         case .onDisk(let timeout):
             cachePolicySegmentControl.selectedSegmentIndex = 2
             cacheTimeoutSegmentControl.selectedSegmentIndex = Timeout(rawValue: timeout)?.index ?? 0
+        @unknown default:
+            break
         }
         hideCacheConfigurationIfNeeded()
     }

@@ -24,10 +24,7 @@ class CoreDataManager {
             let baseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
             let modelURL = Bundle.nomosi.url(forResource: name, withExtension: "momd"),
             let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
-            else {
-                #warning("Handle error")
-                return
-            }
+            else { return }
         let storeURL = baseURL.appendingPathComponent("Database/\(name).sqlite")
         let container = NSPersistentContainer(name: name, managedObjectModel: managedObjectModel)
         
