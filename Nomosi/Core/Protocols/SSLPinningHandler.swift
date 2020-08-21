@@ -9,20 +9,19 @@
 import Foundation
 
 public protocol SSLPinningHandler {
-    
+
     func configuration(for challenge: URLAuthenticationChallenge) -> (disposition: URLSession.AuthChallengeDisposition, credentials: URLCredential?)
-    
 }
 
-public struct SSLPinningLocalCertificate: SSLPinningHandler {
-    
-    private let certificatePath: String
-    
-    public init(certificatePath: String) {
-        self.certificatePath = certificatePath
+struct SSLPinningLocalCertificate: SSLPinningHandler {
+
+    private let certificatesPaths: [String]
+
+    init(certificatePaths: [String]) {
+        self.certificatesPaths = certificatePaths
     }
-    
-    public func configuration(for challenge: URLAuthenticationChallenge) -> (disposition: URLSession.AuthChallengeDisposition, credentials: URLCredential?) {
+
+    func configuration(for challenge: URLAuthenticationChallenge) -> (disposition: URLSession.AuthChallengeDisposition, credentials: URLCredential?) {
         guard
             challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
             let serverTrust = challenge.protectionSpace.serverTrust,
@@ -37,13 +36,13 @@ public struct SSLPinningLocalCertificate: SSLPinningHandler {
                 let size = CFDataGetLength(serverCertificateData)
                 return NSData(bytes: data, length: size) as Data
             }(),
-            let localCertificateData = NSData(contentsOfFile: certificatePath),
-            localCertificateData.isEqual(to: serverCertificateData)
+            certificatesPaths
+                .compactMap({ NSData(contentsOfFile: $0) })
+                .contains(where: { $0.isEqual(to: serverCertificateData )})
             else {
                 return (.cancelAuthenticationChallenge, nil)
             }
-        
+
         return (.useCredential, URLCredential(trust: serverTrust))
     }
-    
 }
