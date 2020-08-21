@@ -36,8 +36,13 @@ extension Service: AnyService {
     
     public func load(completion: AnyServiceResponseCallback?) {
         if let completion = completion {
-            onCompletion { _, error in
-                completion(error)
+            onCompletion { result in
+                switch result {
+                case .failure(let error):
+                    completion(error)
+                case .success:
+                    completion(nil)
+                }
             }
         }
         load()

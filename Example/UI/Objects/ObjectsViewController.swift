@@ -79,7 +79,7 @@ class ObjectsViewController: PaginatedViewController {
                 self?.nextPageLink = response.paginatedServiceInfo.next
                 self?.insertObjects(response.objects)
             }
-            .onCompletion { [weak self] _, _ in
+            .onCompletion { [weak self] _ in
                 self?.currentService = nil
             }
         currentService = service

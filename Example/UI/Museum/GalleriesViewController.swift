@@ -47,7 +47,7 @@ class GalleriesViewController: PaginatedViewController {
                 self?.nextPageLink = response.paginatedServiceInfo.next
                 self?.insertObjects(response.galleries)
             }
-            .onCompletion { [weak self] _, _ in
+            .onCompletion { [weak self] _ in
                 self?.currentService = nil
             }
         currentService = service

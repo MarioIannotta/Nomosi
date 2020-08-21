@@ -20,8 +20,13 @@ extension UIImageView {
         }
         service
             .load()
-            .onCompletion { [weak self] image, _ in
-                self?.image = image
+            .onCompletion { [weak self] result in
+                switch result {
+                case .success(let image):
+                    self?.image = image
+                case .failure:
+                    self?.image = nil
+                }
             }
         return service
     }

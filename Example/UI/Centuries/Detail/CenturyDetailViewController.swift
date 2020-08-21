@@ -46,7 +46,7 @@ class CenturyDetailViewController: UIViewController {
             .onFailure { error in
                 // TODO: handle error
             }
-            .onCompletion { [weak self] _, _ in
+            .onCompletion { [weak self] _ in
                 self?.reloadContent()
             }
     }

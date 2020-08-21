@@ -20,6 +20,8 @@ public struct ServiceError: LocalizedError {
             self.underlyingError = underlyingError
         }
     }
+
+    public static let genericError = ServiceError(code: 9, reason: "This shouldn't happen")
     
     public static func responseValidationFailed(_ error: Error) -> ServiceError {
         ServiceError(code: 8,
@@ -31,11 +33,11 @@ public struct ServiceError: LocalizedError {
                      reason: "Invalid status code \(String(describing: statusCode))",
                      userInfo: UserInfo(statusCode: statusCode))
     }
-    public static var redundantRequest = ServiceError(code: 6, reason: "The same request is already running")
-    public static var requestCancelled = ServiceError(code: 5, reason: "The request has been cancelled")
-    public static var invalidRequest = ServiceError(code: 4, reason: "Invalid request")
-    public static var emptyResponse = ServiceError(code: 3, reason: "Empty response")
-    public static func cannotParseResponse(error: Error) -> ServiceError {
+    public static let redundantRequest = ServiceError(code: 6, reason: "The same request is already running")
+    public static let requestCancelled = ServiceError(code: 5, reason: "The request has been cancelled")
+    public static let invalidRequest = ServiceError(code: 4, reason: "Invalid request")
+    public static let emptyResponse = ServiceError(code: 3, reason: "Empty response")
+    public static func cannotParseResponse(error: Error?) -> ServiceError {
         ServiceError(code: 2,
                      reason: "Can't parse the response",
                      userInfo: UserInfo(underlyingError: error))

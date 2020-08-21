@@ -9,12 +9,13 @@
 import Foundation
 
 open class Service<Response: ServiceResponse> {
-    
-    public typealias CompletionClosure = (_ response: Response?, _ error: ServiceError?) -> Void
+
+    public typealias ServiceResult = Result<Response, ServiceError>
+    public typealias CompletionClosure = (ServiceResult) -> Void
     public typealias SuccessClosure = (_ response: Response) -> Void
     public typealias FailureClosure = (_ error: ServiceError) -> Void
     public typealias DecorateRequestClosure = (@escaping (_ error: ServiceError?) -> Void) -> Void
-    public typealias ShouldRetryClosure = (_ response: Response?, _ error: ServiceError?, _ retryCount: Int) -> Bool
+    public typealias ShouldRetryClosure = (_ result: ServiceResult, _ retryCount: Int) -> Bool
     public typealias ValidateResponseClosure = (_ response: Response) -> Error?
     
     public var method: Method = .get
@@ -152,14 +153,14 @@ open class Service<Response: ServiceResponse> {
         guard
             let request = makeRequest()
             else {
-                completeRequest(response: nil, error: .invalidRequest)
+                completeRequest(result: .failure(.invalidRequest))
                 return
             }
         
         guard
             !request.isOnGoing
             else {
-                completeRequest(response: nil, error: .redundantRequest)
+                completeRequest(result: .failure(.redundantRequest))
                 return
             }
         
@@ -169,7 +170,7 @@ open class Service<Response: ServiceResponse> {
                 self.printFullRequest()
             }
             if let error = error {
-                self.completeRequest(response: nil, error: error)
+                self.completeRequest(result: .failure(error))
                 return
             }
             
@@ -180,7 +181,7 @@ open class Service<Response: ServiceResponse> {
             guard
                 !self.hasBeenCancelled
                 else {
-                    self.completeRequest(response: nil, error: .requestCancelled)
+                    self.completeRequest(result: .failure(.requestCancelled))
                     return
                 }
             
@@ -191,7 +192,7 @@ open class Service<Response: ServiceResponse> {
             guard
                 let request = self.makeRequest()
                 else {
-                    self.completeRequest(response: nil, error: .invalidRequest)
+                    self.completeRequest(result: .failure(.invalidRequest))
                     return
                 }
             
@@ -306,7 +307,7 @@ open class Service<Response: ServiceResponse> {
             let statusCode = statusCode,
             !validStatusCodes.contains(statusCode)
         {
-            completeRequest(response: nil, error: .invalidStatusCode(statusCode))
+            completeRequest(result: .failure(.invalidStatusCode(statusCode)))
             return
         }
         let statusCodeDescription = statusCode.flatMap { String($0) } ?? ""
@@ -314,13 +315,13 @@ open class Service<Response: ServiceResponse> {
         if let error = error {
             let isCancelled = (error as NSError).code == NSURLErrorCancelled
             let serviceError: ServiceError = isCancelled ? .requestCancelled : ServiceError(networkError: error)
-            completeRequest(response: nil, error: serviceError)
+            completeRequest(result: .failure(serviceError))
             return
         }
         guard
             let data = data
             else {
-                completeRequest(response: nil, error: .emptyResponse)
+                completeRequest(result: .failure(.emptyResponse))
                 return
             }
         cacheResponseIfNeeded(request: request, response: response, data: data)
@@ -331,15 +332,18 @@ open class Service<Response: ServiceResponse> {
         let responseString = String(data: data, encoding: .utf8) ?? "\(data.count) bytes"
         self.log.print("Response: \n\(responseString)", requiredLevel: .verbose)
         do {
-            let response = try Response.parse(data: data)
-            self.completeRequest(response: response, error: nil)
+            if let response = try Response.parse(data: data) {
+                completeRequest(result: .success(response))
+            } else {
+                completeRequest(result: .failure(.cannotParseResponse(error: nil)))
+            }
         } catch let error {
-            self.completeRequest(response: nil, error: .cannotParseResponse(error: error))
+            completeRequest(result: .failure(.cannotParseResponse(error: error)))
         }
     }
     
-    private func completeRequest(response: Response?, error: ServiceError?) {
-        let shouldRetry = shouldRetryClosure?(response, error, retryCount) ?? false
+    private func completeRequest(result: ServiceResult) {
+        let shouldRetry = shouldRetryClosure?(result, retryCount) ?? false
         guard
             !shouldRetry
             else {
@@ -347,23 +351,21 @@ open class Service<Response: ServiceResponse> {
                 self._load()
                 return
             }
-        
-        var finalError = error
-        if let response = response {
-            if let error = validateResponseClosure?(response) {
-                let validationError = ServiceError.responseValidationFailed(error)
-                finalError = validationError
+
+        switch result {
+        case .failure(let error):
+            latestError = error
+            notifyError(error)
+        case .success(let response):
+            if let validationError = validateResponseClosure?(response).map(ServiceError.responseValidationFailed) {
+                latestError = validationError
                 notifyError(validationError)
             } else {
+                latestResponse = response
                 notifySuccess(response)
             }
-        } else if let error = finalError {
-            notifyError(error)
         }
-        
-        latestResponse = response
-        latestError = finalError
-        notifyCompletion(response: latestResponse, error: latestError)
+        notifyCompletion(result: result)
     }
     
     private func notifyError(_ error: ServiceError) {
@@ -379,9 +381,9 @@ open class Service<Response: ServiceResponse> {
         }
     }
     
-    private func notifyCompletion(response: Response?, error: ServiceError?) {
+    private func notifyCompletion(result: ServiceResult) {
         DispatchQueue.main.async {
-            self.completionClosures.forEach { $0(response, error) }
+            self.completionClosures.forEach { $0(result) }
             self.serviceObservers.forEach { $0.serviceDidEndRequest(self) }
         }
     }
