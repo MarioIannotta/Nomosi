@@ -16,7 +16,6 @@ open class DefaultRemoteImageService: Service<UIImage> {
         super.init()
         self.url = URL(string: link)
     }
-    
 }
 
 extension UIImage: ServiceResponse { }
@@ -26,5 +25,4 @@ extension ServiceResponse where Self: UIImage {
     public static func parse(data: Data) throws -> Self? {
         return UIImage(data: data) as? Self
     }
-    
 }

@@ -9,7 +9,6 @@
 import Foundation
 
 struct Person: Decodable {
-    
     let alphasort: String?
     let birthplace: String?
     let name: String?
@@ -20,5 +19,4 @@ struct Person: Decodable {
     let culture: String?
     let displaydate, deathplace: String?
     let displayname: String?
-    
 }

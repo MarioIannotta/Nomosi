@@ -26,5 +26,4 @@ class AsycTask<ExpectedResult>: NSObject {
         self.onCompletion = onCompletion
         self.sslPinningHandler = sslPinningHandler
     }
-    
 }

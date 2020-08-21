@@ -69,7 +69,6 @@ struct Object: Decodable, Hashable {
     }
 
     static func == (lhs: Object, rhs: Object) -> Bool {
-        return lhs.hashValue == rhs.hashValue
+        lhs.hashValue == rhs.hashValue
     }
-    
 }

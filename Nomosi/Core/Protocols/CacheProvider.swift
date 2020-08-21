@@ -49,5 +49,4 @@ extension Service {
                 log.print("📦 \(self): storing response in cache with policy \(self.cachePolicy)")
             })
     }
-    
 }

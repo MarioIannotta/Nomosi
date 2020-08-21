@@ -9,7 +9,6 @@
 import Foundation
 
 struct Image: Decodable {
-    
     let height: Int?
     let iiifbaseuri, baseimageurl: String?
     let width: Int?
@@ -18,5 +17,4 @@ struct Image: Decodable {
     let copyright: String?
     let imageid: Int?
     let renditionnumber: String?
-    
 }

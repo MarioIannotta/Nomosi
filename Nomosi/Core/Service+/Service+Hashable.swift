@@ -17,7 +17,7 @@ extension Service: Hashable {
     }
     
     public static func == (lhs: Service<Response>, rhs: Service<Response>) -> Bool {
-        return lhs.hashValue == rhs.hashValue
+        lhs.hashValue == rhs.hashValue
     }
     
     public static func == (lhs: Service<Response>, rhs: AnyService) -> Bool {
@@ -26,7 +26,6 @@ extension Service: Hashable {
     }
     
     public static func == (lhs: AnyService, rhs: Service<Response>) -> Bool {
-        return rhs == lhs
+        rhs == lhs
     }
-    
 }

@@ -16,7 +16,6 @@ class FloorsService: HarvardArtMuseumService<[Floor]> {
         super.init(resource: "floors")
         self.mockProvider = self
     }
-    
 }
 
 extension FloorsService: MockProvider { }

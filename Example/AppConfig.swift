@@ -24,7 +24,7 @@ struct AppConfig {
             UserDefaults.standard.set(newValue, forKey: Keys.isNetworkErrorActive)
         }
         get {
-            return UserDefaults.standard.bool(forKey: Keys.isNetworkErrorActive)
+            UserDefaults.standard.bool(forKey: Keys.isNetworkErrorActive)
         }
     }
     
@@ -33,7 +33,7 @@ struct AppConfig {
             UserDefaults.standard.set(newValue, forKey: Keys.isNetworkRequestDelayEnabled)
         }
         get {
-            return UserDefaults.standard.bool(forKey: Keys.isNetworkRequestDelayEnabled)
+            UserDefaults.standard.bool(forKey: Keys.isNetworkRequestDelayEnabled)
         }
     }
     
@@ -81,5 +81,4 @@ struct AppConfig {
             return Log(rawValue: storedRawValue) ?? .minimal
         }
     }
-    
 }

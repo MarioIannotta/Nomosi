@@ -14,7 +14,6 @@ class CenturyService: HarvardArtMuseumService<Century> {
     init(id: Int) {
         super.init(resource: "century/\(id)")
     }
-    
 }
 
 extension Century: ServiceResponse { }

@@ -11,17 +11,11 @@ import Foundation
 public protocol BodyConvertible: DataConvertible {
 
     var asBodyStream: InputStream? { get }
-    
 }
 
 extension BodyConvertible {
     
-    public var asData: Data? {
-        return nil
-    }
+    public var asData: Data? { nil }
     
-    public var asBodyStream: InputStream? {
-        return nil
-    }
-    
+    public var asBodyStream: InputStream? { nil }
 }

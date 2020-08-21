@@ -16,5 +16,4 @@ class GroupCell: UITableViewCell {
     func configure(group: Group) {
         nameLabel.text = group.name
     }
-    
 }

@@ -47,5 +47,4 @@ class UploadDelegate: AsycTask<Data?>, URLSessionTaskDelegate, URLSessionDataDel
         let configuration = sslPinningHandler.configuration(for: challenge)
         completionHandler(configuration.disposition, configuration.credentials)
     }
-    
 }

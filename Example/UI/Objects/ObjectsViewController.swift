@@ -113,7 +113,6 @@ class ObjectsViewController: PaginatedViewController {
         resetDataSource()
         loadNextPage()
     }
-    
 }
 
 extension ObjectsViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -153,10 +152,9 @@ extension ObjectsViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: config.topPadding,
-                            left: config.horizontalPadding,
-                            bottom: config.bottomPadding,
-                            right: config.horizontalPadding)
+        UIEdgeInsets(top: config.topPadding,
+                     left: config.horizontalPadding,
+                     bottom: config.bottomPadding,
+                     right: config.horizontalPadding)
     }
-    
 }

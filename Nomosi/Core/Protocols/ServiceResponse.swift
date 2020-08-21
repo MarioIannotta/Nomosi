@@ -11,7 +11,6 @@ import Foundation
 public protocol ServiceResponse {
     
     static func parse(data: Data) throws -> Self?
-    
 }
 
 public extension ServiceResponse where Self: Decodable {
@@ -20,7 +19,6 @@ public extension ServiceResponse where Self: Decodable {
         let jsonDecoder = JSONDecoder()
         return try jsonDecoder.decode(Self.self, from: data)
     }
-    
 }
 
 extension Array: ServiceResponse where Element: Decodable { }
@@ -37,5 +35,4 @@ extension URL: ServiceResponse {
             }
         return URL(string: string)
     }
-    
 }

@@ -11,39 +11,34 @@ import Foundation
 public protocol DataConvertible {
     
     var asData: Data? { get }
-    
 }
 
 extension Dictionary: DataConvertible, BodyConvertible {
     
     public var asData: Data? {
-        return try? JSONSerialization.data(withJSONObject: self, options: [])
+        try? JSONSerialization.data(withJSONObject: self, options: [])
     }
-    
 }
 
 extension Array: DataConvertible, BodyConvertible {
     
     public var asData: Data? {
-        return try? JSONSerialization.data(withJSONObject: self, options: [])
+        try? JSONSerialization.data(withJSONObject: self, options: [])
     }
-    
 }
 
 extension String: DataConvertible, BodyConvertible {
     
     public var asData: Data? {
-        return data(using: .utf8)
+        data(using: .utf8)
     }
-    
 }
 
 extension URL: DataConvertible, BodyConvertible {
     
     public var asData: Data? {
-        return try? Data(contentsOf: self)
+        try? Data(contentsOf: self)
     }
-    
 }
 
 extension DataConvertible where Self: Encodable {
@@ -52,7 +47,6 @@ extension DataConvertible where Self: Encodable {
         let jsonEncoder = JSONEncoder()
         return try? jsonEncoder.encode(self)
     }
-    
 }
 
 extension BodyConvertible where Self: Encodable {
@@ -61,5 +55,4 @@ extension BodyConvertible where Self: Encodable {
         let jsonEncoder = JSONEncoder()
         return try? jsonEncoder.encode(self)
     }
-    
 }

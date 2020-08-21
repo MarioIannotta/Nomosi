@@ -12,14 +12,11 @@ public protocol MockProvider: class {
     var isMockEnabled: Bool { get }
     var mockedData: DataConvertible? { get }
     var mockBundle: Bundle? { get }
-    
 }
 
 public extension MockProvider {
     
-    var isMockEnabled: Bool {
-        return true
-    }
+    var isMockEnabled: Bool { true }
     
     var mockedData: DataConvertible? {
         guard
@@ -36,8 +33,5 @@ public extension MockProvider {
         return URL(fileURLWithPath: path)
     }
     
-    var mockBundle: Bundle? {
-        return .main
-    }
-    
+    var mockBundle: Bundle? { .main }
 }

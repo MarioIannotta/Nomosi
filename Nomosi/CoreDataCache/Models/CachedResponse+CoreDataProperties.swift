@@ -12,11 +12,10 @@ import CoreData
 extension CachedResponse {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CachedResponse> {
-        return NSFetchRequest<CachedResponse>(entityName: "CachedResponse")
+        NSFetchRequest<CachedResponse>(entityName: "CachedResponse")
     }
 
     @NSManaged public var data: NSData?
     @NSManaged public var expirationDate: NSDate?
     @NSManaged public var id: String?
-
 }

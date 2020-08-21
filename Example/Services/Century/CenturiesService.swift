@@ -14,7 +14,6 @@ class CenturiesService: HarvardArtMuseumService<CenturiesServiceResponse> {
     init() {
         super.init(resource: "century")
     }
-    
 }
 
 struct CenturiesServiceResponse: ServiceResponse, Decodable {
@@ -24,5 +23,4 @@ struct CenturiesServiceResponse: ServiceResponse, Decodable {
     }
     
     let centuries: [Century]
-    
 }

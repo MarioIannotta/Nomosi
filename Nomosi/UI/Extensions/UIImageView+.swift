@@ -34,5 +34,4 @@ extension UIImageView {
         return self.loadImage(service: defaultRemoteImageService,
                               overlayView: overlayView)
     }
-    
 }

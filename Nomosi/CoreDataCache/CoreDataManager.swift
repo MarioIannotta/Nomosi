@@ -106,5 +106,4 @@ class CoreDataManager {
             print("Error removing cached responses. Error: \(error)")
         }
     }
-    
 }

@@ -21,5 +21,4 @@ class ThreadSafeArray<Element> {
     func forEach(_ body: (Element) -> Void) {
         queue.sync { self.array.forEach(body) }
     }
-    
 }

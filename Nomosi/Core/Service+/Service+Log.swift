@@ -21,7 +21,6 @@ public enum Log: Int {
         Swift.print("[\(timestamp)] - ", terminator: "")
         Swift.print(item(), separator: " ", terminator: "\n")
     }
-    
 }
 
 extension Service: CustomDebugStringConvertible {
@@ -50,5 +49,4 @@ extension Service: CustomDebugStringConvertible {
     public var debugDescription: String {
         return "\(method.rawValue): \(urlDebugDescription)"
     }
-    
 }

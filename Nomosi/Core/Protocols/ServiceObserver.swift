@@ -11,12 +11,10 @@ public protocol ServiceObserver {
     
     func serviceWillStartRequest(_ service: AnyService)
     func serviceDidEndRequest(_ service: AnyService)
-    
 }
 
 extension ServiceObserver {
     
     func serviceWillStartRequest(_ service: AnyService) { }
     func serviceDidEndRequest(_ service: AnyService) { }
-    
 }

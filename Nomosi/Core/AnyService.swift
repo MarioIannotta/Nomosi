@@ -30,7 +30,6 @@ public protocol AnyService: class {
      it has Self or associated type requirements"
      */
     func isEqual(to service: AnyService) -> Bool
-    
 }
 
 extension Service: AnyService {
@@ -53,13 +52,12 @@ extension Service: AnyService {
     }
     
     public var lastError: ServiceError? {
-        return latestError
+        latestError
     }
     
     public func isEqual(to service: AnyService) -> Bool {
-        return self == service as? Service
+        self == service as? Service
     }
-    
 }
 
 /**
@@ -109,7 +107,6 @@ extension Array where Element == AnyService {
         }
         return nil
     }
-    
 }
 
 extension AnyService {
@@ -119,5 +116,4 @@ extension AnyService {
         allServices.append(contentsOf: services)
         return allServices
     }
-    
 }

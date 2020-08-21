@@ -23,7 +23,6 @@ class GalleriesService: HarvardArtMuseumService<GalleriesServiceResponse> {
             super.init(resource: "gallery", queryItems: queryItems)
         }
     }
-    
 }
 
 struct GalleriesServiceResponse: ServiceResponse, Decodable {
@@ -35,5 +34,4 @@ struct GalleriesServiceResponse: ServiceResponse, Decodable {
     
     let galleries: [Gallery]
     let paginatedServiceInfo: PaginatedServiceInfo
-    
 }

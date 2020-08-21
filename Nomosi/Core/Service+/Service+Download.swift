@@ -13,7 +13,6 @@ open class DownloadService: Service<URL> {
         super.init()
         serviceType = .downloadFile
     }
-    
 }
 
 class DownloadDelegate: AsycTask<URL>, URLSessionDownloadDelegate {
@@ -48,5 +47,4 @@ class DownloadDelegate: AsycTask<URL>, URLSessionDownloadDelegate {
         let configuration = sslPinningHandler.configuration(for: challenge)
         completionHandler(configuration.disposition, configuration.credentials)
     }
-    
 }

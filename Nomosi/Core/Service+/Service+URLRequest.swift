@@ -51,5 +51,4 @@ extension Service {
         request.timeoutInterval = timeoutInterval
         return request
     }
-    
 }

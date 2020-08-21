@@ -11,11 +11,11 @@ import UIKit
 extension UIView {
     
     static var nib: UINib {
-        return UINib(nibName: identifier, bundle: nil)
+        UINib(nibName: identifier, bundle: nil)
     }
     
     static var identifier: String {
-        return String(describing: self)
+        String(describing: self)
     }
     
     func fillSubview(_ subview: UIView, insets: UIEdgeInsets = .zero) {
@@ -26,5 +26,4 @@ extension UIView {
             subview.leftAnchor.constraint(equalTo: leftAnchor, constant: insets.left),
             subview.rightAnchor.constraint(equalTo: rightAnchor, constant: insets.right)])
     }
-    
 }

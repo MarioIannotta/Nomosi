@@ -50,7 +50,6 @@ class FloorsViewController: UIViewController {
         floorDetailViewController.floorID = indexPath.row
         floorDetailViewController.floorName = floors[indexPath.row].name
     }
-    
 }
 
 extension FloorsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -73,5 +72,4 @@ extension FloorsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }

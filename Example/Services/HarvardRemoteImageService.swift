@@ -16,5 +16,4 @@ class HarvardRemoteImageService: DefaultRemoteImageService {
         self.cachePolicy = AppConfig.cachePolicy
         self.validStatusCodes = nil // sometimes we receive empty status codes with valid images ¯\_(ツ)_/¯
     }
-    
 }

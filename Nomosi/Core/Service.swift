@@ -250,9 +250,9 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func makeURLSession(delegate: URLSessionDelegate) -> URLSession {
-        return URLSession(configuration: .default,
-                          delegate: delegate,
-                          delegateQueue: OperationQueue())
+        URLSession(configuration: .default,
+                   delegate: delegate,
+                   delegateQueue: OperationQueue())
     }
     
     private func performUploadTask(request: URLRequest) {
@@ -385,5 +385,4 @@ open class Service<Response: ServiceResponse> {
             self.serviceObservers.forEach { $0.serviceDidEndRequest(self) }
         }
     }
-    
 }

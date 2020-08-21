@@ -24,13 +24,12 @@ extension URLRequest {
      and a collision is highly unlikely.
     */
     var requestID: String {
-        return String([httpMethod,
-                       url?.absoluteString,
-                       allHTTPHeaderFields?.description,
-                       String(data: httpBody ?? Data(), encoding: .utf8)]
+        String([httpMethod,
+                url?.absoluteString,
+                allHTTPHeaderFields?.description,
+                String(data: httpBody ?? Data(), encoding: .utf8)]
             .compactMap { $0 }
             .joined()
             .sorted())
     }
-    
 }

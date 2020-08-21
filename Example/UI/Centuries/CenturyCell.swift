@@ -21,5 +21,4 @@ class CenturyCell: UITableViewCell {
         objectNumberLabel.text = String(century.objectCount ?? 0)
         lastUpdateLabel.text = century.formattedDate
     }
-    
 }

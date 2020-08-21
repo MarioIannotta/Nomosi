@@ -53,7 +53,6 @@ class CenturiesViewController: UIViewController {
             else { return }
         centuryDetailViewController.century = centuries[selectedIndexPath.row]
     }
-
 }
 
 extension CenturiesViewController: UITableViewDataSource, UITableViewDelegate {
@@ -80,5 +79,4 @@ extension CenturiesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }

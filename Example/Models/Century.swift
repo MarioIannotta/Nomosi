@@ -10,7 +10,7 @@ import Foundation
 
 struct Century: Decodable {
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
         case objectCount = "objectcount"
@@ -20,9 +20,7 @@ struct Century: Decodable {
     }
     
     struct Detail: Decodable {
-        
         let groups: [Group]?
-        
     }
     
     let id: Int?
@@ -32,12 +30,11 @@ struct Century: Decodable {
     let detail: Detail?
     
     var formattedDate: String {
-        return lastUpdate?
+        lastUpdate?
             .split(separator: "T")
             .first?
             .split(separator: "-")
             .reversed()
             .joined(separator: "/") ?? ""
     }
-    
 }

@@ -90,13 +90,12 @@ class GalleriesViewController: PaginatedViewController {
         }
         tableView.reloadRows(at: indexPathsToReload, with: .fade)
     }
-    
 }
 
 extension GalleriesViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return galleries.count
+        galleries.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,5 +116,4 @@ extension GalleriesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
 }

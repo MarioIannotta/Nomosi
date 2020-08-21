@@ -52,7 +52,6 @@ class SettingsViewController: UIViewController {
                 return nil
             }
         }
-        
     }
     
     override func viewDidLoad() {
@@ -124,5 +123,4 @@ class SettingsViewController: UIViewController {
         cacheTimeoutStackView.isHidden = isHidden
         resetCacheButton.isHidden = isHidden
     }
-    
 }

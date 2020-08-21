@@ -57,5 +57,4 @@ public struct RemoteImageServiceOverlayView: ServiceObserver {
         superview.addSubview(subview)
         superview.fillSubview(subview)
     }
-    
 }

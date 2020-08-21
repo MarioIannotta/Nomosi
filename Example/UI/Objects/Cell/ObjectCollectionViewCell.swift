@@ -89,5 +89,4 @@ class ObjectCollectionViewCell: UICollectionViewCell {
             else { return }
         viewModel.onDownloadButtonTapped(viewModel.object, downloadButton)
     }
-    
 }

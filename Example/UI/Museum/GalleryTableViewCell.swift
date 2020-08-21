@@ -37,6 +37,5 @@ class GalleryTableViewCell: UITableViewCell {
     
     @IBAction private func expandButtonTapped() {
         onExpandButtonTapped?()
-    }
-    
+    }   
 }

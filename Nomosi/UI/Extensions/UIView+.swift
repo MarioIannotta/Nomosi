@@ -17,5 +17,4 @@ extension UIView {
             subview.leftAnchor.constraint(equalTo: leftAnchor, constant: insets.left),
             subview.rightAnchor.constraint(equalTo: rightAnchor, constant: insets.right)])
     }
-    
 }

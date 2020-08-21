@@ -15,5 +15,4 @@ class FloorTableViewCell: UITableViewCell {
     func configure(floor: Floor) {
         titleLabel.text = floor.name
     }
-    
 }

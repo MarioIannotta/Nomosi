@@ -19,5 +19,4 @@ extension NSPersistentContainer {
         
         self.init(name: name, managedObjectModel: mom)
     }
-    
 }

@@ -19,5 +19,4 @@ extension Bundle {
             }
         return bundle
     }()
-    
 }

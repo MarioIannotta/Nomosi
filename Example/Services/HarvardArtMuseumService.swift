@@ -48,5 +48,4 @@ class HarvardArtMuseumService<Response: ServiceResponse>: Service<Response> {
             }
         }
     }
-    
 }

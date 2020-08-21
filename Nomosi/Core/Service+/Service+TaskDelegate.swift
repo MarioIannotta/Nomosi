@@ -28,5 +28,4 @@ class TaskDelegate: NSObject, URLSessionTaskDelegate {
         let configuration = sslPinningHandler.configuration(for: challenge)
         completionHandler(configuration.disposition, configuration.credentials)
     }
-    
 }

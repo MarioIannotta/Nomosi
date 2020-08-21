@@ -9,13 +9,12 @@
 import Foundation
 
 struct Group: Decodable {
-    
-    let name: String?
-    let groupID: Int?
-    
-    enum CodingKeys: String, CodingKey {
+
+    private enum CodingKeys: String, CodingKey {
         case name = "name"
         case groupID = "groupId"
     }
     
+    let name: String?
+    let groupID: Int?
 }

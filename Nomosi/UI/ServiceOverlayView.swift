@@ -25,12 +25,8 @@ open class ServiceOverlayView: UIView {
     private var loadingServices = [AnyService]()
     private var servicesWithError = [AnyService]()
     
-    private var hasLoadingServices: Bool {
-        return loadingServices.count > 0
-    }
-    private var hasServicesWithError: Bool {
-        return servicesWithError.count > 0
-    }
+    private var hasLoadingServices: Bool { loadingServices.count > 0 }
+    private var hasServicesWithError: Bool { servicesWithError.count > 0 }
     
     public init(cover viewToCover: UIView,
                 keepOnError: Bool = true,
@@ -120,8 +116,7 @@ open class ServiceOverlayView: UIView {
         NSLayoutConstraint.activate([
             leftAnchor.constraint(equalTo: contentStackView.leftAnchor, constant: -20),
             rightAnchor.constraint(equalTo: contentStackView.rightAnchor, constant: 20),
-            centerYAnchor.constraint(equalTo: contentStackView.centerYAnchor)
-            ])
+            centerYAnchor.constraint(equalTo: contentStackView.centerYAnchor)])
     }
     
     private func setupButtonsStackView() {
@@ -160,7 +155,9 @@ open class ServiceOverlayView: UIView {
         setError(nil)
         servicesWithError = []
         DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else { return }
+            guard
+                let self = self
+                else { return }
             self.viewToCover?.addSubview(self)
             self.refreshSize()
         }
@@ -207,7 +204,6 @@ open class ServiceOverlayView: UIView {
         hideActivityIndicatorIfNeeded()
         removeOverlayViewIfNeeded()
     }
-    
 }
 
 extension ServiceOverlayView: ServiceObserver {
@@ -219,5 +215,4 @@ extension ServiceOverlayView: ServiceObserver {
     public func serviceDidEndRequest(_ service: AnyService) {
         serviceDidEndLoad(service)
     }
-    
 }

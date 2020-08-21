@@ -66,13 +66,11 @@ class PaginatedViewController: UIViewController {
             else { return }
         loadNextPage()
     }
-    
 }
 
 extension PaginatedViewController: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         loadNextPageIfNeeded(contentOffset: targetContentOffset.pointee)
-    }
-    
+    }   
 }

@@ -68,5 +68,4 @@ extension URLCache: CacheProvider {
         storeCachedResponse(cachedResponse, for: request)
         completion(true)
     }
-    
 }

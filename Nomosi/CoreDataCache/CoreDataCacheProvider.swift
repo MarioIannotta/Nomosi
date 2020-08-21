@@ -26,8 +26,7 @@ public class CoreDataCacheProvider: CacheProvider {
                                                object: nil)
     }
     
-    @objc
-    public func removeExpiredCachedResponses() {
+    @objc public func removeExpiredCachedResponses() {
         coreDataManager?.removeExpiredCachedResponses()
     }
     
@@ -90,5 +89,4 @@ public class CoreDataCacheProvider: CacheProvider {
     private func removeCachedResponse(for request: URLRequest) {
         coreDataManager?.removeCacheResponse(withIdentifier: request.requestID)
     }
-    
 }

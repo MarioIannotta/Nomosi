@@ -54,7 +54,6 @@ class CenturyDetailViewController: UIViewController {
     private func reloadContent() {
         tableView.reloadData()
     }
-    
 }
 
 extension CenturyDetailViewController: UITableViewDataSource, UITableViewDelegate {
@@ -82,7 +81,6 @@ extension CenturyDetailViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }
 
 extension CenturyDetailViewController: ServiceObserver {

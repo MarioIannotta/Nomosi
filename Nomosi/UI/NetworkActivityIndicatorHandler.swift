@@ -22,5 +22,4 @@ public struct NetworkActivityIndicatorHandler: ServiceObserver {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
-    
 }

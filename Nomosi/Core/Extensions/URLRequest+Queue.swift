@@ -21,7 +21,7 @@ extension URLRequest {
     }
     
     var isOnGoing: Bool {
-        return URLRequest.nomosiOnGoingRequests.contains(where: { $0._isEqual(to: self) })
+        URLRequest.nomosiOnGoingRequests.contains(where: { $0._isEqual(to: self) })
     }
     
     /**
@@ -34,7 +34,6 @@ extension URLRequest {
      ```
      */
     private func _isEqual(to request: URLRequest) -> Bool {
-        return requestID == request.requestID
-    }
-    
+        requestID == request.requestID
+    }   
 }

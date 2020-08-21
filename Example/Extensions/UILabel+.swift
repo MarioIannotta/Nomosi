@@ -16,5 +16,4 @@ extension UILabel {
         let charSize: Int = lroundf(Float(font.pointSize))
         return rHeight / charSize
     }
-    
 }

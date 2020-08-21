@@ -9,6 +9,13 @@
 import Foundation
 
 struct Gallery: Decodable, Hashable {
+
+    private enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case id = "id"
+        case theme = "theme"
+        case labelText = "labeltext"
+    }
     
     private let summaryLenght = 60
     
@@ -31,17 +38,9 @@ struct Gallery: Decodable, Hashable {
         return summary
     }
     
-    enum CodingKeys: String, CodingKey {
-        case name = "name"
-        case id = "id"
-        case theme = "theme"
-        case labelText = "labeltext"
-    }
-    
     // MARK: - Hashable
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
 }

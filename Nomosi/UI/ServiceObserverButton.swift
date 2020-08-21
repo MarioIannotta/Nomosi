@@ -43,9 +43,8 @@ open class ServiceObserverButton: UIButton {
         
         public static func == (lhs: ServiceObserverButton.LoadingAction,
                                rhs: ServiceObserverButton.LoadingAction) -> Bool {
-            return lhs.id == rhs.id
+            lhs.id == rhs.id
         }
-        
     }
     
     private lazy var activityIndicatorView: UIActivityIndicatorView = {
@@ -193,7 +192,6 @@ open class ServiceObserverButton: UIButton {
             }
         }
     }
-    
 }
 
 extension ServiceObserverButton: ServiceObserver {
@@ -212,5 +210,4 @@ extension ServiceObserverButton: ServiceObserver {
         loadingServices.remove(service)
         performUnwindActionsIfNeeded()
     }
-    
 }
