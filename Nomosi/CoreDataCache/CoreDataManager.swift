@@ -28,15 +28,11 @@ class CoreDataManager {
         let storeURL = baseURL.appendingPathComponent("Database/\(name).sqlite")
         let container = NSPersistentContainer(name: name, managedObjectModel: managedObjectModel)
         
-        let description = NSPersistentStoreDescription()
-        description.shouldInferMappingModelAutomatically = true
-        description.shouldMigrateStoreAutomatically = true
-        description.url = storeURL
-        
         container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
-        container.loadPersistentStores { _, error in
+        container.loadPersistentStores { [weak self] _, error in
             if let error = error {
                 print("Fail to load persistent store - Error: \(error)")
+                self?.dropDatabase()
             }
         }
         let viewContext = container.viewContext
@@ -46,6 +42,19 @@ class CoreDataManager {
         self.container = container
     }
     
+    func dropDatabase() {
+        defer { initDatabase() }
+        guard
+            let storeURL = storeURL
+            else { return }
+        do {
+            try FileManager.default.removeItem(at: storeURL)
+            try FileManager.default.removeItem(at: URL(fileURLWithPath: storeURL.path+"-wal"))
+            try FileManager.default.removeItem(at: URL(fileURLWithPath: storeURL.path+"-shm"))
+        } catch let error {
+            print(error)
+        }
+    }
     func newCachedResponse(configurationClosure: ((_ cachedResponse: CachedResponse) -> Void)) {
         let context = container.newBackgroundContext()
         let cachedResponse = CachedResponse(context: context)
