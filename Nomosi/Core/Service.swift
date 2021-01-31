@@ -46,54 +46,63 @@ open class Service<Response: ServiceResponse> {
     private var hasBeenCancelled = false
     private var serviceObservers = [ServiceObserver]()
     private var retryCount = 0
+    private var loadWorkItem: DispatchWorkItem?
     
     public init() { }
     
     @discardableResult
     public func onCompletion(_ closure: @escaping CompletionClosure) -> Self {
         completionClosures.append(closure)
+        load()
         return self
     }
     
     @discardableResult
     public func onSuccess(_ closure: @escaping SuccessClosure) -> Self {
         successClosures.append(closure)
+        load()
         return self
     }
     
     @discardableResult
     public func onFailure(_ closure: @escaping FailureClosure) -> Self {
         failureClosures.append(closure)
+        load()
         return self
     }
     
     @discardableResult
     public func decorateRequest(_ closure: @escaping DecorateRequestClosure) -> Self {
         decorateRequestClosure = closure
+        load()
         return self
     }
     
     @discardableResult
     public func shouldRetry(_ closure: @escaping ShouldRetryClosure) -> Self {
         shouldRetryClosure = closure
+        load()
         return self
     }
     
     @discardableResult
     public func validateResponse(_ closure: @escaping ValidateResponseClosure) -> Self {
         validateResponseClosure = closure
+        load()
         return self
     }
     
     @discardableResult
     public func onProgress(_ closure: @escaping ProgressClosure) -> Self {
         progressClosures.append(closure)
+        load()
         return self
     }
     
     @discardableResult
     public func addingObserver(_ serviceObserver: ServiceObserver) -> Self {
         serviceObservers.append(serviceObserver)
+        load()
         return self
     }
     
@@ -122,9 +131,11 @@ open class Service<Response: ServiceResponse> {
          would be raised before setting the closure to handle the error itself `onFailure {...}`.
          */
         retryCount = 0
-        queue.asyncAfter(deadline: .now() + 0.01) {
-            self._load()
-        }
+        loadWorkItem?.cancel()
+        let newLoadWorkItem = DispatchWorkItem { self.debouncedLoad() }
+        loadWorkItem = newLoadWorkItem
+        queue.asyncAfter(deadline: .now() + 0.01, execute: newLoadWorkItem)
+        
         return self
     }
     
@@ -133,7 +144,7 @@ open class Service<Response: ServiceResponse> {
         sessionTask?.cancel()
     }
 
-    private func _load() {
+    private func debouncedLoad() {
         retryCount += 1
         hasBeenCancelled = false
         // if the user has defined a decorateRequestClosure, let's log the request after the decorating
@@ -348,7 +359,7 @@ open class Service<Response: ServiceResponse> {
             !shouldRetry
             else {
                 log.print("🔄 \(self): Retrying request")
-                self._load()
+                self.load()
                 return
             }
 

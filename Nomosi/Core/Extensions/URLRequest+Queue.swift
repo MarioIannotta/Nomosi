@@ -10,30 +10,17 @@ import Foundation
 
 extension URLRequest {
     
-    static private var nomosiOnGoingRequests = [URLRequest]()
+    static private var nomosiOnGoingRequests = [String: URLRequest]()
     
     func begin() {
-        URLRequest.nomosiOnGoingRequests.append(self)
+        URLRequest.nomosiOnGoingRequests[requestID] = self
     }
     
     func end() {
-        URLRequest.nomosiOnGoingRequests.removeAll(where: { $0._isEqual(to: self) })
+        URLRequest.nomosiOnGoingRequests.removeValue(forKey: requestID)
     }
     
     var isOnGoing: Bool {
-        URLRequest.nomosiOnGoingRequests.contains(where: { $0._isEqual(to: self) })
+        URLRequest.nomosiOnGoingRequests[requestID] != nil
     }
-    
-    /**
-     We can't use the default implementation defined here
-     https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/URLRequest.swift as
-     ```
-     public static func ==(lhs: URLRequest, rhs: URLRequest) -> Bool {
-        return lhs._handle._uncopiedReference().isEqual(rhs._handle._uncopiedReference())
-     }
-     ```
-     */
-    private func _isEqual(to request: URLRequest) -> Bool {
-        requestID == request.requestID
-    }   
 }
