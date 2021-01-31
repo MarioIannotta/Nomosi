@@ -10,13 +10,12 @@ import Foundation
 
 extension Bundle {
     
-    static var nomosi: Bundle = {
-        guard
-            let frameworkBundlePath = Bundle.main.resourcePath?.appending("/Frameworks/Nomosi.framework"),
-            let bundle = Bundle(path: frameworkBundlePath)
-            else {
-                fatalError("Unable to locate Nomosi.framework")
-            }
-        return bundle
+    static var nomosi: Bundle? = {
+        // TODO: Find a better there's a better way to do this
+        [Bundle.main.resourceURL?.deletingLastPathComponent().path,  /* catalyst */
+                         Bundle.main.resourcePath /* iOS  */ ]
+            .compactMap { $0?.appending("/Frameworks/Nomosi.framework") }
+            .compactMap(Bundle.init)
+            .first
     }()
 }

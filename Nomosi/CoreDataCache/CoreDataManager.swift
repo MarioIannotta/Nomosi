@@ -22,7 +22,7 @@ class CoreDataManager {
     func initDatabase() {
         guard
             let baseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
-            let modelURL = Bundle.nomosi.url(forResource: name, withExtension: "momd"),
+            let modelURL = Bundle.nomosi?.url(forResource: name, withExtension: "momd"),
             let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
             else { return }
         let storeURL = baseURL.appendingPathComponent("Database/\(name).sqlite")
