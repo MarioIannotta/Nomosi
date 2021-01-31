@@ -215,7 +215,6 @@
 		AC52889723216AD700C9462C /* HarvardArtMuseumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HarvardArtMuseumService.swift; sourceTree = "<group>"; };
 		AC52889923216AD700C9462C /* FloorsService.mock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FloorsService.mock; sourceTree = "<group>"; };
 		AC52889A23216AD700C9462C /* FloorsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloorsService.swift; sourceTree = "<group>"; };
-		AC5288CA23216B6400C9462C /* ExportFramework.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ExportFramework.sh; sourceTree = "<group>"; };
 		AC959BAD23462DAE00AFE6D5 /* SSLPinningHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLPinningHandler.swift; sourceTree = "<group>"; };
 		AC959BAF234638C500AFE6D5 /* Service+TaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+TaskDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -275,7 +274,6 @@
 			children = (
 				AC5287FE23216A9800C9462C /* Nomosi */,
 				AC52885623216ABC00C9462C /* Example */,
-				AC5288C923216B6400C9462C /* Exporter */,
 				AC1E593125C6AE9900809BC5 /* UnitTests */,
 				AC5287FD23216A9800C9462C /* Products */,
 			);
@@ -571,14 +569,6 @@
 				AC52889A23216AD700C9462C /* FloorsService.swift */,
 			);
 			path = Floor;
-			sourceTree = "<group>";
-		};
-		AC5288C923216B6400C9462C /* Exporter */ = {
-			isa = PBXGroup;
-			children = (
-				AC5288CA23216B6400C9462C /* ExportFramework.sh */,
-			);
-			path = Exporter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
