@@ -5,7 +5,9 @@
 //  Created by Mario on 07/10/2018.
 //
 
+#if canImport(UIKit)
 import UIKit
+#endif
 
 public class CoreDataCacheProvider: CacheProvider {
     
@@ -20,10 +22,12 @@ public class CoreDataCacheProvider: CacheProvider {
     }
     
     private func observeMemoryWarning() {
+        #if canImport(UIKit)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(removeExpiredCachedResponses),
                                                name: UIApplication.didReceiveMemoryWarningNotification,
                                                object: nil)
+        #endif
     }
     
     @objc public func removeExpiredCachedResponses() {

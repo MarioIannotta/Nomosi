@@ -6,20 +6,6 @@
 	objectVersion = 50;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		AC5288BF23216B2700C9462C /* Exporter */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = AC5288C023216B2700C9462C /* Build configuration list for PBXAggregateTarget "Exporter" */;
-			buildPhases = (
-				AC5288C823216B4800C9462C /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = Exporter;
-			productName = Exporter;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		AC1E593325C6AE9900809BC5 /* UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1E593225C6AE9900809BC5 /* UnitTests.swift */; };
 		AC1E593525C6AE9900809BC5 /* Nomosi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC5287FC23216A9800C9462C /* Nomosi.framework */; };
@@ -663,9 +649,6 @@
 					AC52885423216ABC00C9462C = {
 						CreatedOnToolsVersion = 10.2;
 					};
-					AC5288BF23216B2700C9462C = {
-						CreatedOnToolsVersion = 10.2;
-					};
 				};
 			};
 			buildConfigurationList = AC5287F623216A9800C9462C /* Build configuration list for PBXProject "Nomosi" */;
@@ -684,7 +667,6 @@
 				AC5287FB23216A9800C9462C /* Nomosi */,
 				AC52885423216ABC00C9462C /* Example */,
 				AC1E592F25C6AE9800809BC5 /* UnitTests */,
-				AC5288BF23216B2700C9462C /* Exporter */,
 			);
 		};
 /* End PBXProject section */
@@ -716,26 +698,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		AC5288C823216B4800C9462C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "sh \"${SRCROOT}/Exporter/ExportFramework.sh\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AC1E592C25C6AE9800809BC5 /* Sources */ = {
@@ -862,6 +824,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marioiannotta.Nomosi.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Example";
@@ -882,6 +845,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marioiannotta.Nomosi.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Example";
@@ -944,7 +908,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1001,7 +964,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -1032,6 +994,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marioiannotta.Nomosi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1059,6 +1022,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marioiannotta.Nomosi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1081,6 +1045,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marioiannotta.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1104,27 +1069,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marioiannotta.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		AC5288C123216B2700C9462C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X9253HG4XT;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		AC5288C223216B2700C9462C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X9253HG4XT;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1163,15 +1111,6 @@
 			buildConfigurations = (
 				AC52886523216ABD00C9462C /* Debug */,
 				AC52886623216ABD00C9462C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AC5288C023216B2700C9462C /* Build configuration list for PBXAggregateTarget "Exporter" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AC5288C123216B2700C9462C /* Debug */,
-				AC5288C223216B2700C9462C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

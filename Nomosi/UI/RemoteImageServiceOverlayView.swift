@@ -5,6 +5,7 @@
 //  Created by Mario on 07/10/2018.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 public struct RemoteImageServiceOverlayView: ServiceObserver {
@@ -58,3 +59,4 @@ public struct RemoteImageServiceOverlayView: ServiceObserver {
         superview.fillSubview(subview)
     }
 }
+#endif

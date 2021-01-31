@@ -6,6 +6,7 @@
 //  Copyright © 2018 Mario Iannotta. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 open class ServiceObserverButton: UIButton {
@@ -211,3 +212,4 @@ extension ServiceObserverButton: ServiceObserver {
         performUnwindActionsIfNeeded()
     }
 }
+#endif

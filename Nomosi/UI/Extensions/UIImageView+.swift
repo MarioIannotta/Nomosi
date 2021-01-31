@@ -6,6 +6,7 @@
 //  Copyright © 2018 Mario Iannotta. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 extension UIImageView {
@@ -40,3 +41,4 @@ extension UIImageView {
                               overlayView: overlayView)
     }
 }
+#endif

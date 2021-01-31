@@ -6,7 +6,7 @@
 //  Copyright © 2019 Mario Iannotta. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for Nomosi.
 FOUNDATION_EXPORT double NomosiVersionNumber;

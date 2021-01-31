@@ -6,6 +6,7 @@
 //  Copyright © 2018 Mario. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 open class ServiceOverlayView: UIView {
@@ -216,3 +217,4 @@ extension ServiceOverlayView: ServiceObserver {
         serviceDidEndLoad(service)
     }
 }
+#endif

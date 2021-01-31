@@ -5,6 +5,7 @@
 //  Created by Mario on 06/10/2018.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 extension UIView {
@@ -18,3 +19,4 @@ extension UIView {
             subview.rightAnchor.constraint(equalTo: rightAnchor, constant: insets.right)])
     }
 }
+#endif

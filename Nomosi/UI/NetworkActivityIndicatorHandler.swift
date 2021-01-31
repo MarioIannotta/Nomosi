@@ -5,6 +5,7 @@
 //  Created by Mario on 04/07/2018.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 public struct NetworkActivityIndicatorHandler: ServiceObserver {
@@ -23,3 +24,4 @@ public struct NetworkActivityIndicatorHandler: ServiceObserver {
         }
     }
 }
+#endif

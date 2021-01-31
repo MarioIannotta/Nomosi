@@ -5,6 +5,7 @@
 //  Created by Mario on 07/10/2018.
 //
 
+#if canImport(UIKit)
 import Foundation
 import UIKit
 
@@ -26,3 +27,4 @@ extension ServiceResponse where Self: UIImage {
         return UIImage(data: data) as? Self
     }
 }
+#endif
