@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Nomosi'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'Declarative plug and play network services for your iOS apps.'
   s.description      = <<-DESC
 ## Features
@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/MarioIannotta/Nomosi.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/MarioIannotta'
   s.ios.deployment_target = '10.0'
+  s.osx.deployment_target  = '10.15'
   
   s.subspec 'All' do |s|
       s.dependency 'Nomosi/Core'

@@ -234,7 +234,7 @@ For an extensive overview about how all of that works, you can take a look at th
 `pod 'Nomosi'`
 
 #### Carthage
-`github "MarioIannotta/Nomosi" ~> 0.1.2`
+`github "MarioIannotta/Nomosi" ~> 0.1.3`
 
 ## License
 
