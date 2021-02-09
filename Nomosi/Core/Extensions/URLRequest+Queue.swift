@@ -10,17 +10,25 @@ import Foundation
 
 extension URLRequest {
     
+    private static let queue = DispatchQueue(label: "com.nomosi.core.urlRequestQueue", attributes: .concurrent)
+    
     static private var nomosiOnGoingRequests = [String: URLRequest]()
     
     func begin() {
-        URLRequest.nomosiOnGoingRequests[requestID] = self
+        Self.queue.async(flags: .barrier) {
+            URLRequest.nomosiOnGoingRequests[requestID] = self
+        }
     }
     
     func end() {
-        URLRequest.nomosiOnGoingRequests.removeValue(forKey: requestID)
+        Self.queue.async(flags: .barrier) {
+            URLRequest.nomosiOnGoingRequests.removeValue(forKey: requestID)
+        }
     }
     
     var isOnGoing: Bool {
-        URLRequest.nomosiOnGoingRequests[requestID] != nil
+        Self.queue.sync(flags: .barrier) {
+            return URLRequest.nomosiOnGoingRequests[requestID] != nil
+        }
     }
 }
