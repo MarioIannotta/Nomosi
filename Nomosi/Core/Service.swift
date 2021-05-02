@@ -363,12 +363,14 @@ open class Service<Response: ServiceResponse> {
                 return
             }
 
+        var result = result
         switch result {
         case .failure(let error):
             latestError = error
             notifyError(error)
         case .success(let response):
             if let validationError = validateResponseClosure?(response).map(ServiceError.responseValidationFailed) {
+                result = .failure(validationError)
                 latestError = validationError
                 notifyError(validationError)
             } else {
