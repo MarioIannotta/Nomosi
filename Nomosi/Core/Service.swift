@@ -359,7 +359,7 @@ open class Service<Response: ServiceResponse> {
             !shouldRetry
             else {
                 log.print("🔄 \(self): Retrying request")
-                self.load()
+                self.debouncedLoad()
                 return
             }
 
