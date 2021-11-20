@@ -18,7 +18,7 @@ import Nomosi
 class AService: Service<AServiceResponse> {
     override init() {
         super.init()
-        url = URL(string: "https://hookb.in/9XwgpoDLwxH600eMoPQk")
+        url = URL(string: "https://hookb.in/pz7MM3owMgURPnrrPL7o")
     }
 }
 
