@@ -8,12 +8,12 @@
 
 import Foundation
 
-public protocol SSLPinningHandler {
+public protocol SSLPinningHandler: AnyObject {
 
     func configuration(for challenge: URLAuthenticationChallenge) -> (disposition: URLSession.AuthChallengeDisposition, credentials: URLCredential?)
 }
 
-struct SSLPinningLocalCertificate: SSLPinningHandler {
+class SSLPinningLocalCertificate: SSLPinningHandler {
 
     private let certificatesPaths: [String]
 

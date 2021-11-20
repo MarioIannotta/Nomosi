@@ -11,7 +11,7 @@ import Foundation
 /**
  Type erasure protocol for Service<ServiceResponse>
  */
-public protocol AnyService: class {
+public protocol AnyService: AnyObject {
     
     typealias AnyServiceResponseCallback = (_ error: Error?) -> Void
     

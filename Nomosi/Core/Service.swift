@@ -131,7 +131,7 @@ open class Service<Response: ServiceResponse> {
          would be raised before setting the closure to handle the error itself `onFailure {...}`.
          */
         retryCount = 0
-        loadWorkItem?.cancel()
+        cancelLoadWorkItem()
         let newLoadWorkItem = DispatchWorkItem { self.debouncedLoad() }
         loadWorkItem = newLoadWorkItem
         queue.asyncAfter(deadline: .now() + 0.01, execute: newLoadWorkItem)
@@ -140,11 +140,13 @@ open class Service<Response: ServiceResponse> {
     }
     
     public func cancel() {
+        cancelLoadWorkItem()
         hasBeenCancelled = true
         sessionTask?.cancel()
     }
 
     private func debouncedLoad() {
+        cancelLoadWorkItem()
         retryCount += 1
         hasBeenCancelled = false
         // if the user has defined a decorateRequestClosure, let's log the request after the decorating
@@ -211,6 +213,11 @@ open class Service<Response: ServiceResponse> {
         }
     }
     
+    private func cancelLoadWorkItem() {
+        loadWorkItem?.cancel()
+        loadWorkItem = nil
+    }
+    
     private func printFullRequest() {
         log.print("⬆️ \(self)")
         log.print(headersDescription, requiredLevel: .verbose)
@@ -259,6 +266,7 @@ open class Service<Response: ServiceResponse> {
             self.handleCompletedTask(request: request, data: data, response: response, error: error)
         }
         sessionTask?.resume()
+        session.finishTasksAndInvalidate() // the session delegate is retained. More info https://stackoverflow.com/a/49772414
     }
     
     private func makeURLSession(delegate: URLSessionDelegate) -> URLSession {

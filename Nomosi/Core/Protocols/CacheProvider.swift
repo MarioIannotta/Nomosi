@@ -14,7 +14,7 @@ public enum CachePolicy: Equatable {
     case onDisk(timeout: TimeInterval)
 }
 
-public protocol CacheProvider: class {
+public protocol CacheProvider: AnyObject {
     
     func removeExpiredCachedResponses()
     

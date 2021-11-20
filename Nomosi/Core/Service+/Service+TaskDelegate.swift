@@ -10,7 +10,7 @@ import Foundation
 
 class TaskDelegate: NSObject, URLSessionTaskDelegate {
     
-    var sslPinningHandler: SSLPinningHandler?
+    private weak var sslPinningHandler: SSLPinningHandler?
     
     public init(sslPinningHandler: SSLPinningHandler?) {
         self.sslPinningHandler = sslPinningHandler
