@@ -93,13 +93,6 @@
 			remoteGlobalIDString = AC5287FB23216A9800C9462C;
 			remoteInfo = Nomosi;
 		};
-		AC1E594125C6B0AD00809BC5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AC5287F323216A9800C9462C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AC52885423216ABC00C9462C;
-			remoteInfo = Example;
-		};
 		AC5288C523216B3400C9462C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AC5287F323216A9800C9462C /* Project object */;
@@ -585,7 +578,6 @@
 			);
 			dependencies = (
 				AC1E593725C6AE9900809BC5 /* PBXTargetDependency */,
-				AC1E594225C6B0AD00809BC5 /* PBXTargetDependency */,
 			);
 			name = UnitTests;
 			productName = UnitTests;
@@ -641,7 +633,6 @@
 				TargetAttributes = {
 					AC1E592F25C6AE9800809BC5 = {
 						CreatedOnToolsVersion = 12.2;
-						TestTargetID = AC52885423216ABC00C9462C;
 					};
 					AC5287FB23216A9800C9462C = {
 						CreatedOnToolsVersion = 10.2;
@@ -797,11 +788,6 @@
 			target = AC5287FB23216A9800C9462C /* Nomosi */;
 			targetProxy = AC1E593625C6AE9900809BC5 /* PBXContainerItemProxy */;
 		};
-		AC1E594225C6B0AD00809BC5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AC52885423216ABC00C9462C /* Example */;
-			targetProxy = AC1E594125C6B0AD00809BC5 /* PBXContainerItemProxy */;
-		};
 		AC5288C623216B3400C9462C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AC5287FB23216A9800C9462C /* Nomosi */;
@@ -827,7 +813,6 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Example";
 			};
 			name = Debug;
 		};
@@ -848,7 +833,6 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Example";
 			};
 			name = Release;
 		};
@@ -1006,7 +990,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marioiannotta.Nomosi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1032,7 +1016,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marioiannotta.Nomosi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
