@@ -56,7 +56,7 @@ struct AServiceResponse: Decodable {
     var aPropertyTwo: String?
 }
 
-// iOS < 15, callback-based approach
+// callback-based approach
 AService()
     .load()
     .onSuccess { response in
@@ -67,15 +67,12 @@ AService()
     }
 }
 
-// iOS 15+, async/await-based approach
-
-let result = await AService().load()
-switch result {
-case .success(let response):
+// async/await-based approach
+do {
+    let response = try await AService().load()
     // response is an instance of `AServiceResponse`: Type-safe swift superpower!
     print(response)
-case .failure(let error):
-    // handle error
+} catch {
     print(error)
 }
 ```
