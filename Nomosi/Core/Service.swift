@@ -139,6 +139,24 @@ open class Service<Response: ServiceResponse> {
         return self
     }
     
+    @available(iOS 15.0, *)
+    @available(macOS 12.0, *)
+    public func load() async throws -> Response {
+        do {
+            return try await withCheckedThrowingContinuation { continuation in
+                load()
+                    .onSuccess { response in
+                        continuation.resume(returning: response)
+                    }
+                    .onFailure { error in
+                        continuation.resume(throwing: error)
+                    }
+            }
+        } catch {
+            throw error
+        }
+    }
+    
     public func cancel() {
         cancelLoadWorkItem()
         hasBeenCancelled = true

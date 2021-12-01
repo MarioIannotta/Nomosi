@@ -37,18 +37,22 @@ class CenturyDetailViewController: UIViewController {
         century = nil
         let centuryService = CenturyService(id: centuryID)
         centuryService
-            .load()
             .addingObserver(serviceOverlayView)
             .addingObserver(self)
-            .onSuccess { [weak self] century in
-                self?.century = century
+        
+        if #available(iOS 15.0, *) {
+            Task {
+                century = try? await centuryService.load()
+                reloadContent()
             }
-            .onFailure { error in
-                // TODO: handle error
-            }
-            .onCompletion { [weak self] _ in
-                self?.reloadContent()
-            }
+        } else {
+            centuryService
+                .load()
+                .onSuccess { [weak self] century in
+                    self?.century = century
+                    self?.reloadContent()
+                }
+        }
     }
     
     private func reloadContent() {

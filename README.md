@@ -7,11 +7,11 @@
 
 ## Why
 
-Today every app is connected to some backend(s), usually that's achieved through a network layer, generally a singleton, that has the resposability to take an input, perform a network request, parse the response and return a result.
+Today every app is connected to some backend(s), usually that's achieved through a network layer, generally a singleton, that has the responsibility to take an input, perform a network request, parse the response and return a result.
 
 In complex projects this approach could cause the network layer to be a massive and unmaintainable file with more than 20.000 LOC. Yes, that's a true story.
 
-The idea behind Nomosi is to breakdown the network layer into different *services* where every service represents a remote resource. 
+The idea behind Nomosi is to split the network layer into different *services* where every service represents a remote resource. 
 
 Each service is indipendent and atomic making things like module-based app development, client api versioning, working in large teams, testing and maintain the codebase a lot easier.
 
@@ -35,7 +35,7 @@ class AService<AServiceResponse>: Service<Response> {
 
     init() {
         super.init()
-        basePath = "https://api.aBackend.com/v1/resources/1234"
+        basePath = "https://api.a-backend.com/v1/resources/1234"
         cachePolicy = .inRam(timeout: 60*5)
         log = .minimal
         decorateRequest { [weak self] completion in
@@ -56,14 +56,27 @@ struct AServiceResponse: Decodable {
     var aPropertyTwo: String?
 }
 
+// iOS < 15, callback-based approach
 AService()
-    .load()?
-    .onSuccess { aResponse in
-        // aResponse is an instance of `AServiceResponse`: Type-safe swift superpower!
+    .load()
+    .onSuccess { response in
+        // response is an instance of `AServiceResponse`: Type-safe swift superpower!
     }
     .onFailure { error in
         // handle error
     }
+}
+
+// iOS 15+, async/await-based approach
+
+let result = await AService().load()
+switch result {
+case .success(let response):
+    // response is an instance of `AServiceResponse`: Type-safe swift superpower!
+    print(response)
+case .failure(let error):
+    // handle error
+    print(error)
 }
 ```
 
@@ -74,7 +87,7 @@ AService()
 <summary>Type-safe by design</summary>
 <p>
 
-Leveraging Swift's type system and latest features, with Nomosi you won't ever need to handle JSON and mixed data content directly. You can forget about third party libraries such as Marshal and SwiftyJSON.
+Leveraging Swift's type system and latest features, with Nomosi you won't ever need to handle JSON and mixed data content directly. You can forget about third party libraries such as `Marshal` and `SwiftyJSON`.
 
 </p>
 </details>
@@ -114,14 +127,14 @@ class TokenProtectedService<ServiceResponse>: Service<Response> {
 </details>
 
 <details>
-<summary>Straightforward cache configuration with the layer of your choice (URLCache by default) </summary>
+<summary>Straightforward cache configuration with the layer of your choice (`URLCache` by default) </summary>
 <p>
 
 Cache is handled with the protocol `CacheProvider`.
 
-`URLCache` already conforms this protocol and  with the podspec  `Nomosi/CoreDataCache` you can use CoreData as persistent storage. 
+`URLCache` already conforms this protocol and with the podspec `Nomosi/CoreDataCache` you can use `CoreData` as persistent storage. 
 
-If you want to use another persistent layer library (Realm, CouchBase, etc...) you have to implement just three methods:
+If you want to use another persistent layer library (`Realm`, `CouchBase`, etc...) you have to implement just three methods:
 ```swift
 func removeExpiredCachedResponses()
 
@@ -160,6 +173,7 @@ protocol MockProvider {
 
     var isMockEnabled: Bool { get }
     var mockedData: DataConvertible? { get }
+    var mockBundle: Bundle? { get }
 
 }
 ```
@@ -205,7 +219,7 @@ struct User {
 <summary>Develop and attach thirdy part components </summary>
 <p>
 
-Any class that conforms the protocol `ServiceObserver` can be notified when a request starts and ends; all ui components such as loader and fancy buttons are built using this protocol. 
+Any class that conforms the protocol `ServiceObserver` can be notified when a request starts and ends; all the UI components such as loader and fancy buttons are built using this protocol. 
 
 </p>
 </details>
@@ -243,7 +257,8 @@ Nomosi is available under the MIT license. See the LICENSE file for more info.
 ## TODOs:
 
 * [ ] Document all the public stuff
-* [ ] Add unit tests
+* [x] Support async/await (aka [Swift concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html))
+* [x] Add unit tests
 * [x] Add ssl pinning support
 * [x] CoreData CacheProvider
 * [x] Download requests

@@ -72,16 +72,30 @@ class ObjectsViewController: PaginatedViewController {
         } else {
             // if objects.count > 0 and nextPageLink == nil it's the end of the list
         }
-        service?
-            .load()
-            .addingObserver(activeServiceOverlay)
-            .onSuccess { [weak self] response in
-                self?.nextPageLink = response.paginatedServiceInfo.next
-                self?.insertObjects(response.objects)
+        guard let service = service?.addingObserver(activeServiceOverlay)
+        else {
+            currentService = nil
+            return
+        }
+        if #available(iOS 15.0, *) {
+            Task {
+                if let response = try? await service.load() {
+                    nextPageLink = response.paginatedServiceInfo.next
+                    insertObjects(response.objects)
+                }
+                currentService = nil
             }
-            .onCompletion { [weak self] _ in
-                self?.currentService = nil
-            }
+        } else {
+            service
+                .load()
+                .onSuccess { [weak self] response in
+                    self?.nextPageLink = response.paginatedServiceInfo.next
+                    self?.insertObjects(response.objects)
+                }
+                .onCompletion { [weak self] _ in
+                    self?.currentService = nil
+                }
+        }
         currentService = service
     }
     
@@ -89,18 +103,35 @@ class ObjectsViewController: PaginatedViewController {
         guard
             let imageLink = object.primaryimageurl
             else { return }
-        HarvardRemoteImageService(link: imageLink)
-            .addingObserver(serviceObserver)
-            .load()
-            .onSuccess { [weak self] image in
-                self?.downloadedImagesObjectID.append(object.objectid)
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        let service = HarvardRemoteImageService(link: imageLink).addingObserver(serviceObserver)
+        if #available(iOS 15.0, *) {
+            Task {
+                do {
+                    let image = try await service.load()
+                    handleDownloadObjectPrimaryPhotoServiceResult(.success(image), object: object)
+                } catch let error as ServiceError {
+                    handleDownloadObjectPrimaryPhotoServiceResult(.failure(error), object: object)
+                }
             }
-            .onFailure { [weak self] error in
-                let alertController = UIAlertController(title: "Error", message: error.description, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self?.present(alertController, animated: true, completion: nil)
-            }
+        } else {
+            service
+                .load()
+                .onCompletion { [weak self] result in
+                    self?.handleDownloadObjectPrimaryPhotoServiceResult(result, object: object)
+                }
+        }
+    }
+    
+    private func handleDownloadObjectPrimaryPhotoServiceResult(_ result: Result<UIImage, ServiceError>, object: Object) {
+        switch result {
+        case .success(let image):
+            downloadedImagesObjectID.append(object.objectid)
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        case .failure(let error):
+            let alertController = UIAlertController(title: "Error", message: error.description, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(alertController, animated: true, completion: nil)
+        }
     }
     
     // MARK: - IBActions

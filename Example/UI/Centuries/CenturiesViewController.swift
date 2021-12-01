@@ -30,18 +30,21 @@ class CenturiesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        CenturiesService()
-            .load()
-            .addingObserver(serviceOverlayView)
-            .onSuccess { [weak self] response in
-                self?.centuries = response
-                                    .centuries
-                                    .sorted(by: { ($0.temporalOrder ?? 0) < ($1.temporalOrder ?? 0) })
-                self?.tableView.reloadData()
+        let centuriesService = CenturiesService().addingObserver(serviceOverlayView)
+        if #available(iOS 15.0, *) {
+            Task {
+                centuries = (try? await centuriesService.load())?.centuries.sorted(by: { ($0.temporalOrder ?? 0) < ($1.temporalOrder ?? 0) }) ?? []
+                tableView.reloadData()
             }
-            .onFailure { error in
-                // TODO: handle error
-            }
+        } else {
+            centuriesService
+                .onSuccess { [weak self] response in
+                    self?.centuries = response
+                                        .centuries
+                                        .sorted(by: { ($0.temporalOrder ?? 0) < ($1.temporalOrder ?? 0) })
+                    self?.tableView.reloadData()
+                }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

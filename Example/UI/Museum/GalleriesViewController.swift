@@ -39,17 +39,33 @@ class GalleriesViewController: PaginatedViewController {
         var service: GalleriesService?
         if galleries.count == 0 || nextPageLink != nil {
             service = GalleriesService(nextPageLink: nextPageLink, id: floorID)
-        } 
-        service?
-            .load()
-            .addingObserver(activeServiceOverlay)
-            .onSuccess { [weak self] response in
-                self?.nextPageLink = response.paginatedServiceInfo.next
-                self?.insertObjects(response.galleries)
+                .addingObserver(activeServiceOverlay)
+        }
+        guard let service = service
+        else {
+            currentService = nil
+            return
+        }
+
+        if #available(iOS 15.0, *) {
+            Task {
+                if let response = try? await service.load() {
+                    nextPageLink = response.paginatedServiceInfo.next
+                    insertObjects(response.galleries)
+                }
             }
-            .onCompletion { [weak self] _ in
-                self?.currentService = nil
-            }
+            currentService = nil
+        } else {
+            service
+                .load()
+                .onSuccess { [weak self] response in
+                    self?.nextPageLink = response.paginatedServiceInfo.next
+                    self?.insertObjects(response.galleries)
+                }
+                .onCompletion { [weak self] _ in
+                    self?.currentService = nil
+                }
+        }
         currentService = service
     }
     

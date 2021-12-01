@@ -73,4 +73,21 @@ class UnitTests: XCTestCase {
         }
         waitForExpectations(timeout: 10, handler: nil)
     }
+    
+    @available(iOS 15.0, *)
+    @available(macOS 12.0, *)
+    func testAsyncAwaitLoad() {
+        let service = AService()
+        let expectation = self.expectation(description: "Wait for the request to finish")
+        Task {
+            do {
+                let response = try await service.load()
+                print(response)
+            } catch {
+                XCTAssert(false, "The service failed with error - \(error)")
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 10, handler: nil)
+    }
 }

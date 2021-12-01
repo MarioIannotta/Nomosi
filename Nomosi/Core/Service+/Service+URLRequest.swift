@@ -10,6 +10,9 @@ import Foundation
 public enum Method {
     case post
     case get
+    case put
+    case patch
+    case delete
     case custom(value: String)
     
     var rawValue: String {
@@ -18,6 +21,12 @@ public enum Method {
             return "POST"
         case .get:
             return "GET"
+        case .put:
+            return "PUT"
+        case .patch:
+            return "PATCH"
+        case .delete:
+            return "DELETE"
         case let .custom(value):
             return value
         }
