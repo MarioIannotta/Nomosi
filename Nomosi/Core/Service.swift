@@ -32,7 +32,6 @@ open class Service<Response: ServiceResponse> {
     public weak var mockProvider: MockProvider?
     public var sslPinningHandler: SSLPinningHandler?
     
-    public private (set) var latestResponse: Response?
     public private (set) var latestError: ServiceError?
     public var decorateRequestClosure: DecorateRequestClosure?
     public var shouldRetryClosure: ShouldRetryClosure?
@@ -47,6 +46,7 @@ open class Service<Response: ServiceResponse> {
     private var serviceObservers = [ServiceObserver]()
     private var retryCount = 0
     private var loadWorkItem: DispatchWorkItem?
+    private var shouldIgnoreCache = false
     
     public init() { }
     
@@ -103,6 +103,26 @@ open class Service<Response: ServiceResponse> {
     public func addingObserver(_ serviceObserver: ServiceObserver) -> Self {
         serviceObservers.append(serviceObserver)
         load()
+        return self
+    }
+    
+    @discardableResult
+    public func flushingCachedResponse(_ closure: (Response?) -> Void) -> Self {
+        guard let cacheProvider = cacheProvider,
+              let request = makeRequest()
+        else {
+            return self
+        }
+        shouldIgnoreCache = true
+        cacheProvider.loadIfNeeded(request: request, cachePolicy: cachePolicy) { data in
+            if let data = data {
+                let response = try? Response.parse(data: data)
+                self.log.print("📦 \(self): the cached response is returned and flushed.")
+                closure(response)
+            } else {
+                closure(nil)
+            }
+        }
         return self
     }
     
@@ -177,23 +197,21 @@ open class Service<Response: ServiceResponse> {
         
         if let mockedData = mockProvider?.mockedData?.asData {
             log.print("🎭 \(self): getting mocked data")
-            parseDataAndValidateRequest(data: mockedData)
+            parseResponseData(mockedData)
             return
         }
         
-        guard
-            let request = makeRequest()
-            else {
-                completeRequest(result: .failure(.invalidRequest))
-                return
-            }
+        guard let request = makeRequest()
+        else {
+            completeRequest(result: .failure(.invalidRequest))
+            return
+        }
         
-        guard
-            !request.isOnGoing
-            else {
-                completeRequest(result: .failure(.redundantRequest))
-                return
-            }
+        guard !request.isOnGoing
+        else {
+            completeRequest(result: .failure(.redundantRequest))
+            return
+        }
         
         let decorateRequestCallback = self.decorateRequestClosure ?? { completion in completion(nil) }
         decorateRequestCallback { error in
@@ -209,23 +227,21 @@ open class Service<Response: ServiceResponse> {
              If the request has been cancelled while evaluating the closure `decorateRequestCallback`,
              `hasBeenCancelled` would be true, in that case we should not even start the network request
              */
-            guard
-                !self.hasBeenCancelled
-                else {
-                    self.completeRequest(result: .failure(.requestCancelled))
-                    return
-                }
+            guard !self.hasBeenCancelled
+            else {
+                self.completeRequest(result: .failure(.requestCancelled))
+                return
+            }
             
             /*
              the URLRequest needs to be refreshed since it's possible to change
              url, headers etc in decorateRequestCallback
              */
-            guard
-                let request = self.makeRequest()
-                else {
-                    self.completeRequest(result: .failure(.invalidRequest))
-                    return
-                }
+            guard let request = self.makeRequest()
+            else {
+                self.completeRequest(result: .failure(.invalidRequest))
+                return
+            }
             
             self.loadFromCacheIfNeeded(request: request)
         }
@@ -243,19 +259,18 @@ open class Service<Response: ServiceResponse> {
     }
     
     private func loadFromCacheIfNeeded(request: URLRequest) {
-        guard
-            let cacheProvider = cacheProvider
-            else {
-                self.performTask(request: request)
-                return
-            }
+        guard let cacheProvider = cacheProvider,
+              !shouldIgnoreCache
+        else {
+            self.performTask(request: request)
+            return
+        }
         cacheProvider.loadIfNeeded(request: request, cachePolicy: cachePolicy) { [weak self] data in
-            guard
-                let self = self
-                else { return }
+            guard let self = self
+            else { return }
             if let data = data {
                 self.log.print("📦 \(self): getting data from cache")
-                self.parseDataAndValidateRequest(data: data)
+                self.parseResponseData(data)
             } else {
                 self.performTask(request: request)
             }
@@ -355,17 +370,16 @@ open class Service<Response: ServiceResponse> {
             completeRequest(result: .failure(serviceError))
             return
         }
-        guard
-            let data = data
-            else {
-                completeRequest(result: .failure(.emptyResponse))
-                return
-            }
+        guard let data = data
+        else {
+            completeRequest(result: .failure(.emptyResponse))
+            return
+        }
         cacheResponseIfNeeded(request: request, response: response, data: data)
-        parseDataAndValidateRequest(data: data)
+        parseResponseData(data)
     }
     
-    private func parseDataAndValidateRequest(data: Data) {
+    private func parseResponseData(_ data: Data) {
         let responseString = String(data: data, encoding: .utf8) ?? "\(data.count) bytes"
         self.log.print("Response: \n\(responseString)", requiredLevel: .verbose)
         do {
@@ -374,20 +388,19 @@ open class Service<Response: ServiceResponse> {
             } else {
                 completeRequest(result: .failure(.cannotParseResponse(error: nil)))
             }
-        } catch let error {
+        } catch {
             completeRequest(result: .failure(.cannotParseResponse(error: error)))
         }
     }
     
     private func completeRequest(result: ServiceResult) {
         let shouldRetry = shouldRetryClosure?(result, retryCount) ?? false
-        guard
-            !shouldRetry
-            else {
-                log.print("🔄 \(self): Retrying request")
-                self.debouncedLoad()
-                return
-            }
+        guard !shouldRetry
+        else {
+            log.print("🔄 \(self): Retrying request")
+            self.debouncedLoad()
+            return
+        }
 
         var result = result
         switch result {
@@ -400,7 +413,6 @@ open class Service<Response: ServiceResponse> {
                 latestError = validationError
                 notifyError(validationError)
             } else {
-                latestResponse = response
                 notifySuccess(response)
             }
         }
