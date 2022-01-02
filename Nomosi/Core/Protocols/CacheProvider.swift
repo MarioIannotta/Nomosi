@@ -28,6 +28,8 @@ public protocol CacheProvider: AnyObject {
                        cachePolicy: CachePolicy,
                        completion: ((_ success: Bool) -> Void))
     
+    func removeCachedResponse(request: URLRequest)
+    
 }
 
 extension Service {

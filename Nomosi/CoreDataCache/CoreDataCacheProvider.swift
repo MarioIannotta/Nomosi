@@ -52,7 +52,7 @@ public class CoreDataCacheProvider: CacheProvider {
             guard
                 cachedResponse.expirationDate > Date()
                 else {
-                    removeCachedResponse(for: request)
+                    removeCachedResponse(request: request)
                     completion(nil)
                     return
                 }
@@ -90,7 +90,7 @@ public class CoreDataCacheProvider: CacheProvider {
         }
     }
     
-    private func removeCachedResponse(for request: URLRequest) {
+    public func removeCachedResponse(request: URLRequest) {
         coreDataManager?.removeCacheResponse(withIdentifier: request.requestID)
     }
 }
