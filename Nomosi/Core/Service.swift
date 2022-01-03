@@ -265,7 +265,7 @@ open class Service<Response: ServiceResponse> {
     private func performTask(request: URLRequest) {
         if let mockedData = mockProvider?.mockedData?.asData {
             log.print("🎭 \(self): getting mocked data")
-            parseResponse(data: mockedData, source: .cache)
+            parseResponse(data: mockedData, source: .network)
             return
         }
         switch serviceType {
