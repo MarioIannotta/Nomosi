@@ -247,6 +247,10 @@ For an extensive overview about how all of that works, you can take a look at th
 #### Carthage
 `github "MarioIannotta/Nomosi"`
 
+#### Swift Package Manager
+* In Xcode select File > Add Packages.
+* Enter this project's URL: https://github.com/MarioIannotta/Nomosi.git
+
 ## License
 
 Nomosi is available under the MIT license. See the LICENSE file for more info.
