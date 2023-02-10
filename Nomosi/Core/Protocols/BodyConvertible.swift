@@ -9,13 +9,13 @@
 import Foundation
 
 public protocol BodyConvertible: DataConvertible {
-
-    var asBodyStream: InputStream? { get }
+  
+  var asBodyStream: InputStream? { get }
 }
 
 extension BodyConvertible {
-    
-    public var asData: Data? { nil }
-    
-    public var asBodyStream: InputStream? { nil }
+  
+  public var asData: Data? { nil }
+  
+  public var asBodyStream: InputStream? { nil }
 }

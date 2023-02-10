@@ -9,16 +9,16 @@
 import Foundation
 
 public protocol ServiceResponse {
-    
-    static func parse(data: Data) throws -> Self?
+  
+  static func parse(data: Data) throws -> Self?
 }
 
 public extension ServiceResponse where Self: Decodable {
-    
-    static func parse(data: Data) throws -> Self? {
-        let jsonDecoder = JSONDecoder()
-        return try jsonDecoder.decode(Self.self, from: data)
-    }
+  
+  static func parse(data: Data) throws -> Self? {
+    let jsonDecoder = JSONDecoder()
+    return try jsonDecoder.decode(Self.self, from: data)
+  }
 }
 
 extension Array: ServiceResponse where Element: Decodable { }
@@ -26,13 +26,13 @@ extension Array: ServiceResponse where Element: Decodable { }
 // Usefull for a download service like DownloadService: Service<URL>
 
 extension URL: ServiceResponse {
-    
-    public static func parse(data: Data) throws -> URL? {
-        guard
-            let string = String(data: data, encoding: .utf8)
-            else {
-                return nil
-            }
-        return URL(string: string)
+  
+  public static func parse(data: Data) throws -> URL? {
+    guard
+      let string = String(data: data, encoding: .utf8)
+    else {
+      return nil
     }
+    return URL(string: string)
+  }
 }

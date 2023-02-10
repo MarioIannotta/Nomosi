@@ -35,7 +35,7 @@ class HarvardArtMuseumService<Response: ServiceResponse>: Service<Response> {
     }
     
     private func commonSetup() {
-        cacheProvider = CoreDataCacheProvider.shared
+        cacheProvider = URLCache.shared
         cachePolicy = AppConfig.cachePolicy
         log = AppConfig.logLevel
         addingObserver(NetworkActivityIndicatorHandler())

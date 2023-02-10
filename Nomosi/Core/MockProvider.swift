@@ -8,30 +8,30 @@
 import Foundation
 
 public protocol MockProvider: AnyObject {
-    
-    var isMockEnabled: Bool { get }
-    var mockedData: DataConvertible? { get }
-    var mockBundle: Bundle? { get }
+  
+  var isMockEnabled: Bool { get }
+  var mockedData: DataConvertible? { get }
+  var mockBundle: Bundle? { get }
 }
 
 public extension MockProvider {
-    
-    var isMockEnabled: Bool { true }
-    
-    var mockedData: DataConvertible? {
-        guard
-            isMockEnabled
-            else {
-                return nil
-            }
-        let mockProviderName = String(describing: type(of: self))
-        guard
-            let path = mockBundle?.path(forResource: mockProviderName, ofType: "mock")
-            else {
-                return nil
-            }
-        return URL(fileURLWithPath: path)
+  
+  var isMockEnabled: Bool { true }
+  
+  var mockedData: DataConvertible? {
+    guard
+      isMockEnabled
+    else {
+      return nil
     }
-    
-    var mockBundle: Bundle? { .main }
+    let mockProviderName = String(describing: type(of: self))
+    guard
+      let path = mockBundle?.path(forResource: mockProviderName, ofType: "mock")
+    else {
+      return nil
+    }
+    return URL(fileURLWithPath: path)
+  }
+  
+  var mockBundle: Bundle? { .main }
 }

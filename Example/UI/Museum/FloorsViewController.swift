@@ -28,22 +28,24 @@ class FloorsViewController: UIViewController {
         serviceOverlayView = ServiceOverlayView(cover: view, keepOnError: true)
         loadData()
     }
-    
-    private func loadData() {
-        let service = FloorsService().addingObserver(serviceOverlayView)
-        if #available(iOS 15.0, *) {
-            Task {
-                floors = (try? await service.load()) ?? []
-                tableView.reloadData()
-            }
-        } else {
-            service
-                .load()
-                .onSuccess { [weak self] floors in
-                    self?.floors = floors
-                    self?.tableView.reloadData()
-                }
+
+  private func loadData() {
+    let service = FloorsService().addingObserver(serviceOverlayView)
+    if #available(iOS 13.0, *) {
+      Task {
+        for await (floors, source) in service.anySuccess {
+          print("got \(floors.count) floors from \(source)")
+          self.floors = floors
+          self.tableView.reloadData()
         }
+      }
+    } else {
+        service
+          .onSuccess { [weak self] floors in
+            self?.floors = floors
+            self?.tableView.reloadData()
+          }
+      }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

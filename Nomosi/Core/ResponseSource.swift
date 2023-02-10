@@ -9,6 +9,6 @@
 import Foundation
 
 public enum ResponseSource {
-    case network
-    case cache
+  case network
+  case cache
 }

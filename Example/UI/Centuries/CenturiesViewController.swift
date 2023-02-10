@@ -31,11 +31,14 @@ class CenturiesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         let centuriesService = CenturiesService().addingObserver(serviceOverlayView)
-        if #available(iOS 15.0, *) {
-            Task {
-                centuries = (try? await centuriesService.load())?.centuries.sorted(by: { ($0.temporalOrder ?? 0) < ($1.temporalOrder ?? 0) }) ?? []
-                tableView.reloadData()
+        if #available(iOS 13.0, *) {
+          Task {
+            for await (response, source) in centuriesService.anySuccess {
+              print("got \(response.centuries.count) centuries from \(source)")
+              centuries = response.centuries.sorted(by: { ($0.temporalOrder ?? 0) < ($1.temporalOrder ?? 0) })
+              tableView.reloadData()
             }
+          }
         } else {
             centuriesService
                 .onSuccess { [weak self] response in

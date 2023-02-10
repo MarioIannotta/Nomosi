@@ -12,30 +12,14 @@
 		AC1E594D25C6B22E00809BC5 /* AService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1E594C25C6B22E00809BC5 /* AService.swift */; };
 		AC21F0D023317A4A007E55CE /* BodyConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC21F0CF23317A4A007E55CE /* BodyConvertible.swift */; };
 		AC52880123216A9800C9462C /* Nomosi.h in Headers */ = {isa = PBXBuildFile; fileRef = AC5287FF23216A9800C9462C /* Nomosi.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AC52883123216AA300C9462C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52880823216AA200C9462C /* CoreDataManager.swift */; };
-		AC52883223216AA300C9462C /* NomosiCoreDataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC52880A23216AA200C9462C /* NomosiCoreDataCache.xcdatamodeld */; };
-		AC52883323216AA300C9462C /* CachedResponse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52880D23216AA200C9462C /* CachedResponse+CoreDataClass.swift */; };
-		AC52883423216AA300C9462C /* CachedResponse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52880E23216AA200C9462C /* CachedResponse+CoreDataProperties.swift */; };
-		AC52883523216AA300C9462C /* CoreDataCacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52880F23216AA200C9462C /* CoreDataCacheProvider.swift */; };
 		AC52883623216AA300C9462C /* URLRequest+RequestID.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881123216AA200C9462C /* URLRequest+RequestID.swift */; };
-		AC52883723216AA300C9462C /* NSPersistentContainer+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881223216AA200C9462C /* NSPersistentContainer+Bundle.swift */; };
-		AC52883823216AA300C9462C /* RemoteImageServiceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881423216AA200C9462C /* RemoteImageServiceOverlayView.swift */; };
-		AC52883923216AA300C9462C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881623216AA200C9462C /* UIView+.swift */; };
-		AC52883A23216AA300C9462C /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881723216AA200C9462C /* UIImageView+.swift */; };
-		AC52883B23216AA300C9462C /* ServiceObserverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881823216AA200C9462C /* ServiceObserverButton.swift */; };
-		AC52883C23216AA300C9462C /* NetworkActivityIndicatorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881923216AA200C9462C /* NetworkActivityIndicatorHandler.swift */; };
-		AC52883D23216AA300C9462C /* ServiceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881A23216AA200C9462C /* ServiceOverlayView.swift */; };
-		AC52883E23216AA300C9462C /* RemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881B23216AA200C9462C /* RemoteImageService.swift */; };
 		AC52883F23216AA300C9462C /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881D23216AA300C9462C /* DataConvertible.swift */; };
-		AC52884023216AA300C9462C /* ServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881E23216AA300C9462C /* ServiceObserver.swift */; };
 		AC52884123216AA300C9462C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881F23216AA300C9462C /* Service.swift */; };
 		AC52884223216AA300C9462C /* Service+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882023216AA300C9462C /* Service+URLRequest.swift */; };
-		AC52884323216AA300C9462C /* AnyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882123216AA300C9462C /* AnyService.swift */; };
 		AC52884423216AA300C9462C /* ThreadSafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882223216AA300C9462C /* ThreadSafeArray.swift */; };
 		AC52884523216AA300C9462C /* MockProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882323216AA300C9462C /* MockProvider.swift */; };
 		AC52884623216AA300C9462C /* URLCache+CacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882523216AA300C9462C /* URLCache+CacheProvider.swift */; };
 		AC52884723216AA300C9462C /* URLRequest+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882623216AA300C9462C /* URLRequest+Queue.swift */; };
-		AC52884823216AA300C9462C /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882723216AA300C9462C /* Bundle+.swift */; };
 		AC52884923216AA300C9462C /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882823216AA300C9462C /* ServiceError.swift */; };
 		AC52884A23216AA300C9462C /* CacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882923216AA300C9462C /* CacheProvider.swift */; };
 		AC52884B23216AA300C9462C /* ServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882A23216AA300C9462C /* ServiceResponse.swift */; };
@@ -83,6 +67,16 @@
 		AC5288C423216B3400C9462C /* Nomosi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC5287FC23216A9800C9462C /* Nomosi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AC959BAE23462DAE00AFE6D5 /* SSLPinningHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC959BAD23462DAE00AFE6D5 /* SSLPinningHandler.swift */; };
 		AC959BB0234638C500AFE6D5 /* Service+TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC959BAF234638C500AFE6D5 /* Service+TaskDelegate.swift */; };
+		AC9FAD102996960D00A6F083 /* Service+SwiftConcurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD0F2996960D00A6F083 /* Service+SwiftConcurrency.swift */; };
+		AC9FAD1A2996C04A00A6F083 /* RemoteImageServiceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD122996C04A00A6F083 /* RemoteImageServiceOverlayView.swift */; };
+		AC9FAD1B2996C04A00A6F083 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD142996C04A00A6F083 /* UIView+.swift */; };
+		AC9FAD1C2996C04A00A6F083 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD152996C04A00A6F083 /* UIImageView+.swift */; };
+		AC9FAD1D2996C04A00A6F083 /* ServiceObserverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD162996C04A00A6F083 /* ServiceObserverButton.swift */; };
+		AC9FAD1E2996C04A00A6F083 /* NetworkActivityIndicatorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD172996C04A00A6F083 /* NetworkActivityIndicatorHandler.swift */; };
+		AC9FAD1F2996C04A00A6F083 /* ServiceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD182996C04A00A6F083 /* ServiceOverlayView.swift */; };
+		AC9FAD202996C04A00A6F083 /* RemoteImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD192996C04A00A6F083 /* RemoteImageService.swift */; };
+		AC9FAD222996C0B300A6F083 /* ServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD212996C0B300A6F083 /* ServiceObserver.swift */; };
+		AC9FAD232996C0C600A6F083 /* AnyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882123216AA300C9462C /* AnyService.swift */; };
 		ACE6B6D727820327002351B1 /* ResponseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6B6D627820327002351B1 /* ResponseSource.swift */; };
 /* End PBXBuildFile section */
 
@@ -126,22 +120,8 @@
 		AC5287FC23216A9800C9462C /* Nomosi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nomosi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC5287FF23216A9800C9462C /* Nomosi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nomosi.h; sourceTree = "<group>"; };
 		AC52880023216A9800C9462C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AC52880823216AA200C9462C /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		AC52880B23216AA200C9462C /* NomosiCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NomosiCache.xcdatamodel; sourceTree = "<group>"; };
-		AC52880D23216AA200C9462C /* CachedResponse+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CachedResponse+CoreDataClass.swift"; sourceTree = "<group>"; };
-		AC52880E23216AA200C9462C /* CachedResponse+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CachedResponse+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		AC52880F23216AA200C9462C /* CoreDataCacheProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataCacheProvider.swift; sourceTree = "<group>"; };
 		AC52881123216AA200C9462C /* URLRequest+RequestID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+RequestID.swift"; sourceTree = "<group>"; };
-		AC52881223216AA200C9462C /* NSPersistentContainer+Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+Bundle.swift"; sourceTree = "<group>"; };
-		AC52881423216AA200C9462C /* RemoteImageServiceOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImageServiceOverlayView.swift; sourceTree = "<group>"; };
-		AC52881623216AA200C9462C /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
-		AC52881723216AA200C9462C /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
-		AC52881823216AA200C9462C /* ServiceObserverButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceObserverButton.swift; sourceTree = "<group>"; };
-		AC52881923216AA200C9462C /* NetworkActivityIndicatorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorHandler.swift; sourceTree = "<group>"; };
-		AC52881A23216AA200C9462C /* ServiceOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceOverlayView.swift; sourceTree = "<group>"; };
-		AC52881B23216AA200C9462C /* RemoteImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImageService.swift; sourceTree = "<group>"; };
 		AC52881D23216AA300C9462C /* DataConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
-		AC52881E23216AA300C9462C /* ServiceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceObserver.swift; sourceTree = "<group>"; };
 		AC52881F23216AA300C9462C /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		AC52882023216AA300C9462C /* Service+URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Service+URLRequest.swift"; sourceTree = "<group>"; };
 		AC52882123216AA300C9462C /* AnyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyService.swift; sourceTree = "<group>"; };
@@ -149,7 +129,6 @@
 		AC52882323216AA300C9462C /* MockProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockProvider.swift; sourceTree = "<group>"; };
 		AC52882523216AA300C9462C /* URLCache+CacheProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLCache+CacheProvider.swift"; sourceTree = "<group>"; };
 		AC52882623216AA300C9462C /* URLRequest+Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Queue.swift"; sourceTree = "<group>"; };
-		AC52882723216AA300C9462C /* Bundle+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		AC52882823216AA300C9462C /* ServiceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
 		AC52882923216AA300C9462C /* CacheProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheProvider.swift; sourceTree = "<group>"; };
 		AC52882A23216AA300C9462C /* ServiceResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceResponse.swift; sourceTree = "<group>"; };
@@ -198,6 +177,15 @@
 		AC95258725C6B74D003516A6 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		AC959BAD23462DAE00AFE6D5 /* SSLPinningHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLPinningHandler.swift; sourceTree = "<group>"; };
 		AC959BAF234638C500AFE6D5 /* Service+TaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+TaskDelegate.swift"; sourceTree = "<group>"; };
+		AC9FAD0F2996960D00A6F083 /* Service+SwiftConcurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+SwiftConcurrency.swift"; sourceTree = "<group>"; };
+		AC9FAD122996C04A00A6F083 /* RemoteImageServiceOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImageServiceOverlayView.swift; sourceTree = "<group>"; };
+		AC9FAD142996C04A00A6F083 /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		AC9FAD152996C04A00A6F083 /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		AC9FAD162996C04A00A6F083 /* ServiceObserverButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceObserverButton.swift; sourceTree = "<group>"; };
+		AC9FAD172996C04A00A6F083 /* NetworkActivityIndicatorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorHandler.swift; sourceTree = "<group>"; };
+		AC9FAD182996C04A00A6F083 /* ServiceOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceOverlayView.swift; sourceTree = "<group>"; };
+		AC9FAD192996C04A00A6F083 /* RemoteImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImageService.swift; sourceTree = "<group>"; };
+		AC9FAD212996C0B300A6F083 /* ServiceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceObserver.swift; sourceTree = "<group>"; };
 		ACE6B6D627820327002351B1 /* ResponseSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -244,7 +232,7 @@
 				AC21F0CF23317A4A007E55CE /* BodyConvertible.swift */,
 				AC52882923216AA300C9462C /* CacheProvider.swift */,
 				AC52881D23216AA300C9462C /* DataConvertible.swift */,
-				AC52881E23216AA300C9462C /* ServiceObserver.swift */,
+				AC9FAD212996C0B300A6F083 /* ServiceObserver.swift */,
 				AC52882A23216AA300C9462C /* ServiceResponse.swift */,
 				AC959BAD23462DAE00AFE6D5 /* SSLPinningHandler.swift */,
 			);
@@ -276,70 +264,10 @@
 			children = (
 				AC5287FF23216A9800C9462C /* Nomosi.h */,
 				AC52880023216A9800C9462C /* Info.plist */,
+				AC9FAD112996C04A00A6F083 /* UI */,
 				AC52881C23216AA300C9462C /* Core */,
-				AC52880723216AA200C9462C /* CoreDataCache */,
-				AC52881323216AA200C9462C /* UI */,
 			);
 			path = Nomosi;
-			sourceTree = "<group>";
-		};
-		AC52880723216AA200C9462C /* CoreDataCache */ = {
-			isa = PBXGroup;
-			children = (
-				AC52880F23216AA200C9462C /* CoreDataCacheProvider.swift */,
-				AC52880823216AA200C9462C /* CoreDataManager.swift */,
-				AC52881023216AA200C9462C /* Extensions */,
-				AC52880C23216AA200C9462C /* Models */,
-				AC52880923216AA200C9462C /* Resources */,
-			);
-			path = CoreDataCache;
-			sourceTree = "<group>";
-		};
-		AC52880923216AA200C9462C /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				AC52880A23216AA200C9462C /* NomosiCoreDataCache.xcdatamodeld */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		AC52880C23216AA200C9462C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				AC52880D23216AA200C9462C /* CachedResponse+CoreDataClass.swift */,
-				AC52880E23216AA200C9462C /* CachedResponse+CoreDataProperties.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		AC52881023216AA200C9462C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				AC52881223216AA200C9462C /* NSPersistentContainer+Bundle.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		AC52881323216AA200C9462C /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				AC52881423216AA200C9462C /* RemoteImageServiceOverlayView.swift */,
-				AC52881523216AA200C9462C /* Extensions */,
-				AC52881823216AA200C9462C /* ServiceObserverButton.swift */,
-				AC52881923216AA200C9462C /* NetworkActivityIndicatorHandler.swift */,
-				AC52881A23216AA200C9462C /* ServiceOverlayView.swift */,
-				AC52881B23216AA200C9462C /* RemoteImageService.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		AC52881523216AA200C9462C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				AC52881623216AA200C9462C /* UIView+.swift */,
-				AC52881723216AA200C9462C /* UIImageView+.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		AC52881C23216AA300C9462C /* Core */ = {
@@ -362,7 +290,6 @@
 		AC52882423216AA300C9462C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				AC52882723216AA300C9462C /* Bundle+.swift */,
 				AC52882523216AA300C9462C /* URLCache+CacheProvider.swift */,
 				AC52882623216AA300C9462C /* URLRequest+Queue.swift */,
 				AC52881123216AA200C9462C /* URLRequest+RequestID.swift */,
@@ -379,6 +306,7 @@
 				AC52882F23216AA300C9462C /* Service+Log.swift */,
 				AC52883023216AA300C9462C /* Service+Upload.swift */,
 				AC52882023216AA300C9462C /* Service+URLRequest.swift */,
+				AC9FAD0F2996960D00A6F083 /* Service+SwiftConcurrency.swift */,
 			);
 			path = "Service+";
 			sourceTree = "<group>";
@@ -555,6 +483,28 @@
 			path = Floor;
 			sourceTree = "<group>";
 		};
+		AC9FAD112996C04A00A6F083 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				AC9FAD122996C04A00A6F083 /* RemoteImageServiceOverlayView.swift */,
+				AC9FAD132996C04A00A6F083 /* Extensions */,
+				AC9FAD162996C04A00A6F083 /* ServiceObserverButton.swift */,
+				AC9FAD172996C04A00A6F083 /* NetworkActivityIndicatorHandler.swift */,
+				AC9FAD182996C04A00A6F083 /* ServiceOverlayView.swift */,
+				AC9FAD192996C04A00A6F083 /* RemoteImageService.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		AC9FAD132996C04A00A6F083 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AC9FAD142996C04A00A6F083 /* UIView+.swift */,
+				AC9FAD152996C04A00A6F083 /* UIImageView+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -707,42 +657,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC52883423216AA300C9462C /* CachedResponse+CoreDataProperties.swift in Sources */,
-				AC52883B23216AA300C9462C /* ServiceObserverButton.swift in Sources */,
 				AC52883623216AA300C9462C /* URLRequest+RequestID.swift in Sources */,
-				AC52883E23216AA300C9462C /* RemoteImageService.swift in Sources */,
-				AC52883523216AA300C9462C /* CoreDataCacheProvider.swift in Sources */,
 				AC52884F23216AA300C9462C /* Service+Log.swift in Sources */,
+				AC9FAD222996C0B300A6F083 /* ServiceObserver.swift in Sources */,
 				AC52884523216AA300C9462C /* MockProvider.swift in Sources */,
+				AC9FAD202996C04A00A6F083 /* RemoteImageService.swift in Sources */,
 				AC52884223216AA300C9462C /* Service+URLRequest.swift in Sources */,
 				AC52883F23216AA300C9462C /* DataConvertible.swift in Sources */,
-				AC52883823216AA300C9462C /* RemoteImageServiceOverlayView.swift in Sources */,
-				AC52884323216AA300C9462C /* AnyService.swift in Sources */,
 				AC52884623216AA300C9462C /* URLCache+CacheProvider.swift in Sources */,
 				ACE6B6D727820327002351B1 /* ResponseSource.swift in Sources */,
+				AC9FAD1A2996C04A00A6F083 /* RemoteImageServiceOverlayView.swift in Sources */,
+				AC9FAD1E2996C04A00A6F083 /* NetworkActivityIndicatorHandler.swift in Sources */,
 				AC52884A23216AA300C9462C /* CacheProvider.swift in Sources */,
-				AC52883A23216AA300C9462C /* UIImageView+.swift in Sources */,
+				AC9FAD232996C0C600A6F083 /* AnyService.swift in Sources */,
 				AC21F0D023317A4A007E55CE /* BodyConvertible.swift in Sources */,
 				AC959BAE23462DAE00AFE6D5 /* SSLPinningHandler.swift in Sources */,
-				AC52883223216AA300C9462C /* NomosiCoreDataCache.xcdatamodeld in Sources */,
-				AC52884023216AA300C9462C /* ServiceObserver.swift in Sources */,
 				AC52885023216AA300C9462C /* Service+Upload.swift in Sources */,
+				AC9FAD1C2996C04A00A6F083 /* UIImageView+.swift in Sources */,
 				AC52884B23216AA300C9462C /* ServiceResponse.swift in Sources */,
-				AC52883123216AA300C9462C /* CoreDataManager.swift in Sources */,
 				AC959BB0234638C500AFE6D5 /* Service+TaskDelegate.swift in Sources */,
 				AC52884123216AA300C9462C /* Service.swift in Sources */,
 				AC52884723216AA300C9462C /* URLRequest+Queue.swift in Sources */,
 				AC52884C23216AA300C9462C /* AsyncTask.swift in Sources */,
-				AC52883923216AA300C9462C /* UIView+.swift in Sources */,
-				AC52883323216AA300C9462C /* CachedResponse+CoreDataClass.swift in Sources */,
-				AC52883C23216AA300C9462C /* NetworkActivityIndicatorHandler.swift in Sources */,
 				AC52884E23216AA300C9462C /* Service+Download.swift in Sources */,
 				AC52884923216AA300C9462C /* ServiceError.swift in Sources */,
 				AC52884D23216AA300C9462C /* Service+Hashable.swift in Sources */,
-				AC52883723216AA300C9462C /* NSPersistentContainer+Bundle.swift in Sources */,
-				AC52884823216AA300C9462C /* Bundle+.swift in Sources */,
+				AC9FAD1D2996C04A00A6F083 /* ServiceObserverButton.swift in Sources */,
+				AC9FAD102996960D00A6F083 /* Service+SwiftConcurrency.swift in Sources */,
 				AC52884423216AA300C9462C /* ThreadSafeArray.swift in Sources */,
-				AC52883D23216AA300C9462C /* ServiceOverlayView.swift in Sources */,
+				AC9FAD1F2996C04A00A6F083 /* ServiceOverlayView.swift in Sources */,
+				AC9FAD1B2996C04A00A6F083 /* UIView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1116,19 +1060,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		AC52880A23216AA200C9462C /* NomosiCoreDataCache.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				AC52880B23216AA200C9462C /* NomosiCache.xcdatamodel */,
-			);
-			currentVersion = AC52880B23216AA200C9462C /* NomosiCache.xcdatamodel */;
-			path = NomosiCoreDataCache.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = AC5287F323216A9800C9462C /* Project object */;
 }
