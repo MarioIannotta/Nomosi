@@ -9,38 +9,38 @@
 import Foundation
 
 struct Gallery: Decodable, Hashable {
-
-    private enum CodingKeys: String, CodingKey {
-        case name = "name"
-        case id = "id"
-        case theme = "theme"
-        case labelText = "labeltext"
+  
+  private enum CodingKeys: String, CodingKey {
+    case name = "name"
+    case id = "id"
+    case theme = "theme"
+    case labelText = "labeltext"
+  }
+  
+  private let summaryLenght = 60
+  
+  var name: String
+  var id: Int
+  var theme: String?
+  var labelText: String?
+  var summaryLabelText: String? {
+    guard
+      let labelText = labelText,
+      labelText.count >= summaryLenght
+    else {
+      return nil
     }
-    
-    private let summaryLenght = 60
-    
-    var name: String
-    var id: Int
-    var theme: String?
-    var labelText: String?
-    var summaryLabelText: String? {
-        guard
-            let labelText = labelText,
-            labelText.count >= summaryLenght
-            else {
-                return nil
-            }
-        let substringIndex = labelText.index(labelText.startIndex, offsetBy: summaryLenght)
-        var summary = String(labelText[...substringIndex])
-        if summary != labelText {
-            summary = "\(summary)... [Read more]"
-        }
-        return summary
+    let substringIndex = labelText.index(labelText.startIndex, offsetBy: summaryLenght)
+    var summary = String(labelText[...substringIndex])
+    if summary != labelText {
+      summary = "\(summary)... [Read more]"
     }
-    
-    // MARK: - Hashable
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
+    return summary
+  }
+  
+  // MARK: - Hashable
+  
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
 }

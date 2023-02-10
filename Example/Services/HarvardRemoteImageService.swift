@@ -11,7 +11,7 @@ import UIKit
 import Nomosi
 
 class HarvardRemoteImageService: DefaultRemoteImageService {
-
+  
   override init(link: String) {
     super.init(link: link)
     self.cachePolicy = AppConfig.cachePolicy
@@ -23,7 +23,7 @@ class HarvardRemoteImageService: DefaultRemoteImageService {
 public typealias RemoteImageService = Service<UIImage>
 
 open class DefaultRemoteImageService: Service<UIImage> {
-
+  
   public init(link: String) {
     super.init()
     self.url = URL(string: link)
@@ -33,7 +33,7 @@ open class DefaultRemoteImageService: Service<UIImage> {
 extension UIImage: ServiceResponse { }
 
 extension ServiceResponse where Self: UIImage {
-
+  
   public static func parse(data: Data) throws -> Self? {
     return UIImage(data: data) as? Self
   }
@@ -41,7 +41,7 @@ extension ServiceResponse where Self: UIImage {
 
 
 extension UIImageView {
-
+  
   @discardableResult
   public func loadImage<T: RemoteImageService>(service: T) -> T {
     self.image = nil
@@ -57,7 +57,7 @@ extension UIImageView {
       }
     return service
   }
-
+  
   @discardableResult
   public func loadImage(link: String,
                         cachePolicy: CachePolicy = .none) -> RemoteImageService {

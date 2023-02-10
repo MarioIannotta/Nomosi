@@ -9,11 +9,11 @@
 import UIKit
 
 class GroupCell: UITableViewCell {
-
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var tileView: UIView!
-    
-    func configure(group: Group) {
-        nameLabel.text = group.name
-    }
+  
+  @IBOutlet private weak var nameLabel: UILabel!
+  @IBOutlet private weak var tileView: UIView!
+  
+  func configure(group: Group) {
+    nameLabel.text = group.name
+  }
 }

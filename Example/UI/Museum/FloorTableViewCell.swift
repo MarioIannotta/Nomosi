@@ -9,10 +9,10 @@
 import UIKit
 
 class FloorTableViewCell: UITableViewCell {
-    
-    @IBOutlet private weak var titleLabel: UILabel!
-    
-    func configure(floor: Floor) {
-        titleLabel.text = floor.name
-    }
+  
+  @IBOutlet private weak var titleLabel: UILabel!
+  
+  func configure(floor: Floor) {
+    titleLabel.text = floor.name
+  }
 }

@@ -10,10 +10,10 @@ import Foundation
 import Nomosi
 
 class CenturyService: HarvardArtMuseumService<Century> {
-    
-    init(id: Int) {
-        super.init(resource: "century/\(id)")
-    }
+  
+  init(id: Int) {
+    super.init(resource: "century/\(id)")
+  }
 }
 
 extension Century: ServiceResponse { }

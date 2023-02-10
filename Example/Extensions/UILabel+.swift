@@ -9,11 +9,11 @@
 import UIKit
 
 extension UILabel {
-    
-    var numberOfVisibleLines: Int {
-        let textSize = CGSize(width: CGFloat(frame.size.width), height: CGFloat(MAXFLOAT))
-        let rHeight: Int = lroundf(Float(sizeThatFits(textSize).height))
-        let charSize: Int = lroundf(Float(font.pointSize))
-        return rHeight / charSize
-    }
+  
+  var numberOfVisibleLines: Int {
+    let textSize = CGSize(width: CGFloat(frame.size.width), height: CGFloat(MAXFLOAT))
+    let rHeight: Int = lroundf(Float(sizeThatFits(textSize).height))
+    let charSize: Int = lroundf(Float(font.pointSize))
+    return rHeight / charSize
+  }
 }

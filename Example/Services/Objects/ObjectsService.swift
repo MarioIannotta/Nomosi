@@ -10,31 +10,31 @@ import Foundation
 import Nomosi
 
 class ObjectsService: HarvardArtMuseumService<ObjectsServiceResponse> {
-
-    init?(galleryID: Int?, nextPageLink: String? = nil) {
-        if let nextPageURL = URL(string: nextPageLink ?? "") {
-            super.init(url: nextPageURL)
-        } else {
-            var queryItems = [String: String]()
-            let fields = "objectid,title,primaryimageurl,century,classification,dateoffirstpageview"
-            queryItems["fields"] = fields.replacingOccurrences(of: ",", with: "%2C")
-            if let galleryID = galleryID {
-                queryItems["gallery"] = String(galleryID)
-            }
-            queryItems["sort"] = "dateoffirstpageview"
-            queryItems["sortorder"] = "desc"
-            super.init(resource: "object", queryItems: queryItems)
-        }
+  
+  init?(galleryID: Int?, nextPageLink: String? = nil) {
+    if let nextPageURL = URL(string: nextPageLink ?? "") {
+      super.init(url: nextPageURL)
+    } else {
+      var queryItems = [String: String]()
+      let fields = "objectid,title,primaryimageurl,century,classification,dateoffirstpageview"
+      queryItems["fields"] = fields.replacingOccurrences(of: ",", with: "%2C")
+      if let galleryID = galleryID {
+        queryItems["gallery"] = String(galleryID)
+      }
+      queryItems["sort"] = "dateoffirstpageview"
+      queryItems["sortorder"] = "desc"
+      super.init(resource: "object", queryItems: queryItems)
     }
+  }
 }
 
 struct ObjectsServiceResponse: ServiceResponse, Decodable {
-    
-    enum CodingKeys: String, CodingKey {
-        case objects = "records"
-        case paginatedServiceInfo = "info"
-    }
-    
-    let objects: [Object]
-    let paginatedServiceInfo: PaginatedServiceInfo
+  
+  enum CodingKeys: String, CodingKey {
+    case objects = "records"
+    case paginatedServiceInfo = "info"
+  }
+  
+  let objects: [Object]
+  let paginatedServiceInfo: PaginatedServiceInfo
 }

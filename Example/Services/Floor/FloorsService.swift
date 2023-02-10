@@ -11,11 +11,11 @@ import Nomosi
 
 // This service has not deployed yet, we'll use a mock for now
 class FloorsService: HarvardArtMuseumService<[Floor]> {
-    
-    init() {
-        super.init(resource: "floors")
-        self.mockProvider = self
-    }
+  
+  init() {
+    super.init(resource: "floors")
+    self.mockProvider = self
+  }
 }
 
 extension FloorsService: MockProvider { }

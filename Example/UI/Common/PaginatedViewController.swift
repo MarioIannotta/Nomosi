@@ -11,7 +11,7 @@ import Nomosi
 
 class PaginatedViewController<PaginatedService: Service<Response>, Response: ServiceResponse>: UIViewController {
   
-  public var nextPageLink: String? = nil 
+  public var nextPageLink: String? = nil
   public var currentService: PaginatedService?
   
   private var paginatedScrollView: UIScrollView?

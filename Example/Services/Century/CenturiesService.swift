@@ -10,17 +10,17 @@ import Foundation
 import Nomosi
 
 class CenturiesService: HarvardArtMuseumService<CenturiesServiceResponse> {
-    
-    init() {
-        super.init(resource: "century")
-    }
+  
+  init() {
+    super.init(resource: "century")
+  }
 }
 
 struct CenturiesServiceResponse: ServiceResponse, Decodable {
-    
-    enum CodingKeys: String, CodingKey {
-        case centuries = "records"
-    }
-    
-    let centuries: [Century]
+  
+  enum CodingKeys: String, CodingKey {
+    case centuries = "records"
+  }
+  
+  let centuries: [Century]
 }

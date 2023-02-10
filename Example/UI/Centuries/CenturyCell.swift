@@ -9,16 +9,16 @@
 import UIKit
 
 class CenturyCell: UITableViewCell {
-    
-    // MARK: - IBOutlets
-    
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var objectNumberLabel: UILabel!
-    @IBOutlet private weak var lastUpdateLabel: UILabel!
-    
-    func configure(century: Century) {
-        nameLabel.text = century.name
-        objectNumberLabel.text = String(century.objectCount ?? 0)
-        lastUpdateLabel.text = century.formattedDate
-    }
+  
+  // MARK: - IBOutlets
+  
+  @IBOutlet private weak var nameLabel: UILabel!
+  @IBOutlet private weak var objectNumberLabel: UILabel!
+  @IBOutlet private weak var lastUpdateLabel: UILabel!
+  
+  func configure(century: Century) {
+    nameLabel.text = century.name
+    objectNumberLabel.text = String(century.objectCount ?? 0)
+    lastUpdateLabel.text = century.formattedDate
+  }
 }

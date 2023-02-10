@@ -9,14 +9,14 @@
 import Foundation
 
 struct Person: Decodable {
-    let alphasort: String?
-    let birthplace: String?
-    let name: String?
-    let personPrefix: String?
-    let personid: Int?
-    let gender, role: String?
-    let displayorder: Int?
-    let culture: String?
-    let displaydate, deathplace: String?
-    let displayname: String?
+  let alphasort: String?
+  let birthplace: String?
+  let name: String?
+  let personPrefix: String?
+  let personid: Int?
+  let gender, role: String?
+  let displayorder: Int?
+  let culture: String?
+  let displaydate, deathplace: String?
+  let displayname: String?
 }

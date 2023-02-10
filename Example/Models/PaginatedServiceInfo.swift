@@ -9,7 +9,7 @@
 import Foundation
 
 struct PaginatedServiceInfo: Decodable {
-    let totalrecordsperquery, totalrecords, pages, page: Int?
-    let next: String?
+  let totalrecordsperquery, totalrecords, pages, page: Int?
+  let next: String?
 }
 

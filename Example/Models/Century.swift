@@ -9,32 +9,32 @@
 import Foundation
 
 struct Century: Decodable {
-    
-    private enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case name = "name"
-        case objectCount = "objectcount"
-        case temporalOrder = "temporalOrder"
-        case lastUpdate = "lastupdate"
-        case detail = "contains"
-    }
-    
-    struct Detail: Decodable {
-        let groups: [Group]?
-    }
-    
-    let id: Int?
-    let name: String?
-    let objectCount, temporalOrder: Int?
-    let lastUpdate: String?
-    let detail: Detail?
-    
-    var formattedDate: String {
-        lastUpdate?
-            .split(separator: "T")
-            .first?
-            .split(separator: "-")
-            .reversed()
-            .joined(separator: "/") ?? ""
-    }
+  
+  private enum CodingKeys: String, CodingKey {
+    case id = "id"
+    case name = "name"
+    case objectCount = "objectcount"
+    case temporalOrder = "temporalOrder"
+    case lastUpdate = "lastupdate"
+    case detail = "contains"
+  }
+  
+  struct Detail: Decodable {
+    let groups: [Group]?
+  }
+  
+  let id: Int?
+  let name: String?
+  let objectCount, temporalOrder: Int?
+  let lastUpdate: String?
+  let detail: Detail?
+  
+  var formattedDate: String {
+    lastUpdate?
+      .split(separator: "T")
+      .first?
+      .split(separator: "-")
+      .reversed()
+      .joined(separator: "/") ?? ""
+  }
 }

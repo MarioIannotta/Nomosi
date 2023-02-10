@@ -9,12 +9,12 @@
 import Foundation
 
 struct Image: Decodable {
-    let height: Int?
-    let iiifbaseuri, baseimageurl: String?
-    let width: Int?
-    let publiccaption: String?
-    let idsid, displayorder: Int?
-    let copyright: String?
-    let imageid: Int?
-    let renditionnumber: String?
+  let height: Int?
+  let iiifbaseuri, baseimageurl: String?
+  let width: Int?
+  let publiccaption: String?
+  let idsid, displayorder: Int?
+  let copyright: String?
+  let imageid: Int?
+  let renditionnumber: String?
 }
