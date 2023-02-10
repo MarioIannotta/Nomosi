@@ -68,8 +68,6 @@
 		AC959BAE23462DAE00AFE6D5 /* SSLPinningHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC959BAD23462DAE00AFE6D5 /* SSLPinningHandler.swift */; };
 		AC959BB0234638C500AFE6D5 /* Service+TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC959BAF234638C500AFE6D5 /* Service+TaskDelegate.swift */; };
 		AC9FAD102996960D00A6F083 /* Service+SwiftConcurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD0F2996960D00A6F083 /* Service+SwiftConcurrency.swift */; };
-		AC9FAD222996C0B300A6F083 /* ServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FAD212996C0B300A6F083 /* ServiceObserver.swift */; };
-		AC9FAD232996C0C600A6F083 /* AnyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882123216AA300C9462C /* AnyService.swift */; };
 		ACE6B6D727820327002351B1 /* ResponseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6B6D627820327002351B1 /* ResponseSource.swift */; };
 /* End PBXBuildFile section */
 
@@ -117,7 +115,6 @@
 		AC52881D23216AA300C9462C /* DataConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		AC52881F23216AA300C9462C /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		AC52882023216AA300C9462C /* Service+URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Service+URLRequest.swift"; sourceTree = "<group>"; };
-		AC52882123216AA300C9462C /* AnyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyService.swift; sourceTree = "<group>"; };
 		AC52882223216AA300C9462C /* ThreadSafeArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadSafeArray.swift; sourceTree = "<group>"; };
 		AC52882323216AA300C9462C /* MockProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockProvider.swift; sourceTree = "<group>"; };
 		AC52882523216AA300C9462C /* URLCache+CacheProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLCache+CacheProvider.swift"; sourceTree = "<group>"; };
@@ -171,7 +168,6 @@
 		AC959BAD23462DAE00AFE6D5 /* SSLPinningHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLPinningHandler.swift; sourceTree = "<group>"; };
 		AC959BAF234638C500AFE6D5 /* Service+TaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+TaskDelegate.swift"; sourceTree = "<group>"; };
 		AC9FAD0F2996960D00A6F083 /* Service+SwiftConcurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+SwiftConcurrency.swift"; sourceTree = "<group>"; };
-		AC9FAD212996C0B300A6F083 /* ServiceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceObserver.swift; sourceTree = "<group>"; };
 		ACE6B6D627820327002351B1 /* ResponseSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,7 +214,6 @@
 				AC21F0CF23317A4A007E55CE /* BodyConvertible.swift */,
 				AC52882923216AA300C9462C /* CacheProvider.swift */,
 				AC52881D23216AA300C9462C /* DataConvertible.swift */,
-				AC9FAD212996C0B300A6F083 /* ServiceObserver.swift */,
 				AC52882A23216AA300C9462C /* ServiceResponse.swift */,
 				AC959BAD23462DAE00AFE6D5 /* SSLPinningHandler.swift */,
 			);
@@ -258,7 +253,6 @@
 		AC52881C23216AA300C9462C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				AC52882123216AA300C9462C /* AnyService.swift */,
 				AC52882B23216AA300C9462C /* AsyncTask.swift */,
 				AC52882423216AA300C9462C /* Extensions */,
 				AC52882323216AA300C9462C /* MockProvider.swift */,
@@ -622,14 +616,12 @@
 			files = (
 				AC52883623216AA300C9462C /* URLRequest+RequestID.swift in Sources */,
 				AC52884F23216AA300C9462C /* Service+Log.swift in Sources */,
-				AC9FAD222996C0B300A6F083 /* ServiceObserver.swift in Sources */,
 				AC52884523216AA300C9462C /* MockProvider.swift in Sources */,
 				AC52884223216AA300C9462C /* Service+URLRequest.swift in Sources */,
 				AC52883F23216AA300C9462C /* DataConvertible.swift in Sources */,
 				AC52884623216AA300C9462C /* URLCache+CacheProvider.swift in Sources */,
 				ACE6B6D727820327002351B1 /* ResponseSource.swift in Sources */,
 				AC52884A23216AA300C9462C /* CacheProvider.swift in Sources */,
-				AC9FAD232996C0C600A6F083 /* AnyService.swift in Sources */,
 				AC21F0D023317A4A007E55CE /* BodyConvertible.swift in Sources */,
 				AC959BAE23462DAE00AFE6D5 /* SSLPinningHandler.swift in Sources */,
 				AC52885023216AA300C9462C /* Service+Upload.swift in Sources */,

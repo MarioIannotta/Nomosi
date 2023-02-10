@@ -64,7 +64,7 @@ class ObjectCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        loadImageService?.cancelRequest()
+        loadImageService?.cancel()
     }
     
     @IBAction private func downloadButtonTapped() {

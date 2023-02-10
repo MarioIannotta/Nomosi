@@ -9,7 +9,7 @@
 import UIKit
 import Nomosi
 
-class ObjectsViewController: PaginatedViewController {
+class ObjectsViewController: PaginatedViewController<ObjectsService, ObjectsServiceResponse> {
     
     // MARK: - Config
     
@@ -187,5 +187,12 @@ extension ObjectsViewController: UICollectionViewDataSource, UICollectionViewDel
                      left: config.horizontalPadding,
                      bottom: config.bottomPadding,
                      right: config.horizontalPadding)
+    }
+}
+
+extension ObjectsViewController: UIScrollViewDelegate {
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        loadNextPageIfNeeded(contentOffset: targetContentOffset.pointee)
     }
 }

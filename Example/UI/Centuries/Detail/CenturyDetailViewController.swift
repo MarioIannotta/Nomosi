@@ -33,9 +33,6 @@ class CenturyDetailViewController: UIViewController {
         
         century = nil
         let centuryService = CenturyService(id: centuryID)
-        centuryService
-            .addingObserver(self)
-        
         if #available(iOS 15.0, *) {
             Task {
                 century = try? await centuryService.load()
@@ -81,22 +78,4 @@ extension CenturyDetailViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-}
-
-extension CenturyDetailViewController: ServiceObserver {
-    
-    func serviceWillStartRequest(_ service: AnyService) {
-//        guard
-//            let service = service as? CenturyService
-//            else { return }
-//        print("service \(service) did start request")
-    }
-    
-    func serviceDidEndRequest(_ service: AnyService) {
-//        guard
-//            let service = service as? CenturyService
-//            else { return }
-//        print("service \(service) did end request, latest response is: \(service.latestResponse)")
-    }
-    
 }

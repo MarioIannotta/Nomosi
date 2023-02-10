@@ -49,7 +49,6 @@ open class Service<Response: ServiceResponse> {
   private var anyFailureClosures = ThreadSafeArray<AnyFailureClosure>()
   private var progressClosures = ThreadSafeArray<ProgressClosure>()
   private var hasBeenCancelled = false
-  private var serviceObservers = [ServiceObserver]()
   private var retryCount = 0
   private var loadWorkItem: DispatchWorkItem?
   
@@ -121,13 +120,6 @@ open class Service<Response: ServiceResponse> {
   @discardableResult
   public func onProgress(_ closure: @escaping ProgressClosure) -> Self {
     progressClosures.append(closure)
-    load()
-    return self
-  }
-  
-  @discardableResult
-  public func addingObserver(_ serviceObserver: ServiceObserver) -> Self {
-    serviceObservers.append(serviceObserver)
     load()
     return self
   }
@@ -205,7 +197,6 @@ open class Service<Response: ServiceResponse> {
     } else {
       log.print("⏱ \(self): decorating request...", requiredLevel: .verbose)
     }
-    serviceObservers.forEach { $0.serviceWillStartRequest(self) }
     
     guard let request = makeRequest()
     else {
@@ -452,7 +443,6 @@ open class Service<Response: ServiceResponse> {
         self.completionClosures.forEach { $0(result) }
       }
       self.anyCompletionClosures.forEach { $0(result, source) }
-      self.serviceObservers.forEach { $0.serviceDidEndRequest(self) }
     }
   }
 }
