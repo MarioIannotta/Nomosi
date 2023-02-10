@@ -11,7 +11,7 @@ import Nomosi
 
 struct ObjectCollectionViewCellViewModel {
     let object: Object
-    let onDownloadButtonTapped: ((_ object: Object, _ serviceObserver: ServiceObserver) -> Void)
+    let onDownloadButtonTapped: ((_ object: Object) -> Void)
     let isImageDownloaded: Bool
 }
 
@@ -26,11 +26,9 @@ class ObjectCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var classificationLabel: UILabel!
     @IBOutlet private weak var classificationContainerView: UIView!
     @IBOutlet private weak var previewImageView: UIImageView!
-    @IBOutlet private weak var downloadButton: ServiceObserverButton!
+    @IBOutlet private weak var downloadButton: UIButton!
     
     private var viewModel: ObjectCollectionViewCellViewModel?
-    private let placeholder: RemoteImageServiceOverlayView = .activityIndicator(tintColor: .black,
-                                                                                errorImage: #imageLiteral(resourceName: "image_placeholder"))
     private var loadImageService: HarvardRemoteImageService?
     
     override func awakeFromNib() {
@@ -44,19 +42,6 @@ class ObjectCollectionViewCell: UICollectionViewCell {
         centuryContainerView.layer.cornerRadius = 8
         classificationContainerView.layer.cornerRadius = 8
         downloadButton.layer.cornerRadius = downloadButton.bounds.height/2
-        let downloadButtonCompactiSize = CGSize(width: downloadButton.bounds.height, height: downloadButton.bounds.height)
-        downloadButton.setLoadingActions(
-            .disableUserInteraction,
-            .showLoader(animated: true),
-            .hideContent(animated: false),
-            .resize(newSize: downloadButtonCompactiSize, animated: true),
-            .onCompletion({ [weak self] _, hasError in
-                guard
-                    !hasError
-                    else { return }
-                self?.setupDownloadButton(isImageDownloaded: true)
-            })
-        )
     }
     
     func configure(viewModel: ObjectCollectionViewCellViewModel) {
@@ -70,8 +55,7 @@ class ObjectCollectionViewCell: UICollectionViewCell {
         setupDownloadButton(isImageDownloaded: viewModel.isImageDownloaded)
         let imageLink = viewModel.object.primaryimageurl ?? ""
         let loadImageService = HarvardRemoteImageService(link: "\(imageLink)?height=200&width=200")
-        self.loadImageService = previewImageView.loadImage(service: loadImageService,
-                                                           overlayView: placeholder)
+        self.loadImageService = previewImageView.loadImage(service: loadImageService)
     }
     
     private func setupDownloadButton(isImageDownloaded: Bool) {
@@ -87,6 +71,6 @@ class ObjectCollectionViewCell: UICollectionViewCell {
         guard
             let viewModel = viewModel
             else { return }
-        viewModel.onDownloadButtonTapped(viewModel.object, downloadButton)
+        viewModel.onDownloadButtonTapped(viewModel.object)
     }
 }

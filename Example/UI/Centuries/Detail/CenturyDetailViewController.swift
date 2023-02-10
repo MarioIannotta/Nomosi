@@ -14,9 +14,7 @@ class CenturyDetailViewController: UIViewController {
     // MARK: - IBOutlets
     
     @IBOutlet private weak var tableView: UITableView!
-    
-    private var serviceOverlayView: ServiceOverlayView!
-    
+
     // MARK: - Model
     
     var century: Century?
@@ -28,7 +26,6 @@ class CenturyDetailViewController: UIViewController {
         super.viewDidLoad()
         title = century?.name
         centuryID = century?.id ?? -1
-        serviceOverlayView = ServiceOverlayView(cover: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,7 +34,6 @@ class CenturyDetailViewController: UIViewController {
         century = nil
         let centuryService = CenturyService(id: centuryID)
         centuryService
-            .addingObserver(serviceOverlayView)
             .addingObserver(self)
         
         if #available(iOS 15.0, *) {

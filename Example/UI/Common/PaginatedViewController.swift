@@ -13,16 +13,6 @@ class PaginatedViewController: UIViewController {
     
     public var nextPageLink: String? = nil 
     public var currentService: AnyService?
-    public var activeServiceOverlay: ServiceOverlayView {
-        var serviceOverlayView = self.pageServiceOverlayView
-        if nextPageLink != nil, let footerServiceOverlayView = footerServiceOverlayView {
-            serviceOverlayView = footerServiceOverlayView
-        }
-        return serviceOverlayView!
-    }
-    
-    private var footerServiceOverlayView: ServiceOverlayView?
-    private var pageServiceOverlayView: ServiceOverlayView!
     
     private var paginatedScrollView: UIScrollView?
     private let heightThreshold: CGFloat = 200
@@ -43,9 +33,6 @@ class PaginatedViewController: UIViewController {
     
     public func setupPaginatedController(scrollView: UIScrollView, footerView: UIView) {
         paginatedScrollView = scrollView
-        pageServiceOverlayView = ServiceOverlayView(cover: view)
-        footerServiceOverlayView = ServiceOverlayView(cover: footerView)
-        footerServiceOverlayView?.backgroundColor = .clear
     }
     
     public func resetDataSource() {

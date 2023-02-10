@@ -72,7 +72,7 @@ class ObjectsViewController: PaginatedViewController {
         } else {
             // if objects.count > 0 and nextPageLink == nil it's the end of the list
         }
-        guard let service = service?.addingObserver(activeServiceOverlay)
+        guard let service = service
         else {
             currentService = nil
             return
@@ -99,11 +99,11 @@ class ObjectsViewController: PaginatedViewController {
         currentService = service
     }
     
-    private func downloadObjectPrimaryPhoto(object: Object, serviceObserver: ServiceObserver) {
+    private func downloadObjectPrimaryPhoto(object: Object) {
         guard
             let imageLink = object.primaryimageurl
             else { return }
-        let service = HarvardRemoteImageService(link: imageLink).addingObserver(serviceObserver)
+        let service = HarvardRemoteImageService(link: imageLink)
         if #available(iOS 15.0, *) {
             Task {
                 do {
@@ -163,8 +163,8 @@ extension ObjectsViewController: UICollectionViewDataSource, UICollectionViewDel
             }
         let viewModel = ObjectCollectionViewCellViewModel(
             object: objects[indexPath.item],
-            onDownloadButtonTapped: { [weak self] object, serviceObserver in
-                self?.downloadObjectPrimaryPhoto(object: object, serviceObserver: serviceObserver)
+            onDownloadButtonTapped: { [weak self] object in
+                self?.downloadObjectPrimaryPhoto(object: object)
             },
             isImageDownloaded: downloadedImagesObjectID.contains(objects[indexPath.item].objectid))
         cell.configure(viewModel: viewModel)

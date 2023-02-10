@@ -38,7 +38,6 @@ class HarvardArtMuseumService<Response: ServiceResponse>: Service<Response> {
         cacheProvider = URLCache.shared
         cachePolicy = AppConfig.cachePolicy
         log = AppConfig.logLevel
-        addingObserver(NetworkActivityIndicatorHandler())
         let oldURL = url
         decorateRequest { [weak self] completion in
             self?.url = AppConfig.isNetworkErrorActive ? URL(string: "http://www.marioiannotta.com") : oldURL

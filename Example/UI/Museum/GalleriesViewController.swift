@@ -39,7 +39,6 @@ class GalleriesViewController: PaginatedViewController {
         var service: GalleriesService?
         if galleries.count == 0 || nextPageLink != nil {
             service = GalleriesService(nextPageLink: nextPageLink, id: floorID)
-                .addingObserver(activeServiceOverlay)
         }
         guard let service = service
         else {

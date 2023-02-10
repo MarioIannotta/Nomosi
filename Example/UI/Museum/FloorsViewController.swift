@@ -15,8 +15,6 @@ class FloorsViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private var serviceOverlayView: ServiceOverlayView!
-    
     // MARK: - Model
     
     private var floors = [Floor]()
@@ -25,12 +23,11 @@ class FloorsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        serviceOverlayView = ServiceOverlayView(cover: view, keepOnError: true)
         loadData()
     }
 
   private func loadData() {
-    let service = FloorsService().addingObserver(serviceOverlayView)
+    let service = FloorsService()
     if #available(iOS 13.0, *) {
       Task {
         for await (floors, source) in service.anySuccess {

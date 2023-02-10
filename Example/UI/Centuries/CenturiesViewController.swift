@@ -18,19 +18,17 @@ class CenturiesViewController: UIViewController {
     // MARK: - Model
     
     private var centuries: [Century] = []
-    private var serviceOverlayView: ServiceOverlayView!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        serviceOverlayView = ServiceOverlayView(cover: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let centuriesService = CenturiesService().addingObserver(serviceOverlayView)
+        let centuriesService = CenturiesService()
         if #available(iOS 13.0, *) {
           Task {
             for await (response, source) in centuriesService.anySuccess {
