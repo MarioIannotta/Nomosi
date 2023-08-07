@@ -41,13 +41,13 @@ open class Service<Response: ServiceResponse> {
   public var validateResponseClosure: ValidateResponseClosure?
   
   private var sessionTask: URLSessionTask?
-  private var completionClosures = ThreadSafeArray<CompletionClosure>()
-  private var anyCompletionClosures = ThreadSafeArray<AnyCompletionClosure>()
-  private var successClosures = ThreadSafeArray<SuccessClosure>()
-  private var anySuccessClosures = ThreadSafeArray<AnySuccessClosure>()
-  private var failureClosures = ThreadSafeArray<FailureClosure>()
-  private var anyFailureClosures = ThreadSafeArray<AnyFailureClosure>()
-  private var progressClosures = ThreadSafeArray<ProgressClosure>()
+  private var completionClosure: CompletionClosure?
+  private var anyCompletionClosure: AnyCompletionClosure?
+  private var successClosure: SuccessClosure?
+  private var anySuccessClosure: AnySuccessClosure?
+  private var failureClosure: FailureClosure?
+  private var anyFailureClosure: AnyFailureClosure?
+  private var progressClosure: ProgressClosure?
   private var hasBeenCancelled = false
   private var retryCount = 0
   private var loadWorkItem: DispatchWorkItem?
@@ -56,42 +56,42 @@ open class Service<Response: ServiceResponse> {
   
   @discardableResult
   public func onCompletion(_ closure: @escaping CompletionClosure) -> Self {
-    completionClosures.append(closure)
+    completionClosure = closure
     load()
     return self
   }
   
   @discardableResult
   public func onAnyCompletion(_ closure: @escaping AnyCompletionClosure) -> Self {
-    anyCompletionClosures.append(closure)
+    anyCompletionClosure = closure
     load()
     return self
   }
   
   @discardableResult
   public func onSuccess(_ closure: @escaping SuccessClosure) -> Self {
-    successClosures.append(closure)
+    successClosure = closure
     load()
     return self
   }
   
   @discardableResult
   public func onAnySuccess(_ closure: @escaping AnySuccessClosure) -> Self {
-    anySuccessClosures.append(closure)
+    anySuccessClosure = closure
     load()
     return self
   }
   
   @discardableResult
   public func onFailure(_ closure: @escaping FailureClosure) -> Self {
-    failureClosures.append(closure)
+    failureClosure = closure
     load()
     return self
   }
   
   @discardableResult
   public func onAnyFailure(_ closure: @escaping AnyFailureClosure) -> Self {
-    anyFailureClosures.append(closure)
+    anyFailureClosure = closure
     load()
     return self
   }
@@ -119,7 +119,7 @@ open class Service<Response: ServiceResponse> {
   
   @discardableResult
   public func onProgress(_ closure: @escaping ProgressClosure) -> Self {
-    progressClosures.append(closure)
+    progressClosure = closure
     load()
     return self
   }
@@ -348,7 +348,7 @@ open class Service<Response: ServiceResponse> {
   }
   
   private func forwardProgress(_ progress: Progress) {
-    progressClosures.forEach { $0(progress) }
+    progressClosure?(progress)
   }
   
   private func handleCompletedTask(request: URLRequest, data: Data?, response: URLResponse?, error: Error?) {
@@ -422,27 +422,27 @@ open class Service<Response: ServiceResponse> {
     self.log.print("⚠️ \(self): Error \(error)")
     DispatchQueue.main.async {
       if source == .network {
-        self.failureClosures.forEach { $0(error) }
+        self.failureClosure?(error)
       }
-      self.anyFailureClosures.forEach { $0(error, source) }
+      self.anyFailureClosure?(error, source)
     }
   }
   
   private func notifySuccess(response: Response, source: ResponseSource) {
     DispatchQueue.main.async {
       if source == .network {
-        self.successClosures.forEach { $0(response) }
+        self.successClosure?(response)
       }
-      self.anySuccessClosures.forEach { $0(response, source) }
+      self.anySuccessClosure?(response, source)
     }
   }
   
   private func notifyCompletion(result: ServiceResult, source: ResponseSource) {
     DispatchQueue.main.async {
       if source == .network {
-        self.completionClosures.forEach { $0(result) }
+        self.completionClosure?(result)
       }
-      self.anyCompletionClosures.forEach { $0(result, source) }
+      self.anyCompletionClosure?(result, source)
     }
   }
 }

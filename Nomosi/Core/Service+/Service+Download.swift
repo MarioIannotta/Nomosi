@@ -8,7 +8,7 @@
 import Foundation
 
 open class DownloadService: Service<URL> {
-
+  
   public override init() {
     super.init()
     serviceType = .downloadFile
@@ -16,9 +16,9 @@ open class DownloadService: Service<URL> {
 }
 
 class DownloadDelegate: AsycTask<URL>, URLSessionDownloadDelegate {
-
+  
   // MARK: - URLSessionDownloadDelegate
-
+  
   func urlSession(_ session: URLSession,
                   downloadTask: URLSessionDownloadTask,
                   didWriteData bytesWritten: Int64,
@@ -28,13 +28,13 @@ class DownloadDelegate: AsycTask<URL>, URLSessionDownloadDelegate {
     progress.completedUnitCount = totalBytesWritten
     onProgress?(progress)
   }
-
+  
   func urlSession(_ session: URLSession,
                   downloadTask: URLSessionDownloadTask,
                   didFinishDownloadingTo location: URL) {
     onCompletion?(location, downloadTask.response, downloadTask.error)
   }
-
+  
   func urlSession(_ session: URLSession,
                   didReceive challenge: URLAuthenticationChallenge,
                   completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {

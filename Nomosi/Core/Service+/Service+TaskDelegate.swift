@@ -9,13 +9,13 @@
 import Foundation
 
 class TaskDelegate: NSObject, URLSessionTaskDelegate {
-
+  
   private weak var sslPinningHandler: SSLPinningHandler?
-
+  
   public init(sslPinningHandler: SSLPinningHandler?) {
     self.sslPinningHandler = sslPinningHandler
   }
-
+  
   func urlSession(_ session: URLSession,
                   didReceive challenge: URLAuthenticationChallenge,
                   completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {

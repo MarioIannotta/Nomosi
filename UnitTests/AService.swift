@@ -16,12 +16,12 @@ import Nomosi
  ```
  */
 class AService: Service<AServiceResponse> {
-    override init() {
-        super.init()
-        url = URL(string: "https://hookb.in/pz7MM3owMgURPnrrPL7o")
-    }
+  override init() {
+    super.init()
+    url = URL(string: "https://pastebin.com/raw/tdA2qddh")
+  }
 }
 
 struct AServiceResponse: ServiceResponse, Decodable {
-    let success: Bool
+  let success: Bool
 }

@@ -16,7 +16,6 @@
 		AC52883F23216AA300C9462C /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881D23216AA300C9462C /* DataConvertible.swift */; };
 		AC52884123216AA300C9462C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52881F23216AA300C9462C /* Service.swift */; };
 		AC52884223216AA300C9462C /* Service+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882023216AA300C9462C /* Service+URLRequest.swift */; };
-		AC52884423216AA300C9462C /* ThreadSafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882223216AA300C9462C /* ThreadSafeArray.swift */; };
 		AC52884523216AA300C9462C /* MockProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882323216AA300C9462C /* MockProvider.swift */; };
 		AC52884623216AA300C9462C /* URLCache+CacheProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882523216AA300C9462C /* URLCache+CacheProvider.swift */; };
 		AC52884723216AA300C9462C /* URLRequest+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52882623216AA300C9462C /* URLRequest+Queue.swift */; };
@@ -115,7 +114,6 @@
 		AC52881D23216AA300C9462C /* DataConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		AC52881F23216AA300C9462C /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		AC52882023216AA300C9462C /* Service+URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Service+URLRequest.swift"; sourceTree = "<group>"; };
-		AC52882223216AA300C9462C /* ThreadSafeArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadSafeArray.swift; sourceTree = "<group>"; };
 		AC52882323216AA300C9462C /* MockProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockProvider.swift; sourceTree = "<group>"; };
 		AC52882523216AA300C9462C /* URLCache+CacheProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLCache+CacheProvider.swift"; sourceTree = "<group>"; };
 		AC52882623216AA300C9462C /* URLRequest+Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Queue.swift"; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 				AC52881F23216AA300C9462C /* Service.swift */,
 				AC52882C23216AA300C9462C /* Service+ */,
 				AC52882823216AA300C9462C /* ServiceError.swift */,
-				AC52882223216AA300C9462C /* ThreadSafeArray.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -634,7 +631,6 @@
 				AC52884923216AA300C9462C /* ServiceError.swift in Sources */,
 				AC52884D23216AA300C9462C /* Service+Hashable.swift in Sources */,
 				AC9FAD102996960D00A6F083 /* Service+SwiftConcurrency.swift in Sources */,
-				AC52884423216AA300C9462C /* ThreadSafeArray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
