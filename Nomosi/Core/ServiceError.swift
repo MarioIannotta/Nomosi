@@ -39,7 +39,7 @@ public struct ServiceError: LocalizedError {
   public static let emptyResponse = ServiceError(code: 3, reason: "Empty response")
   public static func cannotParseResponse(error: Error?) -> ServiceError {
     ServiceError(code: 2,
-                 reason: "Can't parse the response",
+                 reason: "Can't parse the response. \(String(describing: error))",
                  userInfo: UserInfo(underlyingError: error))
   }
   

@@ -34,7 +34,8 @@ open class Service<Response: ServiceResponse> {
   public var validStatusCodes: Range<Int>? = 200..<300
   public weak var mockProvider: MockProvider?
   public var sslPinningHandler: SSLPinningHandler?
-  
+  public var requestID: String?
+
   public private (set) var latestError: ServiceError?
   public var decorateRequestClosure: DecorateRequestClosure?
   public var shouldRetryClosure: ShouldRetryClosure?
@@ -51,7 +52,7 @@ open class Service<Response: ServiceResponse> {
   private var hasBeenCancelled = false
   private var retryCount = 0
   private var loadWorkItem: DispatchWorkItem?
-  
+
   public init() { }
   
   @discardableResult
@@ -184,7 +185,7 @@ open class Service<Response: ServiceResponse> {
   public func flushCache() {
     guard let request = makeRequest()
     else { return }
-    cacheProvider?.removeCachedResponse(request: request)
+    cacheProvider?.removeCachedResponse(request: request, cacheID: requestID ?? request.requestID)
   }
   
   private func debouncedLoad() {
@@ -260,11 +261,12 @@ open class Service<Response: ServiceResponse> {
       log.print("🎭 \(self): getting mocked data")
       parseResponse(data: mockedData, source: .cache)
     } else {
-      cacheProvider?.loadIfNeeded(request: request, cachePolicy: cachePolicy) { [weak self] data in
+      let cacheID = requestID ?? request.requestID
+      cacheProvider?.loadIfNeeded(request: request, cacheID: cacheID, cachePolicy: cachePolicy) { [weak self] data in
         guard let self = self,
               let data = data
         else { return }
-        self.log.print("📦 \(self): getting data from cache")
+        self.log.print("📦 \(self): getting data from cache. ID \(cacheID)")
         self.parseResponse(data: data, source: .cache)
       }
     }
@@ -374,7 +376,7 @@ open class Service<Response: ServiceResponse> {
       completeRequest(result: .failure(.emptyResponse), source: .network)
       return
     }
-    cacheResponseIfNeeded(request: request, response: response, data: data)
+    cacheResponseIfNeeded(request: request, cacheID: requestID ?? request.requestID, response: response, data: data)
     parseResponse(data: data, source: .network)
   }
   

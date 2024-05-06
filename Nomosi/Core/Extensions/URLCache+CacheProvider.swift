@@ -19,6 +19,7 @@ extension URLCache: CacheProvider {
   }
   
   public func loadIfNeeded(request: URLRequest,
+                           cacheID: String,
                            cachePolicy: CachePolicy,
                            completion: ((_ data: Data?) -> Void)) {
     if case .none = cachePolicy {
@@ -43,6 +44,7 @@ extension URLCache: CacheProvider {
   }
   
   public func storeIfNeeded(request: URLRequest,
+                            cacheID: String,
                             response: URLResponse,
                             data: Data,
                             cachePolicy: CachePolicy,
@@ -69,7 +71,7 @@ extension URLCache: CacheProvider {
     completion(true)
   }
   
-  public func removeCachedResponse(request: URLRequest) {
+  public func removeCachedResponse(request: URLRequest, cacheID: String) {
     removeCachedResponse(for: request)
   }
 }

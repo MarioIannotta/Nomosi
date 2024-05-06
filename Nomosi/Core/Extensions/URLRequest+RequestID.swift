@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CryptoKit
 
 extension URLRequest {
   
@@ -24,12 +25,16 @@ extension URLRequest {
    and a collision is highly unlikely.
    */
   var requestID: String {
-    String([httpMethod,
-            url?.absoluteString,
-            allHTTPHeaderFields?.description,
-            String(data: httpBody ?? Data(), encoding: .utf8)]
+    let id = String([httpMethod,
+                     url?.absoluteString,
+                     allHTTPHeaderFields?.description,
+                     String(data: httpBody ?? Data(), encoding: .utf8)]
       .compactMap { $0 }
       .joined()
       .sorted())
+
+    return SHA256.hash(data: id.data(using: .utf8) ?? Data())
+      .compactMap { String(format: "%02x", $0) }
+      .joined()
   }
 }
