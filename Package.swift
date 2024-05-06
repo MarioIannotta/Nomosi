@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Nomosi",
     platforms: [
-        .iOS(.v10),
+        .iOS(.v13),
         .macOS(.v10_15)
     ],
     products: [

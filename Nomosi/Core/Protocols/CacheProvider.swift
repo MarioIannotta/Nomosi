@@ -19,22 +19,25 @@ public protocol CacheProvider: AnyObject {
   func removeExpiredCachedResponses()
   
   func loadIfNeeded(request: URLRequest,
+                    cacheID: String,
                     cachePolicy: CachePolicy,
                     completion: ((_ data: Data?) -> Void))
   
   func storeIfNeeded(request: URLRequest,
+                     cacheID: String,
                      response: URLResponse,
                      data: Data,
                      cachePolicy: CachePolicy,
                      completion: ((_ success: Bool) -> Void))
   
-  func removeCachedResponse(request: URLRequest)
+  func removeCachedResponse(request: URLRequest, cacheID: String)
   
 }
 
 extension Service {
   
   func cacheResponseIfNeeded(request: URLRequest,
+                             cacheID: String,
                              response: URLResponse?,
                              data: Data?) {
     guard
@@ -44,11 +47,12 @@ extension Service {
     else { return }
     cacheProvider?.storeIfNeeded(
       request: request,
+      cacheID: request.requestID,
       response: response,
       data: data,
       cachePolicy: self.cachePolicy,
       completion: { success in
-        log.print("📦 \(self): storing response in cache with policy \(self.cachePolicy)")
+        log.print("📦 \(self): storing response in cache with policy \(self.cachePolicy). ID: \(cacheID)")
       })
   }
 }
