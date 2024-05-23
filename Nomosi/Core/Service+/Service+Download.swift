@@ -8,9 +8,10 @@
 import Foundation
 
 open class DownloadService: Service<URL> {
-  
-  public override init() {
+
+  public init(targetLocation: String) {
     super.init()
+    self.downloadTargetLocation = targetLocation
     serviceType = .downloadFile
   }
 }
@@ -32,7 +33,18 @@ class DownloadDelegate: AsycTask<URL>, URLSessionDownloadDelegate {
   func urlSession(_ session: URLSession,
                   downloadTask: URLSessionDownloadTask,
                   didFinishDownloadingTo location: URL) {
-    onCompletion?(location, downloadTask.response, downloadTask.error)
+    guard let downloadTargetLocation, let downloadTargetLocationURL = URL(string: downloadTargetLocation)
+    else {
+      onCompletion?(location, downloadTask.response, ServiceError.invalidDownloadTargetPath)
+      return
+    }
+    do {
+      try? FileManager.default.removeItem(at: downloadTargetLocationURL)
+      try FileManager.default.copyItem(atPath: location.path, toPath: downloadTargetLocation)
+      onCompletion?(downloadTargetLocationURL, downloadTask.response, downloadTask.error)
+    } catch {
+      onCompletion?(location, downloadTask.response, error)
+    }
   }
   
   func urlSession(_ session: URLSession,

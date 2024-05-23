@@ -18,12 +18,15 @@ class AsycTask<ExpectedResult>: NSObject {
   var onProgress: ProgressClosure?
   var onCompletion: CompletionClosure?
   var sslPinningHandler: SSLPinningHandler?
-  
+  var downloadTargetLocation: String?
+
   public init(onProgress: ProgressClosure?,
               onCompletion: CompletionClosure?,
-              sslPinningHandler: SSLPinningHandler?) {
+              sslPinningHandler: SSLPinningHandler?,
+              downloadTargetLocation: String?) {
     self.onProgress = onProgress
     self.onCompletion = onCompletion
     self.sslPinningHandler = sslPinningHandler
+    self.downloadTargetLocation = downloadTargetLocation
   }
 }

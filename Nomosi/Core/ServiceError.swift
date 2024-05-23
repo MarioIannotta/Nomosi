@@ -20,7 +20,9 @@ public struct ServiceError: LocalizedError {
       self.underlyingError = underlyingError
     }
   }
-  
+
+  public static let invalidDownloadTargetPath = ServiceError(code: 10, reason: "Invalid `downloadTargetPath`")
+
   public static let genericError = ServiceError(code: 9, reason: "This shouldn't happen")
   
   public static func responseValidationFailed(_ error: Error) -> ServiceError {
@@ -42,7 +44,7 @@ public struct ServiceError: LocalizedError {
                  reason: "Can't parse the response. \(String(describing: error))",
                  userInfo: UserInfo(underlyingError: error))
   }
-  
+
   public var code: Int
   public var reason: String
   public var userInfo: UserInfo?

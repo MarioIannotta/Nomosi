@@ -35,6 +35,7 @@ open class Service<Response: ServiceResponse> {
   public weak var mockProvider: MockProvider?
   public var sslPinningHandler: SSLPinningHandler?
   public var requestID: String?
+  public var downloadTargetLocation: String?
 
   public private (set) var latestError: ServiceError?
   public var decorateRequestClosure: DecorateRequestClosure?
@@ -317,7 +318,8 @@ open class Service<Response: ServiceResponse> {
         request.end()
         self.handleCompletedTask(request: request, data: data, response: response, error: error)
       },
-      sslPinningHandler: sslPinningHandler)
+      sslPinningHandler: sslPinningHandler,
+      downloadTargetLocation: nil)
     let session = makeURLSession(delegate: uploadDelegate)
     switch serviceType {
     case .upload(let content):
@@ -342,7 +344,8 @@ open class Service<Response: ServiceResponse> {
                                  response: response,
                                  error: error)
       },
-      sslPinningHandler: sslPinningHandler)
+      sslPinningHandler: sslPinningHandler,
+      downloadTargetLocation: downloadTargetLocation)
     let session = makeURLSession(delegate: downloadDelegate)
     sessionTask = session.downloadTask(with: request)
     sessionTask?.resume()
