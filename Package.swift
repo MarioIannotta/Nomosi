@@ -7,7 +7,8 @@ let package = Package(
     name: "Nomosi",
     platforms: [
         .iOS(.v13),
-        .macOS(.v10_15)
+        .macOS(.v10_15),
+        .watchOS(.v8)
     ],
     products: [
         .library(
