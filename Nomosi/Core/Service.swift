@@ -162,18 +162,19 @@ open class Service<Response: ServiceResponse> {
   @available(iOS 13.0, *)
   @available(macOS 12.0, *)
   public func load() async throws -> Response {
-    do {
-      return try await withCheckedThrowingContinuation { continuation in
-        load()
-          .onSuccess { response in
-            continuation.resume(returning: response)
-          }
-          .onFailure { error in
-            continuation.resume(throwing: error)
-          }
-      }
-    } catch {
-      throw error
+    var didResume = false
+    return try await withCheckedThrowingContinuation { continuation in
+      load()
+        .onSuccess { response in
+          guard !didResume else { return }
+          didResume = true
+          continuation.resume(returning: response)
+        }
+        .onFailure { error in
+          guard !didResume else { return }
+          didResume = true
+          continuation.resume(throwing: error)
+        }
     }
   }
   
